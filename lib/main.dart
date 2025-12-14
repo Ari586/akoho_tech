@@ -9594,8 +9594,8 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
             child: Text('J$days', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
           ),
           const SizedBox(width: 8),
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-          const Spacer(),
+          Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.w500), overflow: TextOverflow.ellipsis)),
+          const SizedBox(width: 8),
           Text(note, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
         ],
       ),
@@ -9810,7 +9810,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                                     children: [
                                       Row(
                                         children: [
-                                          Text('${incub['quantity']} atody', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                                          Flexible(child: Text('${incub['quantity']} atody', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18), overflow: TextOverflow.ellipsis)),
                                           const SizedBox(width: 8),
                                           Container(
                                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -9822,7 +9822,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                                           ),
                                         ],
                                       ),
-                                      Text('Nanomboka: ${incub['startDate']} • $incubDays andro', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                                      Text('Nanomboka: ${incub['startDate']} • $incubDays andro', style: const TextStyle(color: AppColors.textSecondary, fontSize: 12), overflow: TextOverflow.ellipsis, maxLines: 1),
                                     ],
                                   ),
                                 ),
@@ -9965,13 +9965,16 @@ Widget _buildStatCard({
           child: Icon(icon, color: cardColor, size: 24),
         ),
         const SizedBox(height: 14),
-        Text(
-          value,
-          style: TextStyle(
-            color: cardColor,
-            fontSize: 26,
-            fontWeight: FontWeight.w800,
-            letterSpacing: -0.5,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            value,
+            style: TextStyle(
+              color: cardColor,
+              fontSize: 26,
+              fontWeight: FontWeight.w800,
+              letterSpacing: -0.5,
+            ),
           ),
         ),
         const SizedBox(height: 4),
