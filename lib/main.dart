@@ -5290,6 +5290,7 @@ class _FeedScreenState extends State<FeedScreen> {
     if (_type == 'Mpiady') return ['Démarrage', 'Croissance', 'Ady'];
     if (_type == 'Bitro') return ['Zaza', 'Mitombo', 'Lehibe'];
     if (_type == 'BitroVolavo') return ['Zaza', 'Mitombo', 'Lehibe'];
+    if (_type == 'Kisoa') return ['Zaza (Sevrage)', 'Mitombo (Croissance)', 'Lehibe (Finition)'];
     return ['Démarrage', 'Croissance', 'Adulte'];
   }
 
@@ -5560,6 +5561,26 @@ class _FeedScreenState extends State<FeedScreen> {
 
       stageLabel = week <= 4 ? 'Zaza' : (week <= 8 ? 'Mitombo' : 'Lehibe');
       currentFormula = '• 🐹 BITRO VOALAVO - Sakafo isan\'andro:\n\n🥬 Hay (Foin): 60% - Ilaina mandrakariva\n🥬 Anana maitso: 30%\n   - Petsay, Salady, Anamalaho\n   - Karaoty, Voatavo\n🍊 Vitamina C: Voasary, Tongolo mena\n🌾 Granulés: 10%\n\n⚠️ Mila Vitamina C isan\'andro!';
+    } else if (type == 'Kisoa') {
+      if (week <= 8) {
+        gPerBird = 500; // 0.5kg
+      } else if (week <= 16) {
+        gPerBird = 1500; // 1.5kg
+      } else {
+        gPerBird = 2500; // 2.5kg
+      }
+      waterMl = gPerBird * 3; // ~3x feed
+
+      if (week <= 8) {
+        stageLabel = 'Zaza (Sevrage: 6-8 sem)';
+        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Tavim-bary (Son de Riz): 10%\n• Vovo-trondro (Farine de Poisson): 5%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+      } else if (week <= 16) {
+        stageLabel = 'Mitombo (Croissance: 9-16 sem)';
+        currentFormula = '• Katsaka: 45%\n• Vovo-mangahazo (Manioc): 15%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Tavim-bary (Son de Riz): 15%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+      } else {
+        stageLabel = 'Lehibe (Finition/Truie)';
+        currentFormula = '• Vovo-mangahazo (Manioc): 30%\n• Katsaka: 20%\n• Tavim-bary (Son de Riz): 25%\n• Faika-labiera (Drêche): 15%\n• Faikan-tsoja (Tourteau Soja): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+      }
     }
 
     return FeedCalcResult(
@@ -5714,6 +5735,10 @@ class _FeedScreenState extends State<FeedScreen> {
       if (stage == 'Démarrage') return '1';
       if (stage == 'Croissance') return '9';
       if (stage == 'Ady') return '24';
+    } else if (_type == 'Kisoa') {
+      if (stage == 'Zaza (Sevrage)') return '6';
+      if (stage == 'Mitombo (Croissance)') return '12';
+      if (stage == 'Lehibe (Finition)') return '20';
     } else {
       if (stage == 'Démarrage') return '1';
       if (stage == 'Croissance') return '9';
@@ -5776,12 +5801,13 @@ class _FeedScreenState extends State<FeedScreen> {
                   children: [
                     DropdownButtonFormField(
                       initialValue: _type,
-                      items: ['Chair', 'Pondeuse', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo'].map((v) {
+                      items: ['Chair', 'Pondeuse', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo', 'Kisoa'].map((v) {
                         String label = v;
                         if (v == 'Bitro') label = '🐇 Bitro (Lapin)';
                         if (v == 'BitroVolavo') label = '🐹 Bitro Voalavo';
                         if (v == 'Sarindokotra') label = '🦆 Sarindokotra (Mulard)';
                         if (v == 'VorontsilozaChair') label = '🦃 Vorontsiloza Chair';
+                        if (v == 'Kisoa') label = '🐖 Kisoa (Porc)';
                         return DropdownMenuItem(value: v, child: Text(label));
                       }).toList(),
                       onChanged: (v) => setState(() {
@@ -6074,6 +6100,7 @@ class _FeedScreenState extends State<FeedScreen> {
       'Papelika': 'Papelika',
       'Bitro': 'Bitro',
       'BitroVolavo': 'Bitro Voalavo',
+      'Kisoa': 'Kisoa',
     }[_type] ?? _type;
 
     return Container(
