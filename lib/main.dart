@@ -9841,6 +9841,31 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                                     style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
                                   ),
                                 ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 20),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: const Text('Hamafa?'),
+                                        content: const Text('Tena hamafana ve ity incubation ity?'),
+                                        actions: [
+                                          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Tsia')),
+                                          TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _incubations.removeWhere((i) => i['id'] == incub['id']);
+                                                _saveData();
+                                              });
+                                              Navigator.pop(ctx);
+                                            },
+                                            child: const Text('Eny, fafao', style: TextStyle(color: Colors.red)),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                             const SizedBox(height: 12),
