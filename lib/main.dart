@@ -454,8 +454,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   bool _isLoading = false;
   bool _checkingAccess = true;
   String _errorMessage = '';
-  late AnimationController _animController;
-  late Animation<double> _fadeAnim;
+  late final AnimationController _animController;
+  late final Animation<double> _fadeAnim;
 
   @override
   void initState() {
@@ -1806,12 +1806,28 @@ class CategorySelectionScreen extends StatelessWidget {
                         context,
                         emoji: '🐔',
                         title: 'AkohoTech',
-                        subtitle: 'Vorona rehetra',
-                        description: 'Akoho, Gana, Gisa, Vorontsiloza, Akanga, Papelika...',
+                        subtitle: 'Akoho sy Vorona hafa',
+                        description: 'Akoho, Vorontsiloza, Akanga, Papelika...',
                         gradientColors: [const Color(0xFFFF9800), const Color(0xFFFF5722)],
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const HomeScreen(category: 'akoho')),
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 16),
+
+                      // VoronaTech Card
+                      _buildCategoryCard(
+                        context,
+                        emoji: '🦆',
+                        title: 'VoronaTech',
+                        subtitle: 'Gana sy Gisa',
+                        description: 'Gana, Dokotra, Gisa, Sarindokotra...',
+                        gradientColors: [const Color(0xFF00BCD4), const Color(0xFF0097A7)],
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomeScreen(category: 'vorona')),
                         ),
                       ),
                       
@@ -2057,6 +2073,32 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
+  String get _appTitle {
+    if (widget.category == 'bitro') return 'BitroTech';
+    if (widget.category == 'kisoa') return 'KisoaTech';
+    if (widget.category == 'fambolena') return 'FambolenaTech';
+    if (widget.category == 'trondro') return 'TrondroTech';
+    if (widget.category == 'tantely') return 'TantelyTech';
+    if (widget.category == 'olitra') return 'OlitraTech';
+    if (widget.category == 'zezika') return 'ZezikaTech';
+    if (widget.category == 'holatra') return 'HolatraTech';
+    if (widget.category == 'vorona') return 'VoronaTech';
+    return 'AkohoTech';
+  }
+
+  String get _appEmoji {
+    if (widget.category == 'bitro') return '🐇';
+    if (widget.category == 'kisoa') return '🐖';
+    if (widget.category == 'fambolena') return '🌱';
+    if (widget.category == 'trondro') return '🐟';
+    if (widget.category == 'tantely') return '🐝';
+    if (widget.category == 'olitra') return '🪲';
+    if (widget.category == 'zezika') return '🌿';
+    if (widget.category == 'holatra') return '🍄‍🟫';
+    if (widget.category == 'vorona') return '🦆';
+    return '🐔';
+  }
+
   List<Widget> get _pages {
     if (widget.category == 'bitro') {
       return [
@@ -2123,13 +2165,23 @@ class _HomeScreenState extends State<HomeScreen> {
         const HolatraMarketScreen(),
         const FinanceScreen(),
       ];
+    } else if (widget.category == 'vorona') {
+      return [
+        const HousingScreen(category: 'vorona'),
+        const FeedScreen(category: 'vorona'),
+        const HealthScreen(category: 'vorona'),
+        const BreedsScreen(category: 'vorona'),
+        const EggsScreen(category: 'vorona'),
+        const GavageScreen(),
+        const FinanceScreen(),
+      ];
     }
     return [
-      const HousingScreen(),
-      const FeedScreen(),
-      const HealthScreen(),
-      const BreedsScreen(),
-      const EggsScreen(),
+      const HousingScreen(category: 'akoho'),
+      const FeedScreen(category: 'akoho'),
+      const HealthScreen(category: 'akoho'),
+      const BreedsScreen(category: 'akoho'),
+      const EggsScreen(category: 'akoho'),
       const FinanceScreen(),
     ];
   }
@@ -2151,6 +2203,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return ['Karazana', 'Fanamboarana', 'Fampiasana', 'Vokatra', 'Vola'];
     } else if (widget.category == 'holatra') {
       return ['Karazana', 'Fambolena', 'Fiotazana', 'Tsena', 'Vola'];
+    } else if (widget.category == 'vorona') {
+      return ['Trano', 'Sakafo', 'Torohay', 'Races', 'Atody', 'Gavage', 'Vola'];
     }
     return ['Trano', 'Sakafo', 'Fahasalamana', 'Races', 'Atody', 'Vola'];
   }
@@ -2221,6 +2275,16 @@ class _HomeScreenState extends State<HomeScreen> {
         {'icon': '🛒', 'label': 'Tsena'},
         {'icon': '💰', 'label': 'Vola'},
       ];
+    } else if (widget.category == 'vorona') {
+      return [
+        {'icon': '🏠', 'label': 'Trano'},
+        {'icon': '🌾', 'label': 'Sakafo'},
+        {'icon': '📘', 'label': 'Torohay'},
+        {'icon': '🦆', 'label': 'Races'},
+        {'icon': '🥚', 'label': 'Atody'},
+        {'icon': '🍽️', 'label': 'Gavage'},
+        {'icon': '💰', 'label': 'Vola'},
+      ];
     }
     return [
       {'icon': '🏠', 'label': 'Trano'},
@@ -2232,29 +2296,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
-  String get _appTitle {
-    if (widget.category == 'bitro') return 'BitroTech';
-    if (widget.category == 'kisoa') return 'KisoaTech';
-    if (widget.category == 'fambolena') return 'FambolenaTech';
-    if (widget.category == 'trondro') return 'TrondroTech';
-    if (widget.category == 'tantely') return 'TantelyTech';
-    if (widget.category == 'olitra') return 'OlitraTech';
-    if (widget.category == 'zezika') return 'ZezikaTech';
-    if (widget.category == 'holatra') return 'HolatraTech';
-    return 'AkohoTech';
-  }
 
-  String get _appEmoji {
-    if (widget.category == 'bitro') return '🐇';
-    if (widget.category == 'kisoa') return '🐷';
-    if (widget.category == 'fambolena') return '🌱';
-    if (widget.category == 'trondro') return '🐟';
-    if (widget.category == 'tantely') return '🐝';
-    if (widget.category == 'olitra') return '🪲';
-    if (widget.category == 'zezika') return '🌿';
-    if (widget.category == 'holatra') return '🍄‍🟫';
-    return '🐔';
-  }
 
   // Temps d'incubation/gestation par type d'animal
   static const Map<String, Map<String, dynamic>> _incubationData = {
@@ -2423,7 +2465,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(incubData['emoji'], style: const TextStyle(fontSize: 24)),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(child: Text('Fanaovana Zana-akoho', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                        const Expanded(child: Text('Manakotrika', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -2594,7 +2636,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pop(ctx);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('✅ Incubation ajoutée! Éclosion prévue: ${DateFormat('dd/MM/yyyy').format(hatchDate)}'),
+                                content: Text('✅ Voatahiry! Hipoitra ny: ${DateFormat('dd/MM/yyyy').format(hatchDate)}'),
                                 backgroundColor: AppColors.success,
                               ),
                             );
@@ -2807,7 +2849,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text('🐣', style: TextStyle(fontSize: 40)),
                                 SizedBox(height: 8),
-                                Text('Incubation', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Manakotrika', style: TextStyle(fontWeight: FontWeight.bold)),
                                 Text('Fanaovana zana-akoho', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                               ],
                             ),
@@ -2857,20 +2899,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // --- MODULE 1: TRANO (HOUSING) ---
 class HousingScreen extends StatefulWidget {
-  const HousingScreen({super.key});
+  final String category;
+  const HousingScreen({super.key, this.category = 'akoho'});
 
   @override
   State<HousingScreen> createState() => _HousingScreenState();
 }
 
 class _HousingScreenState extends State<HousingScreen> {
-  String _type = 'Chair'; // Chair, Pondeuse, Gasy
+  late String _type;
   final TextEditingController _countController = TextEditingController(text: '100');
   String _result = '';
   String _equipment = '';
   double _suggestedLength = 0;
   double _suggestedWidth = 0;
   bool _showFloorPlan = false; // Toggle for 2D floor plan
+
+  @override
+  void initState() {
+    super.initState();
+    _type = widget.category == 'vorona' ? 'Gana' : 'Chair';
+  }
 
   void _calculate() {
     int count = int.tryParse(_countController.text) ?? 0;
@@ -2969,9 +3018,18 @@ class _HousingScreenState extends State<HousingScreen> {
             child: Column(
               children: [
                 DropdownButtonFormField<String>(
-                  initialValue: _type,
+                  value: _type,
                   decoration: const InputDecoration(labelText: 'Karazana Biby'),
-                  items: ['Chair', 'Pondeuse', 'Gasy', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo'].map((String val) {
+                  items: ['Chair', 'Pondeuse', 'Gasy', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo']
+                  .where((val) {
+                    if (widget.category == 'vorona') {
+                      return ['Gana', 'Dokotra', 'Sarindokotra', 'Gisa'].contains(val);
+                    } else if (widget.category == 'akoho') {
+                      return !['Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Bitro', 'BitroVolavo'].contains(val);
+                    }
+                    return true;
+                  })
+                  .map((String val) {
                     String label = val;
                     if (val == 'Bitro') label = '🐇 Bitro (Lapin)';
                     if (val == 'BitroVolavo') label = '🐹 Bitro Voalavo';
@@ -5269,20 +5327,27 @@ double cos(double x) => 1 - (x * x) / 2 + (x * x * x * x) / 24;
 
 // --- MODULE 2: SAKAFO (FEED) ---
 class FeedScreen extends StatefulWidget {
-  const FeedScreen({super.key});
+  final String category;
+  const FeedScreen({super.key, this.category = 'akoho'});
 
   @override
   State<FeedScreen> createState() => _FeedScreenState();
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  String _type = 'Chair';
+  late String _type;
   String _selectedStage = 'Démarrage';
   final List<_FeedSegment> _segments = [
     _FeedSegment(stage: 'Démarrage', week: '1', count: '100'),
   ];
   String _feedResult = '';
   String _formula = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _type = widget.category == 'vorona' ? 'Gana' : 'Chair';
+  }
 
   List<String> _getStages() {
     if (_type == 'Chair') return ['Démarrage', 'Croissance', 'Finition'];
@@ -5342,13 +5407,13 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 3) {
         stageLabel = 'Démarrage (0-3 herinandro)';
-        currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 30%\n• Apombo-bary (Son de Blé): 10%\n• Vovo-trondro (Farine de Poisson): 4%\n• CMV Chair: 4%';
+        currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 30%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 4%\n• CMV Chair: 4%';
       } else if (week <= 5) {
         stageLabel = 'Croissance (4-5 herinandro)';
-        currentFormula = '• Katsaka: 58%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombo-bary (Son de Blé): 10%\n• Vovo-trondro (Farine de Poisson): 3%\n• CMV Chair: 4%';
+        currentFormula = '• Katsaka: 58%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 3%\n• CMV Chair: 4%';
       } else {
         stageLabel = 'Finition (6+ herinandro)';
-        currentFormula = '• Katsaka: 62%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 2%\n• CMV Chair: 4%';
+        currentFormula = '• Katsaka: 62%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 12%\n• Vovo-trondro (Farine de Poisson): 2%\n• CMV Chair: 4%';
       }
     } else if (type == 'Pondeuse') {
       if (week <= 8) {
@@ -5362,13 +5427,13 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 8) {
         stageLabel = 'Démarrage (0-8 herinandro)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Apombo-bary (Son de Blé): 25%\n• CMV Pondeuse: 5%';
+        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 25%\n• CMV Pondeuse: 5%';
       } else if (week <= 18) {
         stageLabel = 'Croissance (9-18 herinandro)';
-        currentFormula = '• Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 35%\n• CMV Pondeuse: 5%';
+        currentFormula = '• Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Son de Blé: 35%\n• CMV Pondeuse: 5%';
       } else {
         stageLabel = 'Ponte (19+ herinandro)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Apombo-bary (Son de Blé): 20%\n• Lao-akorantsely (Coquille): 8%\n• CMV Pondeuse: 2%';
+        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 20%\n• Lao-akorantsely (Coquille): 8%\n• CMV Pondeuse: 2%';
       }
     } else if (type == 'Mpiady') {
       if (week <= 8) {
@@ -5382,13 +5447,13 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 8) {
         stageLabel = 'Démarrage (0-8 herinandro)';
-        currentFormula = '• Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 28%\n• Apombo-bary (Son de Blé): 15%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 4%';
+        currentFormula = '• Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 28%\n• Son de Blé: 15%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 4%';
       } else if (week <= 20) {
         stageLabel = 'Croissance (9-20 herinandro)';
-        currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 6%\n• CMV: 5%';
+        currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Son de Blé: 12%\n• Vovo-trondro (Farine de Poisson): 6%\n• CMV: 5%';
       } else {
         stageLabel = 'Ady (21+ herinandro)';
-        currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Apombo-bary (Son de Blé): 10%\n• Vovo-trondro (Farine de Poisson): 8%\n• CMV: 5%\n\n💪 Vitamines E & B12 recommandées';
+        currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 8%\n• CMV: 5%\n\n💪 Vitamines E & B12 recommandées';
       }
     } else if (type == 'Ornement') {
       if (week <= 8) {
@@ -5461,7 +5526,7 @@ class _FeedScreenState extends State<FeedScreen> {
       waterMl = 500;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Gavage');
-      currentFormula = '• 🦆 SARINDOKOTRA (Mulard):\n\n📍 Démarrage (0-4 sem):\n  Katsaka: 50%, Soja: 25%, Blé: 20%\n\n📍 Croissance (5-10 sem):\n  Katsaka: 55%, Soja: 20%, Blé: 20%\n\n📍 Gavage (11+ sem):\n  Katsaka 100% (omboke masaka)\n  Gavage in-2 isan\'andro\n\n⚠️ Lanja vonjena: 4-6 kg (14 sem)';
+      currentFormula = '• 🦆 SARINDOKOTRA (Mulard):\n\n📍 Démarrage (0-4 sem):\n  Katsaka: 50%, Soja: 25%, Blé: 20%\n\n📍 Croissance (5-10 sem):\n  Katsaka: 55%, Soja: 20%, Blé: 20%\n\n📍 Gavage (11+ sem):\n  Katsaka 100% (Katsaka masaka nandrahoina)\n  Gavage in-2 isan\'andro\n\n⚠️ Lanja vonjena: 4-6 kg (14 sem)';
     } else if (type == 'Gisa') {
       if (week <= 3) {
         gPerBird = 70;
@@ -5573,13 +5638,13 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 8) {
         stageLabel = 'Zaza (Sevrage: 6-8 sem)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Tavim-bary (Son de Riz): 10%\n• Vovo-trondro (Farine de Poisson): 5%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombombary (Son de Riz): 10%\n• Vovo-trondro (Farine de Poisson): 5%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       } else if (week <= 16) {
         stageLabel = 'Mitombo (Croissance: 9-16 sem)';
-        currentFormula = '• Katsaka: 45%\n• Vovo-mangahazo (Manioc): 15%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Tavim-bary (Son de Riz): 15%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = '• Katsaka: 45%\n• Vovo-mangahazo (Manioc): 15%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombombary (Son de Riz): 15%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       } else {
         stageLabel = 'Lehibe (Finition/Truie)';
-        currentFormula = '• Vovo-mangahazo (Manioc): 30%\n• Katsaka: 20%\n• Tavim-bary (Son de Riz): 25%\n• Faika-labiera (Drêche): 15%\n• Faikan-tsoja (Tourteau Soja): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = '• Vovo-mangahazo (Manioc): 30%\n• Katsaka: 20%\n• Apombombary (Son de Riz): 25%\n• Faika-labiera (Drêche): 15%\n• Faikan-tsoja (Tourteau Soja): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       }
     }
 
@@ -5800,8 +5865,17 @@ class _FeedScreenState extends State<FeedScreen> {
                 child: Column(
                   children: [
                     DropdownButtonFormField(
-                      initialValue: _type,
-                      items: ['Chair', 'Pondeuse', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo', 'Kisoa'].map((v) {
+                      value: _type,
+                      items: ['Chair', 'Pondeuse', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo', 'Kisoa']
+                      .where((val) {
+                        if (widget.category == 'vorona') {
+                          return ['Gana', 'Dokotra', 'Sarindokotra', 'Gisa'].contains(val);
+                        } else if (widget.category == 'akoho') {
+                          return !['Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Bitro', 'BitroVolavo', 'Kisoa'].contains(val);
+                        }
+                        return true;
+                      })
+                      .map((v) {
                         String label = v;
                         if (v == 'Bitro') label = '🐇 Bitro (Lapin)';
                         if (v == 'BitroVolavo') label = '🐹 Bitro Voalavo';
@@ -5915,7 +5989,7 @@ class _FeedScreenState extends State<FeedScreen> {
                     children: [
                       const Text('Ireto ny sakafo hafa azo omena ankoatra ny provandy:', style: TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 12),
-                      _buildCollationItem('🪱', 'Larve BSF (Black Soldier Fly)', 'Protéine avo (40-45%). Omena 5-10% ny lanjan\'ny sakafo. Sasao tsara alohan\'ny fanomezana.'),
+                      _buildCollationItem('🪱', 'Larve BSF (Black Soldier Fly)', 'Protéine avo (40-45%). Omena 5-10% ny lanjan\'ny sakafo. Asaina tsara alohan\'ny fanomezana.'),
                       _buildCollationItem('🐛', 'Kankana lafarinina (Ver de farine)', 'Protéine 50%+. Tsara ho an\'ny zana-borona sy mpiady. Sasao sy avelao hihantra aloha.'),
                       _buildCollationItem('🥬', 'Anana (Ravina)', 'Vitamines A, C, K. Ohatra: Anamalaho, Anamamy, Petsay, Salady. Tetehina madinika.'),
                       _buildCollationItem('🎃', 'Voatavo sy voa', 'Vitamines sy mineraly. Voa papay = vermifuge voajanahary.'),
@@ -5937,7 +6011,7 @@ class _FeedScreenState extends State<FeedScreen> {
                           children: [
                             Text('⚠️', style: TextStyle(fontSize: 20)),
                             SizedBox(width: 8),
-                            Expanded(child: Text('Sasao tsara ny kankana sy larve alohan\'ny fanomezana. Aza omena sakafo lo na simba.', style: TextStyle(fontSize: 13, color: Colors.orange))),
+                            Expanded(child: Text('Asaina tsara ny kankana sy larve alohan\'ny fanomezana. Aza omena sakafo lo na simba.', style: TextStyle(fontSize: 13, color: Colors.orange))),
                           ],
                         ),
                       ),
@@ -5991,8 +6065,8 @@ class _FeedScreenState extends State<FeedScreen> {
                       [
                         {'name': 'Katsaka (Maïs)', 'desc': 'Ny akora fototra tsara indrindra. Izy no manome angovo betsaka indrindra.'},
                         {'name': 'Vovo-mangahazo (Farine de Manioc)', 'desc': 'Mangahazo maina (cossettes) nototoina. Solon\'ny katsaka tsara indrindra rehefa lafo ny katsaka, saingy tadidio fa kely dia kely ny Protéine ao anatiny (mila ampiana Soja na Trondro ny fatra rehefa mampiasa an\'ity).'},
-                        {'name': 'Tavim-bary (Son de Riz)', 'desc': 'Ilay hoditry ny vary manify (misy vitamina B).\n\n⚠️ Fanamarihana: Ialao ny Akofa (Balle de riz) fa tsy levon\'ny biby io ary mety handratra tsinay.'},
-                        {'name': 'Apombo-bary (Son de Blé)', 'desc': 'Avy amin\'ny orinasa fikosoham-bary (Minoterie). Tsara ho an\'ny fandevonan-kanina.'},
+                        {'name': 'Apombombary (Son de Riz)', 'desc': 'Ilay hoditry ny vary manify (misy vitamina B).\n\n⚠️ Fanamarihana: Ialao ny Akofa (Balle de riz) fa tsy levon\'ny biby io ary mety handratra tsinay.'},
+                        {'name': 'Son de Blé', 'desc': 'Avy amin\'ny orinasa fikosoham-bary (Minoterie). Tsara ho an\'ny fandevonan-kanina.'},
                       ]
                     ),
                     _buildIngredientSection('2. IREO FAHANA MITONDRA PROTÉINE (Sources de Protéines)', 
@@ -6206,6 +6280,22 @@ class Disease {
   });
 }
 
+class GuideItem {
+  final String title;
+  final String subtitle;
+  final String content;
+  final IconData icon;
+  final Color color;
+
+  GuideItem({
+    required this.title,
+    required this.subtitle,
+    required this.content,
+    required this.icon,
+    required this.color,
+  });
+}
+
 class _FeedSegment {
   String stage;
   String week;
@@ -6264,7 +6354,7 @@ const Map<String, Map<String, dynamic>> prixMatieresPremieresProvende = {
     'note': 'Qualité supérieure',
   },
   'son_riz': {
-    'nom': 'Son de Riz (Apombo vary)',
+    'nom': 'Apombombary (Son de Riz)',
     'prix_kg': 800, // Estimé ~800 Ar/kg
     'unite': 'Ar/kg',
     'note': 'Sous-produit riz, économique',
@@ -6315,7 +6405,8 @@ double calculerCoutProvende100kg(Map<String, double> pourcentages) {
 }
 
 class HealthScreen extends StatefulWidget {
-  const HealthScreen({super.key});
+  final String category;
+  const HealthScreen({super.key, this.category = 'akoho'});
 
   @override
   State<HealthScreen> createState() => _HealthScreenState();
@@ -6325,9 +6416,132 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
   late TabController _tabController;
   DateTime? _startDate;
   List<Map<String, String>> _schedule = [];
-  String _type = 'Chair';
+  late String _type;
 
-  final List<Disease> _diseases = [
+  // RACES VORONA (GANA, GISA) - MALADIES COURANTES
+  final List<GuideItem> _voronaGuides = [
+    GuideItem(
+      title: 'Sarindokotra',
+      subtitle: 'Mulard (Dokotra + Gana)',
+      content: '''
+🦆 SARINDOKOTRA (MULARD) - TOROLALANA FENO
+
+🔹 1. Fiaviana:
+Vokatry ny fampivadiana Dokotra lahy (Barbarie) sy Gana vavy (Pékin).
+⚠️ Fanamarihana: Tsy manatody ary tsy miteraka (Sterile). Ompiana manokana ho an'ny hena na Foie Gras.
+
+🔹 2. Tombony:
+• Mitombo haingana be.
+• Hena matsiro, tsy dia matavy loatra raha tsy atao Gavage (Fahanana).
+• Mahazaka aretina kokoa noho ny gana tsotra.
+
+🔹 3. Sakafo (Programme Alimentaire):
+• 0-3 Herinandro (Démarrage): Provende Gana Démarrage (20% Proteina). Rano madio foana.
+• 4-8 Herinandro (Croissance): Afangaro ny Provende sy ny Katsaka/Apombo. Azo omena anana.
+• 9-12 Herinandro (Finition): Katsaka betsaka kokoa mba hahazoana lanja.
+• Raha Gavage (Fahanana): Manomboka amin'ny herinandro faha-12, omena katsaka masaka in-2 isan'andro mandritra ny 21 andro.
+
+🔹 4. Trano sy Fikarakarana:
+• Tsy mila rano hilomanosana be, fa mila rano fisotro madio foana.
+• Lafika maina (Paille na Copeaux) mba tsy harary tongotra.
+• Tandremo: Mifampipika (Piquage) raha tery loatra ny toerana na mafana loatra.
+''',
+      icon: Icons.pets,
+      color: Colors.orange,
+    ),
+    GuideItem(
+      title: 'Gana (Canard Pékin)',
+      subtitle: 'Mpamokatra atody sy hena',
+      content: '''
+🌊 GANA (PÉKIN) - TOROLALANA FENO
+
+🔹 1. Famaritana:
+Gana fotsy, vava mavo, tongotra mavo. Io no karazana gana miely indrindra eran-tany.
+
+🔹 2. Tombony:
+• Fitomboana: Tena haingana (mahazo 2.5kg ao anatin'ny 7-8 herinandro).
+• Atody: Manatody betsaka (150-200 isan-taona).
+• Hena: Hena malefaka, matavy kokoa noho ny Dokotra.
+
+🔹 3. Fanahafana (Reproduction):
+• Manomboka manatody: 5-6 volana.
+• ⚠️ Olana: Tsy dia mahay mikotrika ny Gana Pékin vavy.
+• Vahaolana: Ampiasao ny Dokotra vavy na Couveuse artifisialy hikotrehana ny atodiny.
+
+🔹 4. Sakafo:
+• Tia mihinana zavatra rehetra (Omnivore): ahitra, kankana, sisa-tsakafo, provende.
+• Mila rano betsaka hanampy azy hitelina sakafo.
+
+🔹 5. Trano:
+• Mila rano (dobo kely) raha azo atao, manatsara ny fahasalamany sy ny volony.
+• Trano maina ho an'ny alina hiarovana amin'ny biby mpiremby.
+''',
+      icon: Icons.water,
+      color: Colors.blue,
+    ),
+    GuideItem(
+      title: 'Gisa (Oie)',
+      subtitle: 'Mpiandry tanàna sy hena',
+      content: '''
+🛡️ GISA (OIE) - TOROLALANA FENO
+
+🔹 1. Famaritana:
+Vorona lehibe, matanjaka, ary manan-tsaina. Mpiandry tanàna tsara (mikiakiaka raha misy olon-tsy fantatra).
+
+🔹 2. Tombony:
+• Sakafo: 80% AHITRA (Herbivore). Tena mitsitsy vola amin'ny sakafo.
+• Hena: Hena mena, matsiro.
+• Foie Gras: Ny atin-gisa no tsara indrindra.
+• Plumes: Ny volony dia azo ampiasaina (ondana).
+
+🔹 3. Sakafo:
+• Alefaso miriaria amin'ny toerana misy ahitra maitso.
+• Omena katsaka na provende kely fotsiny amin'ny hariva hamenoana ny filany.
+
+🔹 4. Fanahafana:
+• Manatody 30-50 isan-taona (Saison: Lohataona).
+• Ny Gisa vavy dia reny tena mahay mikotrika sy mitaiza zanaka.
+• Ny Gisa lahy iray dia ampy ho an'ny vavy 3-4.
+
+🔹 5. Fahasalamana:
+• Tena matanjaka (Rustique). Mahalana vao marary raha madio ny tontolo iainany.
+• Mila vaksiny Derzsy (Parvovirose) ny zana-gisa.
+''',
+      icon: Icons.security,
+      color: Colors.grey,
+    ),
+    GuideItem(
+      title: 'Dokotra (Barbarie)',
+      subtitle: 'Canard de Barbarie',
+      content: '''
+🥚 DOKOTRA (BARBARIE) - TOROLALANA FENO
+
+🔹 1. Famaritana:
+Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
+
+🔹 2. Tombony:
+• Hena: Hena mena, kely tavy (Maigre), tena tadiavina amin'ny tsena.
+• Lanja: Lahy lehibe (4-5kg), Vavy kely (2.5-3kg).
+• Mikotrika: Ny Dokotra vavy no tompondaka amin'ny fikotrehana (Championne). Azo ampiasaina hikotrika atodin'akoho, gana, na vorontsiloza.
+
+🔹 3. Sakafo:
+• Mitovy amin'ny Gana, fa mila fotoana ela kokoa vao lehibe (12 herinandro vavy, 14+ herinandro lahy).
+• Tia mihinana ahitra sy bibikely koa.
+
+🔹 4. Trano sy Fikarakarana:
+• Manidina: Mahay manidina tsara ny vavy. Mila tapahina ny elatra (remiges) iray mba tsy handositra.
+• Perchoir: Tia mipetraka amin'ny toerana avo (tsy toy ny gana).
+• Tsy dia mila rano be toy ny Gana Pékin.
+
+🔹 5. Torohevitra:
+• Raha te hamokatra Sarindokotra: Ampiasao ny Dokotra lahy lehibe indrindra hiaraka amin'ny Gana vavy.
+''',
+      icon: Icons.egg,
+      color: Colors.teal,
+    ),
+  ];
+
+  final List<Disease> _chickenDiseases = [
     Disease(
       name: 'Pesta (Newcastle)',
       description: 'Aretina vokatry ny virus, mpahazo ny taovam-pisefoana sy ny rafi-pitatitra. Tena mahery vaika ary moram-pifindra.',
@@ -6469,6 +6683,7 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _type = widget.category == 'vorona' ? 'Gana' : 'Chair';
     _generateSchedule();
   }
 
@@ -6546,6 +6761,9 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    if (widget.category == 'vorona') {
+      return _buildDiseaseTab();
+    }
     return Column(
       children: [
         TabBar(
@@ -6580,8 +6798,17 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
             child: Column(
               children: [
                 DropdownButtonFormField(
-                  initialValue: _type,
-                  items: ['Chair', 'Pondeuse', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo'].map((v) {
+                  value: _type,
+                  items: ['Chair', 'Pondeuse', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo']
+                  .where((val) {
+                    if (widget.category == 'vorona') {
+                      return ['Gana', 'Dokotra', 'Sarindokotra', 'Gisa'].contains(val);
+                    } else if (widget.category == 'akoho') {
+                      return !['Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Bitro', 'BitroVolavo'].contains(val);
+                    }
+                    return true;
+                  })
+                  .map((v) {
                     String label = v;
                     if (v == 'Bitro') label = '🐇 Bitro (Lapin)';
                     if (v == 'BitroVolavo') label = '🐹 Bitro Voalavo';
@@ -6626,11 +6853,61 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
   }
 
   Widget _buildDiseaseTab() {
+    if (widget.category == 'vorona') {
+      return GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+          childAspectRatio: 0.85,
+        ),
+        itemCount: _voronaGuides.length,
+        itemBuilder: (context, index) {
+          final item = _voronaGuides[index];
+          return Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Row(children: [Icon(item.icon, color: item.color), const SizedBox(width: 10), Text(item.title)]),
+                    content: SingleChildScrollView(child: Text(item.content)),
+                    actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
+                  ),
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: item.color.withValues(alpha: 0.2),
+                    child: Icon(item.icon, size: 30, color: item.color),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(item.subtitle, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    final diseases = _chickenDiseases;
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: _diseases.length,
+      itemCount: diseases.length,
       itemBuilder: (context, index) {
-        final d = _diseases[index];
+        final d = diseases[index];
         return Card(
           margin: const EdgeInsets.only(bottom: 10),
           child: ExpansionTile(
@@ -7991,8 +8268,14 @@ class _TransactionDialogState extends State<TransactionDialog> {
   String _category = 'Sakafo';
   DateTime _date = DateTime.now();
 
-  final List<String> _expenseCats = ['Sakafo', 'Fanafody', 'Zanak\'akoho', 'Fitaovana', 'Karama', 'Hafa'];
-  final List<String> _revenueCats = ['Fivarotana Akoho', 'Fivarotana Atody', 'Feziko', 'Hafa'];
+  final List<String> _expenseCats = ['Sakafo', 'Fanafody', 'Kojakoja', 'Fitaovana', 'Karama', 'Biby', 'Masomboly', 'Hafa'];
+  final List<String> _revenueCats = ['Vokatra', 'Hena', 'Atody', 'Trondro', 'Zezika', 'Hafa'];
+
+  @override
+  void initState() {
+    super.initState();
+    _category = widget.type == 'expense' ? _expenseCats.first : _revenueCats.first;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -8130,7 +8413,8 @@ Widget _buildCard({required String title, required Widget child, IconData? icon}
 
 // --- MODULE 5: RACES (BREEDS & CROSSBREEDING) ---
 class BreedsScreen extends StatefulWidget {
-  const BreedsScreen({super.key});
+  final String category;
+  const BreedsScreen({super.key, this.category = 'akoho'});
 
   @override
   State<BreedsScreen> createState() => _BreedsScreenState();
@@ -8243,6 +8527,29 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
     {'name': 'Livorno', 'origin': 'Italie', 'type': 'Pondeuse', 'eggsPerYear': 280, 'weight': 2.5, 'color': 'Blanc', 'comb': 'Simple'},
     {'name': 'Ancona', 'origin': 'Italie', 'type': 'Pondeuse', 'eggsPerYear': 220, 'weight': 2.5, 'color': 'Noir moucheté', 'comb': 'Simple'},
     {'name': 'Sicilienne', 'origin': 'Italie', 'type': 'Pondeuse', 'eggsPerYear': 200, 'weight': 2.3, 'color': 'Renoncule', 'comb': 'Coupe'},
+
+    // AUTRES VOLAILLES (VORONTSILOZA, AKANGA, PAPELIKA)
+    {'name': 'Dinde Bronze', 'origin': 'Amérique', 'type': 'Vorontsiloza', 'eggsPerYear': 80, 'weight': 10.0, 'color': 'Bronze', 'comb': '-'},
+    {'name': 'Dinde Blanche Géante', 'origin': 'États-Unis', 'type': 'Vorontsiloza', 'eggsPerYear': 60, 'weight': 15.0, 'color': 'Blanc', 'comb': '-'},
+    {'name': 'Dinde Rouge des Ardennes', 'origin': 'France', 'type': 'Vorontsiloza', 'eggsPerYear': 70, 'weight': 8.0, 'color': 'Rouge rouillé', 'comb': '-'},
+    {'name': 'Dinde Royal Palm', 'origin': 'États-Unis', 'type': 'Vorontsiloza', 'eggsPerYear': 50, 'weight': 6.0, 'color': 'Blanc/Noir', 'comb': '-'},
+    
+    {'name': 'Pintade Perlée (Akanga)', 'origin': 'Afrique', 'type': 'Akanga', 'eggsPerYear': 100, 'weight': 1.5, 'color': 'Gris perlé', 'comb': '-'},
+    {'name': 'Pintade Blanche', 'origin': 'France', 'type': 'Akanga', 'eggsPerYear': 120, 'weight': 1.8, 'color': 'Blanc', 'comb': '-'},
+    {'name': 'Pintade Violette', 'origin': 'Afrique', 'type': 'Akanga', 'eggsPerYear': 90, 'weight': 1.6, 'color': 'Violet', 'comb': '-'},
+    
+    {'name': 'Caille du Japon (Coturnix)', 'origin': 'Japon', 'type': 'Papelika', 'eggsPerYear': 300, 'weight': 0.3, 'color': 'Brun', 'comb': '-'},
+    {'name': 'Caille de Chine', 'origin': 'Chine', 'type': 'Papelika', 'eggsPerYear': 150, 'weight': 0.05, 'color': 'Variable', 'comb': '-'},
+    {'name': 'Colin de Virginie', 'origin': 'Amérique', 'type': 'Papelika', 'eggsPerYear': 100, 'weight': 0.2, 'color': 'Brun/Blanc', 'comb': '-'},
+  ];
+
+  static final List<Map<String, dynamic>> _waterfowlBreeds = [
+    {'name': 'Pekin', 'origin': 'Chine', 'type': 'Chair', 'eggsPerYear': 200, 'weight': 3.5, 'color': 'Blanc', 'comb': '-'},
+    {'name': 'Barbarie (Dokotra)', 'origin': 'Amérique du Sud', 'type': 'Chair', 'eggsPerYear': 100, 'weight': 4.0, 'color': 'Noir/Blanc', 'comb': '-'},
+    {'name': 'Khaki Campbell', 'origin': 'Angleterre', 'type': 'Pondeuse', 'eggsPerYear': 300, 'weight': 2.0, 'color': 'Kaki', 'comb': '-'},
+    {'name': 'Coureur Indien', 'origin': 'Asie', 'type': 'Pondeuse', 'eggsPerYear': 200, 'weight': 2.0, 'color': 'Variable', 'comb': '-'},
+    {'name': 'Oie de Toulouse', 'origin': 'France', 'type': 'Chair/Foie', 'eggsPerYear': 40, 'weight': 9.0, 'color': 'Gris', 'comb': '-'},
+    {'name': 'Oie d\'Emden', 'origin': 'Allemagne', 'type': 'Chair', 'eggsPerYear': 40, 'weight': 10.0, 'color': 'Blanc', 'comb': '-'},
   ];
 
   @override
@@ -8252,31 +8559,63 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
     _loadData();
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
   Future<void> _loadData() async {
     final prefs = await SharedPreferences.getInstance();
-    final breedsJson = prefs.getString('breeds_v2') ?? '[]';
+    final key = widget.category == 'vorona' ? 'breeds_vorona' : 'breeds_v2';
+    final breedsJson = prefs.getString(key) ?? '[]';
     final chickensJson = prefs.getString('chickens_pedigree') ?? '[]';
     setState(() {
       _breeds = List<Map<String, dynamic>>.from(jsonDecode(breedsJson));
       _chickens = List<Map<String, dynamic>>.from(jsonDecode(chickensJson));
+      
+      final source = widget.category == 'vorona' ? _waterfowlBreeds : _predefinedBreeds;
+      
       // Initialiser avec les races prédéfinies si vide
       if (_breeds.isEmpty) {
-        _breeds = _predefinedBreeds.map((b) => {...b, 'id': 'breed_${b['name'].hashCode}'}).toList();
+        _breeds = source.map((b) => {...b, 'id': 'breed_${b['name'].hashCode}'}).toList();
         _saveData();
+      } else {
+        // Mettre à jour avec les nouvelles races si elles manquent
+        bool changed = false;
+        for (var predefined in source) {
+          if (!_breeds.any((b) => b['name'] == predefined['name'])) {
+            _breeds.add({...predefined, 'id': 'breed_${predefined['name'].hashCode}'});
+            changed = true;
+          }
+        }
+        if (changed) {
+          _saveData();
+        }
       }
     });
   }
 
   Future<void> _saveData() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('breeds_v2', jsonEncode(_breeds));
+    final key = widget.category == 'vorona' ? 'breeds_vorona' : 'breeds_v2';
+    await prefs.setString(key, jsonEncode(_breeds));
     await prefs.setString('chickens_pedigree', jsonEncode(_chickens));
+  }
+
+  // Helper: Check if type is Chicken
+  bool _isChicken(String type) {
+    return ['Pondeuse', 'Chair', 'Mixte', 'Ornement', 'Mpiady'].contains(type);
+  }
+
+  // Helper: Check compatibility between types
+  bool _areTypesCompatible(String type1, String type2) {
+    if (type1 == type2) return true;
+    if (_isChicken(type1) && _isChicken(type2)) return true;
+    // Exception Akanga x Akoho
+    if ((_isChicken(type1) && type2 == 'Akanga') || (type1 == 'Akanga' && _isChicken(type2))) return true;
+    return false;
+  }
+
+  // Helper: Get breed type from breedId
+  String _getBreedType(String? breedId) {
+    if (breedId == null) return 'Inconnu';
+    final breed = _breeds.firstWhere((b) => b['id'] == breedId, orElse: () => {'type': 'Inconnu'});
+    return breed['type'] ?? 'Inconnu';
   }
 
   // Calculer les caractéristiques prédites d'un croisement
@@ -8343,10 +8682,10 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                           gradient: const LinearGradient(colors: [AppColors.gradientStart, AppColors.gradientEnd]),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Text('🐓', style: TextStyle(fontSize: 24)),
+                        child: Text(widget.category == 'vorona' ? '🦆' : '🐓', style: const TextStyle(fontSize: 24)),
                       ),
                       const SizedBox(width: 12),
-                      const Expanded(child: Text('Hanampy Akoho + Pedigree', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
+                      Expanded(child: Text(widget.category == 'vorona' ? 'Hanampy Vorona + Pedigree' : 'Hanampy Akoho + Pedigree', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -8419,12 +8758,28 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                           ),
                           items: [
                             const DropdownMenuItem<String?>(value: null, child: Text('Tsy fantatra')),
-                            ..._chickens.where((c) => c['sex'] == 'Lahy').map((c) => DropdownMenuItem<String>(
+                            ..._chickens.where((c) {
+                              if (c['sex'] != 'Lahy') return false;
+                              if (motherId != null) {
+                                final mother = _chickens.firstWhere((m) => m['id'] == motherId);
+                                return _areTypesCompatible(_getBreedType(c['breedId']), _getBreedType(mother['breedId']));
+                              }
+                              return true;
+                            }).map((c) => DropdownMenuItem<String>(
                               value: c['id'] as String,
                               child: Text('${c['name']} (${c['bandId']})'),
                             )),
                           ],
-                          onChanged: (v) => setModalState(() => fatherId = v),
+                          onChanged: (v) => setModalState(() {
+                            fatherId = v;
+                            if (motherId != null && v != null) {
+                              final fatherType = _getBreedType(v);
+                              final mother = _chickens.firstWhere((m) => m['id'] == motherId);
+                              if (!_areTypesCompatible(fatherType, _getBreedType(mother['breedId']))) {
+                                motherId = null;
+                              }
+                            }
+                          }),
                           isExpanded: true,
                         ),
                         const SizedBox(height: 10),
@@ -8438,12 +8793,28 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                           ),
                           items: [
                             const DropdownMenuItem<String?>(value: null, child: Text('Tsy fantatra')),
-                            ..._chickens.where((c) => c['sex'] == 'Vavy').map((c) => DropdownMenuItem<String>(
+                            ..._chickens.where((c) {
+                              if (c['sex'] != 'Vavy') return false;
+                              if (fatherId != null) {
+                                final father = _chickens.firstWhere((f) => f['id'] == fatherId);
+                                return _areTypesCompatible(_getBreedType(c['breedId']), _getBreedType(father['breedId']));
+                              }
+                              return true;
+                            }).map((c) => DropdownMenuItem<String>(
                               value: c['id'] as String,
                               child: Text('${c['name']} (${c['bandId']})'),
                             )),
                           ],
-                          onChanged: (v) => setModalState(() => motherId = v),
+                          onChanged: (v) => setModalState(() {
+                            motherId = v;
+                            if (fatherId != null && v != null) {
+                              final motherType = _getBreedType(v);
+                              final father = _chickens.firstWhere((f) => f['id'] == fatherId);
+                              if (!_areTypesCompatible(motherType, _getBreedType(father['breedId']))) {
+                                fatherId = null;
+                              }
+                            }
+                          }),
                           isExpanded: true,
                         ),
                       ],
@@ -8481,7 +8852,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                             _chickens.add({
                               'id': DateTime.now().millisecondsSinceEpoch.toString(),
                               'bandId': idCtrl.text,
-                              'name': nameCtrl.text.isNotEmpty ? nameCtrl.text : 'Akoho ${idCtrl.text}',
+                              'name': nameCtrl.text.isNotEmpty ? nameCtrl.text : '${widget.category == 'vorona' ? 'Vorona' : 'Akoho'} ${idCtrl.text}',
                               'breedId': selectedBreed,
                               'breedName': breed['name'],
                               'sex': sex,
@@ -8724,11 +9095,26 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                         filled: true,
                         fillColor: Colors.blue.shade50,
                       ),
-                      items: _breeds.map((b) => DropdownMenuItem<String>(
+                      items: _breeds.where((b) {
+                        if (motherId != null) {
+                          final mother = _breeds.firstWhere((m) => m['id'] == motherId);
+                          return _areTypesCompatible(b['type'], mother['type']);
+                        }
+                        return true;
+                      }).map((b) => DropdownMenuItem<String>(
                         value: b['id'] as String,
                         child: Text('${b['name']} (${b['origin']})'),
                       )).toList(),
-                      onChanged: (v) => setModalState(() => fatherId = v),
+                      onChanged: (v) => setModalState(() {
+                        fatherId = v;
+                        if (motherId != null && v != null) {
+                          final father = _breeds.firstWhere((f) => f['id'] == v);
+                          final mother = _breeds.firstWhere((m) => m['id'] == motherId);
+                          if (!_areTypesCompatible(father['type'], mother['type'])) {
+                            motherId = null;
+                          }
+                        }
+                      }),
                       isExpanded: true,
                     ),
                     const SizedBox(height: 12),
@@ -8742,11 +9128,26 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                         filled: true,
                         fillColor: Colors.pink.shade50,
                       ),
-                      items: _breeds.map((b) => DropdownMenuItem<String>(
+                      items: _breeds.where((b) {
+                        if (fatherId != null) {
+                          final father = _breeds.firstWhere((f) => f['id'] == fatherId);
+                          return _areTypesCompatible(b['type'], father['type']);
+                        }
+                        return true;
+                      }).map((b) => DropdownMenuItem<String>(
                         value: b['id'] as String,
                         child: Text('${b['name']} (${b['origin']})'),
                       )).toList(),
-                      onChanged: (v) => setModalState(() => motherId = v),
+                      onChanged: (v) => setModalState(() {
+                        motherId = v;
+                        if (fatherId != null && v != null) {
+                          final mother = _breeds.firstWhere((m) => m['id'] == v);
+                          final father = _breeds.firstWhere((f) => f['id'] == fatherId);
+                          if (!_areTypesCompatible(mother['type'], father['type'])) {
+                            fatherId = null;
+                          }
+                        }
+                      }),
                       isExpanded: true,
                     ),
                     
@@ -8875,7 +9276,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
               const SizedBox(width: 12),
               Expanded(
                 child: _buildStatCard(
-                  label: 'Akoho',
+                  label: widget.category == 'vorona' ? 'Vorona' : 'Akoho',
                   value: '${_chickens.length}',
                   icon: Icons.pets,
                   color: AppColors.accent,
@@ -8901,10 +9302,10 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
               borderRadius: BorderRadius.circular(10),
             ),
             indicatorSize: TabBarIndicatorSize.tab,
-            tabs: const [
-              Tab(text: '🐔 Races (100+)'),
-              Tab(text: '🐓 Akoho'),
-              Tab(text: '🧬 Pedigree'),
+            tabs: [
+              const Tab(text: '🐔 Races (100+)'),
+              Tab(text: widget.category == 'vorona' ? '🦆 Vorona' : '🐓 Akoho'),
+              const Tab(text: '🧬 Pedigree'),
             ],
           ),
         ),
@@ -8929,110 +9330,189 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
     );
   }
 
-  Widget _buildRacesTab() {
-    return Column(
-      children: [
-        // Search & Filter
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
+  // Ajouter une nouvelle race
+  void _addNewBreed() {
+    final nameCtrl = TextEditingController();
+    final originCtrl = TextEditingController();
+    String type = 'Mixte';
+    final eggsCtrl = TextEditingController();
+    final weightCtrl = TextEditingController();
+    final colorCtrl = TextEditingController();
+    final combCtrl = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Hanampy Race Vaovao'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Hikaroka races...',
-                    prefixIcon: const Icon(Icons.search),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-                  ),
-                  onChanged: (v) => setState(() => _searchQuery = v),
-                ),
+              TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Anarana (ex: Brahma)')),
+              TextField(controller: originCtrl, decoration: const InputDecoration(labelText: 'Fiaviana (ex: Inde)')),
+              DropdownButtonFormField<String>(
+                value: type,
+                items: ['Pondeuse', 'Chair', 'Mixte', 'Ornement', 'Mpiady', 'Vorontsiloza', 'Akanga', 'Papelika']
+                    .map((t) => DropdownMenuItem(value: t, child: Text(t)))
+                    .toList(),
+                onChanged: (v) => type = v!,
+                decoration: const InputDecoration(labelText: 'Karazana'),
               ),
-              const SizedBox(width: 12),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: DropdownButton<String>(
-                  value: _filterType,
-                  underline: const SizedBox(),
-                  items: ['Rehetra', 'Pondeuse', 'Chair', 'Mixte', 'Ornement', 'Mpiady']
-                      .map((t) => DropdownMenuItem(value: t, child: Text(t)))
-                      .toList(),
-                  onChanged: (v) => setState(() => _filterType = v!),
-                ),
-              ),
+              TextField(controller: eggsCtrl, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: 'Atody/taona (ex: 150)')),
+              TextField(controller: weightCtrl, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: 'Lanja (kg) (ex: 4.5)')),
+              TextField(controller: colorCtrl, decoration: const InputDecoration(labelText: 'Loko (ex: Mainty)')),
+              TextField(controller: combCtrl, decoration: const InputDecoration(labelText: 'Vohitra (ex: Pois)')),
             ],
           ),
         ),
-        
-        // Breeds List
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: _filteredBreeds.length,
-            itemBuilder: (ctx, i) {
-              final breed = _filteredBreeds[i];
-              final typeColor = breed['type'] == 'Pondeuse' ? Colors.orange
-                  : breed['type'] == 'Chair' ? Colors.red
-                  : breed['type'] == 'Ornement' ? Colors.purple
-                  : breed['type'] == 'Mpiady' ? Colors.deepOrange
-                  : AppColors.primary;
-              
-              return Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                  boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 10)],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: typeColor.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(12),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Hanafoana')),
+          ElevatedButton(
+            onPressed: () {
+              if (nameCtrl.text.isNotEmpty) {
+                setState(() {
+                  _breeds.add({
+                    'id': 'breed_${DateTime.now().millisecondsSinceEpoch}',
+                    'name': nameCtrl.text,
+                    'origin': originCtrl.text,
+                    'type': type,
+                    'eggsPerYear': int.tryParse(eggsCtrl.text) ?? 0,
+                    'weight': double.tryParse(weightCtrl.text) ?? 0.0,
+                    'color': colorCtrl.text,
+                    'comb': combCtrl.text,
+                  });
+                  _saveData();
+                });
+                Navigator.pop(ctx);
+              }
+            },
+            child: const Text('Tehirizina'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRacesTab() {
+    return Stack(
+      children: [
+        Column(
+          children: [
+            // Search & Filter
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Hikaroka races...',
+                        prefixIcon: const Icon(Icons.search),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                       ),
-                      child: Center(child: Text(_getBreedEmoji(breed['type']), style: const TextStyle(fontSize: 24))),
+                      onChanged: (v) => setState(() => _searchQuery = v),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(breed['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                          Row(
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: DropdownButton<String>(
+                      value: _filterType,
+                      underline: const SizedBox(),
+                      items: ['Rehetra', 'Pondeuse', 'Chair', 'Mixte', 'Ornement', 'Mpiady', 'Vorontsiloza', 'Akanga', 'Papelika']
+                          .map((t) => DropdownMenuItem(value: t, child: Text(t)))
+                          .toList(),
+                      onChanged: (v) => setState(() => _filterType = v!),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            // Breeds List
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _filteredBreeds.length,
+                itemBuilder: (ctx, i) {
+                  final breed = _filteredBreeds[i];
+                  final typeColor = breed['type'] == 'Pondeuse' ? Colors.orange
+                      : breed['type'] == 'Chair' ? Colors.red
+                      : breed['type'] == 'Ornement' ? Colors.purple
+                      : breed['type'] == 'Mpiady' ? Colors.deepOrange
+                      : breed['type'] == 'Vorontsiloza' ? Colors.brown
+                      : breed['type'] == 'Akanga' ? Colors.blueGrey
+                      : breed['type'] == 'Papelika' ? Colors.amber
+                      : AppColors.primary;
+                  
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 10)],
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: typeColor.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(child: Text(_getBreedEmoji(breed['type']), style: const TextStyle(fontSize: 24))),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: typeColor.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Text(breed['type'], style: TextStyle(color: typeColor, fontSize: 10, fontWeight: FontWeight.bold)),
+                              Text(breed['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: typeColor.withValues(alpha: 0.15),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(breed['type'], style: TextStyle(color: typeColor, fontSize: 10, fontWeight: FontWeight.bold)),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text('📍 ${breed['origin']}', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                                ],
                               ),
-                              const SizedBox(width: 6),
-                              Text('📍 ${breed['origin']}', style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
+                              const SizedBox(height: 4),
+                              Text(
+                                '🥚 ${breed['eggsPerYear']}/taona  •  ⚖️ ${breed['weight']}kg  •  🎨 ${breed['color'] ?? '-'}',
+                                style: const TextStyle(fontSize: 11),
+                              ),
                             ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            '🥚 ${breed['eggsPerYear']}/taona  •  ⚖️ ${breed['weight']}kg  •  🎨 ${breed['color'] ?? '-'}',
-                            style: const TextStyle(fontSize: 11),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              );
-            },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        Positioned(
+          bottom: 16,
+          right: 16,
+          child: FloatingActionButton(
+            onPressed: _addNewBreed,
+            backgroundColor: AppColors.primary,
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ),
       ],
@@ -9045,6 +9525,9 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
       case 'Chair': return '🍗';
       case 'Ornement': return '🦚';
       case 'Mpiady': return '🐓';
+      case 'Vorontsiloza': return '🦃';
+      case 'Akanga': return '🐦';
+      case 'Papelika': return '🐣';
       default: return '🐔';
     }
   }
@@ -9060,12 +9543,12 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
                     children: [
                       const Text('🐣', style: TextStyle(fontSize: 60)),
                       const SizedBox(height: 12),
-                      const Text('Tsy misy akoho voasoratra', style: TextStyle(color: AppColors.textSecondary)),
+                      Text(widget.category == 'vorona' ? 'Tsy misy vorona voasoratra' : 'Tsy misy akoho voasoratra', style: const TextStyle(color: AppColors.textSecondary)),
                       const SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: _addChicken,
                         icon: const Icon(Icons.add),
-                        label: const Text('Hanampy akoho voalohany'),
+                        label: Text(widget.category == 'vorona' ? 'Hanampy vorona voalohany' : 'Hanampy akoho voalohany'),
                       ),
                     ],
                   ),
@@ -9134,7 +9617,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
             child: ElevatedButton.icon(
               onPressed: _addChicken,
               icon: const Icon(Icons.add),
-              label: const Text('Hanampy Akoho + Pedigree'),
+              label: Text(widget.category == 'vorona' ? 'Hanampy Vorona + Pedigree' : 'Hanampy Akoho + Pedigree'),
               style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
             ),
           ),
@@ -9274,7 +9757,8 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
 
 // --- MODULE 6: ATODY (EGGS & CHICKS MANAGEMENT) ---
 class EggsScreen extends StatefulWidget {
-  const EggsScreen({super.key});
+  final String category;
+  const EggsScreen({super.key, this.category = 'akoho'});
 
   @override
   State<EggsScreen> createState() => _EggsScreenState();
@@ -9283,6 +9767,7 @@ class EggsScreen extends StatefulWidget {
 class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> _eggCollections = [];
   List<Map<String, dynamic>> _incubations = [];
+  List<Map<String, dynamic>> _availableBreeds = [];
   late TabController _tabController;
 
   // Temps d'incubation/gestation par type d'animal
@@ -9317,9 +9802,22 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
     final prefs = await SharedPreferences.getInstance();
     final eggsJson = prefs.getString('eggCollections') ?? '[]';
     final incubJson = prefs.getString('incubations') ?? '[]';
+    
+    // Charger les races
+    final breedsV2Json = prefs.getString('breeds_v2') ?? '[]';
+    final breedsVoronaJson = prefs.getString('breeds_vorona') ?? '[]';
+    final breedsV2 = List<Map<String, dynamic>>.from(jsonDecode(breedsV2Json));
+    final breedsVorona = List<Map<String, dynamic>>.from(jsonDecode(breedsVoronaJson));
+    
     setState(() {
       _eggCollections = List<Map<String, dynamic>>.from(jsonDecode(eggsJson));
       _incubations = List<Map<String, dynamic>>.from(jsonDecode(incubJson));
+      _availableBreeds = [...breedsV2, ...breedsVorona];
+      
+      // Ajouter une option "Autre / Inconnu" si la liste est vide ou pour fallback
+      if (_availableBreeds.isEmpty) {
+        _availableBreeds.add({'name': 'Akoho Gasy', 'type': 'Mixte'});
+      }
     });
   }
 
@@ -9349,6 +9847,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
     final quantityCtrl = TextEditingController();
     final notesCtrl = TextEditingController();
     DateTime selectedDate = DateTime.now();
+    String? selectedBreedName;
 
     showModalBottomSheet(
       context: context,
@@ -9408,6 +9907,21 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                   ),
                 ),
                 const SizedBox(height: 12),
+                
+                DropdownButtonFormField<String>(
+                  value: selectedBreedName,
+                  decoration: const InputDecoration(
+                    labelText: 'Race / Karazany',
+                    prefixIcon: Icon(Icons.category),
+                  ),
+                  items: _availableBreeds.map((b) => DropdownMenuItem<String>(
+                    value: b['name'] as String,
+                    child: Text(b['name'] as String),
+                  )).toList(),
+                  onChanged: (v) => setModalState(() => selectedBreedName = v),
+                ),
+                const SizedBox(height: 12),
+
                 TextField(
                   controller: quantityCtrl,
                   keyboardType: TextInputType.number,
@@ -9426,6 +9940,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                             'id': DateTime.now().millisecondsSinceEpoch.toString(),
                             'date': DateFormat('yyyy-MM-dd').format(selectedDate),
                             'quantity': int.tryParse(quantityCtrl.text) ?? 0,
+                            'breed': selectedBreedName ?? 'Tsy voafaritra',
                             'notes': notesCtrl.text,
                           });
                           _saveData();
@@ -9450,7 +9965,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
     final notesCtrl = TextEditingController();
     DateTime startDate = DateTime.now();
     bool enableAlarm = true;
-    String selectedType = 'Akoho (Poule)';
+    String selectedType = widget.category == 'vorona' ? 'Gana (Canard)' : 'Akoho (Poule)';
 
     showModalBottomSheet(
       context: context,
@@ -9487,19 +10002,28 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                           child: Text(incubData['emoji'], style: const TextStyle(fontSize: 24)),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(child: Text('Fanaovana Zana-akoho', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                        const Expanded(child: Text('Manakotrika', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
                       ],
                     ),
                     const SizedBox(height: 20),
                     
                     // Type de volaille
                     DropdownButtonFormField<String>(
-                      initialValue: selectedType,
+                      value: selectedType,
                       decoration: const InputDecoration(
                         labelText: 'Karazan\'ny vorona',
                         prefixIcon: Icon(Icons.egg_alt),
                       ),
-                      items: _incubationData.keys.map((type) => DropdownMenuItem(
+                      items: _incubationData.keys
+                      .where((type) {
+                        if (widget.category == 'vorona') {
+                          return ['Gana (Canard)', 'Dokotra (Canard Barbarie)', 'Gisa (Oie)'].contains(type);
+                        } else if (widget.category == 'akoho') {
+                          return !['Gana (Canard)', 'Dokotra (Canard Barbarie)', 'Gisa (Oie)'].contains(type) && !type.contains('Bitro');
+                        }
+                        return true;
+                      })
+                      .map((type) => DropdownMenuItem(
                         value: type,
                         child: Row(
                           children: [
@@ -9695,7 +10219,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                             if (enableAlarm) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('⏰ Réveil programmé pour le ${DateFormat('dd/MM/yyyy').format(hatchDate)}'),
+                                  content: Text('⏰ Fanairana voapetraka ho an\'ny ${DateFormat('dd/MM/yyyy').format(hatchDate)}'),
                                   backgroundColor: AppColors.success,
                                 ),
                               );
@@ -9862,7 +10386,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
             dividerColor: Colors.transparent,
             tabs: const [
               Tab(text: '🥚 Atody Voangona'),
-              Tab(text: '🐣 Zana-akoho'),
+              Tab(text: '🐣 Manakotrika'),
             ],
           ),
         ),
@@ -9905,6 +10429,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                               children: [
                                 Text('${egg['quantity']} atody', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                                 Text('📅 ${egg['date']}', style: const TextStyle(color: AppColors.textSecondary)),
+                                if (egg['breed'] != null) Text('🐔 ${egg['breed']}', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w500)),
                                 if (egg['notes'].isNotEmpty) Text('📝 ${egg['notes']}', style: const TextStyle(fontSize: 12)),
                               ],
                             ),
@@ -10087,7 +10612,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
     return FloatingActionButton.extended(
       onPressed: _tabController.index == 0 ? _addEggCollection : _addIncubation,
       icon: const Icon(Icons.add),
-      label: Text(_tabController.index == 0 ? 'Atody' : 'Incubation'),
+      label: Text(_tabController.index == 0 ? 'Atody' : 'Manakotrika'),
       backgroundColor: AppColors.primary,
     );
   }
@@ -10156,6 +10681,130 @@ Widget _buildStatCard({
   );
 }
 
+// ==================== GAVAGE SCREEN ====================
+class GavageScreen extends StatefulWidget {
+  const GavageScreen({super.key});
+
+  @override
+  State<GavageScreen> createState() => _GavageScreenState();
+}
+
+class _GavageScreenState extends State<GavageScreen> {
+  String _selectedType = 'Sarindokotra (Mulard)';
+  
+  final Map<String, Map<String, dynamic>> _gavageData = {
+    'Sarindokotra (Mulard)': {
+      'age_start': '11-12 herinandro',
+      'duration': '12-15 andro',
+      'feed': 'Katsaka masaka (Maïs grain entier cuit)',
+      'frequency': '2 isan\'andro (300-450g isaky ny sakafo)',
+      'target_weight': '5-6 kg',
+      'liver_weight': '400-600g',
+      'desc': 'Ny Mulard no tsara indrindra amin\'ny Foie Gras. Matanjaka ary mahazaka gavage tsara.',
+    },
+    'Gisa (Oie)': {
+      'age_start': '14-16 herinandro',
+      'duration': '18-21 andro',
+      'feed': 'Katsaka masaka + Menaka kely',
+      'frequency': '3 isan\'andro (250-350g isaky ny sakafo)',
+      'target_weight': '8-10 kg',
+      'liver_weight': '700-900g',
+      'desc': 'Ny Gisa dia manome Foie Gras lehibe kokoa fa sarotra kokoa ny gavage (tenda lava).',
+    },
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final data = _gavageData[_selectedType]!;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCard(
+            title: 'Safidio ny Karazana',
+            child: DropdownButtonFormField<String>(
+              value: _selectedType,
+              items: _gavageData.keys.map((k) => DropdownMenuItem(value: k, child: Text(k))).toList(),
+              onChanged: (v) => setState(() => _selectedType = v!),
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.pets, color: AppColors.primary),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          
+          _buildCard(
+            title: 'Torolalana Gavage',
+            child: Column(
+              children: [
+                _buildInfoRow('📅 Fanombohana', data['age_start']),
+                _buildInfoRow('⏳ Faharetana', data['duration']),
+                _buildInfoRow('🌽 Sakafo', data['feed']),
+                _buildInfoRow('🔄 Fatrany', data['frequency']),
+                _buildInfoRow('⚖️ Lanja Kendrena', data['target_weight']),
+                _buildInfoRow('🥩 Lanja Foie Gras', data['liver_weight']),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    data['desc'],
+                    style: const TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          _buildCard(
+            title: 'Teknika Fanaovana',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('1. Fiomanana (Pré-gavage)', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('• Omena sakafo betsaka (ad libitum) 10 andro alohan\'ny gavage.\n• Ampitomboina ny katsaka amin\'ny sakafo.'),
+                SizedBox(height: 10),
+                Text('2. Fandrahoana Katsaka', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('• Andrahoina ny katsaka (voany manontolo) mandra-pahalemy.\n• Afangaro menaka kely (1%) sy sira (0.5%) rehefa maty ny afo.\n• Avela hangatsiaka vao omena.'),
+                SizedBox(height: 10),
+                Text('3. Fomba Fampidirana (Gavage)', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('• Tazomina moramora ny vorona.\n• Atsofoka ny "Entonnoir" na milina gavage.\n• Atao moramora mba tsy handratra ny tenda.\n• Otraina ny tenda mba hidina ny sakafo.'),
+                SizedBox(height: 10),
+                Text('⚠️ Tandremo:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                Text('• Ajanona raha sempotra ny vorona.\n• Omena rano madio foana.\n• Aza atao mafana loatra ny trano.'),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: const TextStyle(color: Colors.grey)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 // ==================== BITROTECH SCREENS ====================
 
 // Bitro Housing Screen - Trano Bitro
@@ -10214,10 +10863,10 @@ class _BitroHousingScreenState extends State<BitroHousingScreen> {
       'spacePerUnit': 0.5,
       'cageSize': '80x60x50 cm',
       'groupSize': '⚠️ 1 BITRO = 1 CAGE (Tsy mety miaraka)',
-      'temperature': '15-21°C',
+      'temperature': '15-21°C (Saro-pady amin\'ny hafanana)',
       'humidity': '60-70%',
-      'description': '⚠️ ZAVA-DEHIBE: Tokony hisy cage manokana ny bitro tsirairay! Ny bitro lahy tsy tokony hiaraka.',
-      'features': ['1 bitro = 1 cage', 'Tany maina (litière)', 'Nid ho an\'ny vavy mpiteraka', 'Toerana fihinanana', 'Rano madio'],
+      'description': '⚠️ ZAVA-DEHIBE: Ny bitro dia biby saro-pady amin\'ny hafanana sy ny rivotra. 1 Bitro = 1 Cage. Ny lahy tsy atao miaraka. Ny rivotra dia tokony hivezivezy tsara fa tsy mivantana (Pas de courant d\'air direct).',
+      'features': ['1 bitro = 1 cage', 'Lafika: Caillebotis/Tariby', 'Boîte à nid (Vavy)', 'Mangeoire (Terre cuite/Galva)', 'Abreuvoir (Pipette/Biberon)'],
       'housingTypes': [
         {'name': 'Cage tokana', 'desc': '⚠️ 1 bitro iray = 1 cage iray (Obligatoire)', 'emoji': '🏠'},
         {'name': 'Clapier (Armoire)', 'desc': 'Boaty maro sosona, cage tsirairay ho an\'ny bitro tsirairay', 'emoji': '🗄️'},
@@ -10952,7 +11601,7 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
         {'name': 'Mangahazo masaka (Manioc cuit)', 'note': 'Masaka tsara, esory ny hodiny', 'emoji': '🥔', 'ok': true},
         {'name': 'Vomanga masaka (Patate douce)', 'note': 'Tsara be, manome angovo', 'emoji': '🍠', 'ok': true},
         {'name': 'Vary masaka (Riz cuit)', 'note': 'Kely fotsiny, tsy be loatra', 'emoji': '🍚', 'ok': true},
-        {'name': 'Apombo (Son de riz)', 'note': 'Afangarony amin\'ny sakafo masaka', 'emoji': '🌾', 'ok': true},
+        {'name': 'Apombombary (Son de Riz)', 'note': 'Afangarony amin\'ny sakafo masaka', 'emoji': '🌾', 'ok': true},
         {'name': 'Katsaka masaka (Maïs cuit)', 'note': 'Masaka tsara', 'emoji': '🌽', 'ok': true},
       ],
       'pelletFormulas': {
@@ -10967,7 +11616,7 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
             {'name': 'Orge', 'percent': '20%'},
             {'name': 'Blé', 'percent': '15%'},
             {'name': 'Tourteau de soja', 'percent': '15%'},
-            {'name': 'Apombo (Son de riz)', 'percent': '10%'},
+            {'name': 'Apombombary (Son de Riz)', 'percent': '10%'},
             {'name': 'Vitamines/Mineraly', 'percent': '5%'},
           ],
         },
@@ -11033,7 +11682,7 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
         },
       },
       'forbidden': ['Ovy MANTA (cru)', 'Saonjo MANTA (cru)', 'Tongolo', 'Avocat', 'Chocolat', 'Mofo mamy'],
-      'tips': 'Foin dia zava-dehibe indrindra ho an\'ny Bitro - 70% ny sakafo',
+      'tips': '💡 ZAVA-DEHIBE: Ny Foin (Bozaka maina) no fototry ny sakafo (70%) hisorohana ny aretin-kibo sy hanalavana ny nify. Ny rano dia tokony ho madio foana (Ad libitum).',
     },
     'Bitro Voalavo': {
       'emoji': '🐹',
@@ -11315,31 +11964,72 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
                   SingleChildScrollView(
                     padding: const EdgeInsets.all(16),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildCard(
-                          title: 'Karazana Sakafo',
-                          icon: Icons.restaurant_menu,
-                          child: Column(
-                            children: (data['foods'] as List).map((food) => Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: Row(
+                        const Text(
+                          '🍽️ Sakafo Fototra',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple),
+                        ),
+                        const SizedBox(height: 12),
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.85,
+                          ),
+                          itemCount: (data['foods'] as List).length,
+                          itemBuilder: (context, index) {
+                            final food = (data['foods'] as List)[index];
+                            final gradients = [
+                              [const Color(0xFF66BB6A), const Color(0xFFA5D6A7)], // Green (Foin)
+                              [const Color(0xFFFFA726), const Color(0xFFFFCC80)], // Orange (Carrot)
+                              [const Color(0xFF8D6E63), const Color(0xFFBCAAA4)], // Brown (Pellets)
+                              [const Color(0xFFEF5350), const Color(0xFFEF9A9A)], // Red (Fruit)
+                            ];
+                            final gradient = gradients[index % gradients.length];
+                            
+                            return Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(color: gradient[0].withValues(alpha: 0.4), blurRadius: 8, offset: const Offset(0, 4)),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(food['emoji'] as String, style: const TextStyle(fontSize: 24)),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(food['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                        Text(food['percent'] as String, style: TextStyle(color: Colors.grey[600], fontSize: 12)),
-                                      ],
+                                  Text(food['emoji'] as String, style: const TextStyle(fontSize: 32)),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    food['name'] as String,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withValues(alpha: 0.2),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      food['percent'] as String,
+                                      style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ],
                               ),
-                            )).toList(),
-                          ),
+                            );
+                          },
                         ),
+                        const SizedBox(height: 20),
                         if (data['beneficialPlants'] != null)
                           _buildCard(
                             title: 'Zava-maniry Mahasoa',
@@ -11791,6 +12481,52 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
       ],
     );
   }
+
+  Widget _buildCard({required String title, required IconData icon, required Widget child}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withValues(alpha: 0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.purple.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: Colors.purple),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          child,
+        ],
+      ),
+    );
+  }
 }
 
 // Bitro Health Screen - Fahasalamana Bitro
@@ -11852,9 +12588,15 @@ class _BitroHealthScreenState extends State<BitroHealthScreen> {
         },
         {
           'name': 'Gale (Lagaly)',
-          'symptoms': 'Mangidihidy sofina/orona, Volo mihintsana, Misy "croute"',
-          'treatment': 'Ivermectine (Tsindrona/Hosotra)',
-          'prevention': 'Fahadiovana, Atokana ny vaovao'
+          'symptoms': 'Mangidihidy mafy, Misy "croute" fotsy ao anaty sofina na orona, Mihintsana ny volo',
+          'treatment': 'Ivermectine (0.2ml/kg - Tsindrona SC) + Menaka/Vaseline hanempotra ny atody',
+          'prevention': 'Fahadiovana, Quarantaine, Famafazana fanafody ny trano'
+        },
+        {
+          'name': 'Otite (Aretin-tsofina)',
+          'symptoms': 'Loha mitongilana (Torticolis), Tsy mahay mandanjalanja (Perte d\'équilibre), Misy nana',
+          'treatment': 'Antibiotique (Oxytetracycline) + Fanadiovana sofina (Tsy rano!)',
+          'prevention': 'Fadiana ny rivotra mivantana (Courant d\'air), Fitsaboana haingana ny Lagaly'
         },
         {
           'name': 'VHD (Hémorragie)',
@@ -11870,6 +12612,56 @@ class _BitroHealthScreenState extends State<BitroHealthScreen> {
         },
       ],
       'guides': [
+        {
+          'title': '🐰 TEKNIKA FIOMPIANA (Guide Technique)',
+          'elements': [
+            {'type': 'section', 'value': '1. Fifidianana Vejivavy sy Lahy (Sélection)'},
+            {'type': 'bullet', 'label': 'Lahy (Mâle)', 'value': 'Vatana matanjaka, testicules hita tsara, mazoto (vif). 1 lahy ho an\'ny vavy 8-10.'},
+            {'type': 'bullet', 'label': 'Vavy (Femelle)', 'value': 'Vatana lava, valahana malalaka, nono 8 farafahakeliny.'},
+            {'type': 'bullet', 'label': 'Taona fampivadiana', 'value': '5-6 volana (Lahy), 5 volana (Vavy).'},
+
+            {'type': 'section', 'value': '2. Trano (Logement)'},
+            {'type': 'bullet', 'label': 'Cage', 'value': '80x60x50cm isaky ny bitro. 1 Bitro = 1 Cage.'},
+            {'type': 'bullet', 'label': 'Lafika', 'value': 'Tokony hisy "caillebotis" na tariby (maille 13x25mm) mba hianjera ny tay.'},
+            {'type': 'bullet', 'label': 'Toerana', 'value': 'Mangatsiatsiaka (15-20°C), rivotra madio fa tsy mivantana (courant d\'air).'},
+
+            {'type': 'section', 'value': '3. Sakafo (Alimentation)'},
+            {'type': 'bullet', 'label': 'Rano', 'value': 'Madio foana, 0.5 - 1 Litatra isan\'andro.'},
+            {'type': 'bullet', 'label': 'Fibre', 'value': 'Bozaka maina (Foin) no fototra (70%). Tena ilaina amin\'ny fandevonan-kanina.'},
+            {'type': 'bullet', 'label': 'Granulé', 'value': '30-50g (Vavy), 100-150g (Vavy mampinono).'},
+
+            {'type': 'section', 'value': '4. Fanahafana (Reproduction)'},
+            {'type': 'bullet', 'label': 'Fampivadiana', 'value': 'Entina any amin\'ny lahy ny vavy (Tsy ny mifamadika).'},
+            {'type': 'bullet', 'label': 'Fahamarihana', 'value': '10-14 andro aorian\'ny fampivadiana (Palpation).'},
+            {'type': 'bullet', 'label': 'Boaty fiterahana', 'value': 'Atao ao amin\'ny cage amin\'ny andro faha-28. Asio bozaka maina.'},
+            {'type': 'bullet', 'label': 'Fiterahana', 'value': 'Andro faha-31. Hamarino ny zaza vao teraka (esory ny maty).'},
+
+            {'type': 'section', 'value': '5. Fisaraha-nono (Sevrage)'},
+            {'type': 'bullet', 'label': 'Fotoana', 'value': '35-42 andro.'},
+            {'type': 'bullet', 'label': 'Lanja', 'value': 'Tokony ho 500-700g.'},
+            {'type': 'bullet', 'label': 'Fikarakarana', 'value': 'Omena anti-coccidien sy vinaigre de cidre (1ml/L) anaty rano.'},
+          ]
+        },
+        {
+          'title': '🛡️ PROPHYLAXIE (Fisorohana Aretina)',
+          'elements': [
+            {'type': 'section', 'value': '1. Prophylaxie Sanitaire (Fahadiovana)'},
+            {'type': 'bullet', 'label': 'Quarantaine', 'value': 'Atokana 21-30 andro ny bitro vaovao vao ampidirina. Jerena sao misy lagaly na sery.'},
+            {'type': 'bullet', 'label': 'Vide Sanitaire', 'value': 'Diovina sy avela maina 1-2 herinandro ny cage alohan\'ny hampidirana bitro hafa.'},
+            {'type': 'bullet', 'label': 'Désinfection', 'value': 'Famafazana fanafody (Virkon, Eau de Javel) isam-bolana ny trano sy ny fitaovana.'},
+            {'type': 'bullet', 'label': 'Lafika', 'value': 'Soloina isan-kerinandro raha mololo. Diovina isan\'andro raha caillebotis.'},
+
+            {'type': 'section', 'value': '2. Prophylaxie Médicale (Fanafody)'},
+            {'type': 'bullet', 'label': 'Vaksiny', 'value': 'VHD (Hémorragie) sy Myxomatose: Atao isan-taona (manomboka 6-10 herinandro).'},
+            {'type': 'bullet', 'label': 'Anticoccidien', 'value': 'Omena isam-bolana (3-5 andro) anaty rano, indrindra ho an\'ny zaza vao misaraka.'},
+            {'type': 'bullet', 'label': 'Vermifuge', 'value': 'Isaky ny 3 volana (Ivermectine na Levamisole).'},
+            {'type': 'bullet', 'label': 'Vitamines', 'value': 'Omena isam-bolana (3-5 andro) hanamafisana ny hery fiarovana.'},
+
+            {'type': 'section', 'value': '3. Fisorohana Manokana'},
+            {'type': 'bullet', 'label': 'Pododermatite', 'value': 'Aza atao anaty cage misy tariby maranitra. Asio "repose-pattes" (planche kely).'},
+            {'type': 'bullet', 'label': 'Stress', 'value': 'Fadio ny tabataba, ny hafanana be (>28°C), ary ny fiovana tampoka.'},
+          ]
+        },
         {
           'title': '🐰 ARETIMBITRO: Vohoka sy Fiterahana',
           'elements': [
@@ -12282,33 +13074,83 @@ class _BitroHealthScreenState extends State<BitroHealthScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          ...(data['diseases'] as List).map((disease) => Container(
-                            margin: const EdgeInsets.only(bottom: 12),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.red[50],
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.red[100]!),
-                              boxShadow: [BoxShadow(color: Colors.red.withValues(alpha: 0.1), blurRadius: 4, offset: const Offset(0, 2))],
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 0.85,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  disease['name'] as String,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                            itemCount: (data['diseases'] as List).length,
+                            itemBuilder: (context, index) {
+                              final disease = (data['diseases'] as List)[index];
+                              final gradients = [
+                                [const Color(0xFFEF5350), const Color(0xFFEF9A9A)], // Red
+                                [const Color(0xFFEC407A), const Color(0xFFF48FB1)], // Pink
+                                [const Color(0xFFAB47BC), const Color(0xFFCE93D8)], // Purple
+                                [const Color(0xFF7E57C2), const Color(0xFFB39DDB)], // Deep Purple
+                                [const Color(0xFF5C6BC0), const Color(0xFF9FA8DA)], // Indigo
+                                [const Color(0xFF42A5F5), const Color(0xFF90CAF9)], // Blue
+                              ];
+                              final gradient = gradients[index % gradients.length];
+
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => DiseaseDetailScreen(disease: disease),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(color: gradient[0].withValues(alpha: 0.4), blurRadius: 8, offset: const Offset(0, 4)),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withValues(alpha: 0.2),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(Icons.medical_services_outlined, color: Colors.white, size: 24),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        disease['name'] as String,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withValues(alpha: 0.2),
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: const Text(
+                                          'Tsindrio',
+                                          style: TextStyle(color: Colors.white, fontSize: 10),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                const SizedBox(height: 4),
-                                Text('📌 Soritr\'aretina: ${disease['symptoms']}', style: const TextStyle(fontSize: 12)),
-                                if (disease['treatment'] != null)
-                                   Padding(
-                                     padding: const EdgeInsets.symmetric(vertical: 2),
-                                     child: Text('💊 Fitsaboana: ${disease['treatment']}', style: TextStyle(fontSize: 12, color: Colors.blue[800], fontWeight: FontWeight.w600)),
-                                   ),
-                                Text('✅ Fisorohana: ${disease['prevention']}', style: TextStyle(fontSize: 12, color: Colors.green[700])),
-                              ],
-                            ),
-                          )),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -12446,6 +13288,109 @@ class _BitroHealthScreenState extends State<BitroHealthScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DiseaseDetailScreen extends StatelessWidget {
+  final Map<String, dynamic> disease;
+  const DiseaseDetailScreen({super.key, required this.disease});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFFFF5F5),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFE53935),
+        title: Text(disease['name'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [Color(0xFFEF5350), Color(0xFFE57373)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [BoxShadow(color: const Color(0xFFE53935).withValues(alpha: 0.3), blurRadius: 12, offset: const Offset(0, 6))],
+              ),
+              child: Column(
+                children: [
+                  const Icon(Icons.medical_services_outlined, size: 48, color: Colors.white),
+                  const SizedBox(height: 12),
+                  Text(
+                    disease['name'],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            _buildSectionCard(
+              title: '🤒 Famantarana (Symptômes)',
+              content: disease['symptoms'],
+              icon: Icons.sick_outlined,
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 16),
+
+            if (disease['treatment'] != null) ...[
+              _buildSectionCard(
+                title: '💊 Fitsaboana (Traitement)',
+                content: disease['treatment'],
+                icon: Icons.medication_outlined,
+                color: Colors.blue,
+              ),
+              const SizedBox(height: 16),
+            ],
+
+            _buildSectionCard(
+              title: '🛡️ Fisorohana (Prévention)',
+              content: disease['prevention'],
+              icon: Icons.shield_outlined,
+              color: Colors.green,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionCard({required String title, required String content, required IconData icon, required Color color}) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
+        boxShadow: [BoxShadow(color: color.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
+                child: Icon(icon, color: color, size: 20),
+              ),
+              const SizedBox(width: 12),
+              Expanded(child: Text(title, style: TextStyle(color: color.withValues(alpha: 0.8), fontWeight: FontWeight.bold, fontSize: 16))),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(content, style: const TextStyle(color: Color(0xFF374151), fontSize: 14, height: 1.5)),
+        ],
       ),
     );
   }
@@ -14895,6 +15840,15 @@ class _KisoaGestationScreenState extends State<KisoaGestationScreen> {
 // ===========================================
 
 // --- FAMBOLENA CROPS SCREEN (Voly) ---
+class Culture {
+  final String name;
+  final String imagePath;
+  final List<String> steps;
+   final Map<String, dynamic>? meta;
+
+  const Culture({required this.name, required this.imagePath, required this.steps, this.meta});
+}
+
 class FambolenaCropsScreen extends StatefulWidget {
   const FambolenaCropsScreen({super.key});
 
@@ -14915,7 +15869,53 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '20x20 cm',
       'yield': '3-6 T/ha',
       'waterNeeds': 'Be loatra (Riziculture)',
-      'plantingGuide': '1. Manomana tanimbary: asio rano ary aotory tsara.\n2. Mamafy voa amin\'ny pépinière (tanin-ketsa).\n3. Rehefa afaka 3-4 herinandro, afindra ny ketsa.\n4. Asio elanelana 20cm isaky ny ketsa.\n5. Ataovy anaty rano 5-10cm ny tany.',
+      'soil': 'Tany vilany misy tanimanga; pH 5,5-7; zezika organika 5 T/ha',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa vary: 40-60 gramma
+• Izany dia ≈ 1500-2000 voa madinika
+
+📏 HALALINY FAMAFAZANA:
+• Vary afafy mivantana: 1-2 cm
+• Vary ketsa (tanin-ketsa): 2-3 cm
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 25-35°C
+• Miposaka ao anatin'ny: 3-7 andro
+• ILAINA RANO MANDO hatrany!
+
+✅ TAHAN'NY FIPOSAHANA: 85-95%
+(Izany hoe 85-95 amin'ny 100 voa no maniry)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Aleno ao anaty rano ny voa mandritra ny 24 ora
+2. Esory ary avelao eo amin'ny toerana mando 24 ora hafa
+3. Rehefa miposaka ny tsimoka fotsy kely, afafy
+4. Aza avela ho maina mihitsy ny tany!''',
+      'nursery': 'Tanin-ketsa: 100-150 m² ho an\'ny 1 ha; afindra 21-25 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA NY TANIMBARY
+• Diovy tsara ny ahi-dratsy rehetra
+• Asio rano 5-10 cm ary aotory (sasao) ny tany
+• Avelao 1-2 herinandro alohan'ny famafazana
+
+DINGANA 2: FANAMBOARANA TANIN-KETSA
+• Toerana kely (10-15 m²) ho an'ny 1000 m² tanimbary
+• Asio zezika organika (komposta na zezika omby antitra)
+• Ataovy malemilemy ny tany
+
+DINGANA 3: FAMAFAZANA VOA
+• Afafazo miparitaka ny voa efa niposaka
+• Saromy tany madinika (1-2 cm)
+• Asio rano moramora isan'andro
+
+DINGANA 4: FAFINDRANA KETSA (21-25 andro)
+• Rehefa misy ravina 4-5 ny ketsa
+• Esory moramora mba tsy ho simba ny faka
+• Afindra avy hatrany (aza avela ho maina)
+
+DINGANA 5: FAMETRAHANA AMIN'NY TANIMBARY
+• Elanelana: 20 cm x 20 cm
+• Ketsa 2-3 isaky ny lavaka
+• Asio rano 5-10 cm hatrany''',
       'steps': [
         {'week': 'H1-2', 'action': 'Fanamboarana tanimbary - Famafazana voa'},
         {'week': 'H3-4', 'action': 'Fanetsana - Fampidirana rano'},
@@ -14925,9 +15925,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H17-20', 'action': 'Fijinjana - Fanaingoana - Famolavolana'},
       ],
       'tips': [
-        'Ilaina ny rano maharitra 5-10 cm hatramin\'ny fahamasahana',
-        'Ny zezika azota dia ampiana 3 androany: fanetsana, 30 andro, 60 andro',
-        'Fisorohana ny bibikely toy ny akoho sy vorona',
+        '💧 Ny rano dia zava-dehibe indrindra - aza avela ho ritra',
+        '🌱 Zezika azota: ampiana 3 andro (fanetsana, 30 andro, 60 andro)',
+        '🐦 Arovy amin\'ny vorona sy bibikely',
+        '📅 Jinjao rehefa 80% ny salohim-bary efa mavo',
       ],
     },
     'Katsaka': {
@@ -14939,7 +15940,53 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '75x25 cm',
       'yield': '2-8 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Manaova lavaka kely 5cm ny halaliny.\n2. Asio elanelana 75cm isaky ny laharana ary 25cm isaky ny lavaka.\n3. Asio voa 2 na 3 isaky ny lavaka.\n4. Sarony tany kely ary tsindrio moramora.\n5. Tondrahy rano avy hatrany.',
+      'soil': 'Tany lalina lonaka; pH 5,8-7; komposta 3-4 T/ha + NPK 200 kg/ha',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa katsaka: 20-25 gramma
+• Izany dia ≈ 50-70 voa lehibe
+
+📏 HALALINY FAMAFAZANA:
+• 4-5 cm ao anaty tany
+• Voa 2-3 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 20-30°C
+• Miposaka ao anatin'ny: 5-8 andro
+
+✅ TAHAN'NY FIPOSAHANA: 90-95%
+(Tsara be ny katsaka - saika maniry daholo!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Aza alena aloha ny voa - afafy mivantana
+2. Asio voa 2-3 isaky ny lavaka
+3. Rehefa maniry tsara, esory ny malemy, avelao 1-2
+4. Tondrahy tsara indrindra rehefa mamoaka felana (voninkazo)''',
+      'nursery': 'Famafazana MIVANTANA - tsy ilaina tanin-ketsa',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA NY TANY
+• Sasao ny tany lalina (30-40 cm)
+• Esory ny ahi-dratsy sy vato
+• Asio komposta na zezika omby antitra (3-4 kg/m²)
+
+DINGANA 2: FANAOVANA LAHARANA
+• Manaova tsipika mahitsy (mampiasa tady)
+• Elanelana laharana: 75 cm
+• Elanelana lavaka: 25 cm
+
+DINGANA 3: FAMAFAZANA
+• Manaova lavaka 4-5 cm ny halaliny
+• Asio voa 2-3 isaky ny lavaka
+• Saromy tany ary tsindrio moramora
+• Tondrahy avy hatrany
+
+DINGANA 4: FIKARAKARANA VOALOHANY (H2-3)
+• Esory ahi-dratsy
+• Raha maniry daholo, esory ny malemy (avelao 1-2)
+• Asio tany manodidina ny fototra (buttage)
+
+DINGANA 5: ZEZIKA SY RANO
+• H3-4: Asio NPK 15-15-15 (20g/m²)
+• H7-8: Asio urée (10g/m²) rehefa mamony
+• Tondrahy tsara indrindra rehefa mamoaka felana''',
       'steps': [
         {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana 2-3 voa isaky ny lavaka'},
         {'week': 'H2-3', 'action': 'Fiposahana - Fikarakarana voalohany'},
@@ -14949,9 +15996,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H15-17', 'action': 'Fijinjana rehefa maina ny tavom-boankazo'},
       ],
       'tips': [
-        'Famafazana 2-3 voa isaky ny lavaka, 5 cm lalina',
-        'Zezika NPK 15-15-15: 200 kg/ha rehefa mamafa',
-        'Mila rano be rehefa mamoaka felana',
+        '🌽 Jinjao rehefa mavo sy maina ny tavom-boankazo',
+        '💧 Rano be indrindra rehefa mamoaka felana (voninkazo)',
+        '🐛 Jereo tsara ny biby kely (chenille) ao anaty felana',
+        '📏 Aza atao akaiky loatra - mila rivotra tsara',
       ],
     },
     'Mangahazo': {
@@ -14963,7 +16011,55 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '1x1 m',
       'yield': '10-25 T/ha',
       'waterNeeds': 'Kely',
-      'plantingGuide': '1. Omano ny tany, ataovy malalaka tsara.\n2. Makà tahon-kazo 20-30cm, misy maso 5-7.\n3. Atsatohy 45° na mitsivalana ny taho.\n4. Asio elanelana 1m isaky ny taho.\n5. Avelao hisy maso 2-3 ambonin\'ny tany.',
+      'soil': 'Tany maivana fasika; pH 5-6,5; tsy mila zezika be (mahatanty tany mahantra)',
+      'seed': '''📊 FOMBA FAMPITOMBOANA:
+⚠️ NY MANGAHAZO DIA TSY MAMPIASA VOA!
+• Mampiasa BOUTURE (tahon-kazo tapaka)
+• Tsy misy voa famafazana
+
+📏 TAHON-KAZO ILAINA:
+• Halavany: 20-30 cm
+• Misy maso (nœud): 5-7
+• Avy amin'ny mangahazo antitra 8-12 volana
+
+📍 FOMBA FAMETRAHANA:
+• 45° (manenjana) = faka be + vokatra be
+• Mitsivalana (horizontal) = vokatra antonony
+
+✅ TAHAN'NY FIVELOMANA: 85-95%
+(Saika maniry daholo ny mangahazo tsara)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Fidio tahon-kazo SALAMA (tsy misy aretina)
+2. Avy amin'ny mangahazo 8-12 volana
+3. Tapaho ny ravina (avelao 2-3 andro) alohan'ny hambolena
+4. Aza atsatoka amin ny tany lena be loatra!''',
+      'nursery': 'Tsy ilaina tanin-ketsa - atsatohy MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA NY TANY
+• Sasao ny tany lalina (20-30 cm)
+• Esory ahi-dratsy sy faka tratra
+• Tsy mila zezika betsaka (mahatanty tany mahantra)
+
+DINGANA 2: FIKARAKARANA TAHON-KAZO
+• Fidio mangahazo salama 8-12 volana
+• Tapaho 20-30 cm (misy maso 5-7)
+• Avelao 2-3 andro hihainana ny tapatapany
+
+DINGANA 3: FAMETRAHANA
+• Manaova lavaka 10-15 cm lalina
+• Elanelana: 1 metatra x 1 metatra
+• Atsatohy 45° (na mitsivalana)
+• Avelao maso 2-3 ambonin'ny tany
+
+DINGANA 4: FIKARAKARANA (V2-6)
+• Esory ahi-dratsy matetika
+• Tondrahy raha maina be (tsy voatery)
+• Jereo raha misy aretina (ravina mavo)
+
+DINGANA 5: FIJINJANA (V9-24)
+• Afaka jinjaina 9 volana (fa kely ny vokatra)
+• Tsara indrindra: 12-18 volana
+• Esory ny tany manodidina aloha''',
       'steps': [
         {'week': 'V1', 'action': 'Fanamboarana tany - Fametrahana tahon-kazo (20-30 cm)'},
         {'week': 'V2-3', 'action': 'Fiposahana - Fikarakarana voalohany'},
@@ -14972,9 +16068,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'V13-24', 'action': 'Fiandrasana fahamasahana - Fijinjana'},
       ],
       'tips': [
-        'Ny tahon-kazo dia tokony ho 20-30 cm lava, misy maso 5-7',
-        'Ataovy 45° ny fipetrahany, maso 2-3 ambonin\'ny tany',
-        'Afaka jinjaina aorian\'ny 9 volana fa tsara kokoa raha 12-18 volana',
+        '🌱 Ny tahon-kazo dia avy amin\'ny mangahazo 8-12 volana, tsy tanora',
+        '📐 Ataovy 45° ny fipetrahany = vokatra betsaka kokoa',
+        '⏰ Tsara kokoa ny miandry 12-18 volana alohan\'ny fijinjana',
+        '🌧️ Aza avela ho lena be loatra - mety ho lò ny faka',
       ],
     },
     'Voanjo': {
@@ -14986,7 +16083,53 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '30x15 cm',
       'yield': '1-2 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Omano ny tany, tsara raha tany fasika.\n2. Manaova lavaka kely 3-5cm.\n3. Asio voa 1 isaky ny lavaka.\n4. Asio elanelana 30cm isaky ny laharana, 15cm isaky ny lavaka.\n5. Sarony tany maivana.',
+      'soil': 'Tany fasika maivana; pH 5,5-6,5; tsy mila azote (manamboatra azy)',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voanjo miaraka hoditra: 80-120 gramma
+• Izany dia ≈ 200-250 voanjo
+
+📏 HALALINY FAMAFAZANA:
+• 3-5 cm ao anaty tany
+• Voanjo 1 na 2 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 25-30°C
+• Miposaka ao anatin'ny: 5-10 andro
+
+✅ TAHAN'NY FIPOSAHANA: 80-90%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Mampiasà voanjo MIARAKA HODITRA (tsy voasokitra)
+2. Tany fasika no tsara indrindra
+3. Aza tondrahina be loatra!
+4. Rehefa mamony, ny voninkazo dia midina ao anaty tany
+5. Aza manao fandroahana rehefa mamony (mety ho tapaka)''',
+      'nursery': 'Famafazana MIVANTANA - voa 1-2 isaky ny lavaka',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TANY
+• Tany fasika maivana no tsara indrindra
+• Aza mampiasa tany tanimanga (sarotra bongotina)
+• Esory vato sy ahi-dratsy
+
+DINGANA 2: FANAMBOARANA TANY
+• Sasao lalina (20-30 cm)
+• Asio komposta (2 kg/m²) - TSY MILA AZOTE
+• Ny voanjo dia manamboatra azote ho azy
+
+DINGANA 3: FAMAFAZANA
+• Elanelana laharana: 30 cm
+• Elanelana lavaka: 15 cm
+• Halaliny: 3-5 cm
+• Voanjo 1-2 isaky ny lavaka (miaraka hoditra)
+
+DINGANA 4: FIKARAKARANA MANOKANA
+• H1-4: Esory ahi-dratsy moramora
+• H5-8: Rehefa mamony, AZA manao fandroahana be
+• Ny voninkazo dia midina ao anaty tany (gynophore)
+
+DINGANA 5: FIJINJANA
+• Rehefa mavo ny ravina (90-120 andro)
+• Bongoty ny tongotra iray manontolo
+• Avelao haina 2-3 andro alohan'ny fakana''',
       'steps': [
         {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana voa 1 isaky ny lavaka'},
         {'week': 'H2-4', 'action': 'Fiposahana - Fandroahana voalohany'},
@@ -14995,9 +16138,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H13-17', 'action': 'Fijinjana rehefa mavo ny ravina'},
       ],
       'tips': [
-        'Ny tany fasika dia tsara indrindra ho an\'ny voanjo',
-        'Aza avela ho lena be ny tany rehefa mamoaka voninkazo',
-        'Atao maivana ny fandroahana mba tsy hamaky ny gynophore',
+        '🥜 Mampiasà voanjo miaraka hoditra - tsy voasokitra',
+        '🏖️ Tany fasika no tsara indrindra ho an\'ny voanjo',
+        '🌸 Aza manao fandroahana rehefa mamony!',
+        '☀️ Avelao haina tsara alohan\'ny tehirizina',
       ],
     },
     'Tsaramaso': {
@@ -15009,7 +16153,53 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '40x10 cm',
       'yield': '1-3 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Manaova lavaka 3-5cm ny halaliny.\n2. Asio voa 2 isaky ny lavaka.\n3. Asio elanelana 40cm isaky ny laharana, 10cm isaky ny lavaka.\n4. Sarony tany ary tondrahy.',
+      'soil': 'Tany maivana; pH 6-7; komposta 2 T/ha (tsy mila azote betsaka)',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa tsaramaso: 80-100 gramma
+• Izany dia ≈ 250-350 voa
+
+📏 HALALINY FAMAFAZANA:
+• 3-5 cm ao anaty tany
+• Voa 2 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 5-8 andro
+
+✅ TAHAN'NY FIPOSAHANA: 85-95%
+(Tsara be ny tsaramaso - mora ambolena!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. AZA alena aloha ny voa (mety ho lofika/lò)
+2. Afafy mivantana amin'ny tany
+3. Tondrahy moramora tsy be loatra
+4. Ny tsaramaso dia haingana (60-90 andro fotsiny!)''',
+      'nursery': 'Famafazana MIVANTANA - tsy ilaina tanin-ketsa',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao lalina (20-30 cm)
+• Asio komposta (2 kg/m²)
+• TSY MILA zezika azote (manamboatra azy ny tsaramaso)
+
+DINGANA 2: FANAOVANA LAHARANA
+• Manaova hady kely mahitsy
+• Elanelana laharana: 40 cm
+• Elanelana lavaka: 10 cm
+
+DINGANA 3: FAMAFAZANA
+• Asio voa 2 isaky ny lavaka
+• Halaliny: 3-5 cm
+• Saromy tany ary tsindrio moramora
+• Tondrahy avy hatrany (fa tsy be loatra)
+
+DINGANA 4: FIKARAKARANA
+• H2-3: Esory ahi-dratsy
+• H4-6: Asio tany manodidina ny fototra
+• Raha tsaramaso mananika (grimpant): asio tuteur
+
+DINGANA 5: FIJINJANA
+• Tsaramaso maintso: jinjao 45-60 andro
+• Tsaramaso maina: jinjao 70-90 andro
+• Jinjao maraina alohan'ny hafanana''',
       'steps': [
         {'week': 'H1', 'action': 'Famafazana 2 voa isaky ny lavaka, 3-5 cm lalina'},
         {'week': 'H2-3', 'action': 'Fiposahana - Fikarakarana'},
@@ -15032,18 +16222,66 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '50x50 cm',
       'yield': '10-20 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Mamafy voa amin\'ny pépinière.\n2. Rehefa misy ravina 4-6 (afaka 4-6 herinandro), afindra.\n3. Omano ny tany, asio zezika organika.\n4. Asio elanelana 50cm isaky ny ketsa.\n5. Tondrahy matetika fa aza atao be loatra.',
+      'soil': 'Tany lonaka, misy komposta; pH 6-7; NPK 15-15-15: 150 kg/ha',
+      'seed': '''📊 FATRA ILAINA (tanin-ketsa 1m²):
+• Voa sakay: 0,3-0,5 gramma (madinika be!)
+• Izany dia ≈ 50-100 voa
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny (tena maivana)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 25-30°C (mafana)
+• Miposaka ao anatin'ny: 10-20 andro
+• ⚠️ MIADANA NY SAKAY - Mahandrasa!
+
+✅ TAHAN'NY FIPOSAHANA: 70-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Aleno ao anaty rano MAFANA ny voa (12 ora)
+2. Afafy amin'ny tanin-ketsa aloha
+3. Arovy amin'ny orana be (mety hamono ny ketsa)
+4. Afindra rehefa misy ravina 4-6 (4-6 herinandro)''',
+      'nursery': 'Tanin-ketsa: 4-6 herinandro; afindra rehefa misy ravina 4-6',
+      'plantingGuide': '''DINGANA 1: FANOMANANA VOA
+• Aleno ao anaty rano mafana (12 ora)
+• Esory ary avelao eo amin'ny toerana mafana
+• Afaka afafy rehefa mibontsina kely
+
+DINGANA 2: FANAMBOARANA TANIN-KETSA
+• Toerana masoandro be
+• Tany lonaka, asio komposta
+• Arovy amin'ny orana be (sarom-plastika)
+
+DINGANA 3: FAMAFAZANA
+• Afafazo miparitaka ny voa
+• Saromy tany madinika manify (0,5-1 cm)
+• Tondrahy moramora isan'andro
+• Andraso 10-20 andro ny fiposahana
+
+DINGANA 4: FAMINDRANA KETSA (H5-6)
+• Rehefa misy ravina 4-6
+• Elanelana: 50 cm x 50 cm
+• Asio zezika fototra (komposta + NPK)
+• Tondrahy avy hatrany
+
+DINGANA 5: FIKARAKARANA SY FIJINJANA
+• Esory ahi-dratsy matetika
+• Jinjao ny sakay masaka (mena na maitso)
+• Ny fijinjana matetika = vokatra betsaka kokoa''',
       'steps': [
-        {'week': 'H1-6', 'action': 'Famafazana amin\'ny pépinière - Fikarakarana ketsa'},
+        {'week': 'H1-6', 'action': 'Famafazana amin\'ny tanin-ketsa - Fikarakarana ketsa'},
         {'week': 'H7-8', 'action': 'Famindrana ketsa - Fampidirana zezika fototra'},
         {'week': 'H9-12', 'action': 'Fandroahana - Fanaraha-maso bibikely'},
         {'week': 'H13-16', 'action': 'Famokarana voninkazo - Fiforonana voankazo'},
         {'week': 'H17+', 'action': 'Fijinjana mitohy (isaky ny herinandro)'},
       ],
       'tips': [
-        'Tia masoandro sy tany lonaka tsara',
-        'Tondrahy matetika fa aza avela hiandrona ny rano',
-        'Esory ny ahi-dratsy mba tsy hifaninana amin\'ny sakafo',
+        '☀️ Mila masoandro be ny sakay - toerana mazava',
+        '💧 Tondrahy matetika fa aza avela hijanona ny rano',
+        '🌶️ Jinjao matetika = vokatra betsaka kokoa',
+        '🐛 Jereo ny bibikely (pucerons) - fanafody voajanahary',
       ],
     },
     'Anana': {
@@ -15055,7 +16293,56 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '20x15 cm',
       'yield': '10-20 T/ha',
       'waterNeeds': 'Be',
-      'plantingGuide': '1. Omano ny tany, asio zezika organika tsara.\n2. Afafazo ny voa na afindra ny zanak\'anana.\n3. Asio elanelana 20cm isaky ny laharana.\n4. Tondrahy rano isan\'andro, indrindra ny maraina.',
+      'soil': 'Tany lonaka, misy komposta be; pH 6-7; zezika organika 4 T/ha',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa anana: 5-10 gramma
+• Izany dia ≈ 5000-10000 voa (madinika be!)
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny (maivana be)
+• Na afafy miparitaka fotsiny
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 20-30°C
+• Miposaka ao anatin'ny: 3-7 andro
+• ✅ HAINGANA BE NY ANANA!
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. MORA AMBOLENA ny anana!
+2. Afaka afafy mivantana amin'ny tany
+3. Tondrahy isan'andro (maraina tsara)
+4. Afaka jinjaina 30-45 andro fotsiny!''',
+      'nursery': 'Famafazana MIVANTANA na afindra zanak\'anana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany maivana (15-20 cm)
+• Asio zezika organika betsaka (komposta, zezika omby)
+• Ataovy malemilemy tsara ny tany
+
+DINGANA 2: FAMAFAZANA
+FOMBA 1 - Miparitaka:
+• Afafazo miparitaka ny voa
+• Afangaro amin'ny fasika mba tsy ho be loatra
+
+FOMBA 2 - Andalana:
+• Manaova hady kely 0,5-1 cm lalina
+• Elanelana laharana: 20 cm
+• Afafazo manify ny voa
+
+DINGANA 3: SAROMANA SY TONDRAHINA
+• Saromy tany madinika manify
+• Tondrahy moramora avy hatrany
+• Tondrahy ISAN'ANDRO (maraina tsara)
+
+DINGANA 4: FANITSIANA (Éclaircissage)
+• Rehefa miposaka (H2), esory ny be loatra
+• Avelao 15 cm elanelana
+
+DINGANA 5: FIJINJANA
+• 30-45 andro: Afaka jinjaina efa!
+• Tapaho ny ravina, avelao ny fototra
+• Mbola maniry indray (2-3 fijinjana)''',
       'steps': [
         {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana na fanetsana'},
         {'week': 'H2', 'action': 'Fiposahana - Fanondrahan-drano isan\'andro'},
@@ -15063,9 +16350,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H5-8', 'action': 'Fijinjana - Afaka manomboka jinjaina'},
       ],
       'tips': [
-        'Mila rano isan\'andro, indrindra ny maraina',
-        'Ny zezika organika (zezika omby, kompositra) dia tsara indrindra',
-        'Afaka jinjaina matetika ny ravina vaovao',
+        '💧 Mila rano ISAN\'ANDRO ny anana - aza adino!',
+        '🌱 Zezika organika (zezika omby, komposta) = ravina tsara',
+        '✂️ Tapaho ny ravina, avelao ny fototra = maniry indray',
+        '⏰ Haingana be: 30-45 andro dia afaka jinjaina!',
       ],
     },
     'Angivy': {
@@ -15077,18 +16365,63 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '60x60 cm',
       'yield': '15-25 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Mamafy voa amin\'ny pépinière.\n2. Rehefa afaka 1 volana, afindra ny ketsa.\n3. Omano ny tany, asio zezika organika.\n4. Asio elanelana 60cm isaky ny ketsa.\n5. Tondrahy matetika.',
+      'soil': 'Tany lonaka, drainage tsara; pH 5,5-6,5; komposta 3 T/ha',
+      'seed': '''📊 FATRA ILAINA (tanin-ketsa 1m²):
+• Voa angivy: 0,1-0,2 gramma
+• Izany dia ≈ 20-50 voa
+
+📏 HALALINY FAMAFAZANA:
+• 0,5 cm fotsiny (tena maivana!)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 22-28°C (mafana)
+• Miposaka ao anatin'ny: 8-14 andro
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Esory ny voa avy amin'ny angivy MASAKA TSARA
+2. Afafy amin'ny tanin-ketsa aloha (tsy mivantana)
+3. Mila hafanana be - arovy amin'ny mangatsiaka
+4. Afindra rehefa misy ravina 4-5''',
+      'nursery': 'Tanin-ketsa: 4 herinandro; afindra rehefa misy ravina 4-5',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Toerana masoandro be, mafana
+• Tany lonaka, asio komposta
+• Arovy amin'ny orana be
+
+DINGANA 2: FAMAFAZANA
+• Afafazo ny voa 0,5 cm lalina
+• Saromy tany madinika manify
+• Tondrahy moramora isan'andro
+
+DINGANA 3: FIKARAKARANA KETSA (4 herinandro)
+• Tondrahy isan'andro maraina
+• Arovy amin'ny hafanana be loatra
+• Andrasao ravina 4-5
+
+DINGANA 4: FAMINDRANA AMIN'NY SAHA
+• Elanelana: 60 cm x 60 cm
+• Asio komposta ao anaty lavaka
+• Tondrahy avy hatrany
+
+DINGANA 5: FIKARAKARANA SY FIJINJANA
+• Esory ahi-dratsy matetika
+• Tapaho ny tendrony mba hihabetsaka sampana
+• Jinjao mbola maitso (mangidy) na mena (mamy)''',
       'steps': [
-        {'week': 'H1-4', 'action': 'Famafazana amin\'ny pépinière'},
+        {'week': 'H1-4', 'action': 'Famafazana amin\'ny tanin-ketsa'},
         {'week': 'H5-6', 'action': 'Famindrana ketsa - Fampidirana zezika'},
         {'week': 'H7-10', 'action': 'Fandroahana - Fanaraha-maso bibikely'},
         {'week': 'H11-14', 'action': 'Famokarana voninkazo sy voa'},
         {'week': 'H15+', 'action': 'Fijinjana (mbola maitso na mena)'},
       ],
       'tips': [
-        'Tsara kokoa raha jinjaina mbola maitso raha tiana mangidy',
-        'Tia masoandro sy hafanana',
-        'Azo atao ny manapaka ny tendrony mba hihabetsaka ny sampana',
+        '🟢 Maitso = mangidy kokoa; Mena = mamy kokoa',
+        '☀️ Mila masoandro sy hafanana be',
+        '✂️ Tapaho ny tendrony = sampana betsaka = vokatra betsaka',
+        '🌱 Afaka mamokatra 3-4 volana raha karakaraina tsara',
       ],
     },
     'Voatabia': {
@@ -15100,17 +16433,76 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '60x40 cm',
       'yield': '20-50 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Mamafy voa amin\'ny pépinière aloha.\n2. Rehefa misy ravina 4-5, afindra amin\'ny saha.\n3. Manaova lavaka ary asio zezika.\n4. Asio elanelana 60cm isaky ny laharana, 40cm isaky ny tongotra.\n5. Asio tuteur (kazo) hanohanana azy.',
+      'soil': 'Tany lonaka, drainage tsara; pH 6-6,8; komposta 4 T/ha + NPK',
+      'seed': '''📊 FATRA ILAINA (tanin-ketsa 1m²):
+• Voa voatabia: 0,5-1 gramma (madinika be!)
+• Izany dia ≈ 150-350 voa
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny ao anaty tanin-ketsa
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 20-25°C
+• Miposaka ao anatin'ny: 6-10 andro
+
+✅ TAHAN'NY FIPOSAHANA: 80-90%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Famafazana amin'ny tanin-ketsa aloha (tsy mivantana)
+2. Afindra rehefa misy ravina 4-5 (3-4 herinandro)
+3. ASIO TUTEUR (hazo) hatramin'ny voalohany
+4. Esory ny "sampana kely" (gourmands) eny an-keliny
+
+⚠️ FISAFIDIANANA VOA:
+• F1 (Hybrid): Vokatra be, maharitra aretina, lafo
+• Locale/Gasy: Tanjaka kokoa, tsiro tsara, mora''',
+      'nursery': 'Tanin-ketsa: 3-4 herinandro; afindra rehefa misy ravina 4-5',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Toerana masoandro be, arovy amin'ny orana
+• Tany lonaka, asio komposta
+• Manaova sarom-plastika mba hiarovana
+
+DINGANA 2: FAMAFAZANA (AMIN'NY TANIN-KETSA)
+• Manaova hady kely 0,5-1 cm lalina
+• Afafazo manify ny voa (aza be loatra!)
+• Saromy tany madinika
+• Tondrahy moramora isan'andro
+
+DINGANA 3: FIKARAKARANA KETSA
+• Miposaka: 6-10 andro
+• Tondrahy isan'andro maraina
+• Arovy amin'ny bibikely sy aretina
+• Andrasao ravina 4-5 (3-4 herinandro)
+
+DINGANA 4: FAMINDRANA AMIN'NY SAHA
+• Omano ny tany: sasao lalina, asio komposta
+• Manaova lavaka 15-20 cm lalina
+• Asio zezika fototra (komposta + NPK)
+• Elanelana: 60 cm x 40 cm
+• ASIO TUTEUR (hazo 1,5m) avy hatrany!
+
+DINGANA 5: FIKARAKARANA MANOKANA
+• Esory ny GOURMANDS (sampana kely eny an-keliny)
+• Afatory amin'ny tuteur rehefa mitombo
+• Zezika: NPK (H2), Potasse (H6-8 rehefa mamokatra)
+• Aza mandena ny ravina - ny faka ihany!
+
+DINGANA 6: FIJINJANA
+• Voatabia mena masaka: 90-120 andro
+• Jinjao maraina (tsy mafana loatra)
+• Aza mijinja voatabia lena (mety ho simba)''',
       'steps': [
-        {'week': 'H1-3', 'action': 'Fanetsana amin\'ny pépinière'},
+        {'week': 'H1-3', 'action': 'Fanetsana amin\'ny tanin-ketsa'},
         {'week': 'H4-5', 'action': 'Fametrahana amin\'ny saha - Fametrahana tuteur'},
         {'week': 'H6-10', 'action': 'Fivoarana - Zezika - Fandroahana'},
         {'week': 'H11-16', 'action': 'Famokarana voankazo - Fijinjana'},
       ],
       'tips': [
-        'Mila tuteur ny voatabia mba hitondra ny voankazo',
-        'Esory ny sampan-kazo kely (gourmands) eo amin\'ny het-kazo',
-        'Aza mandena ny ravina rehefa manondraka',
+        '🌿 ASIO TUTEUR hatramin\'ny voalohany - tsy azo adino!',
+        '✂️ Esory ny gourmands (sampana kely eny an-keliny)',
+        '💧 Aza mandena ny ravina - faka ihany no tondrahina',
+        '🍅 Jinjao rehefa mena tsara na mavo kely (afaka miova ao an-trano)',
       ],
     },
     'Tongolo': {
@@ -15122,19 +16514,67 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '15x10 cm',
       'yield': '15-30 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Mamafy voa amin\'ny pépinière.\n2. Rehefa lehibe ny zanak\'ala (toy ny pensilihazo), afindra.\n3. Hetezo kely ny faka sy ny ravina alohan\'ny hambolena.\n4. Asio elanelana 15cm isaky ny tongotra.\n5. Aza atao lalina loatra ny fambolena.',
+      'soil': 'Tany fasika lonaka, drainage tsara; pH 6-7; komposta 3 T/ha',
+      'seed': '''📊 FATRA ILAINA (tanin-ketsa 1m²):
+• Voa tongolo: 3-4 gramma
+• Izany dia ≈ 750-1000 voa (madinika be!)
+
+📏 HALALINY FAMAFAZANA:
+• 1-1,5 cm ao anaty tanin-ketsa
+• Saromy tany madinika
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 15-25°C
+• Miposaka ao anatin'ny: 10-15 andro
+
+✅ TAHAN'NY FIPOSAHANA: 70-80%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Ny voa tongolo dia madinika indrindra - mitandrema!
+2. Afafy amin'ny tanin-ketsa aloha (6-8 herinandro)
+3. Afindra rehefa toy ny pensilihazo (hazo kely)
+4. Hetezo ny faka sy ravina alohan'ny hambolena
+5. AZA atao lalina loatra - bulbe tokony ho hita kely''',
+      'nursery': 'Tanin-ketsa: 6-8 herinandro; afindra rehefa toy ny pensilihazo',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Tany fasika lonaka, drainage tsara
+• Asio komposta antitra (tsy vaovao)
+• Ataovy malemilemy tsara
+
+DINGANA 2: FAMAFAZANA
+• Manaova hady kely 1-1,5 cm lalina
+• Afafazo manify ny voa (madinika be!)
+• Saromy tany madinika
+• Tondrahy moramora isan'andro
+
+DINGANA 3: FIKARAKARANA KETSA (6-8 herinandro)
+• Tondrahy isan'andro maraina
+• Esory ahi-dratsy
+• Andrasao ho toy ny pensilihazo (hazo kely)
+
+DINGANA 4: FAMINDRANA AMIN'NY SAHA
+• Hetezo ny faka (tapaho 1/3)
+• Hetezo ny ravina (tapaho 1/2)
+• Elanelana: 15 cm x 10 cm
+• AZA atao lalina loatra!
+
+DINGANA 5: FIKARAKARANA SY FIJINJANA
+• Tondrahy matetika (fa ny faka ihany, tsy ny ravina)
+• Rehefa mitombo ny bulbe: mampihena rano
+• Jinjao rehefa milofika ny 80% ny ravina
+• Avelao hamaina 2-3 andro''',
       'steps': [
-        {'week': 'H1-4', 'action': 'Fanetsana amin\'ny pépinière - Fikarakarana zanak\'ala'},
+        {'week': 'H1-4', 'action': 'Fanetsana amin\'ny tanin-ketsa - Fikarakarana zanak\'ala'},
         {'week': 'H5-6', 'action': 'Fametrahana amin\'ny saha - Elanelana 15x10 cm'},
         {'week': 'H7-12', 'action': 'Fivoarana - Fanondrahan-drano matetika - Zezika'},
         {'week': 'H13-18', 'action': 'Fiforonana ny bulbe - Fampihenana rano'},
         {'week': 'H19-22', 'action': 'Fijinjana rehefa milofika ny ravina'},
       ],
       'tips': [
-        'Ny tany fasika sy tsara drainage dia mety amin\'ny tongolo',
-        'Aza mandena loatra ny ravina fa ny faka ihany',
-        'Jinjao rehefa milofika ny 80% ny ravina',
-        'Aveao hamaina 2-3 andro alohan\'ny fitahirizana',
+        '🧅 Tany fasika drainage tsara = tongolo tsara',
+        '💧 Tondrahy ny faka ihany - aza mandena ny ravina',
+        '🍂 Jinjao rehefa milofika ny 80% ny ravina',
+        '☀️ Avelao hamaina 2-3 andro alohan\'ny tehirizina',
       ],
     },
     'Tongolo Maitso': {
@@ -15146,7 +16586,52 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '15x5 cm',
       'yield': '10-20 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Afaka mamafy voa na mampiasa ny vodiny.\n2. Raha vodiny: tapaho ny ravina, avelao 3cm.\n3. Hambolena amin\'ny tany lonaka.\n4. Asio elanelana 15cm isaky ny tongotra.',
+      'soil': 'Tany lonaka, misy komposta; pH 6-7',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa tongolo maitso: 20-30 gramma
+• Na vodiny (fototra efa misy): 50-100 vodiny
+
+📏 HALALINY FAMAFAZANA:
+• Voa: 0,5-1 cm lalina
+• Vodiny: 3-5 cm lalina
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 7-12 andro
+
+✅ TAHAN'NY FIPOSAHANA: 70-80%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. MORA INDRINDRA ny tongolo maitso!
+2. Na avy amin'ny voa na avy amin'ny vodiny
+3. Haingana vokatra (45-60 andro fotsiny)
+4. Afaka jinjaina matetika - maniry indray!''',
+      'nursery': 'Famafazana MIVANTANA na fanetsana vodiny',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA FOMBA
+FOMBA 1 - Avy amin'ny VOA:
+• Afafy mivantana amin'ny tany
+• 0,5-1 cm lalina
+• Elanelana: 15 cm x 5 cm
+
+FOMBA 2 - Avy amin'ny VODINY (mora kokoa!):
+• Makà vodiny avy amin'ny tongolo maitso efa misy
+• Tapaho ny ravina (avelao 3-5 cm)
+• Hambolena 3-5 cm lalina
+
+DINGANA 2: FANAMBOARANA TANY
+• Sasao lalina (20 cm)
+• Asio komposta na zezika omby
+• Tany lonaka = ravina betsaka
+
+DINGANA 3: FAMBOLENA
+• Asio elanelana 15 cm x 5 cm
+• Tondrahy avy hatrany
+• Tondrahy isan'andro (maraina)
+
+DINGANA 4: FIJINJANA
+• 45-60 andro: Afaka jinjaina!
+• Tapaho ny ravina, avelao ny vodiny
+• Maniry indray (3-4 fijinjana)''',
       'steps': [
         {'week': 'H1', 'action': 'Famafazana mivantana na fanetsana'},
         {'week': 'H2-3', 'action': 'Fiposahana - Fikarakarana'},
@@ -15154,9 +16639,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H7-9', 'action': 'Fijinjana - Afaka jinjaina matetika'},
       ],
       'tips': [
-        'Mora ompiana sy haingana vokatra',
-        'Afaka jinjaina matetika ny ravina fa hitombo indray',
-        'Tsara ampiarahina amin\'ny voly hafa (tomate, anana)',
+        '🌱 Mora indrindra sy haingana vokatra!',
+        '✂️ Tapaho ny ravina, avelao ny vodiny = maniry indray',
+        '🥗 Tsara ampiarahina amin\'ny voly hafa (tomate, anana)',
+        '⏰ 45-60 andro fotsiny dia afaka jinjaina!',
       ],
     },
     'Tongolo Gasy': {
@@ -15168,18 +16654,77 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '20x10 cm',
       'yield': '8-15 T/ha',
       'waterNeeds': 'Kely - Antonony',
-      'plantingGuide': '1. Misafidiana bulbe (nify) salama.\n2. Atsatohy amin\'ny tany ny nify, ny lohany miakatra.\n3. Asio elanelana 20cm isaky ny laharana, 10cm isaky ny nify.\n4. Aza atao lalina loatra (2-3cm).',
+      'soil': 'Tany fasika drainage tsara; pH 6-7; komposta 2 T/ha',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• NIFY (bulbe) tongolo gasy: 30-50 nify
+• ⚠️ TSY VOA fa NIFY no ambolena!
+• Nify iray = tongotra 4-8 vaovao!
+
+📏 FOMBA FAMETRAHANA:
+• Lalina: 2-3 cm fotsiny
+• Ny LOHANY (mitso-bozaka) = MIAKATRA
+• Ny vodiny = miditra ao anaty tany
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 7-14 andro
+• Fotoana tsara: Martsa - Jiona (maina)
+
+✅ TAHAN'NY FIVERENANA: 90-95%
+(Avo be satria nify fa tsy voa!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. MORA BE amboly - mora indrindra amin'ny tongolo!
+2. Safidio nify SALAMA (tsy simba, tsy lo)
+3. Ny tany fasika drainage tsara no ilaina
+4. Aza mandena loatra = mora lo ny nify
+5. Azo tehirizina ela rehefa maina tsara''',
+      'nursery': 'Fametrahana MIVANTANA nify (bulbe) - tsy ilaina ketsa',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 20-25 cm lalina
+• Asio komposta 2 T/ha (nefa tsy be loatra)
+• Ny tany fasika drainage tsara no ilaina
+• Aza mampiasa zezika omby vaovao
+
+💡 Tany MAINA no ilain'ny tongolo gasy!
+
+DINGANA 2: FANOMANANA NIFY
+• Safidio nify salama sy lehibe antonony (2-3 cm)
+• Esory ny hoditry ny ivelany (maina)
+• Aza safidio nify simba na lo
+• Azo ampiasaina ny nify avy amin'ny vokatra teo aloha
+
+DINGANA 3: FAMETRAHANA NIFY
+• Elanelana laharana: 20 cm
+• Elanelana nify: 10 cm
+• Atsatohy 2-3 cm lalina
+• ⚠️ ZAVA-DEHIBE: Ny lohany MIAKATRA!
+• Tondrahy moramora
+
+DINGANA 4: FIKARAKARANA
+• H2-4: Esory ny ahitra
+• Tondrahy antonony (aza be loatra!)
+• Tongolo gasy = tia tany MAINA KELY
+• Zezika organika H4-5
+
+DINGANA 5: FIJINJANA
+• 90-120 andro dia afaka jinjaina
+• Marika: Ny ravina MAINA sy mianjera
+• Bongoty moramora (aza tapahina ny nify)
+• Avelao hihamaitsoka 2-3 andro
+• Tehirizo amin'ny toerana maina sy mangatsiatsiaka''',
       'steps': [
-        {'week': 'H1', 'action': 'Fametrahana bulbe kely - 2-3 cm lalina'},
+        {'week': 'H1', 'action': 'Fametrahana nify - lohany miakatra'},
         {'week': 'H2-4', 'action': 'Fiposahana - Fikarakarana voalohany'},
         {'week': 'H5-10', 'action': 'Fivoarana - Zezika organika - Fanondrahan-drano'},
         {'week': 'H11-16', 'action': 'Fijinjana rehefa maina ny ravina'},
       ],
       'tips': [
-        'Safidio bulbe salama sy tsy simba',
-        'Ny tany fasika tsara drainage no mety',
-        'Aza mandena loatra fa mora lo',
-        'Azo tehirizina ela rehefa maina tsara',
+        '🧄 Mora indrindra amin\'ny tongolo rehetra!',
+        '💪 Nify iray = 4-8 nify vaovao!',
+        '🌱 Safidio nify salama sy tsy simba',
+        '💧 Aza mandena loatra fa mora lo',
+        '📦 Azo tehirizina 6-12 volana rehefa maina tsara',
       ],
     },
     'Karoty': {
@@ -15191,7 +16736,64 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '20x5 cm',
       'yield': '20-40 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Omano ny tany, ataovy malalaka tsara (tsy misy vato).\n2. Manaova hady kely 1cm ny halaliny.\n3. Afafazo manify ny voa.\n4. Sarony tany tena manify.\n5. Tondrahy moramora mba tsy hiala ny voa.',
+      'soil': 'Tany lalina fasika, tsy misy vato; pH 6-7; komposta antitra 3 T/ha',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa karoty: 3-5 gramma (madinika be!)
+• Izany dia ≈ 2500-5000 voa
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny (tena maivana!)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 15-25°C
+• Miposaka ao anatin'ny: 10-20 andro
+• ⚠️ MIADANA BE NY KAROTY - Mahandrasa!
+
+✅ TAHAN'NY FIPOSAHANA: 65-80%
+(Tsy dia avo loatra - aza kivy!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Ny voa madinika be - AFANGARO AMIN'NY FASIKA
+2. Afafy mivantana (TSY AFINDRA - simba ny faka)
+3. Ny tany dia tokony ho LALINA sy TSY MISY VATO
+4. Esory ny be loatra (éclaircissage) rehefa maniry
+5. Aza mampiasa zezika omby VAOVAO (mampisampona)''',
+      'nursery': 'Famafazana MIVANTANA - TSY AFINDRA (faka simba)',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY (ZAVA-DEHIBE!)
+• Sasao LALINA (30-40 cm) ny tany
+• Esory ny VATO rehetra sy faka tratra
+• Tany fasika maivana no tsara indrindra
+• Asio komposta ANTITRA (tsy vaovao!)
+
+⚠️ ZAVA-DEHIBE: Raha misy vato na tany mafy = karoty sampona!
+
+DINGANA 2: FANOMANANA VOA
+• Afangaro amin'ny fasika (1 voa : 3 fasika)
+• Izany mba tsy ho be loatra rehefa afafy
+• Ny voa dia madinika be (sarotra jerena)
+
+DINGANA 3: FAMAFAZANA MIVANTANA
+• Manaova hady kely 0,5-1 cm lalina
+• Elanelana laharana: 20 cm
+• Afafazo manify ny voa + fasika
+• Saromy tany MANIFY BE (1 cm fotsiny)
+• Tondrahy moramora (aza mafy loatra!)
+
+DINGANA 4: FIANDRASANA (Mahandrasa!)
+• 10-20 andro vao miposaka
+• Tondrahy moramora isan'andro
+• Aza kivy raha tsy miposaka haingana!
+
+DINGANA 5: FANITSIANA (Éclaircissage)
+• H3-4: Esory ny be loatra
+• Avelao 5 cm elanelana isaky ny karoty
+• Afaka hohanina ny ketsa voaesory!
+
+DINGANA 6: FIJINJANA
+• 70-120 andro (jereo ny loha)
+• Bongoty rehefa vokatra ny loha (2-3 cm savaivony)
+• Aza mijinja rehefa lena ny tany''',
       'steps': [
         {'week': 'H1', 'action': 'Famafazana mivantana - Voa kely 1 cm lalina'},
         {'week': 'H2-3', 'action': 'Fiposahana miadana - Fikarakarana'},
@@ -15200,10 +16802,10 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'H13-17', 'action': 'Fijinjana rehefa vokatra ny loha'},
       ],
       'tips': [
-        'Ny tany lalina sy fasika no tsara - aza misy vato',
-        'Aza manao zezika omby vaovao fa mampisampona',
-        'Fanondrahan-drano marin-toerana mba tsy hitriatriaka',
-        'Saromana ny loha mba tsy hivadika mavo',
+        '🪨 Tany lalina sy fasika - AZA MISY VATO!',
+        '💩 Aza mampiasa zezika omby vaovao - mampisampona',
+        '💧 Tondrahy marin-toerana - aza be loatra, aza kely loatra',
+        '🥕 Saromana ny loha amin\'ny tany mba tsy hivadika mavo',
       ],
     },
     'Baranjely': {
@@ -15215,18 +16817,73 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '60x50 cm',
       'yield': '20-40 T/ha',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Manaova pépinière.\n2. Afindra rehefa misy ravina 4-5.\n3. Asio elanelana 60cm isaky ny laharana, 50cm isaky ny tongotra.\n4. Asio zezika tsara ny lavaka.',
+      'soil': 'Tany lonaka, drainage tsara; pH 5,5-6,8; komposta 4 T/ha + NPK',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa baranjely: 0,5-1 gramma
+• Izany dia ≈ 100-200 voa madinika
+• Mila ketsa aloha (tsy mivantana)
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny (maivana be!)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 22-28°C (tia mafana!)
+• Miposaka ao anatin'ny: 8-14 andro
+• 💡 Alena rano mafana 24h alohan'ny afafy = haingana kokoa
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Baranjely = TIA MAFANA BE (22-30°C)
+2. Mila tanin-ketsa voalohany (4-5 herinandro)
+3. Afindra rehefa misy ravina 4-5
+4. Mila masoandro be (8h+ isan'andro)
+5. Jinjao rehefa manopy sy mamirapiratra ny hoditra''',
+      'nursery': 'Tanin-ketsa: 4-5 herinandro; afindra rehefa misy ravina 4-5',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Manaova saha kely 1-2 m²
+• Tany lonaka + komposta + fasika
+• Toerana mafana sy masoandro be
+• Tandrina: Baranjely = tia mafana!
+
+DINGANA 2: FAMAFAZANA VOA
+• Halaliny: 0,5-1 cm fotsiny
+• Elanelana: 5 cm
+• Saromy tany madinika manify
+• Tondrahy moramora isan'andro
+• 💡 Alena amin'ny rano mafana 24h aloha!
+
+DINGANA 3: FAMINDRANA (H4-5)
+• Afindra rehefa misy ravina 4-5
+• Haabo: 15-20 cm
+• Manaova lavaka: 20x20 cm
+• Asio komposta ao anaty lavaka
+• Elanelana: 60 cm x 50 cm
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy antonony (tsy be loatra)
+• Zezika NPK H3, H6, H9
+• Esory ny sampana kely eo ambany
+• Afaka asiana tuteur raha be vokatra
+
+DINGANA 5: FIJINJANA
+• 90-150 andro = afaka jinjaina
+• Marika: hoditra manopy sy mamirapiratra
+• Afaka mamokatra 3-4 volana!
+• Jinjao matetika = be vokatra kokoa''',
       'steps': [
-        {'week': 'H1-4', 'action': 'Fanetsana amin\'ny pépinière'},
+        {'week': 'H1-4', 'action': 'Fanetsana amin\'ny tanin-ketsa'},
         {'week': 'H5-6', 'action': 'Fametrahana amin\'ny saha rehefa 15 cm'},
         {'week': 'H7-10', 'action': 'Fivoarana - Zezika - Fandroahana'},
         {'week': 'H11-20', 'action': 'Famokarana - Fijinjana matetika'},
       ],
       'tips': [
-        'Mila masoandro be sy hafanana',
-        'Jinjao rehefa manopy sy mamirapiratra ny hoditra',
-        'Afaka mamokatra 3-4 volana',
-        'Mila tuteur raha be vokatra',
+        '☀️ Mila masoandro be sy hafanana (tia mafana!)',
+        '🍆 Jinjao rehefa manopy sy mamirapiratra ny hoditra',
+        '📅 Afaka mamokatra 3-4 volana!',
+        '🌳 Mila tuteur raha be vokatra',
+        '✂️ Jinjao matetika = mamokatra be kokoa',
       ],
     },
     'Poireau': {
@@ -15238,18 +16895,75 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '30x15 cm',
       'yield': '15-25 T/ha',
       'waterNeeds': 'Antonony - Be',
-      'plantingGuide': '1. Manaova pépinière.\n2. Rehefa lehibe (toy ny pensilihazo), afindra.\n3. Manaova lavaka lalina (15cm) mba ho fotsy ny tahony.\n4. Asio elanelana 30cm isaky ny laharana.',
+      'soil': 'Tany lonaka, misy komposta be; pH 6-7; azote be',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa poireau: 2-3 gramma
+• Izany dia ≈ 800-1200 voa
+• Mila tanin-ketsa ELA (6-8 herinandro)
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 15-22°C
+• Miposaka ao anatin'ny: 10-14 andro
+• 💡 Voa maharitra 3-4 taona raha tehirizina tsara
+
+✅ TAHAN'NY FIPOSAHANA: 70-80%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Poireau = mila tanin-ketsa ELA (6-8 herinandro)
+2. Afindra rehefa toy ny pensilihazo ny habeny
+3. Ataovy LALINA ny fambolena = fût fotsy
+4. Mila rano matetika sy zezika azota
+5. Afaka tehirizina ela ao amin'ny frigo''',
+      'nursery': 'Tanin-ketsa: 6-8 herinandro; afindra rehefa toy ny pensilihazo',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Manaova saha kely 1-2 m²
+• Tany lonaka + komposta be
+• Afafazo manify ny voa (0,5-1 cm lalina)
+• Tondrahy moramora isan'andro
+
+💡 Poireau = mila tanin-ketsa ELA (6-8 herinandro)!
+
+DINGANA 2: FIKARAKARANA KETSA
+• 10-14 andro: fiposahana
+• Tondrahy matetika
+• Esory ahi-dratsy
+• Avelao hitombo 6-8 herinandro
+
+DINGANA 3: FAMINDRANA (Rehefa toy ny pensilihazo)
+• Manaova LAVAKA LALINA (15 cm)
+• Izany mba ho FOTSY ny fût!
+• Elanelana: 30 cm x 15 cm
+• Aza atao lalina loatra ny faka
+
+⚠️ SEKRETANY: Lavaka lalina = fût fotsy = tsara indrindra!
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy matetika (rano be)
+• Zezika azota H4, H8, H12
+• BUTTAGE: Fanorenana tany = fût fotsy kokoa
+• Buttage H6, H10, H14
+
+DINGANA 5: FIJINJANA
+• 120-150 andro = afaka jinjaina
+• Bongoty moramora (aza tapahina ny faka)
+• Afaka tehirizina ela ao amin'ny frigo
+• Asaina tsara alohan'ny hihinanana''',
       'steps': [
-        {'week': 'H1-6', 'action': 'Fanetsana amin\'ny pépinière'},
+        {'week': 'H1-6', 'action': 'Fanetsana amin\'ny tanin-ketsa'},
         {'week': 'H7-8', 'action': 'Fametrahana amin\'ny saha - Lavaka 15 cm lalina'},
         {'week': 'H9-16', 'action': 'Fivoarana - Fanondrahan-drano - Buttage'},
         {'week': 'H17-22', 'action': 'Fijinjana rehefa lehibe ny fût'},
       ],
       'tips': [
-        'Ataovy lalina ny fambolena mba hampahotsy ny fût',
-        'Ny buttage (fanorenana tany) dia manampy hampahotsy',
-        'Mila rano matetika sy zezika azota',
-        'Afaka tehirizina ela ao amin\'ny frigo',
+        '🕳️ Ataovy LALINA ny fambolena = fût FOTSY!',
+        '🌾 Buttage (fanorenana tany) = manampy hampahotsy',
+        '💧 Mila rano matetika sy zezika azota',
+        '❄️ Afaka tehirizina ela ao amin\'ny frigo',
+        '📅 Tanin-ketsa ela (6-8 herinandro) = tena ilaina',
       ],
     },
     'Voasary': {
@@ -15261,7 +16975,63 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
       'spacing': '6x6 m',
       'yield': '20-40 T/ha (rehefa lehibe)',
       'waterNeeds': 'Antonony',
-      'plantingGuide': '1. Manaova lavaka lehibe 50x50x50cm.\n2. Afangaro ny tany sy zezika organika.\n3. Esory ny plastika amin\'ny zanak\'hazo.\n4. Ataovy ao anaty lavaka, aza atao lalina loatra ny fotony.\n5. Tondrahy be dia be.',
+      'soil': 'Tany lalina, drainage tsara; pH 6-7; zezika organika 20 kg/hazo',
+      'seed': '''📊 ZANAK'HAZO GREFFÉ (tsy voa!):
+• Vidio zanak'hazo greffé 1-2 isan'ny 10m²
+• ⚠️ TSY MAMBOLENA VOA - ela be (7+ taona)!
+• Haabo: 50-80 cm, faka tsara
+
+📏 LAVAKA FAMETRAHANA:
+• 50 x 50 x 50 cm
+• Asio komposta 10-20 kg ao anaty
+• Elanelana: 6 x 6 metatra
+
+🌡️ FOTOANA TSARA:
+• Fanafazana orana (Novambra-Desambra)
+• Mila rano be amin'ny voalohany
+
+✅ TAHAN'NY FIVERENANA: 90-95%
+(Raha zanak'hazo tsara)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Hazo GREFFÉ no tsara = mamokatra 3 taona
+2. Voa = mila 7+ taona vao mamokatra!
+3. Mila tany lalina sy drainage tsara
+4. Zezika organika + NPK isan-taona
+5. Fandidiana sampana = manampy famokarana''',
+      'nursery': 'Zanak\'hazo greffé vidiana amin\'ny pépinière',
+      'plantingGuide': '''DINGANA 1: FANOMANANA SY FIVIDIANANA
+• Vidio zanak'hazo GREFFÉ (tsy voa!)
+• Safidio hazo salama, tsara endrika
+• Haabo: 50-80 cm, faka tsara
+• Jereo: TSY MISY biby na aretina
+
+💡 Hazo greffé = mamokatra 3 taona; voa = 7+ taona!
+
+DINGANA 2: FANAMBOARANA LAVAKA
+• Manaova lavaka LEHIBE: 50 x 50 x 50 cm
+• Afangaro ny tany sy zezika organika (10-20 kg)
+• Avelao 1-2 herinandro alohan'ny fametrahana
+• Elanelana: 6 x 6 metatra (lehibe!)
+
+DINGANA 3: FAMETRAHANA
+• Esory ny plastika amin'ny faka
+• Ataovy ao anaty lavaka
+• ⚠️ Aza atao LALINA LOATRA ny fotony!
+• Ny greffe dia tokony ho 5-10 cm ambonin'ny tany
+• Tondrahy be dia be (20-30 litatra)
+
+DINGANA 4: FIKARAKARANA (Taona 1-3)
+• Tondrahy matetika (1x/herinandro min)
+• Zezika organika 20 kg/hazo/taona
+• NPK 15-15-15: 500g/hazo/taona
+• Fandroahana ahi-dratsy eo amin'ny fototra
+
+DINGANA 5: FANDIDIANA SY FAMOKARANA
+• T2-3: Fandidiana sampana fototra
+• T3-5: Manomboka mamokatra
+• Didio sampana simba sy marary
+• Afaka mamokatra 20-40 taona!''',
       'steps': [
         {'week': 'T1', 'action': 'Fametrahana zanak\'hazo - Lavaka 50x50x50 cm'},
         {'week': 'T1-2', 'action': 'Fikarakarana - Fanondrahan-drano - Zezika'},
@@ -15269,188 +17039,3556 @@ class _FambolenaCropsScreenState extends State<FambolenaCropsScreen> {
         {'week': 'T5+', 'action': 'Famokarana - Fijinjana voninkazo sy voankazo'},
       ],
       'tips': [
-        'Mila tany lalina sy tsara drainage',
-        'Zezika organika sy NPK isan-taona',
-        'Fandidiana manampy ny famokarana',
-        'Mila 3-5 taona vao mamokatra tsara',
+        '🌳 Hazo GREFFÉ = mamokatra 3 taona (voa = 7+ taona!)',
+        '🕳️ Lavaka LEHIBE 50x50x50 cm - asio zezika be',
+        '💧 Mila rano matetika amin\'ny taona voalohany',
+        '✂️ Fandidiana manampy ny famokarana',
+        '📅 Afaka mamokatra 20-40 taona!',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // LEGIOMA RAVINA SY ANANA (Légumes feuilles)
+    // ═══════════════════════════════════════════════════════════════
+    'Salady': {
+      'emoji': '🥬',
+      'name': 'Salady (Laitue, Batavia)',
+      'season': 'Martsa - Aogositra (Ririnina)',
+      'duration': '30-45 andro',
+      'climate': 'Mangatsiaka - 15-20°C',
+      'spacing': '25x25 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony - Rano malefaka isan-2 andro',
+      'soil': 'Tany maivana sy humifère, PH 6-7; komposta 2-3 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa salady: 0,2 gramma fotsiny!
+• Izany dia ≈ 160-200 voa madinika
+• MADINIKA BE - afangaro fasika
+
+📏 HALALINY FAMAFAZANA:
+• 0,5 cm fotsiny (tena maivana!)
+• Saromy tany madinika manify
+• Aza atao lalina - tsy miposaka!
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 15-20°C (TIA MANGATSIAKA!)
+• Miposaka ao anatin'ny: 4-8 andro (haingana!)
+• ⚠️ Aza amboly rehefa mafana be (montée en graine)
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Salady = TIA MANGATSIAKA (15-20°C)
+2. MORA BE sy HAINGANA - 30-45 andro fotsiny!
+3. Aza manondraka amin'ny loha (aretina)
+4. Fiarovana: piège jaune (afipikely), lavenona (limace)
+5. Afaka amboly im-betsaka isan-taona''',
+      'nursery': 'Tanin-ketsa 20-25 andro, afindra rehefa ravina 4-5',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Manaova saha kely 1 m²
+• Tany maivana + komposta
+• Fotoana tsara: Ririnina (Martsa - Aogositra)
+
+💡 Salady = tia mangatsiaka - aza amboly rehefa mafana!
+
+DINGANA 2: FAMAFAZANA VOA
+• Voa madinika be - afangaro fasika
+• Halaliny: 0,5 cm fotsiny!
+• Saromy tany madinika MANIFY
+• Tondrahy moramora (aza mafy!)
+• 4-8 andro = miposaka
+
+DINGANA 3: FAMINDRANA (H3-4)
+• Afindra rehefa misy ravina 4-5
+• 20-25 andro aorian'ny famafazana
+• Elanelana: 25 x 25 cm
+• Tondrahy avy hatrany
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy isan-2 andro (MALEFAKA!)
+• ⚠️ Aza manondraka amin'ny LOHA - faka ihany
+• Esory ahi-dratsy
+• Tsy mila tuteur
+
+💡 FIAROVANA:
+• Afipikely → piège jaune
+• Limace → lavenona manodidina
+
+DINGANA 5: FIJINJANA
+• 30-45 andro = afaka jinjaina!
+• Tapaho amin'ny fototra
+• Jinjao maraina (mangatsiaka)
+• Aza andrasana ela loatra (montée en graine)''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tanin-ketsa - Famafazana voa'},
+        {'week': 'H2-3', 'action': 'Fikarakarana ketsa - Fanondrahan-drano'},
+        {'week': 'H4', 'action': 'Famindrana amin\'ny saha - Elanelana 25x25 cm'},
+        {'week': 'H5-6', 'action': 'Fanondrahan-drano - Fandroahana ahi-dratsy'},
+        {'week': 'H7', 'action': 'Fijinjana - Tapaho amin\'ny fototra'},
+      ],
+      'tips': [
+        '❄️ Salady = TIA MANGATSIAKA (15-20°C)!',
+        '💧 Aza manondraka amin\'ny loha - faka ihany',
+        '⚡ MORA BE - 30-45 andro fotsiny!',
+        '🪤 Afipikely → piège jaune; Limace → lavenona',
+        '🔄 Afaka amboly im-betsaka isan-taona',
+      ],
+    },
+    'Épinard': {
+      'emoji': '🥬',
+      'name': 'Épinard / Tissam maitso',
+      'season': 'Martsa - Septambra',
+      'duration': '25-35 andro (ravina voalohany)',
+      'climate': 'Mangatsiaka - 15-22°C',
+      'spacing': '20x15 cm',
+      'yield': '1,5-3 kg/m²',
+      'waterNeeds': 'Antonony - Rano isan\'andro maraina',
+      'soil': 'Tany lonaka, mando, misy komposta 2-3 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa épinard: 3 gramma
+• Izany dia ≈ 250-300 voa
+• Azo afafy MIVANTANA - mora be!
+
+📏 HALALINY FAMAFAZANA:
+• 1-2 cm lalina
+• Elanelana laharana: 20 cm
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 10-18°C (TIA MANGATSIAKA!)
+• Miposaka ao anatin'ny: 7-14 andro
+• Fotoana tsara: Ririnina (Martsa - Septambra)
+
+✅ TAHAN'NY FIPOSAHANA: 70-80%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Épinard = TIA MANGATSIAKA (10-22°C)
+2. MORA BE sy HAINGANA - 25-35 andro!
+3. Tapaho ravina ambony = maniry INDRAY
+4. Afaka jinjaina 4-5 impianana!
+5. Aza andrasana ela (montée en graine)''',
+      'nursery': 'Afafy mivantana na tanin-ketsa 10-15 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 15-20 cm lalina
+• Asio komposta 2-3 kg/m²
+• Tany lonaka sy mando no ilaina
+
+💡 Épinard = mora ambolena!
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova hady kely 1-2 cm lalina
+• Elanelana laharana: 20 cm
+• Afafazo manify ny voa
+• Saromy tany madinika
+• Tondrahy moramora
+
+DINGANA 3: FIANDRASANA
+• 7-14 andro = miposaka
+• Tondrahy isan'andro maraina
+• Esory ahi-dratsy
+
+DINGANA 4: FIJINJANA VOALOHANY
+• 25-35 andro = afaka jinjaina!
+• Tapaho ravina ambony 3-5 cm
+• ⚠️ Avelao ny fototra = MANIRY INDRAY!
+
+💡 Épinard = afaka jinjaina 4-5 impianana!
+
+DINGANA 5: FIJINJANA MANARAKA
+• Isan-2-3 herinandro = jinjao indray
+• Tapaho foana ny ravina ambony
+• Avelao ny fototra = maniry foana
+• Raha mivoaka voninkazo = farany''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2', 'action': 'Fiposahana - Fanondrahan-drano isan\'andro'},
+        {'week': 'H3', 'action': 'Fandroahana ahi-dratsy'},
+        {'week': 'H4-5', 'action': 'Fijinjana ravina voalohany'},
+        {'week': 'H6+', 'action': 'Fijinjana manaraka - Hitombo indray'},
+      ],
+      'tips': [
+        '❄️ Épinard = TIA MANGATSIAKA (10-22°C)',
+        '✂️ Tapaho ambony 3-5 cm = maniry INDRAY!',
+        '🔄 Afaka jinjaina 4-5 impianana',
+        '🐛 Pucerons → savony 10 g/L; Chenilles → Bt',
+        '⚡ MORA BE - 25-35 andro fotsiny!',
+      ],
+    },
+    'Petsay': {
+      'emoji': '🥬',
+      'name': 'Petsay / Patsoy / Laisoa (Chou)',
+      'season': 'Aprily - Aogositra',
+      'duration': '60-90 andro',
+      'climate': 'Mangatsiaka - 15-20°C',
+      'spacing': '45x40 cm (chou); 35x30 cm (petsay)',
+      'yield': '3-6 kg/m²',
+      'waterNeeds': 'Be - Rano 2-3x isaky ny herinandro',
+      'soil': 'Tany lonaka misy zezika maintso 3-4 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa petsay/chou: 0,4 gramma
+• Izany dia ≈ 100-120 voa
+• Mila tanin-ketsa voalohany
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny (maivana)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 4-7 andro (haingana!)
+• Fotoana tsara: Ririnina (Aprily - Aogositra)
+
+✅ TAHAN'NY FIPOSAHANA: 80-90%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Petsay/Chou = TIA MANGATSIAKA (15-20°C)
+2. F1 hybride = vokatra be kokoa
+3. Variété locale = mora maharitra aretina
+4. Mila rano BE (2-3x isaky ny herinandro)
+5. Mulching = manampy mitazona ranoka''',
+      'nursery': 'Tanin-ketsa 25-30 andro, afindra rehefa 4-5 ravina',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Manaova saha kely 1-2 m²
+• Tany lonaka + zezika maintso
+• Afafazo manify ny voa (0,5-1 cm)
+• Tondrahy moramora isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• 4-7 andro = miposaka
+• Tondrahy matetika
+• Esory ahi-dratsy
+• Avelao 25-30 andro
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa 4-5 ravina
+• Manaova lavaka 15x15 cm
+• Elanelana: 45 x 40 cm (chou), 35 x 30 cm (petsay)
+• Asio komposta ao anaty lavaka
+• Tondrahy avy hatrany
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy BE (2-3x isaky ny herinandro)
+• Zezika azota H3, H6
+• MULCHING eo amin'ny fototra
+• Esory ravina simba
+
+💡 FIAROVANA:
+• Chenilles/Piéride → Bt (Bacillus thuringiensis)
+• Pucerons → savony + ody madinika
+
+DINGANA 5: FIJINJANA
+• 60-90 andro = afaka jinjaina
+• Chou: rehefa mihidy ny pomme (loha)
+• Petsay: tapaho ny ravina rehefa lehibe
+• Jinjao maraina (mangatsiatsiaka)''',
+      'steps': [
+        {'week': 'H1', 'action': 'Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-4', 'action': 'Fikarakarana ketsa'},
+        {'week': 'H5', 'action': 'Famindrana - Elanelana 45x40 cm'},
+        {'week': 'H6-10', 'action': 'Fanondrahan-drano 2-3x/herinandro - Mulching'},
+        {'week': 'H11-13', 'action': 'Fijinjana rehefa mihidy ny pomme'},
+      ],
+      'tips': [
+        '❄️ Petsay/Chou = TIA MANGATSIAKA (15-20°C)',
+        '💧 Mila rano BE - 2-3x isaky ny herinandro',
+        '🌿 MULCHING = manampy mitazona ranoka',
+        '🐛 Chenilles → Bt; Pucerons → savony',
+        '🧬 F1 hybride = vokatra be; Locale = maharitra aretina',
+      ],
+    },
+    'Anamamy': {
+      'emoji': '🌿',
+      'name': 'Anamamy / Anatsonga / Ramirebaka',
+      'season': 'Taona manontolo',
+      'duration': '25-35 andro',
+      'climate': 'Mafana sy mangatsiaka - 18-30°C',
+      'spacing': '20x15 cm',
+      'yield': '1-2 kg/m²',
+      'waterNeeds': 'Antonony - Rano isan\'andro',
+      'soil': 'Tany lonaka, mando, misy komposta 2-3 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa anamamy: 2,5 gramma
+• Izany dia ≈ 3500-4000 voa madinika
+• Azo afafy MIVANTANA - mora be!
+
+📏 HALALINY FAMAFAZANA:
+• 0,5 cm fotsiny (maivana be!)
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 20-30°C
+• Miposaka ao anatin'ny: 3-7 andro (HAINGANA BE!)
+• Fotoana tsara: Taona manontolo!
+
+✅ TAHAN'NY FIPOSAHANA: 70-80%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Anamamy = MORA INDRINDRA amin'ny anana rehetra!
+2. Afaka amboly TAONA MANONTOLO
+3. Tapaho ravina ambony = maniry INDRAY
+4. Afaka jinjaina im-betsaka
+5. Tsara ho an'ny sakafo sy fanafody''',
+      'nursery': 'Afafy mivantana - tsy mila tanin-ketsa',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 10-15 cm lalina
+• Asio komposta 2-3 kg/m²
+• Tany lonaka sy mando no ilaina
+
+💡 Anamamy = MORA AMBOLENA!
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Afafazo manify ny voa
+• Halaliny: 0,5 cm fotsiny
+• Saromy tany madinika manify
+• Tondrahy moramora
+
+DINGANA 3: FIANDRASANA
+• 3-7 andro = miposaka (HAINGANA!)
+• Tondrahy isan'andro maraina
+• Esory ahi-dratsy
+
+DINGANA 4: FIJINJANA VOALOHANY
+• 25-35 andro = afaka jinjaina!
+• Tapaho ravina ambony 3-5 cm
+• ⚠️ Avelao ny fototra = MANIRY INDRAY!
+
+DINGANA 5: FIJINJANA MANARAKA
+• Isan-2 herinandro = jinjao indray
+• Anana malagasy = tena sarobidy
+• Tsara ho sakafo sy fanafody''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2', 'action': 'Fiposahana - Fanondrahan-drano'},
+        {'week': 'H3', 'action': 'Fandroahana ahi-dratsy'},
+        {'week': 'H4-5', 'action': 'Fijinjana ravina voalohany'},
+      ],
+      'tips': [
+        '🌿 Anana malagasy = MORA AMBOLENA!',
+        '🔄 Tapaho ambony 3-5 cm = maniry indray',
+        '📅 Afaka amboly TAONA MANONTOLO',
+        '💊 Tsara ho sakafo sy fanafody',
+        '⚡ 25-35 andro fotsiny = afaka jinjaina!',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // LEGIOMA FAKA & VODY (Légumes racines)
+    // ═══════════════════════════════════════════════════════════════
+    'Betterave': {
+      'emoji': '🟣',
+      'name': 'Betterave (Beet)',
+      'season': 'Aprily - Aogositra',
+      'duration': '60-90 andro',
+      'climate': 'Mangatsiaka - 15-20°C',
+      'spacing': '30x10 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony - Rano 2x/herinandro',
+      'soil': 'Tany lonaka, pH 6-7; komposta 2-3 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa betterave: 1,5-2 gramma
+• Izany dia ≈ 80-120 voa LEHIBE
+• ⚠️ Voa iray = ketsa 2-4 (ilaina éclaircissage!)
+
+📏 HALALINY FAMAFAZANA:
+• 1,5-2 cm lalina
+• Elanelana laharana: 30 cm
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 15-22°C (TIA MANGATSIAKA)
+• Miposaka ao anatin'ny: 8-14 andro
+• Fotoana tsara: Ririnina (Aprily - Aogositra)
+
+✅ TAHAN'NY FIPOSAHANA: 70-75%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Betterave = TIA MANGATSIAKA (15-20°C)
+2. Voa iray = ketsa 2-4 → MILA ÉCLAIRCISSAGE!
+3. Aza mampiasa zezika omby VAOVAO
+4. Azo afafy mivantana (mora)
+5. Ravina = afaka hohanina koa!''',
+      'nursery': 'Famafazana mivantana na tanin-ketsa 15 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 20-25 cm lalina
+• Asio komposta 2-3 kg/m²
+• ⚠️ Aza asiana zezika omby VAOVAO!
+
+💡 Betterave = tia mangatsiaka (15-20°C)
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova hady kely 1,5-2 cm lalina
+• Elanelana laharana: 30 cm
+• Afafazo ny voa (lehibe - mora)
+• Saromy tany
+• Tondrahy moramora
+
+DINGANA 3: FIANDRASANA
+• 8-14 andro = miposaka
+• Tondrahy antonony (2x/herinandro)
+• Esory ahi-dratsy
+
+DINGANA 4: ÉCLAIRCISSAGE (Zava-dehibe!)
+• ⚠️ Voa iray = ketsa 2-4!
+• Rehefa ravina 4-5 = esory ny be loatra
+• Avelao elanelana 10 cm isaky ny tongotra
+• Ny ketsa voaesory = afaka hohanina!
+
+DINGANA 5: FIJINJANA
+• 60-90 andro = afaka jinjaina
+• Marika: loha 5-8 cm savaivony
+• Bongoty moramora
+• Ravina = afaka hohanina koa!''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana'},
+        {'week': 'H2-3', 'action': 'Fiposahana - Fanondrahan-drano'},
+        {'week': 'H4-5', 'action': 'Éclaircissage - Elanelana 10 cm'},
+        {'week': 'H6-10', 'action': 'Fivoarana - Fandroahana'},
+        {'week': 'H11-13', 'action': 'Fijinjana rehefa 5-8 cm savaivony'},
+      ],
+      'tips': [
+        '❄️ Betterave = TIA MANGATSIAKA (15-20°C)',
+        '✂️ ÉCLAIRCISSAGE ilaina - voa iray = ketsa 2-4!',
+        '💩 Aza mampiasa zezika omby VAOVAO',
+        '🥬 Ravina = afaka hohanina koa!',
+        '🦠 Cercospora → esory ravina marary, Cu',
+      ],
+    },
+    'Poivron': {
+      'emoji': '🫑',
+      'name': 'Poivron / Sakay fanendy',
+      'season': 'Aogositra - Novambra',
+      'duration': '70-90 andro',
+      'climate': 'Mafana - 20-28°C',
+      'spacing': '60x50 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony - Rano 2-3x/herinandro',
+      'soil': 'Tany maivana, lonaka; komposta 3 kg/m² + NPK 20-30 g/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa poivron: 0,1 gramma
+• Izany dia ≈ 15-18 voa
+• Mila tanin-ketsa voalohany (35-40 andro)
+
+📏 HALALINY FAMAFAZANA:
+• 0,5-1 cm fotsiny
+• Saromy tany madinika manify
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 22-28°C (TIA MAFANA!)
+• Miposaka ao anatin'ny: 10-14 andro
+• Fotoana tsara: Aogositra - Novambra
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Poivron = TIA MAFANA (20-28°C)
+2. Mila tanin-ketsa ELA (35-40 andro)
+3. Tsy afafy mivantana - mila ketsa!
+4. Tuteur ilaina raha be vokatra
+5. Jinjao maintso na mena (safidio)''',
+      'nursery': 'Tanin-ketsa 35-40 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Manaova saha kely 1 m²
+• Tany maivana + komposta
+• Toerana mafana sy masoandro be
+• ⚠️ Poivron = TIA MAFANA!
+
+DINGANA 2: FAMAFAZANA VOA
+• Halaliny: 0,5-1 cm
+• Saromy tany madinika
+• Tondrahy moramora isan'andro
+• 10-14 andro = miposaka
+
+DINGANA 3: FIKARAKARANA KETSA
+• Tondrahy matetika
+• Esory ahi-dratsy
+• Avelao 35-40 andro
+• Afindra rehefa 15-20 cm haavo
+
+DINGANA 4: FAMINDRANA
+• Elanelana: 60 x 50 cm
+• Asio komposta ao anaty lavaka
+• Tondrahy avy hatrany
+• MULCHING eo amin'ny fototra
+• Asio TUTEUR raha be vokatra
+
+DINGANA 5: FIJINJANA
+• 70-90 andro = afaka jinjaina
+• MAINTSO = afaka jinjaina haingana
+• MENA = avelao ho masaka (ela kokoa)
+• Esory ravina miankina amin'ny tany''',
+      'steps': [
+        {'week': 'H1', 'action': 'Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-5', 'action': 'Fikarakarana ketsa'},
+        {'week': 'H6', 'action': 'Famindrana - Mulching'},
+        {'week': 'H7-11', 'action': 'Tuteur raha ilaina - Fanondrahan-drano'},
+        {'week': 'H12-14', 'action': 'Fijinjana maintso na avela ho mena'},
+      ],
+      'tips': [
+        '🌡️ Poivron = TIA MAFANA (20-28°C)',
+        '🌳 Tuteur raha be vokatra',
+        '🟢 Maintso = haingana; 🔴 Mena = ela kokoa',
+        '🐛 Trips/pucerons → savon noir',
+        '🧬 Masomboly madio = tsy misy virosy',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // LEGIOMA MANDADY (Cucurbitacées)
+    // ═══════════════════════════════════════════════════════════════
+    'Voatango': {
+      'emoji': '🥒',
+      'name': 'Voatango / Concombre',
+      'season': 'Septambra - Janoary',
+      'duration': '35-55 andro',
+      'climate': 'Mafana - 22-30°C',
+      'spacing': '1,5x0,6 m (misandrahaka) na 60x50 cm (tuteur)',
+      'yield': '3-6 kg/m²',
+      'waterNeeds': 'Be - Rano matetika tsy mandena ravina',
+      'soil': 'Tany lonaka, mando; komposta 4 kg/m² + lavenona 200 g/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa voatango: 10-15 gramma
+• Izany dia ≈ 350-500 voa lehibe
+• Voa lehibe = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 2-3 cm lalina
+• Azo afafy MIVANTANA (mora!)
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 25-30°C (TIA MAFANA BE!)
+• Miposaka ao anatin'ny: 4-7 andro (HAINGANA!)
+• Fotoana tsara: Septambra - Janoary
+
+✅ TAHAN'NY FIPOSAHANA: 85-95% (avo be!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Voatango = TIA MAFANA BE (22-30°C)
+2. HAINGANA BE - 35-55 andro fotsiny!
+3. Tuteur/filao = vokatra be kokoa
+4. Aza mandena RAVINA - faka ihany!
+5. Jinjao matetika = vokatra be kokoa''',
+      'nursery': 'Famafazana mivantana na godet 12-15 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 25-30 cm lalina
+• Asio komposta 4 kg/m²
+• Asio lavenona 200 g/m²
+• Tany lonaka sy mando no ilaina
+
+💡 Voatango = TIA MAFANA BE!
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova lavaka 2-3 cm lalina
+• Elanelana: 1,5 x 0,6 m (misandrahaka)
+• Na: 60 x 50 cm (raha asiana tuteur)
+• Afafazo voa 2-3 isaky ny lavaka
+• Tondrahy avy hatrany
+
+DINGANA 3: FIANDRASANA
+• 4-7 andro = miposaka (HAINGANA!)
+• Tondrahy matetika (aza mandena ravina!)
+• Asio TUTEUR na FILAO
+
+💡 Tuteur/filao = vokatra be kokoa, voankazo madio!
+
+DINGANA 4: FIKARAKARANA
+• ⚠️ Aza manondraka amin'ny RAVINA!
+• Rano eo amin'ny faka ihany
+• Zezika potasse rehefa mamony
+• Esory ravina marary
+
+DINGANA 5: FIJINJANA
+• 35-55 andro = afaka jinjaina!
+• Jinjao rehefa 15-20 cm lava
+• ⚠️ Jinjao MATETIKA = vokatra be kokoa!
+• Aza andrasana ela loatra (mangidy)''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana'},
+        {'week': 'H2', 'action': 'Fiposahana - Tuteur/filao'},
+        {'week': 'H3-5', 'action': 'Fanondrahan-drano - Ampio potasse mamony'},
+        {'week': 'H6-8', 'action': 'Fijinjana matetika rehefa 15-20 cm'},
+      ],
+      'tips': [
+        '🌡️ Voatango = TIA MAFANA BE (22-30°C)',
+        '🌳 Tuteur/filao = vokatra be kokoa!',
+        '💧 Aza mandena RAVINA - faka ihany!',
+        '✂️ Jinjao MATETIKA = vokatra be kokoa',
+        '⚡ HAINGANA - 35-55 andro fotsiny!',
+      ],
+    },
+    'Courgette': {
+      'emoji': '🥒',
+      'name': 'Courgette (Zucchini)',
+      'season': 'Septambra - Desambra',
+      'duration': '40-55 andro',
+      'climate': 'Mafana - 20-28°C',
+      'spacing': '1x0,8 m',
+      'yield': '3-5 kg/m²',
+      'waterNeeds': 'Antonony - Rano 2-3x/herinandro',
+      'soil': 'Tany humifère; komposta 4 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa courgette: 8-10 gramma
+• Izany dia ≈ 60-100 voa (voa LEHIBE BE!)
+• Voa lehibe be = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 2-3 cm lalina
+• Voa 2-3 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 22-28°C (TIA MAFANA)
+• Miposaka ao anatin'ny: 5-8 andro
+• Fotoana tsara: Septambra - Desambra
+
+✅ TAHAN'NY FIPOSAHANA: 85-90% (avo be!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Courgette = TIA MAFANA (20-28°C)
+2. TSY MILA TUTEUR - mandady amin'ny tany
+3. HAINGANA BE - 40-55 andro fotsiny!
+4. Esory ravina marary (oïdium)
+5. Jinjao matetika = vokatra be kokoa''',
+      'nursery': 'Godet 12 andro na famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 25-30 cm lalina
+• Asio komposta 4 kg/m²
+• Tany humifère no tsara indrindra
+
+💡 Courgette = mandady lehibe - ilaina toerana malalaka!
+
+DINGANA 2: FAMAFAZANA
+• Manaova lavaka 2-3 cm lalina
+• Elanelana: 1 x 0,8 metatra (LEHIBE!)
+• Afafazo voa 2-3 isaky ny lavaka
+• Saromy tany
+• Tondrahy avy hatrany
+
+DINGANA 3: FIANDRASANA
+• 5-8 andro = miposaka
+• Tondrahy antonony (2-3x/herinandro)
+• Esory ny ketsa be loatra (1-2 fotsiny no avelao)
+
+DINGANA 4: FIKARAKARANA
+• TSY MILA TUTEUR (mandady amin'ny tany)
+• Esory ravina MARARY (oïdium)
+• Zezika organika H3-4
+• MULCHING = manampy mitazona ranoka
+
+💡 FIAROVANA:
+• Oïdium → soufre
+• Limace → lavenona, fandrika labiera
+
+DINGANA 5: FIJINJANA
+• 40-55 andro = afaka jinjaina!
+• Jinjao rehefa 15-20 cm lava
+• ⚠️ Jinjao MATETIKA = vokatra be kokoa!
+• Aza andrasana ela loatra (mafy loatra)''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana'},
+        {'week': 'H2', 'action': 'Fiposahana - Fanondrahan-drano'},
+        {'week': 'H3-5', 'action': 'Esory ravina marary'},
+        {'week': 'H6-8', 'action': 'Fijinjana rehefa 15-20 cm'},
+      ],
+      'tips': [
+        '🌡️ Courgette = TIA MAFANA (20-28°C)',
+        '🚫 TSY MILA TUTEUR - mandady amin\'ny tany',
+        '⚡ HAINGANA - 40-55 andro fotsiny!',
+        '🦠 Oïdium → soufre; Limace → lavenona',
+        '✂️ Jinjao MATETIKA = vokatra be kokoa',
+      ],
+    },
+    'Voatavo': {
+      'emoji': '🎃',
+      'name': 'Voatavo / Melon / Pastèque',
+      'season': 'Oktobra - Janoary',
+      'duration': '90-120 andro',
+      'climate': 'Mafana - 25-35°C',
+      'spacing': '2x1,5 m (voatavo); 1,5x1 m (melon/pastèque)',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony - Rano lalina isaky ny 3-4 andro',
+      'soil': 'Tany lonaka, misy lavenona/potasse; komposta 4-5 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa voatavo/melon/pastèque: 8-12 gramma
+• Izany dia ≈ 150-250 voa lehibe
+• Voa LEHIBE = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 2-3 cm lalina
+• Pointe (tendrony) mankany AMBANY
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 25-32°C (TIA MAFANA BE!)
+• Miposaka ao anatin'ny: 5-10 andro
+• Fotoana tsara: Oktobra - Janoary (fahavaratra)
+
+✅ TAHAN'NY FIPOSAHANA: 80-90%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Voatavo/Melon = TIA MAFANA BE (25-35°C)
+2. Mila toerana MALALAKA BE (2x1,5m!)
+3. PINCEMENT = manampy famokarana
+4. Mila POTASSE sy LAVENONA be
+5. Ela vao vokatra - 90-120 andro''',
+      'nursery': 'Godet 12-15 andro na famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 30-40 cm lalina
+• Asio komposta 4-5 kg/m²
+• Asio lavenona + potasse
+• Mila toerana MALALAKA BE!
+
+💡 Voatavo = mandady be - elanelana 2x1,5m!
+
+DINGANA 2: FAMAFAZANA
+• Manaova lavaka 2-3 cm lalina
+• Elanelana: 2 x 1,5 m (voatavo) / 1,5 x 1 m (melon)
+• Pointe mankany AMBANY!
+• Afafazo voa 2-3 isaky ny lavaka
+• Tondrahy avy hatrany
+
+DINGANA 3: FIANDRASANA
+• 5-10 andro = miposaka
+• Tondrahy antonony (isaky ny 3-4 andro)
+• Esory ny ketsa be loatra (1-2 avelao)
+
+DINGANA 4: PINCEMENT (Zava-dehibe!)
+• Rehefa ravina 5-6 = TAPAHO ny taolana
+• Izany = sampana betsaka = voankazo betsaka!
+• Zezika potasse rehefa mamony
+• PAILLAGE = manampy mitazona ranoka
+
+DINGANA 5: FIJINJANA
+• 90-120 andro = afaka jinjaina
+
+💡 FAMANTARANA FAHAMASAHANA:
+• Voatavo: hoditra mafy, tahony maina
+• Melon: fofona mamy, pedoncule mivaha
+• Pastèque: potrika maina, feo mikoropaka rehefa kapohina''',
+      'steps': [
+        {'week': 'H1-2', 'action': 'Famafazana godet na mivantana'},
+        {'week': 'H3-4', 'action': 'Famindrana - Paillage'},
+        {'week': 'H5-6', 'action': 'Pincement taolana 5-6 ravina'},
+        {'week': 'H7-14', 'action': 'Fanondrahan-drano - Fanaraha-maso'},
+        {'week': 'H15-17', 'action': 'Fijinjana - Jereo famantarana fahamasahana'},
+      ],
+      'tips': [
+        '🌡️ Voatavo = TIA MAFANA BE (25-35°C)',
+        '✂️ PINCEMENT = manampy famokarana!',
+        '🎃 Voatavo: hoditra mafy + tahony maina = masaka',
+        '🍈 Melon: fofona mamy + pedoncule mivaha = masaka',
+        '🍉 Pastèque: potrika maina + feo mikoropaka = masaka',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // VOAMAINA (Légumineuses)
+    // ═══════════════════════════════════════════════════════════════
+    'Haricots': {
+      'emoji': '🫘',
+      'name': 'Haricots verts',
+      'season': 'Martsa - Jona / Septambra - Novambra',
+      'duration': '45-60 andro',
+      'climate': 'Mafana antonony - 18-25°C',
+      'spacing': '60x10 cm na 40x20 cm',
+      'yield': '1-2 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany maivana, misy komposta 2 kg/m²; tsy mila azote betsaka',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa haricots: 300-400 gramma
+• Izany dia ≈ 1200-2000 voa lehibe
+• Voa LEHIBE = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 3-4 cm lalina
+• Voa 2-3 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 6-10 andro
+• Fotoana tsara: Martsa-Jona / Septambra-Novambra
+
+✅ TAHAN'NY FIPOSAHANA: 85-95% (avo be!)
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Haricots = MORA BE amboly!
+2. ⚠️ AZA ALENA RANO alohan'ny mamboly (lofika!)
+3. TSY MILA AZOTE betsaka (manamboatra azy)
+4. HAINGANA - 45-60 andro fotsiny!
+5. Variétés miakatra = mila tuteur''',
+      'nursery': 'Famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 15-20 cm lalina
+• Asio komposta 2 kg/m²
+• ⚠️ TSY MILA AZOTE betsaka!
+
+💡 Haricots = manamboatra azote (légumineuse)
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova lavaka 3-4 cm lalina
+• Elanelana: 60 x 10 cm na 40 x 20 cm
+• Afafazo voa 2-3 isaky ny lavaka
+• ⚠️ AZA ALENA RANO ny voa aloha (lofika!)
+• Tondrahy avy hatrany aorian'ny famafazana
+
+DINGANA 3: FIANDRASANA
+• 6-10 andro = miposaka
+• Tondrahy antonony
+• Esory ahi-dratsy
+
+DINGANA 4: BUTTAGE SY TUTEUR
+• H3: BUTTAGE kely (fanorenana tany)
+• Variétés MIAKATRA = asio TUTEUR
+• Variétés MIDINA = tsy mila tuteur
+• Zezika phosphore-potasse
+
+DINGANA 5: FIJINJANA
+• 45-60 andro = afaka jinjaina!
+• ⚠️ Jinjao ALOHAN'NY HAMAFINY ny tsaramaso
+• Jinjao matetika = vokatra be kokoa
+• Afaka jinjaina 2-3 herinandro''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2', 'action': 'Fiposahana - Fanondrahan-drano'},
+        {'week': 'H3', 'action': 'Buttage kely'},
+        {'week': 'H4-6', 'action': 'Tuteur raha ilaina - Fanaraha-maso'},
+        {'week': 'H7-9', 'action': 'Fijinjana alohan\'ny hamafiny ny tsaramaso'},
+      ],
+      'tips': [
+        '🌱 Haricots = MORA BE amboly!',
+        '💧 AZA ALENA RANO ny voa aloha!',
+        '🌿 TSY MILA AZOTE - manamboatra azy',
+        '🌳 Variétés miakatra = mila tuteur',
+        '⚡ HAINGANA - 45-60 andro fotsiny!',
+      ],
+    },
+    'Voanjobory': {
+      'emoji': '🫛',
+      'name': 'Petit pois / Voanjobory',
+      'season': 'Aprily - Jolay',
+      'duration': '60-80 andro',
+      'climate': 'Mangatsiaka - 12-20°C',
+      'spacing': '60x5-8 cm',
+      'yield': '0,5-1 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany mangatsiaka malefaka; komposta 2-3 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa voanjobory: 400-500 gramma
+• Izany dia ≈ 1200-2000 voa lehibe
+• Voa LEHIBE = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 3-5 cm lalina
+• Voa 2-3 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 8-18°C (TIA MANGATSIAKA BE!)
+• Miposaka ao anatin'ny: 7-14 andro
+• Fotoana tsara: Ririnina (Aprily - Jolay)
+
+✅ TAHAN'NY FIPOSAHANA: 80-90%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Voanjobory = TIA MANGATSIAKA BE (12-20°C)
+2. Azo amboly mandritra ny RIRININA!
+3. Mila TUTEUR TREILLIS (miakatra)
+4. TSY MILA AZOTE betsaka (légumineuse)
+5. Jinjao rehefa maintso mavana''',
+      'nursery': 'Famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 15-20 cm lalina
+• Asio komposta 2-3 kg/m²
+• Tany malefaka no ilaina
+• ⚠️ TSY MILA AZOTE betsaka!
+
+💡 Voanjobory = TIA MANGATSIAKA - amboly ririnina!
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova lavaka 3-5 cm lalina
+• Elanelana: 60 x 5-8 cm
+• Afafazo voa 2-3 isaky ny lavaka
+• Tondrahy avy hatrany
+
+DINGANA 3: FIANDRASANA
+• 7-14 andro = miposaka
+• Tondrahy antonony
+• Esory ahi-dratsy
+
+DINGANA 4: TUTEUR SY BUTTAGE
+• Asio TUTEUR TREILLIS (miakatra!)
+• BUTTAGE rehefa 15-20 cm haavo
+• Zezika phosphore-potasse
+
+DINGANA 5: FIJINJANA
+• 60-80 andro = afaka jinjaina
+• Jinjao rehefa gousse FENO nefa mbola MALEFAKA
+• Maintso mavana = tsara indrindra
+• Afaka jinjaina 2-3 herinandro''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2-3', 'action': 'Fiposahana - Tuteur treillis'},
+        {'week': 'H4', 'action': 'Buttage rehefa 15-20 cm'},
+        {'week': 'H5-9', 'action': 'Fanondrahan-drano - Fanaraha-maso'},
+        {'week': 'H10-12', 'action': 'Fijinjana gousse feno nefa mbola malefaka'},
+      ],
+      'tips': [
+        '❄️ Voanjobory = TIA MANGATSIAKA BE (12-20°C)',
+        '🌳 TUTEUR TREILLIS ilaina (miakatra!)',
+        '🌿 TSY MILA AZOTE - légumineuse',
+        '🦠 Oïdium → soufre; Bruche → masomboly madio',
+        '💚 Jinjao maintso mavana = tsara indrindra',
+      ],
+    },
+    'Tournesol': {
+      'emoji': '🌻',
+      'name': 'Tournesol Géant',
+      'season': 'Oktobra - Desambra',
+      'duration': '90-110 andro',
+      'climate': 'Mafana - 20-28°C',
+      'spacing': '80x40 cm',
+      'yield': '1-2 kg voa/m²',
+      'waterNeeds': 'Antonony - Rano isan-3 andro',
+      'soil': 'Tany maivana, drainage tsara; komposta 2 kg/m²',
+      'seed': '''📊 FATRA ILAINA (ho an'ny 10m²):
+• Voa tournesol: 50-70 gramma
+• Izany dia ≈ 800-1500 voa lehibe
+• Voa LEHIBE = mora afafy!
+
+📏 HALALINY FAMAFAZANA:
+• 2-3 cm lalina
+• Voa 1-2 isaky ny lavaka
+
+🌡️ HAFANANA SY FOTOANA:
+• Mila hafanana: 18-25°C
+• Miposaka ao anatin'ny: 7-14 andro
+• Fotoana tsara: Oktobra - Desambra
+
+✅ TAHAN'NY FIPOSAHANA: 75-85%
+
+💡 TOROHEVITRA HO AN'NY VAO HANOMBOKA:
+1. Tournesol = MORA BE amboly!
+2. Safidio voa LEHIBE sy MAVESATRA
+3. TSY TIA rano miandrona
+4. Tuteur raha rivotra mafy
+5. Afaka hohanina na hamidy ny voa''',
+      'nursery': 'Famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Sasao ny tany 20-25 cm lalina
+• Asio komposta 2 kg/m²
+• Tany maivana drainage tsara
+
+💡 Tournesol = mora be amboly - tsara ho vao hanomboka!
+
+DINGANA 2: FAMAFAZANA MIVANTANA
+• Manaova lavaka 2-3 cm lalina
+• Elanelana: 80 x 40 cm (LEHIBE!)
+• Afafazo voa 1-2 isaky ny lavaka
+• Tondrahy avy hatrany
+
+DINGANA 3: FIANDRASANA
+• 7-14 andro = miposaka
+• Tondrahy antonony (isan-3 andro)
+• Esory ahi-dratsy
+• Esory ketsa be loatra (1 fotsiny avelao)
+
+DINGANA 4: FIKARAKARANA
+• TUTEUR raha rivotra mafy
+• Tondrahy antonony (tsy be loatra!)
+• Zezika organika H4-5
+
+💡 FIAROVANA:
+• Pucerons → savon noir, huile neem
+• Vorona → filets na sachets amin'ny loha
+
+DINGANA 5: FIJINJANA
+• 90-110 andro = afaka jinjaina
+• Marika: loha MAINA sy MIONDRIKA
+• Tapaho ny loha, avelao hihaina
+• Rotsahy ny voa rehefa maina tsara''',
+      'steps': [
+        {'week': 'H1', 'action': 'Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2-3', 'action': 'Fiposahana - Fanondrahan-drano'},
+        {'week': 'H4-8', 'action': 'Fivoarana - Tuteur raha ilaina'},
+        {'week': 'H9-12', 'action': 'Famonoan-kazo - Fanaraha-maso'},
+        {'week': 'H13-16', 'action': 'Fijinjana rehefa loha maina sy miondrika'},
+      ],
+      'tips': [
+        '🌻 Tournesol = MORA BE amboly!',
+        '💧 TSY TIA rano miandrona',
+        '🌳 Tuteur raha rivotra mafy',
+        '🐛 Pucerons → savon/huile neem',
+        '🐦 Vorona → filets/sachets amin\'ny loha',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // VARY SAMIHAFA (Types de riz)
+    // ═══════════════════════════════════════════════════════════════
+    'Vary Antanety': {
+      'emoji': '🌾',
+      'name': 'Vary Antanety (Riz pluvial)',
+      'season': 'Novambra - Desambra',
+      'duration': '90-120 andro',
+      'climate': 'Tropical - Mafana sy orana',
+      'spacing': '25x25 cm',
+      'yield': '2-4 T/ha',
+      'waterNeeds': 'Antonony (tsy mila tanimbary)',
+      'soil': 'Tany tanety lonaka; pH 5-6,5; komposta 3 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 60-80 kg/ha = 6-8 g isaky ny m²\\n📏 Halaliny famafazana: 2-3 cm\\n🌡️ Hafanana ilaina: 25-32°C (maniry 5-7 andro)\\n✅ Taux germination: 80-90%\\n💡 DINGANA: Alena rano 12h → avela hitsiry 24h → vao afafy',
+      'nursery': 'Famafazana MIVANTANA amin\'ny tanety (tsy mila tanin-ketsa)',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA NY TANY
+• Diovy tsara ny ahi-dratsy rehetra
+• Sasao ny tany 2-3 herinandro alohan'ny fambolena
+• Asio komposta 3 T/ha raha misy
+
+DINGANA 2: FANOMANANA NY VOA
+• Aleno rano ny voa 12 ora
+• Avelao hitsiry 24 ora ao amin'ny toerana mando
+• Jereo raha efa miposaka kely vao afafy
+
+DINGANA 3: FAMAFAZANA
+• Manaova lavaka 2-3 cm lalina
+• 25 cm elanelana isaky ny lavaka
+• Asio voa 3-4 isaky ny lavaka
+
+DINGANA 4: FANORENANA
+• Saromy tany madinika ny lavaka
+• Tsindrio moramora ny tany
+• Tondrahy rano raha tsy misy orana
+
+DINGANA 5: FIKARAKARANA
+• Tondrahy isaky ny 3-4 andro raha tsy misy orana
+• Esory ahi-dratsy matetika
+• Jinjao rehefa mavo 80% ny salohim-bary''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana mivantana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Miandry fitsiriany'},
+        {'week': 'H4-6', 'action': '🌾 Fandroahana ahi-dratsy voalohany'},
+        {'week': 'H7-10', 'action': '💧 Zezika urée 50 kg/ha - Fanondrahan-drano'},
+        {'week': 'H11-14', 'action': '🌸 Famokarana voninkazo'},
+        {'week': 'H15-17', 'action': '🌾 Fijinjana rehefa mavo 80%'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tsy mila tanimbary - ambolena amin\'ny tanety',
+        '✓ Mila orana na rano isaky ny 3-4 andro',
+        '✓ Variétés tsara: B22, FOFIFA 154, NERICA',
+        '⚠️ Raha maina be → tondrahy rano maraina',
+        '🌾 Jinjao rehefa mavo 80% ny salohim-bary',
+      ],
+    },
+    'Vary Anaty Rano': {
+      'emoji': '🌾',
+      'name': 'Vary Anaty Rano (Riz irrigué)',
+      'season': 'Oktobra - Febroary',
+      'duration': '120-150 andro',
+      'climate': 'Tropical mafana sy mando',
+      'spacing': '20x20 cm',
+      'yield': '4-8 T/ha',
+      'waterNeeds': 'Be loatra - Mila rano maharitra',
+      'soil': 'Tany vilany/tanimanga; pH 5,5-7; zezika organika 5 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 40-50 kg/ha (tanin-ketsa) = 4-5 g/m²\\n📏 Halaliny: 1-2 cm amin\'ny tanin-ketsa\\n🌡️ Hafanana: 28-35°C (maniry 4-6 andro)\\n✅ Taux germination: 85-95%\\n💡 DINGANA: Alena 24h → miposaka 24h → afafy',
+      'nursery': 'Tanin-ketsa: 100-150 m² ho an\'ny 1 ha; afindra 21-25 andro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANIN-KETSA
+• Toerana kely 100-150 m² ho an'ny 1 ha tanimbary
+• Asio rano 2-3 cm amin'ny tanin-ketsa
+• Asio zezika organika (komposta na zezika omby)
+
+DINGANA 2: FANOMANANA NY VOA
+• Aleno ny voa 24 ora ao anaty rano
+• Avelao hiposaka 24 ora ao amin'ny toerana mando
+• Voa tokony efa misy faka kely vao afafy
+
+DINGANA 3: FAMAFAZANA
+• Afafazo miparitaka amin'ny tanin-ketsa
+• Saromy tany madinika 1-2 cm
+• Asio rano moramora isan'andro
+
+DINGANA 4: FAMINDRANA KETSA
+• Afindra rehefa 21-25 andro (ketsa 15-20 cm)
+• Esory moramora mba tsy ho simba ny faka
+• Ketsa 3-4 isaky ny lavaka, 20x20 cm elanelana
+
+DINGANA 5: FIKARAKARANA TANIMBARY
+• Asio rano 5-10 cm maharitra
+• Zezika urée: 30 andro + 60 andro aorian'ny famindrana
+• Tsy avelao ho maina ny tanimbary''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tanin-ketsa - Famafazana voa'},
+        {'week': 'H2-3', 'action': '💧 Fikarakarana ketsa - Rano 2-3 cm'},
+        {'week': 'H4', 'action': '🌿 Famindrana ketsa → tanimbary'},
+        {'week': 'H5-8', 'action': '💧 Fampidirana rano 5-10 cm'},
+        {'week': 'H9-12', 'action': '🌾 Zezika urée 80 kg/ha - Fandroahana'},
+        {'week': 'H13-16', 'action': '🌸 Famokarana voninkazo'},
+        {'week': 'H17-21', 'action': '🌾 Fijinjana - Fanaingoana'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ ZAVA-DEHIBE: Rano maharitra 5-10 cm',
+        '✓ Ketsa 3-4 isaky ny lavaka',
+        '✓ Zezika urée: 30 andro + 60 andro aorian\'ny famindrana',
+        '⚠️ Tsy avelao ho maina ny tanimbary',
+        '🌾 Afindra ketsa 21-25 andro aorian\'ny famafazana',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // VARIMBAZAHA (Céréales - Blé, Orge, Avoine)
+    // ═══════════════════════════════════════════════════════════════
+    'Blé': {
+      'emoji': '🌾',
+      'name': 'Blé / Varimbazaha',
+      'season': 'Aprily - Aogositra (Ririnina)',
+      'duration': '100-130 andro',
+      'climate': 'Mangatsiaka - 15-22°C (tanety avo)',
+      'spacing': 'Andalana 15-20 cm',
+      'yield': '2-5 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lalina lonaka; pH 6-7,5; komposta 3 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 100-150 kg/ha = 10-15 g/m²\\n📏 Halaliny: 3-5 cm\\n🌡️ Hafanana: 12-20°C (maniry 7-10 andro)\\n✅ Taux germination: 85-95%\\n💡 Tsy mety amin\'ny toerana mafana loatra',
+      'nursery': 'Famafazana MIVANTANA - tsy mila tanin-ketsa',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TOERANA
+• Fidio tanety avo mangatsiaka (15-22°C)
+• Toerana tsara: Antsirabe, Ambositra
+• Tsy mety amin'ny morontsiraka (mafana loatra)
+
+DINGANA 2: FANAMBOARANA TANY
+• Asaina tsara ny tany 2-3 herinandro aloha
+• Asio komposta 3 T/ha
+• Esory ahi-dratsy rehetra
+
+DINGANA 3: FAMAFAZANA
+• Manaova andalana 15-20 cm elanelana
+• Afafy ny voa 3-5 cm lalina
+• Saromy tany madinika
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy matetika
+• Asio zezika NPK 30 andro aorian'ny famafazana
+• Tondrahy antonony raha maina
+
+DINGANA 5: FIJINJANA
+• Andrasao ho mavo tanteraka ny salohina
+• Jinjao amin'ny fotoana maina
+• Hainoy tsara alohan'ny fitahirizana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana andalana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Tallage (sampana)'},
+        {'week': 'H5-8', 'action': '💧 Zezika NPK - Fanondrahan-drano'},
+        {'week': 'H9-12', 'action': '🌾 Épiaison - Famokarana salohina'},
+        {'week': 'H13-18', 'action': '🌾 Fijinjana rehefa mavo tanteraka'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Toerana tsara: Antsirabe, Ambositra, tanety avo',
+        '✓ Tsy mety amin\'ny morontsiraka (mafana loatra)',
+        '✓ Mila toerana mangatsiaka 15-22°C',
+        '⚠️ Rouille → fandidiana ravina marary',
+        '🌾 Jinjao rehefa maina tsara ny voa',
+      ],
+    },
+    'Orge': {
+      'emoji': '🌾',
+      'name': 'Orge',
+      'season': 'Aprily - Aogositra',
+      'duration': '90-110 andro',
+      'climate': 'Mangatsiaka - 12-20°C',
+      'spacing': 'Andalana 15-20 cm',
+      'yield': '2-4 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lalina; pH 6-8; komposta 2-3 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 100-130 kg/ha = 10-13 g/m²\\n📏 Halaliny: 3-5 cm\\n🌡️ Hafanana: 10-18°C (maniry 6-10 andro)\\n✅ Taux germination: 85-95%\\n💡 Maharitra mangatsiaka kokoa noho ny blé',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TOERANA
+• Tanety avo mangatsiaka (12-20°C)
+• Maharitra mangatsiaka kokoa noho ny blé
+• Tsy mety amin'ny toerana mafana
+
+DINGANA 2: FANAMBOARANA TANY
+• Asaina tsara ny tany
+• Asio komposta 2-3 T/ha
+• Esory ahi-dratsy rehetra
+
+DINGANA 3: FAMAFAZANA
+• Manaova andalana 15-20 cm elanelana
+• Afafy 3-5 cm lalina
+• Saromy tany moramora
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy matetika
+• Asio zezika NPK rehefa 30 andro
+• Tondrahy raha maina
+
+DINGANA 5: FIJINJANA
+• Andrasao ho mavo tanteraka
+• Jinjao amin'ny toetr'andro maina
+• Hainoy tsara alohan'ny fitahirizana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Tallage'},
+        {'week': 'H5-8', 'action': '💧 Zezika - Fanondrahan-drano'},
+        {'week': 'H9-12', 'action': '🌾 Épiaison - Floraison'},
+        {'week': 'H13-16', 'action': '🌾 Fijinjana'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora ambolena kokoa noho ny blé',
+        '✓ Maharitra maintso kokoa',
+        '✓ Azo atao vary raha tsy misy blé',
+        '🌾 Jinjao rehefa mavo tanteraka',
+      ],
+    },
+    'Avoine': {
+      'emoji': '🌾',
+      'name': 'Avoine',
+      'season': 'Martsa - Jolay',
+      'duration': '90-120 andro',
+      'climate': 'Mangatsiaka - 10-20°C',
+      'spacing': 'Andalana 15-20 cm',
+      'yield': '2-4 T/ha',
+      'waterNeeds': 'Antonony - Be',
+      'soil': 'Tany lalina; pH 5,5-7; komposta 2-3 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 80-120 kg/ha = 8-12 g/m²\\n📏 Halaliny: 3-5 cm\\n🌡️ Hafanana: 10-18°C (maniry 7-12 andro)\\n✅ Taux germination: 80-90%\\n💡 Tsara ho sakafon\'ny omby sy soavaly',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TOERANA
+• Tany mando mangatsiaka (10-20°C)
+• Avoine tia rano kokoa noho ny blé
+• Tsara amin'ny tany avo
+
+DINGANA 2: FANAMBOARANA TANY
+• Asaina tsara ny tany
+• Asio komposta 2-3 T/ha
+• Esory ahi-dratsy rehetra
+
+DINGANA 3: FAMAFAZANA
+• Manaova andalana 15-20 cm elanelana
+• Afafy 3-5 cm lalina
+• Saromy tany moramora
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy matetika raha maina
+• Mila rano bebe kokoa noho ny blé
+• Asio zezika NPK
+
+DINGANA 5: FIJINJANA
+• Azo jinjaina maintso (silage ho an'ny biby)
+• Na avelao ho maina (flocon d'avoine)
+• Tsara ho sakafon'ny omby sy soavaly''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Fivoarana'},
+        {'week': 'H5-10', 'action': '💧 Zezika - Fanondrahan-drano'},
+        {'week': 'H11-17', 'action': '🌾 Fijinjana (maintso na maina)'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tsara ho sakafon\'ny biby (omby, soavaly)',
+        '✓ Azo jinjaina maintso (silage/hay)',
+        '✓ Azo jinjaina maina (flocon d\'avoine)',
+        '✓ Mila rano bebe kokoa noho ny blé',
+      ],
+    },
+    'Ray-grass': {
+      'emoji': '🌿',
+      'name': 'Ray-grass (Ahitra ho sakafon\'ny omby)',
+      'season': 'Martsa - Septambra',
+      'duration': '60-90 andro (jinja voalohany)',
+      'climate': 'Mangatsiaka - 10-20°C',
+      'spacing': 'Afafy miparitaka na andalana 20 cm',
+      'yield': '8-15 T/ha (maintso)',
+      'waterNeeds': 'Be',
+      'soil': 'Tany lonaka mando; pH 6-7; zezika azota be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 25-35 kg/ha = 2,5-3,5 g/m²\\n📏 Halaliny: 0,5-1 cm (maivana)\\n🌡️ Hafanana: 10-20°C (maniry 7-14 andro)\\n✅ Taux germination: 80-90%\\n💡 Tsara indrindra ho sakafon\'ny omby sy osy',
+      'nursery': 'Famafazana MIVANTANA - afafy miparitaka',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TOERANA
+• Tany mando mangatsiaka (10-20°C)
+• Toerana tsara: tanety avo mando
+• Tsy mety amin'ny toerana mafana loatra
+
+DINGANA 2: FANAMBOARANA TANY
+• Asaina tsara ny tany
+• Asio komposta 2-3 T/ha
+• Ataovy malemilemy ny tany
+
+DINGANA 3: FAMAFAZANA
+• Afafy miparitaka manerana ny tany
+• Saromy tany maivana 0,5-1 cm
+• Tsindrio moramora ny tany
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy isan'andro raha maina
+• Asio zezika urée 50 kg/ha isaky ny fijinjana
+• Maniry 7-14 andro
+
+DINGANA 5: FIJINJANA
+• Jinjao voalohany rehefa 30-40 cm
+• Azo jinjaina 4-6 andro isaky ny 4-6 herinandro
+• Mitombo indray aorian'ny fijinjana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana - Famafazana miparitaka'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Tondrahy rano'},
+        {'week': 'H4-8', 'action': '💧 Fivoarana - Zezika urée'},
+        {'week': 'H9-12', 'action': '🌿 Fijinjana voalohany (30-40 cm)'},
+        {'week': 'H13+', 'action': '🌿 Fijinjana manaraka isaky ny 4-6 herinandro'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Ahitra tsara indrindra ho an\'ny omby sy osy',
+        '✓ Azo jinjaina 4-6 andro isaky ny 4-6 herinandro',
+        '✓ Mitombo indray aorian\'ny fijinjana',
+        '✓ Mila zezika urée 50 kg/ha isaky ny fijinjana',
+        '⚠️ Tsy mety amin\'ny toerana mafana loatra',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // VOANKAZO SY FAKA (Tubercules)
+    // ═══════════════════════════════════════════════════════════════
+    'Vomanga': {
+      'emoji': '🍠',
+      'name': 'Vomanga / Patate douce',
+      'season': 'Oktobra - Desambra',
+      'duration': '90-150 andro',
+      'climate': 'Mafana - 20-30°C',
+      'spacing': '80x30 cm',
+      'yield': '15-30 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany fasika maivana; pH 5,5-6,5; tsy mila zezika be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 TSY VOA - BOUTURE (tendron-dravina)\\n📏 Halavany: 25-30 cm (misy ravina 4-5)\\n📍 Fametrahana: 2/3 ao anaty tany\\n✅ Taux reprise: 90-95%\\n💡 Makà tendron-dravina salama avy amin\'ny vomanga antitra',
+      'nursery': 'Tsy ilaina - fametrahana MIVANTANA ny bouture',
+      'plantingGuide': '''DINGANA 1: FANOMANANA BOUTURE
+• Makà tendron-dravina salama 25-30 cm
+• Misy ravina 4-5 isan'ny bouture
+• Avy amin'ny vomanga antitra, tsy misy aretina
+
+DINGANA 2: FANAMBOARANA TANY
+• Tany fasika maivana no tsara indrindra
+• Manaova rangony 25-30 cm avo
+• Elanelana rangony: 80 cm
+
+DINGANA 3: FAMETRAHANA BOUTURE
+• Atsatsohy 2/3 ao anaty tany, 1/3 ambony
+• 30 cm elanelana isaky ny tongotra
+• Manaova laharana mitsivalana
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy matetika
+• Buttage: asio tany eo amin'ny fototra
+• Tsy mila rano be (mahatantra tany maina)
+
+DINGANA 5: FIJINJANA
+• 90-150 andro aorian'ny fametrahana
+• Jinjao rehefa mavo/maina ny ravina
+• Esory moramora ny vomanga''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana rangony - Fametrahana bouture'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Fampandrosoana faka'},
+        {'week': 'H5-10', 'action': '💧 Fandroahana - Buttage (fanorenana tany)'},
+        {'week': 'H11-16', 'action': '🍠 Fivoaran\'ny vomanga'},
+        {'week': 'H17-21', 'action': '🍠 Fijinjana rehefa maina ny ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora ambolena indrindra',
+        '✓ Tsy mila zezika be (mahatanty tany mahantra)',
+        '✓ Makà bouture salama, tsy misy aretina',
+        '🍠 Jinjao rehefa mavo/maina ny ravina',
+        '⚠️ Tsy tia rano be loatra',
+      ],
+    },
+    'Ovy': {
+      'emoji': '🥔',
+      'name': 'Ovy / Pomme de terre',
+      'season': 'Aprily - Jolay',
+      'duration': '90-120 andro',
+      'climate': 'Mangatsiaka - 15-20°C',
+      'spacing': '70x30 cm',
+      'yield': '15-30 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany fasika lonaka; pH 5-6,5; komposta 4 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 TSY VOA - TUBERCULE (ovy kely)\\n📏 Habeny: 30-50 g (misy maso 2-3)\\n📍 Fametrahana: 10 cm lalina\\n✅ Taux reprise: 90-95%\\n💡 Fidio ovy salama, misy maso maniry',
+      'nursery': 'Tsy ilaina - fametrahana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA OVY HAMBOLENA
+• Fidio ovy kely salama 30-50 g
+• Misy maso 2-3 maniry
+• Tsy misy aretina na simba
+
+DINGANA 2: FANAMBOARANA TANY
+• Asaina tsara ny tany 2-3 herinandro aloha
+• Asio komposta 4 T/ha
+• Tany fasika lonaka no tsara indrindra
+
+DINGANA 3: FAMETRAHANA
+• Manaova lavaka 10 cm lalina
+• Asio ovy - maso miakatra
+• Elanelana: 70 cm laharana, 30 cm tongotra
+
+DINGANA 4: BUTTAGE (Zava-dehibe!)
+• Asio tany eo amin'ny fototra rehefa 15-20 cm
+• Buttage faharoa rehefa 30 cm
+• Tsy avelao hahita masoandro ny ovy (mivadika mavo)
+
+DINGANA 5: FIJINJANA
+• 90-120 andro aorian'ny fametrahana
+• Jinjao 2 herinandro aorian'ny fahafatesan'ny ravina
+• Esory amin'ny fotoana maina''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Fametrahana tubercule'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Buttage voalohany'},
+        {'week': 'H5-8', 'action': '💧 Zezika - Buttage faharoa'},
+        {'week': 'H9-12', 'action': '🌸 Famokarana voninkazo'},
+        {'week': 'H13-17', 'action': '🥔 Fijinjana rehefa maina ny ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mila toerana mangatsiaka (tanety avo)',
+        '✓ Buttage (fanorenana tany) = zava-dehibe',
+        '✓ Tsy avelao hahita masoandro ny ovy (mivadika mavo)',
+        '🥔 Jinjao 2 herinandro aorian\'ny fahafatesan\'ny ravina',
+        '⚠️ Mildiou → bouillie bordelaise',
+      ],
+    },
+    'Saonjo': {
+      'emoji': '🟤',
+      'name': 'Saonjo / Taro',
+      'season': 'Oktobra - Desambra',
+      'duration': '6-12 volana',
+      'climate': 'Mafana sy mando - 25-30°C',
+      'spacing': '80x60 cm',
+      'yield': '10-25 T/ha',
+      'waterNeeds': 'Be loatra',
+      'soil': 'Tany mando, vilany; pH 5,5-7; zezika organika be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 TSY VOA - BULBE (saonjo kely na loha)\\n📏 Habeny: 50-100 g (misy maso)\\n📍 Fametrahana: 5-8 cm lalina\\n✅ Taux reprise: 85-95%\\n💡 Makà saonjo kely salama avy amin\'ny saonjo antitra',
+      'nursery': 'Tsy ilaina - fametrahana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA TOERANA
+• Toerana mando tia rano be
+• Azo ambolena amoron'ny renirano
+• Tsy mety amin'ny toerana maina
+
+DINGANA 2: FISAFIDIANANA SAONJO
+• Makà saonjo kely 50-100 g
+• Misy maso maniry
+• Avy amin'ny saonjo antitra salama
+
+DINGANA 3: FAMETRAHANA
+• Manaova lavaka 5-8 cm lalina
+• Elanelana: 80x60 cm
+• Asio saonjo - maso miakatra
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy rano matetika (mila rano be)
+• Asio zezika organika
+• Esory ahi-dratsy
+
+DINGANA 5: FIJINJANA
+• 6-12 volana aorian'ny fametrahana
+• Jinjao rehefa mavo ny ravina
+• Ravina azo hanina koa (ravim-boatavo)''',
+      'steps': [
+        {'week': 'V1', 'action': '🌱 Fanamboarana tany - Fametrahana bulbe'},
+        {'week': 'V2-4', 'action': '🌿 Fiposahana - Fanondrahan-drano'},
+        {'week': 'V5-8', 'action': '💧 Fandroahana - Zezika organika'},
+        {'week': 'V9-12', 'action': '🟤 Fijinjana (saonjo haingana)'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tia rano be - azo ambolena amoron\'ny renirano',
+        '✓ Ravina azo hanina koa (ravim-boatavo)',
+        '✓ Maharitra aloky',
+        '🟤 Jinjao rehefa mavo ny ravina',
+        '⚠️ Tsy mety amin\'ny toerana maina',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // ANANA MALAGASY (Brèdes locales)
+    // ═══════════════════════════════════════════════════════════════
+    'Anamalaho': {
+      'emoji': '🌿',
+      'name': 'Anamalaho / Brèdes Mafana',
+      'season': 'Taona manontolo',
+      'duration': '30-45 andro',
+      'climate': 'Mafana sy mando - 20-30°C',
+      'spacing': '30x20 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 6-7; komposta 3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 0,5-1 g/m² (voa kely be)\\n📏 Halaliny: 0,5 cm (maivana)\\n🌡️ Hafanana: 20-30°C (maniry 7-10 andro)\\n✅ Taux germination: 70-85%\\n💡 Na avy amin\'ny voa na avy amin\'ny bouture',
+      'nursery': 'Famafazana mivantana na tanin-ketsa 2-3 herinandro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 3 kg/m²
+• Asaina tsara ny tany
+• Ataovy malemilemy
+
+DINGANA 2: FAMAFAZANA
+• Afafy 0,5 cm lalina (voa kely be)
+• Saromy tany maivana
+• Na makà bouture (sampana 10-15 cm)
+
+DINGANA 3: FANONDRAHAN-DRANO
+• Tondrahy isan'andro maraina
+• Maniry 7-10 andro
+• Mila rano antonony
+
+DINGANA 4: FAMINDRANA (raha tanin-ketsa)
+• Afindra rehefa misy ravina 4-5
+• Elanelana: 30x20 cm
+• Na avelao amin'ny toerany
+
+DINGANA 5: FIJINJANA
+• 30-45 andro aorian'ny famafazana
+• Jinjao ny ravina sy voninkazo
+• Hitombo indray aorian'ny fijinjana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Tondrahy rano'},
+        {'week': 'H4', 'action': '🌿 Afindra raha tanin-ketsa'},
+        {'week': 'H5-6', 'action': '🌿 Fijinjana voalohany (ravina)'},
+        {'week': 'H7+', 'action': '🌿 Fijinjana manaraka + voninkazo'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora ambolena - maniry haingana',
+        '✓ Voninkazo mamy sy mangetaheta (brèdes mafana)',
+        '✓ Tsara ho fanafody (aretin\'ny nify)',
+        '✓ Azo bouture: tapaho sampana, atsatsohy',
+        '🌿 Jinjao matetika - hitombo indray',
+      ],
+    },
+    'Sakamalao': {
+      'emoji': '🫚',
+      'name': 'Sakamalao / Gingembre',
+      'season': 'Septambra - Novambra',
+      'duration': '8-10 volana',
+      'climate': 'Mafana sy mando - 20-30°C',
+      'spacing': '40x25 cm',
+      'yield': '15-25 T/ha',
+      'waterNeeds': 'Antonony - Be',
+      'soil': 'Tany lonaka maivana; pH 5,5-6,5; komposta 4 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 TSY VOA - RHIZOME (sakamalao kely)\\n📏 Habeny: 25-50 g (misy maso 2-3)\\n📍 Fametrahana: 5-8 cm lalina\\n✅ Taux reprise: 85-95%\\n💡 Makà rhizome salama, tsy misy lofika',
+      'nursery': 'Tsy ilaina - fametrahana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA RHIZOME
+• Makà sakamalao salama 25-50 g
+• Misy maso 2-3 maniry
+• Tsy misy lofika na aretina
+
+DINGANA 2: FANAMBOARANA TANY
+• Tany lonaka maivana
+• Asio komposta 4 T/ha
+• Maharitra aloky 50-70%
+
+DINGANA 3: FAMETRAHANA
+• Manaova lavaka 5-8 cm lalina
+• Asio rhizome - maso miakatra
+• Elanelana: 40x25 cm
+
+DINGANA 4: MULCHING (Zava-dehibe!)
+• Saromana poti-bozaka na ravina maina
+• 10-15 cm avo
+• Mitazona hamandoana sy hafanana
+
+DINGANA 5: FIJINJANA
+• Azo jinjaina maintso (6 volana)
+• Na antitra (8-10 volana)
+• Jinjao rehefa maina ny ravina''',
+      'steps': [
+        {'week': 'V1', 'action': '🌱 Fanamboarana - Fametrahana rhizome'},
+        {'week': 'V2-4', 'action': '🌿 Fiposahana - Mulching'},
+        {'week': 'V5-8', 'action': '💧 Fandroahana - Fanondrahan-drano'},
+        {'week': 'V9-12', 'action': '🫚 Fivoarana - Zezika organika'},
+        {'week': 'V13+', 'action': '🫚 Fijinjana rehefa maina ny ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Maharitra aloky (50-70% masoandro)',
+        '✓ Mulching (poti-bozaka) = zava-dehibe',
+        '✓ Azo jinjaina maintso (6 volana) na antitra (10 volana)',
+        '🫚 Jinjao rehefa maina ny ravina',
+        '⚠️ Tsy tia rano be loatra (lofika)',
+      ],
+    },
+    'Consoude': {
+      'emoji': '🌿',
+      'name': 'Consoude',
+      'season': 'Taona manontolo',
+      'duration': 'Hazo maharitra (vivace)',
+      'climate': 'Mangatsiaka - Mafana antonony',
+      'spacing': '60x60 cm',
+      'yield': '50-100 T/ha (ravina)',
+      'waterNeeds': 'Be',
+      'soil': 'Tany lonaka mando; pH 6-7; zezika organika be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 TSY VOA - BOUTURE FAKA\\n📏 Habeny: 5-10 cm faka\\n📍 Fametrahana: 5 cm lalina\\n✅ Taux reprise: 90-95%\\n💡 Hazo maharitra - ambolena indray mandeha',
+      'nursery': 'Tsy ilaina - fametrahana MIVANTANA ny faka',
+      'plantingGuide': '''DINGANA 1: FISAFIDIANANA FAKA
+• Makà faka consoude 5-10 cm
+• Avy amin'ny zava-maniry antitra salama
+• Hazo maharitra - ambolena indray mandeha
+
+DINGANA 2: FANAMBOARANA TANY
+• Tany lonaka mando
+• Asio zezika organika be
+• Toerana mahazaka masoandro na aloky
+
+DINGANA 3: FAMETRAHANA
+• Atsatsohy 5 cm lalina
+• Elanelana: 60x60 cm
+• Saromy tany moramora
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy matetika hatramin'ny fampandrosoana
+• Tsy mila fikarakarana be
+• Maharitra taona maro
+
+DINGANA 5: FAMPIASANA
+• Jinjao rehefa 50 cm haavo
+• Ravina ho zezika rano (purin)
+• Sakafon'ny kisoa, omby, akoho''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana - Fametrahana faka'},
+        {'week': 'H2-6', 'action': '🌿 Fiposahana - Fanondrahan-drano'},
+        {'week': 'H7-12', 'action': '🌿 Fijinjana voalohany (rehefa 50 cm)'},
+        {'week': 'H13+', 'action': '🌿 Fijinjana manaraka isaky ny 4-6 herinandro'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ ZEZIKA TSARA INDRINDRA: Ravina → zezika rano',
+        '✓ Sakafon\'ny kisoa, omby, akoho',
+        '✓ Maharitra taona maro - ambolena indray mandeha',
+        '✓ Azo jinjaina 4-6 andro isaky ny 4-6 herinandro',
+        '🌿 Ravina misy azote, potasse, phosphore be',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // LEGIOMA FANAMPINY (Légumes supplémentaires)
+    // ═══════════════════════════════════════════════════════════════
+    'Brocoli': {
+      'emoji': '🥦',
+      'name': 'Brocoli',
+      'season': 'Aprily - Aogositra',
+      'duration': '70-100 andro',
+      'climate': 'Mangatsiaka - 15-20°C',
+      'spacing': '60x40 cm',
+      'yield': '1-2 kg/m²',
+      'waterNeeds': 'Antonony - Be',
+      'soil': 'Tany lonaka; pH 6-7; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 0,03 g/m² (≈300 voa/g)\\n📏 Halaliny: 0,5-1 cm\\n🌡️ Hafanana: 15-20°C (maniry 5-8 andro)\\n✅ Taux germination: 80-90%\\n💡 Mila mangatsiaka - tsy mety amin\'ny mafana',
+      'nursery': 'Tanin-ketsa: 4-5 herinandro; afindra rehefa ravina 4-5',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Maniry 5-8 andro
+• Karakarao 4-5 herinandro
+• Avelao hanana ravina 4-5
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa misy ravina 4-5
+• Elanelana: 60x40 cm
+• Toerana mangatsiaka (15-20°C)
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy 2-3 andro isaky ny herinandro
+• Asio zezika NPK
+• Esory ahi-dratsy
+
+DINGANA 5: FIJINJANA
+• Jinjao rehefa mihidy tsara ny loha
+• Alohan'ny fivoahan'ny voninkazo mavo
+• 70-100 andro aorian'ny famafazana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-4', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H5', 'action': '🌿 Famindrana - Elanelana 60x40 cm'},
+        {'week': 'H6-10', 'action': '💧 Fanondrahan-drano - Zezika'},
+        {'week': 'H11-14', 'action': '🥦 Fijinjana loha voalohany'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Jinjao alohan\'ny hivoahan\'ny voninkazo mavo',
+        '✓ Aorian\'ny fijinjana voalohany → hisy sampana vaovao',
+        '✓ Mila mangatsiaka - tanety avo tsara',
+        '⚠️ Chenilles → Bt (Bacillus thuringiensis)',
+        '🥦 Tsara ho sakafo sy ho fahasalamana',
+      ],
+    },
+    'Chou-fleur': {
+      'emoji': '🥬',
+      'name': 'Chou-fleur',
+      'season': 'Aprily - Aogositra',
+      'duration': '80-120 andro',
+      'climate': 'Mangatsiaka - 15-18°C',
+      'spacing': '70x50 cm',
+      'yield': '1,5-3 kg/m²',
+      'waterNeeds': 'Be',
+      'soil': 'Tany lonaka; pH 6-7; komposta 5 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 0,03 g/m² (≈300 voa/g)\\n📏 Halaliny: 0,5-1 cm\\n🌡️ Hafanana: 15-18°C (maniry 5-8 andro)\\n✅ Taux germination: 80-90%\\n💡 Mila mangatsiaka kokoa noho ny brocoli',
+      'nursery': 'Tanin-ketsa: 4-6 herinandro; afindra rehefa ravina 5-6',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Maniry 5-8 andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Karakarao 4-6 herinandro
+• Tondrahy isan'andro
+• Avelao hanana ravina 5-6
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa misy ravina 5-6
+• Elanelana: 70x50 cm
+• Mila toerana mangatsiaka (15-18°C)
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy matetika (mila rano be)
+• Asio zezika NPK
+• Saromana ny loha amin'ny ravina (mba ho fotsy)
+
+DINGANA 5: FIJINJANA
+• 80-120 andro aorian'ny famafazana
+• Jinjao rehefa fotsy sy mihidy tsara
+• 15-20 cm savaivo ny loha''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-5', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H6', 'action': '🌿 Famindrana - Elanelana 70x50 cm'},
+        {'week': 'H7-12', 'action': '💧 Fanondrahan-drano - Zezika'},
+        {'week': 'H13-17', 'action': '🥬 Fijinjana rehefa mihidy ny loha'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Saromana ny loha amin\'ny ravina (mba ho fotsy)',
+        '✓ Mila mangatsiaka be - tanety avo tsara',
+        '✓ Jinjao rehefa 15-20 cm ny savaivon\'ny loha',
+        '⚠️ Mila rano bebe kokoa',
+        '🥬 Mora simba - jinjao amin\'ny fotoana mety',
+      ],
+    },
+    'Lentille': {
+      'emoji': '🫘',
+      'name': 'Lentille',
+      'season': 'Aprily - Jolay',
+      'duration': '80-110 andro',
+      'climate': 'Mangatsiaka - 15-25°C',
+      'spacing': '30x5 cm',
+      'yield': '0,8-1,5 T/ha',
+      'waterNeeds': 'Kely - Antonony',
+      'soil': 'Tany maivana; pH 6-7; tsy mila zezika be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 80-120 kg/ha = 8-12 g/m²\\n📏 Halaliny: 3-4 cm\\n🌡️ Hafanana: 15-25°C (maniry 7-10 andro)\\n✅ Taux germination: 85-95%\\n💡 Mora ambolena - tsy mila fikarakarana be',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Tany maivana (tsy mila zezika be)
+• Asaina tsara ny tany
+• Légumineuse: manamboatra azote ho an'ny tany
+
+DINGANA 2: FAMAFAZANA
+• Manaova andalana 30 cm elanelana
+• Afafy 3-4 cm lalina
+• 5 cm elanelana isaky ny voa
+
+DINGANA 3: FIPOSAHANA
+• Maniry 7-10 andro
+• Mila mangatsiaka (15-25°C)
+• Tondrahy antonony
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy matetika
+• Tsy mila rano be loatra
+• Tsy mila zezika fanampiny
+
+DINGANA 5: FIJINJANA
+• 80-110 andro aorian'ny famafazana
+• Jinjao rehefa mavo 80% ny ravina
+• Hainoy tsara alohan'ny fitahirizana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Fivoarana'},
+        {'week': 'H5-10', 'action': '💧 Fanondrahan-drano antonony'},
+        {'week': 'H11-16', 'action': '🫘 Fijinjana rehefa mavo ny ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora ambolena indrindra',
+        '✓ Tsy mila zezika be (légumineuse)',
+        '✓ Tsara amin\'ny rotation voly',
+        '🫘 Jinjao rehefa maina 80% ny gousse',
+        '✓ Avelao hamaina tsara alohan\'ny fitahirizana',
+      ],
+    },
+    'Papaye': {
+      'emoji': '🍈',
+      'name': 'Papaye / Papay',
+      'season': 'Taona manontolo',
+      'duration': '9-12 volana (voalohany mamokatra)',
+      'climate': 'Mafana - 22-30°C',
+      'spacing': '3x3 m',
+      'yield': '30-60 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka drainage tsara; pH 6-7; komposta 10 kg/tongotra',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: Voa avy amin\'ny voankazo masaka\\n📏 Halaliny: 1-2 cm\\n🌡️ Hafanana: 25-30°C (maniry 14-21 andro)\\n✅ Taux germination: 60-80%\\n💡 Misy lahy sy vavy - mila roa na telo isaky ny lavaka',
+      'nursery': 'Tanin-ketsa sachet 2-3 volana; afindra rehefa 30-40 cm',
+      'plantingGuide': '''DINGANA 1: FANOMANANA VOA
+• Makà voa avy amin'ny papaye masaka tsara
+• Sasao ny voa, esory ny hoditra
+• Hainoy 1-2 andro
+
+DINGANA 2: FAMAFAZANA
+• Afafy 1-2 cm lalina amin'ny sachet
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 3: FIKARAKARANA KETSA
+• Maniry 14-21 andro
+• Karakarao 2-3 volana
+• Avelao hanana 30-40 cm haavo
+
+DINGANA 4: FAMINDRANA
+• Afindra rehefa 30-40 cm
+• Elanelana: 3x3 m
+• Asio komposta 10 kg isaky ny lavaka
+
+DINGANA 5: FISAFIDIANANA
+• Misy lahy sy vavy - avelao 2-3 isaky ny lavaka
+• Aorian'ny voninkazo: fidio vavy 1-2 + lahy 1
+• Mamokatra 9-12 volana aorian'ny fambolena''',
+      'steps': [
+        {'week': 'V1', 'action': '🌱 Famafazana amin\'ny sachet'},
+        {'week': 'V2-3', 'action': '🌿 Fikarakarana ketsa - Rano isan\'andro'},
+        {'week': 'V4', 'action': '🌿 Famindrana amin\'ny saha'},
+        {'week': 'V5-9', 'action': '💧 Fanondrahan-drano - Zezika'},
+        {'week': 'V10-12', 'action': '🍈 Famokarana voalohany'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Haingana vokatra (9-12 volana)',
+        '✓ Misy lahy sy vavy - mila roa na telo isaky ny lavaka',
+        '✓ Fidio ny vavy (mamokatra be) sy lahy iray (fanondroana)',
+        '🍈 Jinjao rehefa misy faritra mavo',
+        '⚠️ Tsy tia rano miandrona (lofika)',
+      ],
+    },
+    'Soja': {
+      'emoji': '🫛',
+      'name': 'Soja / Voanjo Soja',
+      'season': 'Novambra - Febroary',
+      'duration': '90-120 andro',
+      'climate': 'Mafana - 20-30°C',
+      'spacing': '50x10 cm',
+      'yield': '1,5-3 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany maivana; pH 6-7; tsy mila azote be',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\\n🌱 Ilaina: 60-80 kg/ha = 6-8 g/m²\\n📏 Halaliny: 3-5 cm\\n🌡️ Hafanana: 20-30°C (maniry 5-8 andro)\\n✅ Taux germination: 85-95%\\n💡 Légumineuse - manamboatra azote',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Tsy mila azote be (légumineuse)
+• Asaina tsara ny tany
+• Asio zezika PK raha ilaina
+
+DINGANA 2: FAMAFAZANA
+• Manaova andalana 50 cm elanelana
+• Afafy 3-5 cm lalina
+• 10 cm elanelana isaky ny voa
+
+DINGANA 3: FIPOSAHANA
+• Maniry 5-8 andro
+• Esory ahi-dratsy matetika
+• Tondrahy antonony
+
+DINGANA 4: BUTTAGE
+• Asio tany eo amin'ny fototra rehefa 20 cm
+• Manampy faka vaovao hiforona
+• Asio zezika PK
+
+DINGANA 5: FIJINJANA
+• 90-120 andro aorian'ny famafazana
+• Jinjao rehefa mavo 90% ny ravina
+• Hainoy tsara alohan'ny fitahirizana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Fandroahana'},
+        {'week': 'H5-6', 'action': '🌿 Buttage - Zezika PK'},
+        {'week': 'H7-12', 'action': '🌸 Famokarana voninkazo - gousse'},
+        {'week': 'H13-17', 'action': '🫛 Fijinjana rehefa maina 90%'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tsy mila azote (légumineuse - manamboatra azy)',
+        '✓ Tsara amin\'ny rotation voly',
+        '✓ Soja = protéine be (tofu, lait de soja)',
+        '🫛 Jinjao rehefa mavo 90% ny ravina',
+        '✓ Avelao hamaina tsara alohan\'ny fitahirizana',
+      ],
+    },
+    // ═══════════════════════════════════════════════════════════════
+    // LEGIOMA FANAMPINY II (Cultures supplémentaires)
+    // ═══════════════════════════════════════════════════════════════
+    'Voanemba': {
+      'emoji': '🫘',
+      'name': 'Voanemba / Niébé / Dolique',
+      'season': 'Novambra - Febroary',
+      'duration': '60-90 andro',
+      'climate': 'Mafana - 25-35°C',
+      'spacing': '60x20 cm',
+      'yield': '0,8-2 T/ha',
+      'waterNeeds': 'Kely - Antonony',
+      'soil': 'Tany maivana; pH 5,5-7; tsy mila azote',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 20-30 kg/ha = 2-3 g/m²\n📏 Halaliny: 3-4 cm\n🌡️ Hafanana: 25-35°C (maniry 4-7 andro)\n✅ Taux germination: 85-95%\n💡 Maharitra maintany - légumineuse',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Tsy mila zezika be (légumineuse)
+• Maharitra tany mahantra
+• Maharitra maintany sy hafanana
+
+DINGANA 2: FAMAFAZANA
+• Manaova lavaka 3-4 cm lalina
+• Asio voa 2-3 isaky ny lavaka
+• Elanelana: 60x20 cm
+
+DINGANA 3: FIPOSAHANA
+• Maniry haingana 4-7 andro
+• Esory ahi-dratsy
+• Tondrahy antonony
+
+DINGANA 4: FIKARAKARANA
+• Tsy mila fikarakarana be
+• Ravina azo hanina koa
+• Maharitra maintany tsara
+
+DINGANA 5: FIJINJANA
+• 60-90 andro aorian'ny famafazana
+• Jinjao rehefa maina 90% ny gousse
+• Avelao hamaina tsara''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Fanamboarana tany - Famafazana'},
+        {'week': 'H2-4', 'action': '🌿 Fiposahana - Fandroahana'},
+        {'week': 'H5-8', 'action': '🌸 Famokarana voninkazo'},
+        {'week': 'H9-13', 'action': '🫘 Fijinjana gousse maina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Maharitra maintany sy hafanana',
+        '✓ Ravina azo hanina koa',
+        '✓ Tsara amin\'ny rotation (légumineuse)',
+        '🫘 Jinjao rehefa maina 90% ny gousse',
+      ],
+    },
+    'Tissam': {
+      'emoji': '🥬',
+      'name': 'Tissam Maitso / Moutarde chinoise',
+      'season': 'Martsa - Aogositra',
+      'duration': '25-40 andro',
+      'climate': 'Mangatsiaka - 15-22°C',
+      'spacing': '20x15 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 6-7; komposta 3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,3-0,5 g/m² (≈500 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 15-22°C (maniry 4-7 andro)\n✅ Taux germination: 80-90%\n💡 Haingana vokatra - 25-40 andro',
+      'nursery': 'Famafazana MIVANTANA na tanin-ketsa 2 herinandro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 3 kg/m²
+• Asaina tsara ny tany
+• Ataovy malemilemy
+
+DINGANA 2: FAMAFAZANA
+• Afafy 0,5-1 cm lalina
+• Saromy tany maivana
+• Na afindra avy amin'ny tanin-ketsa
+
+DINGANA 3: FANONDRAHAN-DRANO
+• Tondrahy isan'andro maraina
+• Maniry 4-7 andro
+• Mila rano antonony
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy matetika
+• Asio zezika rano (purin)
+• Mora sy haingana vokatra
+
+DINGANA 5: FIJINJANA
+• 25-40 andro aorian'ny famafazana
+• Jinjao alohan'ny hivoahan'ny voninkazo
+• Azo jinjaina matetika''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana mivantana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Rano isan\'andro'},
+        {'week': 'H4-6', 'action': '🥬 Fijinjana ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora sy haingana vokatra',
+        '✓ Azo jinjaina matetika',
+        '✓ Tsara amin\'ny sakafo malagasy',
+        '🥬 Jinjao alohan\'ny hivoahan\'ny voninkazo',
+      ],
+    },
+    'Patsoy': {
+      'emoji': '🥬',
+      'name': 'Patsoy / Bok Choy (Fotsy & Maitso)',
+      'season': 'Martsa - Aogositra',
+      'duration': '30-50 andro',
+      'climate': 'Mangatsiaka - 15-22°C',
+      'spacing': '25x20 cm',
+      'yield': '2-5 kg/m²',
+      'waterNeeds': 'Antonony - Be',
+      'soil': 'Tany lonaka; pH 6-7; komposta 3-4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,3-0,5 g/m² (≈400 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 15-22°C (maniry 4-7 andro)\n✅ Taux germination: 80-90%\n💡 Fotsy = tahony fotsy; Maitso = tahony maitso',
+      'nursery': 'Tanin-ketsa 2-3 herinandro na mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 3-4 kg/m²
+• Asaina tsara ny tany
+• Ataovy malemilemy
+
+DINGANA 2: FAMAFAZANA
+• Afafy 0,5-1 cm lalina
+• Na tanin-ketsa 2-3 herinandro
+• Tondrahy isan'andro
+
+DINGANA 3: FAMINDRANA (raha tanin-ketsa)
+• Afindra rehefa misy ravina 3-4
+• Elanelana: 25x20 cm
+• Tondrahy avy hatrany
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy 2-3 andro isaky ny herinandro
+• Esory ahi-dratsy
+• Asio zezika rano (purin)
+
+DINGANA 5: FIJINJANA
+• 30-50 andro aorian'ny famafazana
+• Jinjao rehefa lehibe tsara ny fototra
+• Patsoy fotsy = tahony fotsy; Maitso = tahony maitso''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-3', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H4', 'action': '🌿 Famindrana - Elanelana 25x20 cm'},
+        {'week': 'H5-7', 'action': '🥬 Fijinjana'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Patsoy fotsy = tahony fotsy mavesatra',
+        '✓ Patsoy maitso = tahony maitso maivana',
+        '✓ Mora sy haingana vokatra',
+        '🥬 Jinjao rehefa lehibe tsara ny fototra',
+      ],
+    },
+    'Anatsonga': {
+      'emoji': '🌿',
+      'name': 'Anatsonga / Morelle noire',
+      'season': 'Taona manontolo',
+      'duration': '30-45 andro',
+      'climate': 'Mafana sy mando - 20-30°C',
+      'spacing': '30x20 cm',
+      'yield': '1-3 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 5,5-7; komposta 2-3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,2-0,4 g/m² (voa kely be)\n📏 Halaliny: 0,5 cm\n🌡️ Hafanana: 20-30°C (maniry 7-14 andro)\n✅ Taux germination: 70-80%\n💡 Anana malagasy mora ambolena',
+      'nursery': 'Famafazana mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 2-3 kg/m²
+• Anana malagasy mora ambolena
+• Tany lonaka
+
+DINGANA 2: FAMAFAZANA
+• Afafy 0,5 cm lalina (voa kely be)
+• Saromy tany maivana
+• Tondrahy moramora
+
+DINGANA 3: FANONDRAHAN-DRANO
+• Tondrahy isan'andro
+• Maniry 7-14 andro
+• Mila rano antonony
+
+DINGANA 4: FIKARAKARANA
+• Esory ahi-dratsy
+• Mora sy haingana vokatra
+• Ravina sy voankazo azo hanina
+
+DINGANA 5: FIJINJANA
+• 30-45 andro aorian'ny famafazana
+• Jinjao ny ravina matetika
+• Hitombo indray aorian'ny fijinjana''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana voa'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana'},
+        {'week': 'H4-6', 'action': '🌿 Fijinjana ravina matetika'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Anana malagasy mora ambolena',
+        '✓ Afafy voa mivantana',
+        '✓ Ravina sy voankazo azo hanina',
+        '🌿 Jinjao matetika - hitombo indray',
+      ],
+    },
+    'Ramirebaka': {
+      'emoji': '🌿',
+      'name': 'Ramirebaka / Amarante',
+      'season': 'Taona manontolo',
+      'duration': '25-40 andro',
+      'climate': 'Mafana - 20-35°C',
+      'spacing': '20x15 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 6-7; komposta 2-3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,2-0,3 g/m² (voa kely be ≈1500/g)\n📏 Halaliny: 0,3-0,5 cm (maivana be)\n🌡️ Hafanana: 20-35°C (maniry 4-7 andro)\n✅ Taux germination: 75-85%\n💡 Anana malagasy - mora indrindra',
+      'nursery': 'Famafazana MIVANTANA - miparitaka',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 2-3 kg/m²
+• Ataovy malemilemy ny tany
+• Anana mora indrindra amboly
+
+DINGANA 2: FAMAFAZANA
+• Afafy miparitaka manerana ny tany
+• 0,3-0,5 cm lalina (maivana be)
+• Saromy tany maivana moramora
+
+DINGANA 3: FANONDRAHAN-DRANO
+• Tondrahy isan'andro maraina
+• Maniry 4-7 andro (haingana be)
+• Mila rano antonony
+
+DINGANA 4: ÉCLAIRCISSAGE
+• Esory ny zava-maniry mifanila loatra
+• Avelao 5-10 cm elanelana
+• Ny nesorina azo hanina
+
+DINGANA 5: FIJINJANA
+• 25-40 andro aorian'ny famafazana
+• Tapaho 5 cm ambonin'ny tany
+• Hitombo indray - azo jinjaina matetika''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana miparitaka'},
+        {'week': 'H2', 'action': '🌿 Fiposahana haingana'},
+        {'week': 'H3-4', 'action': '🌿 Éclaircissage - Fijinjana voalohany'},
+        {'week': 'H5-6', 'action': '🌿 Fijinjana manaraka'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora indrindra amboly',
+        '✓ Maniry haingana be',
+        '✓ Ravina be vitamina A sy C',
+        '🌿 Jinjao tapaho 5 cm ambonin\'ny tany',
+      ],
+    },
+    'Concombre': {
+      'emoji': '🥒',
+      'name': 'Concombre / Voatango lava',
+      'season': 'Septambra - Janoary',
+      'duration': '50-70 andro',
+      'climate': 'Mafana - 22-30°C',
+      'spacing': '100x50 cm',
+      'yield': '3-6 kg/m²',
+      'waterNeeds': 'Be',
+      'soil': 'Tany lonaka; pH 6-7; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 1-1,5 g/m² (≈35-40 voa/g)\n📏 Halaliny: 2-3 cm\n🌡️ Hafanana: 25-30°C (maniry 4-7 andro)\n✅ Taux germination: 85-95%\n💡 Voa lehibe - mora afafy',
+      'nursery': 'Famafazana MIVANTANA na godet 2 herinandro',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 4 kg/m²
+• Asaina tsara ny tany
+• Tany lonaka drainage tsara
+
+DINGANA 2: FAMAFAZANA
+• Manaova lavaka 2-3 cm lalina
+• Asio voa 2-3 isaky ny lavaka
+• Elanelana: 100x50 cm
+
+DINGANA 3: FIPOSAHANA
+• Maniry 4-7 andro
+• Avelao ketsa 1-2 tsara indrindra
+• Tondrahy isan'andro
+
+DINGANA 4: TUTEUR/FILAO
+• Apetraho tuteur na filao rehefa maniry
+• Vokatra be kokoa sy madio
+• Aza mandena ny ravina
+
+DINGANA 5: FIJINJANA
+• 50-70 andro aorian'ny famafazana
+• Jinjao rehefa 15-20 cm (aza avela ho lehibe loatra)
+• Jinjao matetika = vokatra be''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana mivantana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Tuteur/Filao'},
+        {'week': 'H4-6', 'action': '💧 Fanondrahan-drano be'},
+        {'week': 'H7-10', 'action': '🥒 Fijinjana matetika'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tuteur/Filao = vokatra be kokoa',
+        '✓ Aza mandena ravina',
+        '✓ Jinjao matetika = vokatra be',
+        '🥒 Jinjao rehefa 15-20 cm (tsy avela ho lehibe loatra)',
+      ],
+    },
+    'Tongolo Mena': {
+      'emoji': '🧅',
+      'name': 'Tongolo Be Mena / Oignon rouge',
+      'season': 'Aprily - Aogositra',
+      'duration': '100-150 andro',
+      'climate': 'Mafana antonony - Maina',
+      'spacing': '15x10 cm',
+      'yield': '20-40 T/ha',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany fasika lonaka; pH 6-7; komposta 3 T/ha',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 3-4 g/m² (≈250 voa/g)\n📏 Halaliny: 1-1,5 cm\n🌡️ Hafanana: 15-25°C (maniry 10-15 andro)\n✅ Taux germination: 70-80%\n💡 Mena = mamy kokoa',
+      'nursery': 'Tanin-ketsa 6-8 herinandro',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 1-1,5 cm lalina
+• Tondrahy isan'andro
+• Maniry 10-15 andro (miadana)
+
+DINGANA 2: FIKARAKARANA KETSA
+• Karakarao 6-8 herinandro
+• Avelao ho toy ny pensilihazo
+• Esory ahi-dratsy
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa toy ny pensilihazo
+• Elanelana: 15x10 cm
+• Tsy avelao ho lalina loatra ny fametrahana
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy antonony (tsy tia rano be)
+• Esory ahi-dratsy matetika
+• Ajanony ny fanondrahan-drano 2 herinandro alohan'ny fijinjana
+
+DINGANA 5: FIJINJANA
+• 100-150 andro aorian'ny famafazana
+• Jinjao rehefa 80% milofika ny ravina
+• Avelao hamaina 2-3 andro alohan'ny fitahirizana''',
+      'steps': [
+        {'week': 'H1-2', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H3-8', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H9', 'action': '🌿 Famindrana - Elanelana 15x10 cm'},
+        {'week': 'H10-18', 'action': '🧅 Fivoarana bulbe'},
+        {'week': 'H19-22', 'action': '🧅 Fijinjana rehefa milofika ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tongolo mena = mamy kokoa',
+        '✓ Jinjao rehefa 80% milofika ny ravina',
+        '✓ Avelao hamaina 2-3 andro',
+        '🧅 Tehirizo amin\'ny toerana maina mangatsika',
+      ],
+    },
+    'Persil': {
+      'emoji': '🌿',
+      'name': 'Persil / Persily',
+      'season': 'Taona manontolo',
+      'duration': '60-90 andro',
+      'climate': 'Mangatsiaka - Mafana antonony',
+      'spacing': '20x15 cm',
+      'yield': '1-3 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 6-7; komposta 3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,3-0,5 g/m² (≈600 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 15-25°C (maniry 14-28 andro) - MIADANA\n✅ Taux germination: 60-75%\n💡 Miadana maniry - alena rano 24h aloha',
+      'nursery': 'Famafazana mivantana na tanin-ketsa 4-6 herinandro',
+      'plantingGuide': '''DINGANA 1: FANOMANANA VOA
+• Aleno ny voa 24 ora ao anaty rano
+• Manampy haingana kokoa ny fiposahana
+• Voa miadana maniry (2-4 herinandro)
+
+DINGANA 2: FAMAFAZANA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Saromy tany maivana
+
+DINGANA 3: FIPOSAHANA (Miadana!)
+• Andrasao 2-4 herinandro
+• Tondrahy matetika mba tsy ho maina
+• Mahantra - aza kivy
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy antonony
+• Esory ahi-dratsy
+• Esory voninkazo mba hitombo ravina
+
+DINGANA 5: FIJINJANA
+• 60-90 andro aorian'ny famafazana
+• Jinjao ravina matetika
+• Hitombo indray aorian'ny fijinjana''',
+      'steps': [
+        {'week': 'H1-2', 'action': '🌱 Famafazana - Miandry fiposahana (miadana)'},
+        {'week': 'H3-6', 'action': '🌿 Fiposahana - Fivoarana'},
+        {'week': 'H7-10', 'action': '🌿 Fijinjana ravina voalohany'},
+        {'week': 'H11+', 'action': '🌿 Fijinjana manaraka matetika'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Aleno voa 24h alohan\'ny afafy',
+        '✓ Miadana maniry (2-4 herinandro)',
+        '✓ Jinjao ravina matetika - hitombo indray',
+        '🌿 Esory voninkazo mba hitombo ravina',
+      ],
+    },
+    'Kotomila': {
+      'emoji': '🌿',
+      'name': 'Kotomila / Coriandre',
+      'season': 'Martsa - Septambra',
+      'duration': '40-60 andro',
+      'climate': 'Mangatsiaka - 15-25°C',
+      'spacing': '20x10 cm',
+      'yield': '1-2 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany maivana lonaka; pH 6-7; komposta 2 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 2-3 g/m² (≈50 voa/g - voa lehibe)\n📏 Halaliny: 1-2 cm\n🌡️ Hafanana: 15-25°C (maniry 7-14 andro)\n✅ Taux germination: 65-75%\n💡 Voa = voa roa afangaro - vakio roa',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANOMANANA VOA
+• Voa roa afangaro - vakio roa
+• Aleno 12 ora ao anaty rano
+• Manampy haingana kokoa ny fiposahana
+
+DINGANA 2: FAMAFAZANA
+• Afafy 1-2 cm lalina
+• Elanelana: 20x10 cm
+• Saromy tany maivana
+
+DINGANA 3: FIPOSAHANA
+• Maniry 7-14 andro
+• Tondrahy antonony
+• Mila toerana mangatsiaka (15-25°C)
+
+DINGANA 4: ÉCLAIRCISSAGE
+• Esory ny zava-maniry mifanila loatra
+• Avelao 10 cm elanelana
+• Tsy tia hafanana be (miakatra voninkazo)
+
+DINGANA 5: FIJINJANA
+• 40-60 andro aorian'ny famafazana
+• Jinjao ravina alohan'ny voninkazo
+• Voa azo tehirizina (epice)''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana mivantana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana'},
+        {'week': 'H4-6', 'action': '🌿 Fivoarana - Éclaircissage'},
+        {'week': 'H7-9', 'action': '🌿 Fijinjana ravina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Vakio ny voa roa alohan\'ny afafy',
+        '✓ Tsy tia hafanana be (miakatra voninkazo)',
+        '✓ Jinjao ravina alohan\'ny voninkazo',
+        '🌿 Voa azo tehirizina (épice)',
+      ],
+    },
+    'Sakay Fanendy': {
+      'emoji': '🌶️',
+      'name': 'Sakay Fanendy / Piment doux',
+      'season': 'Taona manontolo',
+      'duration': '90-120 andro',
+      'climate': 'Mafana - 20-30°C',
+      'spacing': '50x40 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka; pH 6-7; komposta 3 kg/m² + NPK',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,02-0,04 g/m² (≈150 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 22-28°C (maniry 10-14 andro)\n✅ Taux germination: 75-85%\n💡 Sakay tsy masiaka - azo hanina manta',
+      'nursery': 'Tanin-ketsa 5-6 herinandro',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Maniry 10-14 andro
+• Karakarao 5-6 herinandro
+• Avelao hanana ravina 4-5
+
+DINGANA 3: FAMINDRANA
+• Afindra 5-6 herinandro aorian'ny famafazana
+• Elanelana: 50x40 cm
+• Asio komposta amin'ny lavaka
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy antonony
+• Apetraho tuteur raha be vokatra
+• Asio zezika NPK
+
+DINGANA 5: FIJINJANA
+• 90-120 andro aorian'ny famafazana
+• Jinjao maintso na avela ho mena
+• Jinjao matetika = vokatra be''',
+      'steps': [
+        {'week': 'H1-2', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H3-6', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H7', 'action': '🌿 Famindrana - Elanelana 50x40 cm'},
+        {'week': 'H8-12', 'action': '💧 Fanondrahan-drano - Tuteur'},
+        {'week': 'H13-17', 'action': '🌶️ Fijinjana matetika'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Tsy masiaka - azo hanina manta (salade)',
+        '✓ Jinjao maintso na mena',
+        '✓ Jinjao matetika = vokatra be',
+        '🌶️ Vitamina C be indrindra',
+      ],
+    },
+    'Voatabia Cada': {
+      'emoji': '🍅',
+      'name': 'Voatabia Cada / Tomate Roma',
+      'season': 'Aprily - Septambra',
+      'duration': '90-120 andro',
+      'climate': 'Mafana antonony - 18-28°C',
+      'spacing': '60x40 cm',
+      'yield': '4-8 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka drainage tsara; pH 6-6,8; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,03-0,05 g/m² (≈300 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 20-25°C (maniry 6-10 andro)\n✅ Taux germination: 80-90%\n💡 Voatabia lava - tsara amin\'ny sauce',
+      'nursery': 'Tanin-ketsa 4-5 herinandro',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Maniry 6-10 andro
+• Karakarao 4-5 herinandro
+• Avelao hanana ravina 4-5
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa misy ravina 4-5
+• Elanelana: 60x40 cm
+• Apetraho tuteur avy hatrany
+
+DINGANA 4: ESORY GOURMANDS (Zava-dehibe!)
+• Esory sampana kely eo amin'ny het-kazo
+• Sampana tsy mamokatra - mandany hery
+• Asio zezika NPK isaky ny 2 herinandro
+
+DINGANA 5: FIJINJANA
+• 90-120 andro aorian'ny famafazana
+• Jinjao rehefa mena tsara
+• Cada/Roma = tsara amin'ny sauce sy conserve''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-4', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H5', 'action': '🌿 Famindrana - Tuteur'},
+        {'week': 'H6-10', 'action': '💧 Esory gourmands - Zezika'},
+        {'week': 'H11-17', 'action': '🍅 Fijinjana rehefa mena'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Cada/Roma = lava, nofo be, voa kely',
+        '✓ Tsara amin\'ny sauce sy conserve',
+        '✓ Tuteur + Esory gourmands = zava-dehibe',
+        '🍅 Jinjao rehefa mena tanteraka',
+      ],
+    },
+    'Voatabia Japonais': {
+      'emoji': '🍅',
+      'name': 'Voatabia Japonais / Tomate Momotaro',
+      'season': 'Aprily - Septambra',
+      'duration': '100-130 andro',
+      'climate': 'Mafana antonony - 18-26°C',
+      'spacing': '70x50 cm',
+      'yield': '5-10 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany lonaka drainage tsara; pH 6-6,8; komposta 5 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,02-0,04 g/m² (≈300 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 20-25°C (maniry 6-10 andro)\n✅ Taux germination: 80-90%\n💡 Voatabia boribory lehibe - mamy',
+      'nursery': 'Tanin-ketsa 4-6 herinandro',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Maniry 6-10 andro
+• Karakarao 4-6 herinandro
+• Avelao hanana ravina 5-6
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa misy ravina 5-6
+• Elanelana: 70x50 cm (lehibe kokoa)
+• Tuteur MATANJAKA ilaina (voa mavesatra)
+
+DINGANA 4: ESORY GOURMANDS
+• Esory sampana kely eo amin'ny het-kazo
+• Avelao sampana roa lehibe ihany
+• Asio zezika NPK matetika
+
+DINGANA 5: FIJINJANA
+• 100-130 andro aorian'ny famafazana
+• Jinjao rehefa mena 80%
+• Japonais = voa lehibe 200-400g, vidiny ambony''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-5', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H6', 'action': '🌿 Famindrana - Tuteur matanjaka'},
+        {'week': 'H7-12', 'action': '💧 Fikarakarana - Esory gourmands'},
+        {'week': 'H13-19', 'action': '🍅 Fijinjana voa lehibe'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Japonais = voa lehibe (200-400g)',
+        '✓ Mamy sy nofo be',
+        '✓ Mila tuteur matanjaka (mavesatra)',
+        '🍅 Vidiny ambony eny an-tsena',
+      ],
+    },
+    'Petit Pois': {
+      'emoji': '🫛',
+      'name': 'Petit Pois / Voanjobory kely',
+      'season': 'Aprily - Jolay',
+      'duration': '60-80 andro',
+      'climate': 'Mangatsiaka - 12-20°C',
+      'spacing': '60x5 cm',
+      'yield': '0,5-1 kg/m²',
+      'waterNeeds': 'Antonony',
+      'soil': 'Tany mangatsiaka malefaka; pH 6-7; komposta 2-3 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 40-50 g/m² (≈3-5 voa/g)\n📏 Halaliny: 3-5 cm\n🌡️ Hafanana: 8-18°C (maniry 7-14 andro) - TIA MANGATSIAKA\n✅ Taux germination: 80-90%\n💡 Tsy mila hafanana - azo afafy ririnina',
+      'nursery': 'Famafazana MIVANTANA',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 2-3 kg/m²
+• Toerana mangatsiaka (12-20°C)
+• Tanety avo tsara
+
+DINGANA 2: FAMAFAZANA
+• Afafy 3-5 cm lalina
+• Elanelana: 60 cm laharana, 5 cm isaky ny voa
+• Famafazana mivantana (tsy mila tanin-ketsa)
+
+DINGANA 3: FIPOSAHANA
+• Maniry 7-14 andro
+• Tia mangatsiaka - tsy mety amin'ny mafana
+• Tondrahy antonony
+
+DINGANA 4: TUTEUR TREILLIS
+• Apetraho tuteur treillis rehefa 15-20 cm
+• Buttage rehefa 15-20 cm
+• Mila fihazonana mba hiakatra
+
+DINGANA 5: FIJINJANA
+• 60-80 andro aorian'ny famafazana
+• Jinjao gousse feno nefa mbola malefaka
+• Alohan'ny hamafiny ny gousse''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana mivantana'},
+        {'week': 'H2-3', 'action': '🌿 Fiposahana - Tuteur treillis'},
+        {'week': 'H4-5', 'action': '🌿 Buttage rehefa 15-20 cm'},
+        {'week': 'H6-9', 'action': '🌸 Famokarana voninkazo - gousse'},
+        {'week': 'H10-12', 'action': '🫛 Fijinjana gousse malefaka'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mila mangatsiaka - tanety avo tsara',
+        '✓ Tuteur treillis ilaina',
+        '✓ Jinjao maintso mavana',
+        '🫛 Jinjao alohan\'ny hamafiny ny gousse',
+      ],
+    },
+    'Melon': {
+      'emoji': '🍈',
+      'name': 'Melon',
+      'season': 'Oktobra - Janoary',
+      'duration': '75-100 andro',
+      'climate': 'Mafana - 25-30°C',
+      'spacing': '150x100 cm',
+      'yield': '2-4 kg/m²',
+      'waterNeeds': 'Antonony - Atsaharo alohan\'ny fijinjana',
+      'soil': 'Tany lonaka fasika; pH 6-7; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,8-1,2 g/m² (≈30-40 voa/g)\n📏 Halaliny: 2-3 cm\n🌡️ Hafanana: 25-30°C (maniry 5-8 andro)\n✅ Taux germination: 80-90%\n💡 Mila hafanana be',
+      'nursery': 'Godet 2-3 herinandro na mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 4 kg/m² + lavenona
+• Tany lonaka fasika drainage tsara
+• Mila hafanana be (25-30°C)
+
+DINGANA 2: FAMAFAZANA
+• Afafy 2-3 cm lalina
+• Voa 2-3 isaky ny lavaka
+• Elanelana: 150x100 cm (malalaka)
+
+DINGANA 3: PAILLAGE
+• Saromana poti-bozaka na plastika
+• Mba ho maina ny voa sy ravina
+• Miaro amin'ny aretina
+
+DINGANA 4: PINCEMENT (Zava-dehibe!)
+• Taolana rehefa misy ravina 5-6
+• Sampana be = voa be
+• Avelao voa 2-3 isaky ny tongotra
+
+DINGANA 5: FIJINJANA
+• 75-100 andro aorian'ny famafazana
+• Fofona mamy + pedoncule mivaha = masaka
+• Atsaharo rano 1 herinandro alohan'ny fijinjana''',
+      'steps': [
+        {'week': 'H1-2', 'action': '🌱 Famafazana godet na mivantana'},
+        {'week': 'H3-4', 'action': '🌿 Famindrana - Paillage'},
+        {'week': 'H5-6', 'action': '🌿 Pincement taolana 5-6 ravina'},
+        {'week': 'H7-12', 'action': '💧 Fanondrahan-drano - Fanaraha-maso'},
+        {'week': 'H13-15', 'action': '🍈 Fijinjana rehefa misy fofona mamy'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Pincement = sampana be = voa be',
+        '✓ Atsaharo rano 1 herinandro alohan\'ny fijinjana',
+        '✓ Fofona mamy + pedoncule mivaha = masaka',
+        '🍈 Voa 2-3 isaky ny tongotra fotsiny avela',
+      ],
+    },
+    'Pasteque': {
+      'emoji': '🍉',
+      'name': 'Pastèque / Kankana',
+      'season': 'Oktobra - Janoary',
+      'duration': '80-110 andro',
+      'climate': 'Mafana be - 25-35°C',
+      'spacing': '200x150 cm',
+      'yield': '3-6 kg/m²',
+      'waterNeeds': 'Antonony - Atsaharo alohan\'ny fijinjana',
+      'soil': 'Tany fasika lonaka; pH 6-7; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,5-0,8 g/m² (≈15-20 voa/g)\n📏 Halaliny: 2-3 cm\n🌡️ Hafanana: 25-35°C (maniry 5-10 andro)\n✅ Taux germination: 80-90%\n💡 Mila hafanana be sy toerana malalaka',
+      'nursery': 'Godet 2-3 herinandro na mivantana',
+      'plantingGuide': '''DINGANA 1: FANAMBOARANA TANY
+• Asio komposta 4 kg/m² + lavenona
+• Tany fasika lonaka drainage tsara
+• Mila hafanana be sy toerana malalaka
+
+DINGANA 2: FAMAFAZANA
+• Afafy 2-3 cm lalina
+• Voa 2-3 isaky ny lavaka
+• Elanelana: 200x150 cm (malalaka be)
+
+DINGANA 3: PAILLAGE
+• Saromana poti-bozaka na plastika
+• Mba ho maina ny voa
+• Miaro amin'ny lofika
+
+DINGANA 4: PINCEMENT
+• Taolana rehefa misy ravina 5-6
+• Avelao voa 2-3 isaky ny tongotra
+• Voa lehibe kokoa
+
+DINGANA 5: FIJINJANA
+• 80-110 andro aorian'ny famafazana
+• Potrika maina + feo mikoropaka = masaka
+• Atsaharo rano 1 herinandro alohan'ny fijinjana''',
+      'steps': [
+        {'week': 'H1-2', 'action': '🌱 Famafazana godet na mivantana'},
+        {'week': 'H3-4', 'action': '🌿 Famindrana - Paillage'},
+        {'week': 'H5-6', 'action': '🌿 Pincement taolana 5-6 ravina'},
+        {'week': 'H7-14', 'action': '💧 Fanondrahan-drano - Fanaraha-maso'},
+        {'week': 'H15-16', 'action': '🍉 Fijinjana rehefa potrika maina'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mila toerana malalaka be',
+        '✓ Potrika maina = famantarana fahamasahana',
+        '✓ Kapohina = feo mikoropaka = masaka',
+        '🍉 Atsaharo rano 1 herinandro alohan\'ny fijinjana',
+      ],
+    },
+    'Laisoa': {
+      'emoji': '🥬',
+      'name': 'Laisoa / Chou de Chine',
+      'season': 'Martsa - Aogositra',
+      'duration': '45-70 andro',
+      'climate': 'Mangatsiaka - 15-22°C',
+      'spacing': '40x30 cm',
+      'yield': '3-6 kg/m²',
+      'waterNeeds': 'Antonony - Be',
+      'soil': 'Tany lonaka; pH 6-7; komposta 4 kg/m²',
+      'seed': '📊 HO AN\'NY VAO HANOMBOKA:\n🌱 Ilaina: 0,03-0,05 g/m² (≈300 voa/g)\n📏 Halaliny: 0,5-1 cm\n🌡️ Hafanana: 15-22°C (maniry 4-7 andro)\n✅ Taux germination: 80-90%\n💡 Chou chinois lava - tahony fotsy',
+      'nursery': 'Tanin-ketsa 3-4 herinandro',
+      'plantingGuide': '''DINGANA 1: TANIN-KETSA
+• Afafy 0,5-1 cm lalina
+• Tany malemilemy misy komposta
+• Tondrahy isan'andro
+
+DINGANA 2: FIKARAKARANA KETSA
+• Maniry 4-7 andro
+• Karakarao 3-4 herinandro
+• Avelao hanana ravina 4-5
+
+DINGANA 3: FAMINDRANA
+• Afindra rehefa misy ravina 4-5
+• Elanelana: 40x30 cm
+• Toerana mangatsiaka (15-22°C)
+
+DINGANA 4: FIKARAKARANA
+• Tondrahy 2-3 andro isaky ny herinandro
+• Asio zezika NPK
+• Esory ahi-dratsy
+
+DINGANA 5: FIJINJANA
+• 45-70 andro aorian'ny famafazana
+• Jinjao rehefa mihidy ny loha
+• Mora sy haingana vokatra''',
+      'steps': [
+        {'week': 'H1', 'action': '🌱 Famafazana amin\'ny tanin-ketsa'},
+        {'week': 'H2-4', 'action': '🌿 Fikarakarana ketsa'},
+        {'week': 'H5', 'action': '🌿 Famindrana - Elanelana 40x30 cm'},
+        {'week': 'H6-8', 'action': '💧 Fanondrahan-drano - Zezika'},
+        {'week': 'H9-10', 'action': '🥬 Fijinjana rehefa mihidy'},
+      ],
+      'tips': [
+        '💡 HO AN\'NY VAO HANOMBOKA:',
+        '✓ Mora sy haingana vokatra',
+        '✓ Tahony fotsy = mamy',
+        '✓ Jinjao rehefa mihidy ny loha',
+        '🥬 Tsara amin\'ny sakafo sôsety',
       ],
     },
   };
 
+  // Variable pour la recherche
+  String _searchQuery = '';
+
+  String _slugify(String input) {
+    return input
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
+        .replaceAll(RegExp(r'_+'), '_')
+        .replaceAll(RegExp(r'^_|_$'), '')
+        .trim();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final crop = _cropsData[_selectedCrop]!;
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.green.shade700, Colors.green.shade500],
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFE8F5E9), Color(0xFFC8E6C9), Color(0xFFA5D6A7)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '🌱 VOLY',
+                style: TextStyle(color: Color(0xFF1B5E20), fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: 0.4),
               ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              children: [
-                const Text('🌱 Safidio ny Voly', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: _cropsData.keys.map((cropName) {
-                    final isSelected = _selectedCrop == cropName;
-                    return GestureDetector(
-                      onTap: () => setState(() => _selectedCrop = cropName),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: isSelected ? Colors.white : Colors.white.withValues(alpha: 0.2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          '${_cropsData[cropName]!['emoji']} $cropName',
-                          style: TextStyle(
-                            color: isSelected ? Colors.green.shade700 : Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+              const SizedBox(height: 4),
+              const Text(
+                'Safidio ny voly tianao.',
+                style: TextStyle(color: Color(0xFF388E3C), fontSize: 13),
+              ),
+              const SizedBox(height: 12),
+              // 🔍 BARRE DE RECHERCHE
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: const Color(0xFF81C784)),
+                  boxShadow: [
+                    BoxShadow(color: Colors.green.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 4)),
+                  ],
                 ),
-              ],
-            ),
+                child: TextField(
+                  onChanged: (value) => setState(() => _searchQuery = value),
+                  style: const TextStyle(color: Color(0xFF1B5E20), fontSize: 14),
+                  decoration: InputDecoration(
+                    hintText: '🔍 Tadiavo ny voly... (ex: Vary, Katsaka, Tongolo)',
+                    hintStyle: const TextStyle(color: Color(0xFF81C784), fontSize: 13),
+                    prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF4CAF50)),
+                    suffixIcon: _searchQuery.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear_rounded, color: Color(0xFF4CAF50)),
+                            onPressed: () => setState(() => _searchQuery = ''),
+                          )
+                        : null,
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildVolyMenuSection(),
+            ],
           ),
-          const SizedBox(height: 16),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVolyMenuSection() {
+    // Filtrer et trier alphabétiquement
+    var entries = _cropsData.entries.toList();
+    
+    // Filtrer par recherche
+    if (_searchQuery.isNotEmpty) {
+      final query = _searchQuery.toLowerCase();
+      entries = entries.where((e) {
+        final name = (e.value['name'] as String? ?? e.key).toLowerCase();
+        final season = (e.value['season'] as String? ?? '').toLowerCase();
+        return name.contains(query) || e.key.toLowerCase().contains(query) || season.contains(query);
+      }).toList();
+    }
+    
+    // Trier alphabétiquement
+    entries.sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
+    
+    final gradients = [
+      [const Color(0xFF43A047), const Color(0xFF66BB6A)], // 🌿 Vert frais
+      [const Color(0xFFFF7043), const Color(0xFFFFAB91)], // 🍊 Orange corail
+      [const Color(0xFF5C6BC0), const Color(0xFF9FA8DA)], // 💜 Indigo doux
+      [const Color(0xFF26A69A), const Color(0xFF80CBC4)], // 🌊 Teal
+      [const Color(0xFFEC407A), const Color(0xFFF48FB1)], // 🌸 Rose
+      [const Color(0xFF42A5F5), const Color(0xFF90CAF9)], // 💙 Bleu ciel
+      [const Color(0xFFFFCA28), const Color(0xFFFFE082)], // 🌻 Jaune soleil
+      [const Color(0xFFAB47BC), const Color(0xFFCE93D8)], // 🍇 Violet
+      [const Color(0xFF8D6E63), const Color(0xFFBCAAA4)], // 🥜 Brun naturel
+      [const Color(0xFFEF5350), const Color(0xFFEF9A9A)], // 🍅 Rouge tomate
+      [const Color(0xFF00897B), const Color(0xFF4DB6AC)], // 🌴 Vert tropical
+      [const Color(0xFFFF8A65), const Color(0xFFFFCCBC)], // 🍑 Pêche
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('🌱 Sokajy Voly', style: TextStyle(color: Color(0xFF1B5E20), fontSize: 16, fontWeight: FontWeight.w700)),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4CAF50),
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(color: Colors.green.withValues(alpha: 0.3), blurRadius: 4, offset: const Offset(0, 2)),
+                ],
+              ),
+              child: Text(
+                '${entries.length} voly',
+                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Text(
+          _searchQuery.isEmpty
+              ? 'Tsindrio raha hijery ny voly sy ny torolalana A-Z.'
+              : 'Vokatra ho an\'ny "${_searchQuery}"',
+          style: const TextStyle(fontSize: 11, color: Color(0xFF388E3C)),
+        ),
+        const SizedBox(height: 12),
+        if (entries.isEmpty)
           Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10)],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(crop['emoji'] as String, style: const TextStyle(fontSize: 40)),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(crop['name'] as String, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          Text('📅 ${crop['season']}', style: TextStyle(color: Colors.grey.shade600)),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(height: 24),
-                _buildInfoRow('⏱️ Faharetana', crop['duration'] as String),
-                _buildInfoRow('🌡️ Toetr\'andro', crop['climate'] as String),
-                _buildInfoRow('📏 Elanelana', crop['spacing'] as String),
-                _buildInfoRow('📊 Vokatra', crop['yield'] as String),
-                _buildInfoRow('💧 Rano ilaina', crop['waterNeeds'] as String),
+              boxShadow: [
+                BoxShadow(color: Colors.green.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 4)),
               ],
             ),
+            child: Center(
+              child: Column(
+                children: [
+                  const Icon(Icons.search_off_rounded, color: Color(0xFF81C784), size: 48),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Tsy misy voly hita ho an\'ny "$_searchQuery"',
+                    style: const TextStyle(color: Color(0xFF388E3C), fontSize: 13),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Andramo teny hafa...',
+                    style: TextStyle(color: Color(0xFF81C784), fontSize: 11),
+                  ),
+                ],
+              ),
+            ),
+          )
+        else
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final availableWidth = constraints.maxWidth;
+            final targetTileWidth = 140.0;
+            final crossAxisCount = (availableWidth / targetTileWidth).floor().clamp(2, 4);
+            return GridView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: entries.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 0.85,
+              ),
+              itemBuilder: (context, index) {
+                final entry = entries[index];
+                final gradient = gradients[index % gradients.length];
+                final isSelected = _selectedCrop == entry.key;
+                return _buildCultureCardMini(entry.key, entry.value, gradient, isSelected);
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCultureCardMini(
+    String cropKey,
+    Map<String, dynamic> cropData,
+    List<Color> gradient,
+    bool isSelected,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        setState(() => _selectedCrop = cropKey);
+        final steps = (cropData['steps'] as List?)
+                ?.map<String>((step) => '${step['week']}: ${step['action']}')
+                .toList() ??
+            [];
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CultureDetailScreen(
+              culture: Culture(
+                name: cropKey,
+                imagePath: 'assets/voly/${_slugify(cropKey)}.png',
+                steps: steps,
+                meta: cropData,
+              ),
+            ),
           ),
-          if (crop.containsKey('plantingGuide')) ...[
-            const SizedBox(height: 16),
+        );
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: gradient, begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: isSelected ? Colors.white : Colors.white.withValues(alpha: 0.4), width: isSelected ? 2.5 : 1.5),
+          boxShadow: [
+            BoxShadow(color: gradient[0].withValues(alpha: 0.4), blurRadius: 12, offset: const Offset(0, 6)),
+            BoxShadow(color: gradient[1].withValues(alpha: 0.2), blurRadius: 4, offset: const Offset(0, 2)),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.25),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 12),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
+                Center(child: _buildCropThumb(cropKey)),
+                const SizedBox(height: 8),
+                if ((cropData['emoji'] as String?)?.isNotEmpty ?? false)
+                  Text(cropData['emoji'] as String, style: const TextStyle(color: Colors.white, fontSize: 13)),
+                const SizedBox(height: 4),
+                Text(
+                  cropKey,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12, height: 1.1),
+                ),
+                if ((cropData['season'] as String?)?.isNotEmpty ?? false) ...[
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.25),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.calendar_month_rounded, color: Colors.white, size: 10),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            cropData['season'] as String,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCropThumb(String cropName) {
+    final path = 'assets/voly/${_slugify(cropName)}.png';
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        width: 56,
+        height: 56,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.3), width: 2),
+        ),
+        child: Image.asset(
+          path,
+          fit: BoxFit.cover,
+          errorBuilder: (_, __, ___) => Center(
+            child: Text(
+              cropName.isNotEmpty ? cropName.substring(0, 1).toUpperCase() : '🌱',
+              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CultureDetailScreen extends StatefulWidget {
+  final Culture culture;
+  const CultureDetailScreen({super.key, required this.culture});
+
+  @override
+  State<CultureDetailScreen> createState() => _CultureDetailScreenState();
+}
+
+class _CultureDetailScreenState extends State<CultureDetailScreen> {
+
+  @override
+  Widget build(BuildContext context) {
+    final c = widget.culture;
+    final meta = c.meta ?? {};
+    final steps = meta['steps'] as List<dynamic>? ?? c.steps;
+    final plantingGuide = meta['plantingGuide'] as String?;
+    final tips = meta['tips'] as List<dynamic>? ?? const [];
+    final seedInfo = meta['seed'] as String?;
+    final soilInfo = meta['soil'] as String?;
+    final nurseryInfo = meta['nursery'] as String?;
+    final infoItems = <Map<String, String>>[
+      {'label': '📆 Vanim-potoana', 'value': meta['season']?.toString() ?? ''},
+      {'label': '⏱️ Faharetana', 'value': meta['duration']?.toString() ?? ''},
+      {'label': '🌡️ Toetr\'andro', 'value': meta['climate']?.toString() ?? ''},
+      {'label': '📏 Elanelana', 'value': meta['spacing']?.toString() ?? ''},
+      {'label': '📊 Vokatra', 'value': meta['yield']?.toString() ?? ''},
+      {'label': '💧 Rano ilaina', 'value': meta['waterNeeds']?.toString() ?? ''},
+    ].where((e) => (e['value'] ?? '').isNotEmpty).toList();
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF0FDF4),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF16A34A),
+        title: Text(c.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.blue.shade50,
-                borderRadius: BorderRadius.circular(16),
+                gradient: const LinearGradient(colors: [Color(0xFFFFFFFF), Color(0xFFECFDF5)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.15), blurRadius: 16, offset: const Offset(0, 10))],
+                border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('🌱 Fomba Fambolena (Ho an\'ny vao manomboka)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 12),
-                  Text(crop['plantingGuide'] as String, style: const TextStyle(height: 1.5)),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(18), topRight: Radius.circular(18)),
+                    child: SizedBox(
+                      height: 180,
+                      width: double.infinity,
+                      child: Image.asset(
+                        c.imagePath,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          color: const Color(0xFFDCFCE7),
+                          alignment: Alignment.center,
+                          child: Text(c.name.isNotEmpty ? c.name.substring(0, 1).toUpperCase() : '🌱', style: const TextStyle(fontSize: 32, color: Color(0xFF16A34A))),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Techniques A-Z', style: TextStyle(color: Color(0xFF6B7280), fontSize: 11)),
+                        const SizedBox(height: 4),
+                        Text(c.name, style: const TextStyle(color: Color(0xFF1F2937), fontSize: 17, fontWeight: FontWeight.w800)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
+            if (infoItems.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _infoCard(infoItems),
+            ],
+            // 🌱 SEMENCES/SEED INFO
+            if ((seedInfo ?? '').isNotEmpty || (soilInfo ?? '').isNotEmpty || (nurseryInfo ?? '').isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _seedCard(seedInfo, soilInfo, nurseryInfo),
+            ],
+            if ((plantingGuide ?? '').isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _plantingCard(plantingGuide!),
+            ],
+            if (steps.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _stepsCard(steps),
+            ],
+            if (tips.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              _tipsCard(tips),
+            ],
           ],
-          const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.green.shade50,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('📋 Dingana amin\'ny fambolena', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                ...(crop['steps'] as List).map((step) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.green.shade200,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(step['week'] as String, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.green.shade800)),
+        ),
+      ),
+    );
+  }
+
+  Widget _infoCard(List<Map<String, String>> items) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.15)),
+        boxShadow: [BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.1), blurRadius: 12, offset: const Offset(0, 8))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: items
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(e['label'] ?? '', style: const TextStyle(color: Color(0xFF1F2937), fontWeight: FontWeight.w600, fontSize: 13)),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 3,
+                      child: Text(e['value'] ?? '', textAlign: TextAlign.right, style: const TextStyle(color: Color(0xFF6B7280), fontSize: 12)),
+                    ),
+                  ],
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _plantingCard(String guide) {
+    // Parser le guide pour créer des étapes avec des puces améliorées
+    final lines = guide.split('\n').where((l) => l.trim().isNotEmpty).toList();
+    
+    // Couleurs pour les étapes
+    final stepColors = [
+      const Color(0xFF22C55E), // Vert
+      const Color(0xFF3B82F6), // Bleu
+      const Color(0xFFF59E0B), // Orange
+      const Color(0xFF8B5CF6), // Violet
+      const Color(0xFFEC4899), // Rose
+      const Color(0xFF06B6D4), // Cyan
+      const Color(0xFFEF4444), // Rouge
+      const Color(0xFF10B981), // Emeraude
+      const Color(0xFF6366F1), // Indigo
+      const Color(0xFFF97316), // Orange vif
+    ];
+    
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFFFFF), Color(0xFFF0FDF4)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.2)),
+        boxShadow: [BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.1), blurRadius: 12, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF16A34A).withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.agriculture_rounded, color: Color(0xFF16A34A), size: 18),
+              ),
+              const SizedBox(width: 10),
+              const Text('Fomba Fambolena', style: TextStyle(color: Color(0xFF1F2937), fontSize: 16, fontWeight: FontWeight.w700)),
+            ],
+          ),
+          const SizedBox(height: 6),
+          const Text('📋 Dingana tsirairay - Arahina tsara', style: TextStyle(color: Color(0xFF6B7280), fontSize: 11)),
+          const SizedBox(height: 14),
+          ...lines.asMap().entries.map<Widget>((entry) {
+            final idx = entry.key;
+            final line = entry.value.trim();
+            // Enlever les numéros et préfixes comme "DINGANA 1:", "1.", "1)", "① ", etc.
+            final cleanLine = line
+                .replaceFirst(RegExp(r'^DINGANA\s*\d+\s*[:\-–]?\s*', caseSensitive: false), '')
+                .replaceFirst(RegExp(r'^[\d️⃣①②③④⑤⑥⑦⑧⑨⑩]+[.)\-:\s]+'), '')
+                .replaceFirst(RegExp(r'^\d+\s*[.)\-:]\s*'), '')
+                .trim();
+            
+            final color = stepColors[idx % stepColors.length];
+            
+            return Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: color.withValues(alpha: 0.2)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 28,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [color, color.withValues(alpha: 0.7)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(step['action'] as String)),
-                    ],
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 6, offset: const Offset(0, 2)),
+                      ],
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${idx + 1}',
+                      style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700),
+                    ),
                   ),
-                )),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.amber.shade50,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('💡 Toro-hevitra', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                ...(crop['tips'] as List).map((tip) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('• ', style: TextStyle(fontSize: 16, color: Colors.amber)),
-                      Expanded(child: Text(tip as String)),
-                    ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      cleanLine,
+                      style: const TextStyle(color: Color(0xFF1F2937), height: 1.5, fontSize: 13),
+                    ),
                   ),
-                )),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  // 🌱 NOUVELLE SECTION: Informations sur les semences
+  Widget _seedCard(String? seedInfo, String? soilInfo, String? nurseryInfo) {
+    // Parse seed info lines with colors
+    Widget _buildSeedLine(String line) {
+      Color iconColor = Colors.greenAccent;
+      IconData iconData = Icons.eco_rounded;
+      
+      if (line.startsWith('📊')) {
+        iconColor = const Color(0xFF3B82F6);
+        iconData = Icons.analytics_rounded;
+      } else if (line.startsWith('📏')) {
+        iconColor = const Color(0xFFF59E0B);
+        iconData = Icons.straighten_rounded;
+      } else if (line.startsWith('🌡️')) {
+        iconColor = const Color(0xFFEF4444);
+        iconData = Icons.thermostat_rounded;
+      } else if (line.startsWith('✅')) {
+        iconColor = const Color(0xFF22C55E);
+        iconData = Icons.check_circle_rounded;
+      } else if (line.startsWith('💡')) {
+        iconColor = const Color(0xFFF59E0B);
+        iconData = Icons.lightbulb_rounded;
+      }
+      
+      // Remove emoji prefix for clean display
+      final cleanLine = line.replaceFirst(RegExp(r'^[📊📏🌡️✅💡]\s*'), '');
+      
+      return Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: iconColor.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: iconColor.withValues(alpha: 0.15)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: iconColor.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(iconData, color: iconColor, size: 14),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                cleanLine.isNotEmpty ? cleanLine : line,
+                style: const TextStyle(color: Color(0xFF1F2937), fontSize: 12, height: 1.4),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFFFFFF), Color(0xFFF0FDF4)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.2)),
+        boxShadow: [
+          BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.1), blurRadius: 12, offset: const Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
-          Flexible(child: Text(value, textAlign: TextAlign.right)),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF16A34A).withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.grass_rounded, color: Color(0xFF16A34A), size: 18),
+              ),
+              const SizedBox(width: 10),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Masomboly & Tany', style: TextStyle(color: Color(0xFF1F2937), fontSize: 15, fontWeight: FontWeight.w700)),
+                    Text('Fampahalalana teknika', style: TextStyle(color: Color(0xFF6B7280), fontSize: 10)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Semences
+          if ((seedInfo ?? '').isNotEmpty) ...[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFDCFCE7),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.2)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.spa_rounded, color: Color(0xFF16A34A), size: 16),
+                      const SizedBox(width: 6),
+                      const Text('MASOMBOLY', style: TextStyle(color: Color(0xFF16A34A), fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 0.5)),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF16A34A).withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: const Text('Semences', style: TextStyle(color: Color(0xFF16A34A), fontSize: 9, fontWeight: FontWeight.w500)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  ...seedInfo!.split('\n').where((l) => l.trim().isNotEmpty).map((line) => _buildSeedLine(line.trim())),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          // Sol
+          if ((soilInfo ?? '').isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFF92400E).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.2)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF59E0B).withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.landscape_rounded, color: Color(0xFFF59E0B), size: 16),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('TANY (Sol)', style: TextStyle(color: Color(0xFFF59E0B), fontSize: 11, fontWeight: FontWeight.w700)),
+                        const SizedBox(height: 4),
+                        Text(soilInfo!, style: const TextStyle(color: Color(0xFF1F2937), fontSize: 12, height: 1.4)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+          // Pépinière
+          if ((nurseryInfo ?? '').isNotEmpty) ...[
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFF0891B2).withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF06B6D4).withValues(alpha: 0.2)),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF06B6D4).withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.home_work_rounded, color: Color(0xFF06B6D4), size: 16),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('TANIN-KETSA (Pépinière)', style: TextStyle(color: Color(0xFF06B6D4), fontSize: 11, fontWeight: FontWeight.w700)),
+                        const SizedBox(height: 4),
+                        Text(nurseryInfo!, style: const TextStyle(color: Color(0xFF1F2937), fontSize: 12, height: 1.4)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _stepsCard(List<dynamic> steps) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Color(0xFFFFFFFF), Color(0xFFECFDF5)]),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.15)),
+        boxShadow: [BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.08), blurRadius: 10, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('📋 Dingana amin\'ny fambolena', style: TextStyle(color: Color(0xFF1F2937), fontSize: 15, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 10),
+          ...steps.asMap().entries.map<Widget>((e) {
+            final value = e.value;
+            if (value is Map) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(color: const Color(0xFF16A34A).withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
+                      child: Text(value['week']?.toString() ?? 'H${e.key + 1}', style: const TextStyle(color: Color(0xFF16A34A), fontWeight: FontWeight.bold, fontSize: 12)),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(child: Text(value['action']?.toString() ?? '', style: const TextStyle(color: Color(0xFF4B5563)))),
+                  ],
+                ),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(color: const Color(0xFF16A34A).withValues(alpha: 0.15), borderRadius: BorderRadius.circular(8)),
+                    child: Text('H${e.key + 1}', style: const TextStyle(color: Color(0xFF16A34A), fontWeight: FontWeight.bold, fontSize: 12)),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(child: Text(value.toString(), style: const TextStyle(color: Color(0xFF4B5563)))),
+                ],
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _tipsCard(List<dynamic> tips) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Color(0xFFFFFBEB), Color(0xFFFEF3C7)]),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFF59E0B).withValues(alpha: 0.25)),
+        boxShadow: [BoxShadow(color: const Color(0xFFF59E0B).withValues(alpha: 0.1), blurRadius: 10, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('💡 Toro-hevitra', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF92400E))),
+          const SizedBox(height: 10),
+          ...tips.map<Widget>((tip) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('• ', style: TextStyle(fontSize: 15, color: Color(0xFFD97706))),
+                    Expanded(child: Text(tip.toString(), style: const TextStyle(color: Color(0xFF78350F), fontSize: 13))),
+                  ],
+                ),
+              )),
         ],
       ),
     );
@@ -15488,7 +20626,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'vary_fohy': {
       'name': "Vary (Tsingerina Fohy)",
       'tech': {
-        'tany': "Tany ditra (Argileux) ho an'ny vary an-drano. Tany marin-drano ho an'ny an-tanety.",
+        'tany': "Tany ditra (Argileux) mitazona rano tsara. pH 5.5-6.5.",
         'zezika': "NPK 11-22-16 (200kg/ha) + Urée (50kg/ha) + Zezi-pahitra (5t/ha).",
         'fomba_fambolena': "Raha vary an-drano: Ketsa 20 andro no afindra. Elanelana 20cm x 20cm.",
         'fomba_fiavana': "Fiavàna 1 (J+20): Tatrahana ny rano, esorina ny ahitra, atao ny Urée.",
@@ -15509,7 +20647,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'katsaka': {
       'name': "Katsaka",
       'tech': {
-        'tany': "Baiboho, tany lonaka.",
+        'tany': "Baiboho na tany lonaka, lalina, tsy miandrona rano. pH 5.5-7.",
         'zezika': "NPK 15-15-15 (150kg/ha) + Urée.",
         'fomba_fambolena': "Elanelana 80cm x 40cm. 2 voa isaky ny lavaka.",
         'fomba_fiavana': "Asiana buttage amin'ny andro faha-40.",
@@ -15530,7 +20668,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'voanjo': {
       'name': "Voanjo",
       'tech': {
-        'tany': "Tany malemy, maivana (Sableux).",
+        'tany': "Tany maivana (Sableux), malemy, tsy misy vato. pH 6-6.5.",
         'zezika': "Tia Dolomita (Calcium) sy Phosphore.",
         'fomba_fambolena': "40cm x 15cm. Voa iray isaky ny lavaka.",
         'fomba_fiavana': "Fiavàna madio alohan'ny hamoniany.",
@@ -15550,7 +20688,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'tsaramaso': {
       'name': "Tsaramaso",
       'tech': {
-        'tany': "Mandray rano.",
+        'tany': "Tany lonaka, mandray rano nefa tsy miandrona. pH 6-7.",
         'zezika': "Zezi-pahitra efa lo tsara.",
         'fomba_fambolena': "Ligne: 40cm, Poquet: 20cm. Voa 2-3.",
         'fomba_fiavana': "Fanotofana mba tsy hianjera.",
@@ -15570,7 +20708,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'ovy': {
       'name': "Ovy",
       'tech': {
-        'tany': "Maivana, misy Potasse.",
+        'tany': "Tany maivana, lalina, manankarena Potasse. pH 5-6.",
         'zezika': "Zezika fototra betsaka.",
         'fomba_fambolena': "60cm x 30cm. Atao ao anaty Sillons.",
         'fomba_fiavana': "Ny FANOTOFANA no tena zava-dehibe.",
@@ -15588,7 +20726,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'mangahazo': {
       'name': "Mangahazo",
       'tech': {
-        'tany': "Mahatanty hain-tany.",
+        'tany': "Tany maivana (fasika), mahatanty hain-tany. pH 5-6.5.",
         'zezika': "Tsy mifidy.",
         'fomba_fambolena': "Trakatra 20-30cm. Milevina mitsivalana na mitsangana.",
         'fomba_fiavana': "Mila madio ny fotony amin'ny 3 volana voalohany.",
@@ -15607,7 +20745,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'angivy': {
       'name': "Angivy (Aubergine Amère)",
       'tech': {
-        'tany': "Tany lonaka, misy zezika organika.",
+        'tany': "Tany lonaka, misy zezika organika betsaka. pH 6-7.",
         'zezika': "Zezika organika + NPK.",
         'fomba_fambolena': "Pépinière 30 andro. Famindrana: 60cm x 60cm.",
         'fomba_fiavana': "Fiavàna sy fanondrahana matetika.",
@@ -15627,7 +20765,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'sakay': {
       'name': "Sakay (Piment)",
       'tech': {
-        'tany': "Tany lonaka, maivana, tsy miandrona rano.",
+        'tany': "Tany lonaka, maivana, tsy miandrona rano. pH 6-7.",
         'zezika': "Zezika organika (10-20t/ha) + NPK 12-24-12.",
         'fomba_fambolena': "Pépinière 45 andro. Famindrana: 50cm x 50cm.",
         'fomba_fiavana': "Fiavàna matetika, mulching (paillage) tsara.",
@@ -15648,7 +20786,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'vary_lava': {
       'name': "Vary (Lava)",
       'tech': {
-        'tany': "Tany lonaka.",
+        'tany': "Tany lonaka, mitazona rano tsara.",
         'zezika': "Zezika fototra + NPK amin'ny ketsa.",
         'fomba_fambolena': "Fanetsana milahatra 25cm x 25cm. Ketsa 30-40 andro.",
         'fomba_fiavana': "Fiavàna intelo raha azo atao. Ny rano no mifehy ny ahitra (5-10cm).",
@@ -15667,7 +20805,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'vary_tanety': {
       'name': "Vary an-tanety",
       'tech': {
-        'tany': "Tany niasana lalina.",
+        'tany': "Tany niasana lalina, tsy miandrona rano.",
         'zezika': "NPK + Zezi-pahitra.",
         'fomba_fambolena': "Fafy mivantana anaty lavaka (Poquet). 3-4 voa isaky ny lavaka. Elanelana 30cm x 15cm.",
         'fomba_fiavana': "Saropady ny ahitra satria tsy misy rano hamono azy. Miava isaky ny misy ahitra.",
@@ -15686,7 +20824,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'soja': {
       'name': "Soja",
       'tech': {
-        'tany': "Maivana.",
+        'tany': "Tany maivana, lonaka. pH 6-7.",
         'zezika': "Tsy mila Urée be. Mila Inoculum (Bakteria).",
         'fomba_fambolena': "40cm x 10cm. Halalin'ny 2-3 cm.",
         'fomba_fiavana': "Fiavàna in-2. Ny voalohany 15 andro aorian'ny fiposahany.",
@@ -15705,7 +20843,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'vomanga': {
       'name': "Vomanga",
       'tech': {
-        'tany': "Maivana.",
+        'tany': "Tany maivana (fasika), tsy miandrona rano.",
         'zezika': "Tia lavenona (Potasse).",
         'fomba_fambolena': "Bouture (Taho) 30cm. Milevina ny 2/3.",
         'fomba_fiavana': "Fanotofana (Buttage) mba tsy hidiran'ny Charançon.",
@@ -15722,7 +20860,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'saonjo': {
       'name': "Saonjo",
       'tech': {
-        'tany': "Tia rano.",
+        'tany': "Tany mando, tia rano, manankarena zezika.",
         'zezika': "Zezi-pahitra betsaka.",
         'fomba_fambolena': "Lohany na Zanany no ambolena.",
         'fomba_fiavana': "Fanotofana matetika mba hihangeza ny vodiny.",
@@ -15739,7 +20877,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'voatavo': {
       'name': "Voatavo",
       'tech': {
-        'tany': "Tia zezika komposta.",
+        'tany': "Tany lonaka, misy zezika komposta betsaka.",
         'zezika': "Zezika organika be dia be.",
         'fomba_fambolena': "Lavaka lehibe 50x50cm. Asiana zezika organika be dia be.",
         'fomba_fiavana': "Fiavàna alohan'ny handrakofany ny tany.",
@@ -15756,7 +20894,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'tongolo': {
       'name': "Tongolo (Oignon)",
       'tech': {
-        'tany': "Tany maivana sy mora miboaka rano. Tsy tia tany lemaka.",
+        'tany': "Tany maivana, mora miboaka rano. Tsy tia tany lemaka.",
         'zezika': "Zezi-pahitra sy NPK (10-20-20). Tsy asiana zezika maina.",
         'fomba_fambolena': "Famafazana ao anaty pépinière 45-60 andro, avy eo afindra. Elanelana 15x10cm.",
         'fomba_fiavana': "Fanadiovana ahitra matetika. Tsy tokony ho kotrika ny fotony.",
@@ -15775,7 +20913,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'tongolo_maitso': {
       'name': "Tongolo Maitso (Ciboule)",
       'tech': {
-        'tany': "Tany lonaka sy mora miboaka rano.",
+        'tany': "Tany lonaka, maivana, mora miboaka rano.",
         'zezika': "Zezi-pahitra sy kely NPK.",
         'fomba_fambolena': "Fafy mivantana na afindra avy amin'ny pépinière. Elanelana 10x10cm.",
         'fomba_fiavana': "Fanadiovana ahitra. Azonao tapahina ny ravina ary mitsiry indray.",
@@ -15794,7 +20932,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'tongolo_gasy': {
       'name': "Tongolo Gasy (Échalote)",
       'tech': {
-        'tany': "Tany maivana, mora miboaka rano.",
+        'tany': "Tany maivana, mora miboaka rano. pH 6-7.",
         'zezika': "Zezi-pahitra sy lavenona (Potasse).",
         'fomba_fambolena': "Ambolena ny zanany na ny lohany. Elanelana 15x10cm. Halalina 2-3cm.",
         'fomba_fiavana': "Fanadiovana ahitra sy fanotofana kely.",
@@ -15813,7 +20951,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'karoty': {
       'name': "Karoty (Carotte)",
       'tech': {
-        'tany': "Tany maivana lalina (40cm+). Tsy misy vato na fakany.",
+        'tany': "Tany maivana (fasika), lalina (40cm+), tsy misy vato. pH 6-7.",
         'zezika': "Zezi-pahitra ela niolana. Tsy asiana zezika maina (mahatonga fizarazarana).",
         'fomba_fambolena': "Fafy mivantana anaty andalana. Voafangaro fasika ny masomboly.",
         'fomba_fiavana': "Fanapahana (éclaircissage) rehefa 5cm. Elanelana 5cm isaky ny voly.",
@@ -15832,7 +20970,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'baranjely': {
       'name': "Baranjely (Aubergine)",
       'tech': {
-        'tany': "Tany lonaka sy mora miboaka rano.",
+        'tany': "Tany lonaka, lalina, mora miboaka rano. pH 5.5-6.5.",
         'zezika': "Zezi-pahitra betsaka sy NPK.",
         'fomba_fambolena': "Pépinière 40-50 andro. Afindra amin'ny elanelana 60x50cm.",
         'fomba_fiavana': "Fanadiovana ahitra. Fanotofana amin'ny fotony.",
@@ -15851,7 +20989,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'poireau': {
       'name': "Poireau",
       'tech': {
-        'tany': "Tany lonaka sy mora miboaka rano.",
+        'tany': "Tany lonaka, mando, mora miboaka rano. pH 6-7.",
         'zezika': "Zezi-pahitra betsaka. Tia Azote.",
         'fomba_fambolena': "Pépinière 60-80 andro. Afindra anaty lavaka lalina. Buttage matetika.",
         'fomba_fiavana': "Fanotofana (buttage) mba hihabeny ny fotsy.",
@@ -15871,7 +21009,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
     'voasary': {
       'name': "Voasary (Orange)",
       'tech': {
-        'tany': "Tany lalina sy mora miboaka rano. pH 6-7.",
+        'tany': "Tany lalina, tsy miandrona rano. pH 6-7.",
         'zezika': "Zezi-pahitra betsaka sy NPK isaky ny taona.",
         'fomba_fambolena': "Lavaka 60x60x60cm. Elanelana 6-8m. Asiana zezika organika betsaka.",
         'fomba_fiavana': "Fanadiovana ny fotony. Tondrahana raha maina.",
@@ -15886,6 +21024,614 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
         {'d': 1095, 't': "Voaloham-bokatra", 'c': Colors.orange}
       ],
       'windows': {'default': [7, 8, 9, 10]}
+    },
+    'ble': {
+      'name': "Blé (Varimbazaha)",
+      'tech': {
+        'tany': "Tany lalina, lonaka, tsy miandrona rano. pH 6-7.5.",
+        'zezika': "Komposta 3 T/ha + NPK.",
+        'fomba_fambolena': "Andalana 15-20cm. Voa 3-5cm lalina.",
+        'fomba_fiavana': "Esory ahi-dratsy matetika.",
+        'fomba_fijinjana': "Rehefa mavo tanteraka ny salohina.",
+        'saison': "Ririnina (Aprily - Aogositra)."
+      },
+      'calc': {'seed_ha': 125.0, 'yield_ha': 3.5, 'manure_ha': 3000.0, 'npk_ha': 150.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Zezika NPK", 'c': Colors.blue},
+        {'d': 60, 't': "Épiaison", 'c': Colors.purple},
+        {'d': 115, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [4, 5, 6, 7], 'default': [5, 6]}
+    },
+    'orge': {
+      'name': "Orge",
+      'tech': {
+        'tany': "Tany lonaka, mahatanty hatsiaka sy sira kely.",
+        'zezika': "Komposta + NPK.",
+        'fomba_fambolena': "Andalana 20cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa mavo.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 100.0, 'yield_ha': 3.0, 'manure_ha': 3000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [4, 5, 6], 'default': [5]}
+    },
+    'sakamalao': {
+      'name': "Sakamalao (Gingembre)",
+      'tech': {
+        'tany': "Tany lonaka, maivana, tsy miandrona rano. pH 5.5-6.5.",
+        'zezika': "Komposta 4 T/ha.",
+        'fomba_fambolena': "40x25cm. Rhizome 25-50g.",
+        'fomba_fiavana': "Mulching (Saromana bozaka).",
+        'fomba_fijinjana': "Rehefa maina ny ravina (8-10 volana).",
+        'saison': "Septambra - Novambra."
+      },
+      'calc': {'seed_ha': 1500.0, 'is_tige': true, 'yield_ha': 20.0, 'manure_ha': 4000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Fametrahana", 'c': Colors.green},
+        {'d': 15, 't': "Mulching", 'c': Colors.blue},
+        {'d': 270, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [9, 10, 11]}
+    },
+    'brocoli': {
+      'name': "Brocoli",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "60x40cm.",
+        'fomba_fiavana': "Fiavàna matetika.",
+        'fomba_fijinjana': "Alohan'ny hamoniany.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 0.3, 'yield_ha': 15.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 75, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6, 7], 'default': [4, 5, 6]}
+    },
+    'chou_fleur': {
+      'name': "Chou-fleur",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "60x50cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa fotsy sy mafy ny lohany.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 0.3, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6], 'default': [4, 5]}
+    },
+    'lentille': {
+      'name': "Lentille",
+      'tech': {
+        'tany': "Tany maivana, tsy mila rano be. pH 6-7.",
+        'zezika': "Kely.",
+        'fomba_fambolena': "30x5cm.",
+        'fomba_fiavana': "Fiavàna indray mandeha.",
+        'fomba_fijinjana': "Rehefa mavo ny ravina.",
+        'saison': "Ririnina (Menabe)."
+      },
+      'calc': {'seed_ha': 40.0, 'yield_ha': 1.0, 'manure_ha': 0.0, 'npk_ha': 50.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [3, 4, 5]}
+    },
+    'papaye': {
+      'name': "Papaye",
+      'tech': {
+        'tany': "Tany lonaka, tsy miandrona rano. pH 6-6.5.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "2x2m.",
+        'fomba_fiavana': "Mulching.",
+        'fomba_fijinjana': "Rehefa misy loko mavo.",
+        'saison': "Taona iray manontolo."
+      },
+      'calc': {'seed_ha': 0.1, 'yield_ha': 50.0, 'manure_ha': 10000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 240, 't': "Voaloham-bokatra", 'c': Colors.orange}
+      ],
+      'windows': {'default': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+    },
+    'voanemba': {
+      'name': "Voanemba",
+      'tech': {
+        'tany': "Tany rehetra, mahatanty hain-tany. pH 5.5-7.",
+        'zezika': "Tsy mila zezika be.",
+        'fomba_fambolena': "60x20cm.",
+        'fomba_fiavana': "Fiavàna indray mandeha.",
+        'fomba_fijinjana': "Rehefa maina ny voa.",
+        'saison': "Asara."
+      },
+      'calc': {'seed_ha': 20.0, 'yield_ha': 1.0, 'manure_ha': 0.0, 'npk_ha': 0.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 75, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [11, 12, 1]}
+    },
+    'patsoy': {
+      'name': "Patsoy",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena azote.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x30cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny ravina.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 15.0, 'manure_ha': 15000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [3, 4, 5, 6, 7]}
+    },
+    'anatsonga': {
+      'name': "Anatsonga",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena azote.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x30cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny ravina.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 15.0, 'manure_ha': 15000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [3, 4, 5, 6, 7]}
+    },
+    'concombre': {
+      'name': "Concombre",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "1x0.5m. Mila tohana (tuteur).",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa maitso sy lehibe.",
+        'saison': "Lohataona - Asara."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 150.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [9, 10, 11, 12, 1]}
+    },
+    'persil': {
+      'name': "Persil",
+      'tech': {
+        'tany': "Tany lonaka, mando.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "20x10cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny ravina.",
+        'saison': "Taona iray manontolo."
+      },
+      'calc': {'seed_ha': 5.0, 'yield_ha': 10.0, 'manure_ha': 10000.0, 'npk_ha': 50.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 70, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+    },
+    'sakay_fanendy': {
+      'name': "Sakay Fanendy",
+      'tech': {
+        'tany': "Tany lonaka, maivana, tsy miandrona rano.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "60x50cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa mena.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 0.5, 'yield_ha': 10.0, 'manure_ha': 15000.0, 'npk_ha': 150.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10, 11]}
+    },
+    'petit_pois': {
+      'name': "Petit Pois",
+      'tech': {
+        'tany': "Tany lonaka, maivana. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "40x10cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa maitso ny voa.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 80.0, 'yield_ha': 5.0, 'manure_ha': 10000.0, 'npk_ha': 100.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 70, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [4, 5, 6], 'default': [5]}
+    },
+    'melon': {
+      'name': "Melon",
+      'tech': {
+        'tany': "Tany lonaka, mafana, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "1x1m.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa mavo sy manitra.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10]}
+    },
+    'pasteque': {
+      'name': "Pastèque",
+      'tech': {
+        'tany': "Tany maivana (fasika), mafana, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "2x2m.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa maina ny tahony.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 3.0, 'yield_ha': 30.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10]}
+    },
+    'laisoa': {
+      'name': "Laisoa (Chou)",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "60x50cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa mafy ny lohany.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 0.3, 'yield_ha': 30.0, 'manure_ha': 25000.0, 'npk_ha': 250.0, 'urea_ha': 150.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6, 7], 'default': [4, 5, 6]}
+    },
+    'anamamy': {
+      'name': "Anamamy (Brèdes Morelle)",
+      'tech': {
+        'tany': "Tany lonaka, manankarena azote.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x30cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny ravina.",
+        'saison': "Taona iray manontolo."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 15.0, 'manure_ha': 15000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+    },
+    'epinard': {
+      'name': "Épinard",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena azote. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "20x10cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny ravina.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 10.0, 'yield_ha': 15.0, 'manure_ha': 15000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6, 7], 'default': [4, 5, 6]}
+    },
+    'salady': {
+      'name': "Salady (Laitue)",
+      'tech': {
+        'tany': "Tany lonaka, maivana, mando. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x25cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny lohany.",
+        'saison': "Ririnina (na karazana mahatanty hafanana)."
+      },
+      'calc': {'seed_ha': 0.5, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 150.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 25, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 60, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6, 7, 8], 'default': [4, 5, 6]}
+    },
+    'betterave': {
+      'name': "Betterave",
+      'tech': {
+        'tany': "Tany lonaka, lalina, maivana. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x10cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe ny vodiny.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 10.0, 'yield_ha': 25.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6, 7], 'default': [4, 5, 6]}
+    },
+    'poivron': {
+      'name': "Poivron",
+      'tech': {
+        'tany': "Tany lonaka, maivana, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika (20t/ha) + NPK.",
+        'fomba_fambolena': "60x40cm. Pépinière 45 andro.",
+        'fomba_fiavana': "Fiavàna matetika.",
+        'fomba_fijinjana': "Rehefa lehibe sy miloko (maitso, mena, mavo).",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 0.5, 'yield_ha': 15.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10, 11]}
+    },
+    'voatango': {
+      'name': "Voatango",
+      'tech': {
+        'tany': "Tany lonaka, maivana, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "1x1m. Mila rano betsaka.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa lehibe sy mavo ny hodiny.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 150.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 75, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [9, 10, 11, 12]}
+    },
+    'courgette': {
+      'name': "Courgette",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena zezika. pH 6-7.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "1x1m. Fafy mivantana na pépinière.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa tanora (15-20cm). Aza avela ho lehibe loatra.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 3.0, 'yield_ha': 25.0, 'manure_ha': 25000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 50, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [9, 10, 11, 12, 1, 2]}
+    },
+    'haricots': {
+      'name': "Haricots Verts",
+      'tech': {
+        'tany': "Tany maivana, lonaka, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "40x10cm. Fafy mivantana.",
+        'fomba_fiavana': "Fiavàna sy fanotofana.",
+        'fomba_fijinjana': "Rehefa tanora ny voany, alohan'ny hivoahan'ny voa.",
+        'saison': "Ririnina - Lohataona."
+      },
+      'calc': {'seed_ha': 60.0, 'yield_ha': 8.0, 'manure_ha': 10000.0, 'npk_ha': 100.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 9, 10], 'default': [4, 5, 6]}
+    },
+    'voanjobory': {
+      'name': "Voanjobory",
+      'tech': {
+        'tany': "Tany maivana, fasika, mahatanty hain-tany. pH 5.5-7.",
+        'zezika': "Kely. Mahavokatra amin'ny tany mahantra.",
+        'fomba_fambolena': "40x20cm.",
+        'fomba_fiavana': "Fiavàna sy fanotofana (buttage) rehefa mamony.",
+        'fomba_fijinjana': "Rehefa maina ny ravina.",
+        'saison': "Asara."
+      },
+      'calc': {'seed_ha': 50.0, 'yield_ha': 1.5, 'manure_ha': 0.0, 'npk_ha': 50.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fanotofana", 'c': Colors.blue},
+        {'d': 120, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [11, 12, 1]}
+    },
+    'tournesol': {
+      'name': "Tournesol",
+      'tech': {
+        'tany': "Tany rehetra, lalina, tsy miandrona rano. pH 6-7.5.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "60x30cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa maina ny lohany ary miondrika.",
+        'saison': "Asara."
+      },
+      'calc': {'seed_ha': 10.0, 'yield_ha': 2.0, 'manure_ha': 10000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [11, 12, 1]}
+    },
+    'voatabia_cada': {
+      'name': "Voatabia Cada",
+      'tech': {
+        'tany': "Tany lonaka, maivana, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika + NPK.",
+        'fomba_fambolena': "60x50cm. Pépinière.",
+        'fomba_fiavana': "Fiavàna sy fanotofana.",
+        'fomba_fijinjana': "Rehefa mena.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 0.3, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10, 11]}
+    },
+    'voatabia_japonais': {
+      'name': "Voatabia Japonais",
+      'tech': {
+        'tany': "Tany lonaka, maivana, tsy miandrona rano. pH 6-7.",
+        'zezika': "Zezika organika + NPK.",
+        'fomba_fambolena': "60x50cm. Pépinière.",
+        'fomba_fiavana': "Fiavàna sy fanotofana.",
+        'fomba_fijinjana': "Rehefa mena.",
+        'saison': "Lohataona."
+      },
+      'calc': {'seed_ha': 0.3, 'yield_ha': 20.0, 'manure_ha': 20000.0, 'npk_ha': 200.0, 'urea_ha': 100.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 30, 't': "Fanetsana", 'c': Colors.blue},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [8, 9, 10, 11]}
+    },
+    'avoine': {
+      'name': "Avoine",
+      'tech': {
+        'tany': "Tany lonaka, mahatanty hatsiaka.",
+        'zezika': "Komposta.",
+        'fomba_fambolena': "Andalana 20cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa mavo (vilona na voa).",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 100.0, 'yield_ha': 3.0, 'manure_ha': 3000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 100, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [4, 5, 6], 'default': [5]}
+    },
+    'ray_grass': {
+      'name': "Ray-grass",
+      'tech': {
+        'tany': "Tany lonaka, mando, manankarena azote.",
+        'zezika': "Zezika organika + Urée.",
+        'fomba_fambolena': "Famafazana mivantana.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Fijinjana matetika (isaky ny 30-45 andro).",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 20.0, 'yield_ha': 10.0, 'manure_ha': 5000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fijinjana 1", 'c': Colors.orange}
+      ],
+      'windows': {'highland': [3, 4, 5, 6], 'default': [4, 5]}
+    },
+    'consoude': {
+      'name': "Consoude",
+      'tech': {
+        'tany': "Tany mando, lalina, manankarena zezika.",
+        'zezika': "Zezika organika betsaka.",
+        'fomba_fambolena': "50x50cm. Bouture de racine.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Ravina (isaky ny 3-4 herinandro).",
+        'saison': "Taona iray manontolo."
+      },
+      'calc': {'seed_ha': 10.0, 'yield_ha': 50.0, 'manure_ha': 10000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+    },
+    'tissam': {
+      'name': "Tissam",
+      'tech': {
+        'tany': "Tany rehetra, mahatanty hain-tany.",
+        'zezika': "Kely.",
+        'fomba_fambolena': "40x20cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Rehefa maina.",
+        'saison': "Asara."
+      },
+      'calc': {'seed_ha': 20.0, 'yield_ha': 1.0, 'manure_ha': 0.0, 'npk_ha': 0.0, 'urea_ha': 0.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 90, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [11, 12, 1]}
+    },
+    'ramirebaka': {
+      'name': "Ramirebaka",
+      'tech': {
+        'tany': "Tany lonaka, mando.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "30x30cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Ravina.",
+        'saison': "Ririnina."
+      },
+      'calc': {'seed_ha': 2.0, 'yield_ha': 15.0, 'manure_ha': 15000.0, 'npk_ha': 100.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 45, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [3, 4, 5, 6, 7]}
+    },
+    'kotomila': {
+      'name': "Kotomila",
+      'tech': {
+        'tany': "Tany lonaka, mando.",
+        'zezika': "Zezika organika.",
+        'fomba_fambolena': "20x20cm.",
+        'fomba_fiavana': "Fiavàna.",
+        'fomba_fijinjana': "Ravina.",
+        'saison': "Taona iray manontolo."
+      },
+      'calc': {'seed_ha': 5.0, 'yield_ha': 10.0, 'manure_ha': 10000.0, 'npk_ha': 50.0, 'urea_ha': 50.0},
+      'tasks': [
+        {'d': 0, 't': "Famafazana", 'c': Colors.green},
+        {'d': 60, 't': "Fijinjana", 'c': Colors.orange}
+      ],
+      'windows': {'default': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
     },
   };
 
@@ -16049,6 +21795,7 @@ class _FambolenaCalendarScreenState extends State<FambolenaCalendarScreen> with 
           ),
           const SizedBox(height: 4),
           GridView.builder(
+            padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 7, childAspectRatio: 1),
@@ -18452,7 +24199,7 @@ class TrondroSystemsScreen extends StatelessWidget {
         'temperature': '25-30°C',
         'priceKg': '12,000-18,000 Ar/kg',
         'advantages': ['Mora tezaina', 'Mahatanty aretina', 'Mitombo haingana'],
-        'feed': 'Sakafo vita an-trano, kankana, son de riz, katsaka',
+        'feed': 'Sakafo vita an-trano, kankana, apombombary (son de riz), katsaka',
         'alevins': [
           {'size': '1-2 cm (0.5-2g)', 'price': '200-300 Ar/iray'},
           {'size': '3-5 cm (5-10g)', 'price': '400-500 Ar/iray'},
@@ -18469,7 +24216,7 @@ class TrondroSystemsScreen extends StatelessWidget {
         'temperature': '20-28°C',
         'priceKg': '15,000-22,000 Ar/kg',
         'advantages': ['Lanja mavesatra', 'Tsy sarotra sakafo', 'Vidiny lafo'],
-        'feed': 'Kankana, son de riz, ravina, zava-maniry',
+        'feed': 'Kankana, apombombary (son de riz), ravina, zava-maniry',
         'alevins': [
           {'size': '2-3 cm (1-3g)', 'price': '250-350 Ar/iray'},
           {'size': '4-6 cm (8-15g)', 'price': '450-550 Ar/iray'},
@@ -19031,7 +24778,7 @@ class TrondroFeedScreen extends StatelessWidget {
           {'name': 'Lafarinina trondro', 'percentage': '25%', 'role': 'Protéine be'},
           {'name': 'Tourteau soja', 'percentage': '30%', 'role': 'Protéine sy energia'},
           {'name': 'Katsaka voatoto', 'percentage': '25%', 'role': 'Energia (glucides)'},
-          {'name': 'Son de riz (Paombary)', 'percentage': '15%', 'role': 'Fibre sy vitamina B'},
+          {'name': 'Apombombary (Son de Riz)', 'percentage': '15%', 'role': 'Fibre sy vitamina B'},
           {'name': 'Menaka soja', 'percentage': '3%', 'role': 'Energia sy acide gras'},
           {'name': 'Prémix vitamina-mineraly', 'percentage': '2%', 'role': 'Vitamina sy mineraly'},
         ],
@@ -19048,7 +24795,7 @@ class TrondroFeedScreen extends StatelessWidget {
           {'name': 'Lafarinina trondro', 'percentage': '15%', 'role': 'Protéine'},
           {'name': 'Tourteau soja', 'percentage': '25%', 'role': 'Protéine sy energia'},
           {'name': 'Katsaka voatoto', 'percentage': '30%', 'role': 'Energia'},
-          {'name': 'Son de riz (Paombary)', 'percentage': '22%', 'role': 'Fibre sy vitamina'},
+          {'name': 'Apombombary (Son de Riz)', 'percentage': '22%', 'role': 'Fibre sy vitamina'},
           {'name': 'Son de blé', 'percentage': '5%', 'role': 'Fibre'},
           {'name': 'Prémix vitamina-mineraly', 'percentage': '2%', 'role': 'Vitamina'},
           {'name': 'Sira (NaCl)', 'percentage': '1%', 'role': 'Mineraly'},
@@ -19066,7 +24813,7 @@ class TrondroFeedScreen extends StatelessWidget {
           {'name': 'Lafarinina trondro', 'percentage': '10%', 'role': 'Protéine'},
           {'name': 'Tourteau soja', 'percentage': '20%', 'role': 'Protéine'},
           {'name': 'Katsaka voatoto', 'percentage': '35%', 'role': 'Energia'},
-          {'name': 'Son de riz (Paombary)', 'percentage': '28%', 'role': 'Fibre'},
+          {'name': 'Apombombary (Son de Riz)', 'percentage': '28%', 'role': 'Fibre'},
           {'name': 'Menaka soja', 'percentage': '3%', 'role': 'Energia'},
           {'name': 'Prémix vitamina-mineraly', 'percentage': '2%', 'role': 'Vitamina'},
           {'name': 'Calcium (coquille)', 'percentage': '2%', 'role': 'Mineraly'},
@@ -21319,12 +27066,12 @@ class OlitraFeedScreen extends StatelessWidget {
       {'name': 'Fako sakafo (sisan-tsakafo)', 'quality': 'Tsara indrindra', 'emoji': '🍌', 'details': 'Ravina legioma, hoditry voankazo, sisa-mofo'},
       {'name': 'Fako voankazo', 'quality': 'Tsara', 'emoji': '🍎', 'details': 'Mango, papay, voasary lo - mitombo haingana'},
       {'name': 'Tain-biby (zezika)', 'quality': 'Tsara', 'emoji': '💩', 'details': 'Tain-kisoa, tain-omby - protéine betsaka'},
-      {'name': 'Paraky (son de riz)', 'quality': 'Antonony', 'emoji': '🌾', 'details': 'Azo ampiana amin\'ny fako hafa'},
+      {'name': 'Apombombary (Son de Riz)', 'quality': 'Antonony', 'emoji': '🌾', 'details': 'Azo ampiana amin\'ny fako hafa'},
       {'name': 'Fako legioma', 'quality': 'Tsara', 'emoji': '🥬', 'details': 'Ravina, fotony - mora lo'},
     ];
 
     final mealwormFeeds = [
-      {'name': 'Paraky (son de riz/blé)', 'quality': 'Tsara indrindra', 'emoji': '🌾', 'details': 'Sakafo fototra - tsy maintsy misy'},
+      {'name': 'Apombombary (Son de Riz/Blé)', 'quality': 'Tsara indrindra', 'emoji': '🌾', 'details': 'Sakafo fototra - tsy maintsy misy'},
       {'name': 'Lafarinina katsaka', 'quality': 'Tsara', 'emoji': '🌽', 'details': 'Azo ampifangaroina amin\'ny paraky'},
       {'name': 'Karoty/Patsa', 'quality': 'Tsara', 'emoji': '🥕', 'details': 'Loharano hamandoana - tsy mila rano'},
       {'name': 'Ovy mamy', 'quality': 'Tsara', 'emoji': '🍠', 'details': 'Hamandoana sy glucides'},
@@ -24465,12 +30212,12 @@ class _ProfitabilityAnalyzerDialogState extends State<ProfitabilityAnalyzerDialo
       'riskLevel': 'antonony',
       'difficulty': 'antonony',
       'description': 'Version kely: 1 kisoakely hatavezina. 5 volana dia azo amidy.',
-      'tips': 'Mila tranobe madio, sakafo betsaka (son de riz, mangahazo).',
+      'tips': 'Mila tranobe madio, sakafo betsaka (apombombary, mangahazo).',
       'returnRate': 0.55,
       'materials': [
         {'name': 'Kisoakely (Porcelet 2 volana)', 'quantity': '1', 'price': 80000, 'unit': 'iray', 'essential': true},
         {'name': 'Trano kisoa tsotra (hazo)', 'quantity': '1', 'price': 50000, 'unit': 'iray', 'essential': true},
-        {'name': 'Son de riz (1 volana)', 'quantity': '50 kg', 'price': 40000, 'unit': 'kg', 'essential': true},
+        {'name': 'Apombombary (Son de riz) (1 volana)', 'quantity': '50 kg', 'price': 40000, 'unit': 'kg', 'essential': true},
         {'name': 'Mangahazo (1 volana)', 'quantity': '50 kg', 'price': 15000, 'unit': 'kg', 'essential': true},
         {'name': 'Vakisiny PPC', 'quantity': '1', 'price': 15000, 'unit': 'iray', 'essential': true},
         {'name': 'Provende kisoa 50kg (optionnel)', 'quantity': '1 sac', 'price': 180000, 'unit': 'sac', 'essential': false},
@@ -24515,7 +30262,7 @@ class _ProfitabilityAnalyzerDialogState extends State<ProfitabilityAnalyzerDialo
       'returnRate': 1.25,
       'materials': [
         {'name': 'Alevins Tilapia 300 isa', 'quantity': '300', 'price': 75000, 'unit': 'iray', 'essential': true},
-        {'name': 'Sakafo (Son de riz + Compost)', 'quantity': '1 volana', 'price': 20000, 'unit': 'volana', 'essential': true},
+        {'name': 'Sakafo (Apombombary + Compost)', 'quantity': '1 volana', 'price': 20000, 'unit': 'volana', 'essential': true},
         {'name': 'Fitaovana fandavahana (Angady)', 'quantity': '1', 'price': 0, 'unit': 'iray', 'essential': true, 'borrowable': true},
         {'name': 'Tuyau PVC (famoahana rano)', 'quantity': '1', 'price': 15000, 'unit': 'iray', 'essential': true},
         {'name': 'Chaux (fanadiovana)', 'quantity': '5 kg', 'price': 5000, 'unit': 'kg', 'essential': true},
