@@ -15117,15 +15117,15 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3200 - 3300 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Best Quality)',
-          'desc': 'Fitomboana haingana indrindra (GMQ > 400g)',
+          'name': 'Premium (Type Européen)',
+          'desc': 'Tena mahery (Super Croissance). Misy ronono.',
           'ingredients': [
-            {'name': 'Katsaka', 'qty': '55 kg'},
+            {'name': 'Katsaka', 'qty': '50 kg'},
             {'name': 'Tourteau Soja', 'qty': '25 kg'},
-            {'name': 'Farine Poisson (55%)', 'qty': '10 kg'},
+            {'name': 'Farine Poisson', 'qty': '10 kg'},
+            {'name': 'Lactoserum (Poudre Lait)', 'qty': '5 kg'},
             {'name': 'Menaka (Huile)', 'qty': '2 kg'},
-            {'name': 'CMV 5% (Starter)', 'qty': '5 kg'},
-            {'name': 'Sira + Lysine', 'qty': '3 kg'},
+            {'name': 'CMV 5% + Lysine', 'qty': '8 kg'},
           ]
         },
         {
@@ -15151,7 +15151,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Ny kisoa kely dia mila sakafo mora levonina. Ny Premium dia manome fitomboana haingana be.',
+      'tips': 'Ny "Premium" dia manaraka ny fenitra Eoropeana (INRA) misy ronono sy asidra amine (Lysine) ho an\'ny fitomboana farany haingana.',
     },
     'Croissance (25-60kg)': {
       'age': '10 - 18 Herinandro',
@@ -15160,13 +15160,14 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3000 - 3100 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Best Quality)',
-          'desc': 'Fitomboana farany ambony',
+          'name': 'Premium (Intensif)',
+          'desc': 'Fitomboana farany ambony (GMQ > 700g)',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '60 kg'},
-            {'name': 'Tourteau Soja', 'qty': '20 kg'},
-            {'name': 'Apombo (Son)', 'qty': '15 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
+            {'name': 'Tourteau Soja', 'qty': '22 kg'},
+            {'name': 'Apombo (Son)', 'qty': '10 kg'},
+            {'name': 'Menaka', 'qty': '1 kg'},
+            {'name': 'CMV 5% + Methionine', 'qty': '7 kg'},
           ]
         },
         {
@@ -15191,7 +15192,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Azo ampiana mangahazo na vomanga masaka ho solon\'ny katsaka sasany. Tandremo ny fahasalamana.',
+      'tips': 'Ny fenitra Eoropeana dia mitaky angovo (Energie Nette) ambony. Ny katsaka no tsara indrindra amin\'izany.',
     },
     'Finition (60-100kg)': {
       'age': '18 - 24 Herinandro',
@@ -15200,13 +15201,13 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '2900 - 3000 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Best Quality)',
-          'desc': 'Mampitombo hena, mampihena tavy',
+          'name': 'Premium (Viande Maigre)',
+          'desc': 'Hena be, tavy kely (Qualité Export)',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '65 kg'},
             {'name': 'Tourteau Soja', 'qty': '15 kg'},
             {'name': 'Apombo (Son)', 'qty': '15 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
+            {'name': 'CMV 5% Finition', 'qty': '5 kg'},
           ]
         },
         {
@@ -15231,7 +15232,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Tandremo tsy ho matavy loatra (Gras). Ahena ny katsaka raha be tavy loatra ny kisoa.',
+      'tips': 'Any Eoropa, ferana ny sakafo amin\'ny farany mba tsy ho matavy loatra (Gras).',
     },
     'Renin-kisoa (Gestante)': {
       'age': 'Vohoka (114 andro)',
