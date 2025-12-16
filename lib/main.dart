@@ -15125,7 +15125,9 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
             {'name': 'Farine Poisson', 'qty': '10 kg'},
             {'name': 'Lactoserum (Poudre Lait)', 'qty': '5 kg'},
             {'name': 'Menaka (Huile)', 'qty': '2 kg'},
-            {'name': 'CMV 5% + Lysine', 'qty': '8 kg'},
+            {'name': 'CMV 5% (Starter)', 'qty': '5 kg'},
+            {'name': 'Lysine (Acide Aminé)', 'qty': '200 g'},
+            {'name': 'Methionine', 'qty': '100 g'},
           ]
         },
         {
@@ -15151,7 +15153,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Ny "Premium" dia manaraka ny fenitra Eoropeana (INRA) misy ronono sy asidra amine (Lysine) ho an\'ny fitomboana farany haingana.',
+      'tips': 'Ny Methionine sy Lysine dia "Acides Aminés" tena ilaina amin\'ny fananganana hozatra (Muscle). Tsy ampy ireo ny katsaka sy soja.',
     },
     'Croissance (25-60kg)': {
       'age': '10 - 18 Herinandro',
@@ -15167,7 +15169,9 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
             {'name': 'Tourteau Soja', 'qty': '22 kg'},
             {'name': 'Apombo (Son)', 'qty': '10 kg'},
             {'name': 'Menaka', 'qty': '1 kg'},
-            {'name': 'CMV 5% + Methionine', 'qty': '7 kg'},
+            {'name': 'CMV 5%', 'qty': '5 kg'},
+            {'name': 'Lysine', 'qty': '150 g'},
+            {'name': 'Methionine', 'qty': '50 g'},
           ]
         },
         {
