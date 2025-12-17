@@ -5400,6 +5400,13 @@ class _FeedScreenState extends State<FeedScreen> {
     String stageLabel = '';
     String currentFormula = '';
 
+    String formatTiers(Map<String, Map<String, String>> tiers) {
+      return tiers.entries.map((e) {
+        final ingredients = e.value.entries.map((i) => '• ${i.key}: ${i.value}').join('\n');
+        return '🔹 ${e.key}:\n$ingredients';
+      }).join('\n\n');
+    }
+
     if (type == 'Chair') {
       if (week == 1) { gPerBird = 23; waterMl = 46; }
       else if (week == 2) { gPerBird = 47; waterMl = 94; }
@@ -5411,42 +5418,60 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 3) {
         stageLabel = 'Démarrage (0-3 herinandro)';
-        currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 30%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 4%\n• CMV Chair: 4%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '52%', 'Soja': '30%', 'Apombo': '10%', 'Vovo-trondro': '4%', 'CMV': '4%'},
+          'Avo lenta': {'Katsaka': '55%', 'Soja': '30%', 'Blé': '10%', 'Huile': '1%', 'CMV': '4%'},
+          'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'Lysine': '0.5%', 'CMV': '4.5%'}
+        });
       } else if (week <= 5) {
         stageLabel = 'Croissance (4-5 herinandro)';
-        currentFormula = '• Katsaka: 58%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 3%\n• CMV Chair: 4%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '60%', 'Soja': '20%', 'Apombo': '15%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '58%', 'Soja': '25%', 'Apombo': '10%', 'Vovo-trondro': '3%', 'CMV': '4%'},
+          'Avo lenta': {'Katsaka': '62%', 'Soja': '25%', 'Blé': '8%', 'Huile': '1%', 'CMV': '4%'},
+          'Tena raitra': {'Katsaka': '65%', 'Soja': '25%', 'Blé': '5%', 'Huile': '1.5%', 'Lysine': '0.5%', 'CMV': '3%'}
+        });
       } else {
         stageLabel = 'Finition (6+ herinandro)';
-        currentFormula = '• Katsaka: 62%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 12%\n• Vovo-trondro (Farine de Poisson): 2%\n• CMV Chair: 4%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '65%', 'Soja': '15%', 'Apombo': '15%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '62%', 'Soja': '20%', 'Apombo': '12%', 'Vovo-trondro': '2%', 'CMV': '4%'},
+          'Avo lenta': {'Katsaka': '68%', 'Soja': '18%', 'Blé': '8%', 'Huile': '2%', 'CMV': '4%'},
+          'Tena raitra': {'Katsaka': '70%', 'Soja': '18%', 'Blé': '5%', 'Huile': '3%', 'Lysine': '0.5%', 'CMV': '3.5%'}
+        });
       }
     } else if (type == 'Pondeuse') {
-      if (week <= 8) {
-        gPerBird = 40;
-      } else if (week <= 18) {
-        gPerBird = 80;
-      } else {
-        gPerBird = 125;
-      }
+      if (week <= 8) { gPerBird = 40; } else if (week <= 18) { gPerBird = 80; } else { gPerBird = 125; }
       waterMl = 250;
 
       if (week <= 8) {
         stageLabel = 'Démarrage (0-8 herinandro)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 25%\n• CMV Pondeuse: 5%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '25%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '48%', 'Soja': '25%', 'Apombo': '22%', 'CMV': '5%'},
+          'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'CMV': '5%'},
+          'Tena raitra': {'Katsaka': '52%', 'Soja': '28%', 'Blé': '15%', 'Huile': '1%', 'CMV': '4%'}
+        });
       } else if (week <= 18) {
         stageLabel = 'Croissance (9-18 herinandro)';
-        currentFormula = '• Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Son de Blé: 35%\n• CMV Pondeuse: 5%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '45%', 'Soja': '15%', 'Apombo': '35%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '45%', 'Soja': '20%', 'Apombo': '30%', 'CMV': '5%'},
+          'Avo lenta': {'Katsaka': '48%', 'Soja': '22%', 'Blé': '25%', 'CMV': '5%'},
+          'Tena raitra': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'Huile': '1%', 'CMV': '4%'}
+        });
       } else {
         stageLabel = 'Ponte (19+ herinandro)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Son de Blé: 20%\n• Lao-akorantsely (Coquille): 8%\n• CMV Pondeuse: 2%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '20%', 'Coquille': '8%', 'CMV': '2%'},
+          'Antonony': {'Katsaka': '50%', 'Soja': '22%', 'Apombo': '15%', 'Coquille': '9%', 'CMV': '4%'},
+          'Avo lenta': {'Katsaka': '52%', 'Soja': '25%', 'Blé': '10%', 'Coquille': '9%', 'Huile': '2%', 'CMV': '2%'},
+          'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '5%', 'Coquille': '10%', 'Huile': '2%', 'Methionine': '0.2%', 'CMV': '2.8%'}
+        });
       }
     } else if (type == 'Mpiady') {
-      if (week <= 8) {
-        gPerBird = 35;
-      } else if (week <= 20) {
-        gPerBird = 80;
-      } else {
-        gPerBird = 120;
-      }
+      if (week <= 8) { gPerBird = 35; } else if (week <= 20) { gPerBird = 80; } else { gPerBird = 120; }
       waterMl = 280;
 
       if (week <= 8) {
@@ -5460,13 +5485,7 @@ class _FeedScreenState extends State<FeedScreen> {
         currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 8%\n• CMV: 5%\n\n💪 Vitamines E & B12 recommandées';
       }
     } else if (type == 'Ornement') {
-      if (week <= 8) {
-        gPerBird = 30;
-      } else if (week <= 18) {
-        gPerBird = 60;
-      } else {
-        gPerBird = 100;
-      }
+      if (week <= 8) { gPerBird = 30; } else if (week <= 18) { gPerBird = 60; } else { gPerBird = 100; }
       waterMl = 200;
 
       if (week <= 8) {
@@ -5480,175 +5499,150 @@ class _FeedScreenState extends State<FeedScreen> {
         currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 28%\n• CMV: 5%\n\n🪶 Ajouter huile végétale pour plumage brillant';
       }
     } else if (type == 'Nain') {
-      if (week <= 8) {
-        gPerBird = 20;
-      } else if (week <= 18) {
-        gPerBird = 40;
-      } else {
-        gPerBird = 60;
-      }
+      if (week <= 8) { gPerBird = 20; } else if (week <= 18) { gPerBird = 40; } else { gPerBird = 60; }
       waterMl = 120;
 
       stageLabel = week <= 18 ? 'Croissance' : 'Adulte';
       currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 25%\n• CMV: 5%';
     } else if (type == 'Gana') {
-      if (week <= 3) {
-        gPerBird = 50;
-      } else if (week <= 7) {
-        gPerBird = 120;
-      } else {
-        gPerBird = 180;
-      }
+      if (week <= 3) { gPerBird = 50; } else if (week <= 7) { gPerBird = 120; } else { gPerBird = 180; }
       waterMl = 400;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 7 ? 'Croissance' : 'Finition');
-      currentFormula = '• 🦆 Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 20%\n• Apombo-bary (Son de Blé): 20%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV Gana: 5%';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '25%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '52%', 'Soja': '25%', 'Apombo': '18%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '55%', 'Soja': '28%', 'Blé': '12%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '8%', 'Huile': '1%', 'CMV': '3%'}
+      });
     } else if (type == 'Dokotra') {
-      if (week <= 4) {
-        gPerBird = 60;
-      } else if (week <= 10) {
-        gPerBird = 150;
-      } else {
-        gPerBird = 220;
-      }
+      if (week <= 4) { gPerBird = 60; } else if (week <= 10) { gPerBird = 150; } else { gPerBird = 220; }
       waterMl = 450;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Finition');
-      currentFormula = '• 🦆 Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Apombo-bary (Son de Blé): 15%\n• Vovo-trondro (Farine de Poisson): 6%\n• CMV: 5%';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '52%', 'Soja': '22%', 'Apombo': '21%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '58%', 'Soja': '28%', 'Blé': '10%', 'CMV': '4%'},
+        'Tena raitra': {'Katsaka': '60%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
+      });
     } else if (type == 'Sarindokotra') {
-      // Mulard (Gavage/Foie gras) - Croissance rapide
-      if (week <= 4) {
-        gPerBird = 80;
-      } else if (week <= 10) {
-        gPerBird = 200;
-      } else if (week <= 12) {
-        // Phase de gavage
-        gPerBird = 400;
-      } else {
-        gPerBird = 450;
-      }
+      if (week <= 4) { gPerBird = 80; } else if (week <= 10) { gPerBird = 200; } else if (week <= 12) { gPerBird = 400; } else { gPerBird = 450; }
       waterMl = 500;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Gavage');
-      currentFormula = '• 🦆 SARINDOKOTRA (Mulard):\n\n📍 Démarrage (0-4 sem):\n  Katsaka: 50%, Soja: 25%, Blé: 20%\n\n📍 Croissance (5-10 sem):\n  Katsaka: 55%, Soja: 20%, Blé: 20%\n\n📍 Gavage (11+ sem):\n  Katsaka 100% (Katsaka masaka nandrahoina)\n  Gavage in-2 isan\'andro\n\n⚠️ Lanja vonjena: 4-6 kg (14 sem)';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '50%', 'Soja': '25%', 'Apombo': '20%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '58%', 'Soja': '28%', 'Blé': '10%', 'CMV': '4%'},
+        'Tena raitra': {'Katsaka': '60%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
+      });
     } else if (type == 'Gisa') {
-      if (week <= 3) {
-        gPerBird = 70;
-      } else if (week <= 8) {
-        gPerBird = 200;
-      } else {
-        gPerBird = 350;
-      }
+      if (week <= 3) { gPerBird = 70; } else if (week <= 8) { gPerBird = 200; } else { gPerBird = 350; }
       waterMl = 600;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 8 ? 'Croissance' : 'Finition');
-      currentFormula = '• 🦢 Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 25%\n• Ahitra/Anana: 10%\n• CMV: 5%\n\n🌿 Ahitra ilaina be';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '45%', 'Soja': '15%', 'Apombo': '30%', 'Ahitra': '10%'},
+        'Antonony': {'Katsaka': '48%', 'Soja': '20%', 'Apombo': '25%', 'Ahitra': '7%'},
+        'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'Ahitra': '5%'},
+        'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '15%', 'Huile': '1%', 'Ahitra': '4%'}
+      });
     } else if (type == 'Vorontsiloza') {
-      if (week <= 4) {
-        gPerBird = 60;
-      } else if (week <= 12) {
-        gPerBird = 180;
-      } else {
-        gPerBird = 350;
-      }
+      if (week <= 4) { gPerBird = 60; } else if (week <= 12) { gPerBird = 180; } else { gPerBird = 350; }
       waterMl = 500;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 12 ? 'Croissance' : 'Finition');
-      currentFormula = '• 🦃 Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 28%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 7%\n• CMV: 5%\n\n⚠️ Mila protéine be';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '48%', 'Soja': '28%', 'Apombo': '19%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '50%', 'Soja': '30%', 'Apombo': '15%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '52%', 'Soja': '32%', 'Blé': '11%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
+      });
     } else if (type == 'VorontsilozaChair') {
-      // Dinde à chair - Engraissement intensif
-      if (week <= 4) {
-        gPerBird = 80;
-      } else if (week <= 8) {
-        gPerBird = 200;
-      } else if (week <= 14) {
-        gPerBird = 400;
-      } else {
-        gPerBird = 500;
-      }
+      if (week <= 4) { gPerBird = 80; } else if (week <= 8) { gPerBird = 200; } else if (week <= 14) { gPerBird = 400; } else { gPerBird = 500; }
       waterMl = 700;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 8 ? 'Croissance' : 'Finition');
-      currentFormula = '• 🦃 VORONTSILOZA CHAIR:\n\n📍 Démarrage (0-4 sem):\n  Protéine: 28%\n  Katsaka: 45%, Soja: 30%\n\n📍 Croissance (5-8 sem):\n  Protéine: 24%\n  Katsaka: 50%, Soja: 25%\n\n📍 Finition (9-16 sem):\n  Protéine: 18%\n  Katsaka: 60%, Soja: 15%\n\n🎯 Lanja vonjena:\n  • Lahy: 12-18 kg (16-20 sem)\n  • Vavy: 8-10 kg (14-16 sem)';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '45%', 'Soja': '30%', 'Apombo': '20%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '48%', 'Soja': '32%', 'Apombo': '15%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '50%', 'Soja': '35%', 'Blé': '10%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
+      });
     } else if (type == 'Akanga') {
-      if (week <= 6) {
-        gPerBird = 35;
-      } else if (week <= 14) {
-        gPerBird = 80;
-      } else {
-        gPerBird = 120;
-      }
+      if (week <= 6) { gPerBird = 35; } else if (week <= 14) { gPerBird = 80; } else { gPerBird = 120; }
       waterMl = 250;
 
       stageLabel = week <= 6 ? 'Démarrage' : (week <= 14 ? 'Croissance' : 'Adulte');
-      currentFormula = '• 🐓 Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Apombo-bary (Son de Blé): 18%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '50%', 'Soja': '22%', 'Apombo': '23%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '52%', 'Soja': '25%', 'Apombo': '18%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '55%', 'Soja': '28%', 'Blé': '12%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '8%', 'Huile': '1%', 'CMV': '3%'}
+      });
     } else if (type == 'Akohonala') {
-      if (week <= 6) {
-        gPerBird = 30;
-      } else if (week <= 16) {
-        gPerBird = 60;
-      } else {
-        gPerBird = 90;
-      }
+      if (week <= 6) { gPerBird = 30; } else if (week <= 16) { gPerBird = 60; } else { gPerBird = 90; }
       waterMl = 200;
 
       stageLabel = week <= 6 ? 'Démarrage' : (week <= 16 ? 'Croissance' : 'Adulte');
-      currentFormula = '• 🦚 Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombo-bary (Son de Blé): 20%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%\n\n🪶 Ilaina vitamines ho an\'ny volom-borona';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '45%', 'Soja': '25%', 'Apombo': '25%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '48%', 'Soja': '28%', 'Apombo': '19%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '50%', 'Soja': '30%', 'Blé': '15%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '52%', 'Soja': '32%', 'Blé': '10%', 'Huile': '2%', 'CMV': '4%'}
+      });
     } else if (type == 'Papelika') {
-      if (week <= 3) {
-        gPerBird = 8;
-      } else if (week <= 6) {
-        gPerBird = 18;
-      } else {
-        gPerBird = 25;
-      }
+      if (week <= 3) { gPerBird = 8; } else if (week <= 6) { gPerBird = 18; } else { gPerBird = 25; }
       waterMl = 50;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 6 ? 'Croissance' : 'Ponte/Adulte');
-      currentFormula = '• 🐦 Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 30%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%\n\n🥚 Protéine avo ho an\'ny atody';
+      currentFormula = formatTiers({
+        'Mora': {'Katsaka': '48%', 'Soja': '30%', 'Apombo': '17%', 'CMV': '5%'},
+        'Antonony': {'Katsaka': '50%', 'Soja': '32%', 'Apombo': '13%', 'CMV': '5%'},
+        'Avo lenta': {'Katsaka': '52%', 'Soja': '35%', 'Blé': '8%', 'CMV': '5%'},
+        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
+      });
     } else if (type == 'Bitro') {
-      if (week <= 4) {
-        gPerBird = 50;
-      } else if (week <= 12) {
-        gPerBird = 120;
-      } else {
-        gPerBird = 150;
-      }
+      if (week <= 4) { gPerBird = 50; } else if (week <= 12) { gPerBird = 120; } else { gPerBird = 150; }
       waterMl = 300;
 
       stageLabel = week <= 4 ? 'Zaza (0-4 herinandro)' : (week <= 12 ? 'Mitombo (5-12 herinandro)' : 'Lehibe');
       currentFormula = '• 🐇 BITRO - Sakafo isan\'andro:\n\n🥬 Hay (Foin): 70% - Ilaina mandrakariva\n🥕 Anana sy Legioma: 20%\n   - Karaoty, Salady, Petsay\n   - Ravina voasary, Anamalaho\n🌾 Granulés Lapin: 10%\n\n⚠️ Aza omena: Saonjo, Ovy, Voatabia, Vary';
     } else if (type == 'BitroVolavo') {
-      if (week <= 4) {
-        gPerBird = 30;
-      } else if (week <= 8) {
-        gPerBird = 60;
-      } else {
-        gPerBird = 80;
-      }
+      if (week <= 4) { gPerBird = 30; } else if (week <= 8) { gPerBird = 60; } else { gPerBird = 80; }
       waterMl = 150;
 
       stageLabel = week <= 4 ? 'Zaza' : (week <= 8 ? 'Mitombo' : 'Lehibe');
       currentFormula = '• 🐹 BITRO VOALAVO - Sakafo isan\'andro:\n\n🥬 Hay (Foin): 60% - Ilaina mandrakariva\n🥬 Anana maitso: 30%\n   - Petsay, Salady, Anamalaho\n   - Karaoty, Voatavo\n🍊 Vitamina C: Voasary, Tongolo mena\n🌾 Granulés: 10%\n\n⚠️ Mila Vitamina C isan\'andro!';
     } else if (type == 'Kisoa') {
-      if (week <= 8) {
-        gPerBird = 500; // 0.5kg
-      } else if (week <= 16) {
-        gPerBird = 1500; // 1.5kg
-      } else {
-        gPerBird = 2500; // 2.5kg
-      }
-      waterMl = gPerBird * 3; // ~3x feed
+      if (week <= 8) { gPerBird = 500; } else if (week <= 16) { gPerBird = 1500; } else { gPerBird = 2500; }
+      waterMl = gPerBird * 3;
 
       if (week <= 8) {
         stageLabel = 'Zaza (Sevrage: 6-8 sem)';
-        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombombary (Son de Riz): 10%\n• Vovo-trondro (Farine de Poisson): 5%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '50%', 'Soja': '25%', 'Apombo': '20%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '52%', 'Soja': '28%', 'Apombo': '15%', 'CMV': '5%'},
+          'Avo lenta': {'Katsaka': '55%', 'Soja': '30%', 'Blé': '10%', 'CMV': '5%'},
+          'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '5%'}
+        });
       } else if (week <= 16) {
         stageLabel = 'Mitombo (Croissance: 9-16 sem)';
-        currentFormula = '• Katsaka: 45%\n• Vovo-mangahazo (Manioc): 15%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombombary (Son de Riz): 15%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = formatTiers({
+          'Mora': {'Katsaka': '45%', 'Manioc': '15%', 'Soja': '15%', 'Apombo': '20%', 'CMV': '5%'},
+          'Antonony': {'Katsaka': '48%', 'Manioc': '10%', 'Soja': '20%', 'Apombo': '17%', 'CMV': '5%'},
+          'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'CMV': '5%'},
+          'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '15%', 'Huile': '1%', 'CMV': '4%'}
+        });
       } else {
         stageLabel = 'Lehibe (Finition/Truie)';
-        currentFormula = '• Vovo-mangahazo (Manioc): 30%\n• Katsaka: 20%\n• Apombombary (Son de Riz): 25%\n• Faika-labiera (Drêche): 15%\n• Faikan-tsoja (Tourteau Soja): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
+        currentFormula = formatTiers({
+          'Mora': {'Manioc': '30%', 'Katsaka': '20%', 'Apombo': '30%', 'Drêche': '15%', 'CMV': '5%'},
+          'Antonony': {'Manioc': '20%', 'Katsaka': '30%', 'Apombo': '25%', 'Drêche': '20%', 'CMV': '5%'},
+          'Avo lenta': {'Katsaka': '50%', 'Soja': '15%', 'Blé': '20%', 'Drêche': '10%', 'CMV': '5%'},
+          'Tena raitra': {'Katsaka': '60%', 'Soja': '15%', 'Blé': '15%', 'Huile': '2%', 'CMV': '4%'}
+        });
       }
     }
 
@@ -5658,6 +5652,7 @@ class _FeedScreenState extends State<FeedScreen> {
       gPerBird: gPerBird,
       waterMl: waterMl,
     );
+
   }
 
   List<Widget> _buildSegmentInputs() {
@@ -15739,37 +15734,49 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3200 - 3300 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Type Européen)',
+          'name': 'Tena raitra',
           'desc': 'Tena mahery (Super Croissance). Misy ronono.',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '50 kg'},
             {'name': 'Tourteau Soja', 'qty': '25 kg'},
             {'name': 'Farine Poisson', 'qty': '10 kg'},
-            {'name': 'Lactoserum (Poudre Lait)', 'qty': '5 kg'},
-            {'name': 'Menaka (Huile)', 'qty': '2 kg'},
-            {'name': 'CMV 5% (Starter)', 'qty': '5 kg'},
-            {'name': 'Lysine (Acide Aminé)', 'qty': '200 g'},
+            {'name': 'Lactoserum', 'qty': '5 kg'},
+            {'name': 'Menaka', 'qty': '2 kg'},
+            {'name': 'CMV 5%', 'qty': '5 kg'},
+            {'name': 'Lysine', 'qty': '200 g'},
             {'name': 'Methionine', 'qty': '100 g'},
           ]
         },
         {
-          'name': 'Standard (Mid Range)',
+          'name': 'Avo lenta',
+          'desc': 'Fitomboana haingana',
+          'ingredients': [
+            {'name': 'Katsaka', 'qty': '52 kg'},
+            {'name': 'Tourteau Soja', 'qty': '22 kg'},
+            {'name': 'Apombo', 'qty': '10 kg'},
+            {'name': 'Farine Poisson', 'qty': '8 kg'},
+            {'name': 'CMV 5%', 'qty': '5 kg'},
+            {'name': 'Menaka', 'qty': '1 kg'},
+          ]
+        },
+        {
+          'name': 'Antonony',
           'desc': 'Fifandanjana tsara',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '50 kg'},
-            {'name': 'Apombo (Son)', 'qty': '15 kg'},
+            {'name': 'Apombo', 'qty': '15 kg'},
             {'name': 'Tourteau Soja', 'qty': '20 kg'},
             {'name': 'Farine Poisson', 'qty': '10 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
           ]
         },
         {
-          'name': 'Low Cost (Mora)',
+          'name': 'Mora',
           'desc': 'Mampiasa mangahazo sy apombo',
           'ingredients': [
-            {'name': 'Mangahazo (Cossette)', 'qty': '30 kg'},
+            {'name': 'Mangahazo', 'qty': '30 kg'},
             {'name': 'Katsaka', 'qty': '20 kg'},
-            {'name': 'Apombo (Son)', 'qty': '25 kg'},
+            {'name': 'Apombo', 'qty': '25 kg'},
             {'name': 'Tourteau Arachide', 'qty': '20 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
           ]
@@ -15784,12 +15791,12 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3000 - 3100 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Intensif)',
+          'name': 'Tena raitra',
           'desc': 'Fitomboana farany ambony (GMQ > 700g)',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '60 kg'},
             {'name': 'Tourteau Soja', 'qty': '22 kg'},
-            {'name': 'Apombo (Son)', 'qty': '10 kg'},
+            {'name': 'Apombo', 'qty': '10 kg'},
             {'name': 'Menaka', 'qty': '1 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
             {'name': 'Lysine', 'qty': '150 g'},
@@ -15797,7 +15804,18 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Standard (Mid Range)',
+          'name': 'Avo lenta',
+          'desc': 'Tsara ho an\'ny hena',
+          'ingredients': [
+            {'name': 'Katsaka', 'qty': '55 kg'},
+            {'name': 'Tourteau Soja', 'qty': '20 kg'},
+            {'name': 'Apombo', 'qty': '15 kg'},
+            {'name': 'Menaka', 'qty': '1 kg'},
+            {'name': 'CMV 5%', 'qty': '5 kg'},
+          ]
+        },
+        {
+          'name': 'Antonony',
           'desc': 'Fifandanjana tsara',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '45 kg'},
@@ -15808,7 +15826,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Low Cost (Mora)',
+          'name': 'Mora',
           'desc': 'Mora vidy nefa mahomby',
           'ingredients': [
             {'name': 'Mangahazo', 'qty': '40 kg'},
@@ -15818,7 +15836,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Ny fenitra Eoropeana dia mitaky angovo (Energie Nette) ambony. Ny katsaka no tsara indrindra amin\'izany.',
+      'tips': 'Ny fenitra Eoropeana dia mitaky angovo (Energie Nette) ambony. Ny katsaka no tsara indrindra amin\'ny izany.',
     },
     'Finition (60-100kg)': {
       'age': '18 - 24 Herinandro',
@@ -15827,18 +15845,28 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '2900 - 3000 kcal/kg',
       'formulas': [
         {
-          'name': 'Premium (Viande Maigre)',
-          'desc': 'Hena be, tavy kely (Qualité Export). Ahitsy ny Lysine.',
+          'name': 'Tena raitra',
+          'desc': 'Hena be, tavy kely (Qualité Export).',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '65 kg'},
             {'name': 'Tourteau Soja', 'qty': '15 kg'},
-            {'name': 'Apombo (Son)', 'qty': '15 kg'},
+            {'name': 'Apombo', 'qty': '15 kg'},
             {'name': 'CMV 5% Finition', 'qty': '5 kg'},
             {'name': 'Lysine', 'qty': '100 g'},
           ]
         },
         {
-          'name': 'Standard (Mid Range)',
+          'name': 'Avo lenta',
+          'desc': 'Hena tsara',
+          'ingredients': [
+            {'name': 'Katsaka', 'qty': '60 kg'},
+            {'name': 'Tourteau Soja', 'qty': '15 kg'},
+            {'name': 'Apombo', 'qty': '20 kg'},
+            {'name': 'CMV 5%', 'qty': '5 kg'},
+          ]
+        },
+        {
+          'name': 'Antonony',
           'desc': 'Fifandanjana tsara. Sombin\'ny hena sy tavy.',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '40 kg'},
@@ -15849,7 +15877,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Low Cost (Mora)',
+          'name': 'Mora',
           'desc': 'Ho an\'ny farany. Hena be tavy kokoa.',
           'ingredients': [
             {'name': 'Mangahazo maina', 'qty': '50 kg'},
