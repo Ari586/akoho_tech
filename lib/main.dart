@@ -396,7 +396,7 @@ class AkohoTechApp extends StatelessWidget {
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.primary,
             side: const BorderSide(color: AppColors.primary, width: 1.5),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           ),
         ),
@@ -1036,7 +1036,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       builder: (context) => Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         child: Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             gradient: const LinearGradient(
@@ -1207,7 +1207,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
             opacity: _fadeAnim,
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -1273,7 +1273,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
                     // Message d'accueil (code masqué) + Paiement
                     Container(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(20),
@@ -1418,7 +1418,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                             fontSize: 16,
                           ),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.all(20),
+                          contentPadding: const EdgeInsets.all(16),
                         ),
                         textCapitalization: TextCapitalization.characters,
                         onSubmitted: (_) => _verifyCode(),
@@ -1782,7 +1782,7 @@ class CategorySelectionScreen extends StatelessWidget {
               // === GRILLE SCROLLABLE ===
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
                       // FambolenaTech Card
@@ -1999,7 +1999,7 @@ class CategorySelectionScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -2128,6 +2128,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (widget.category == 'trondro') {
       return [
         const TrondroSystemsScreen(),
+        const TrondroTeknikaScreen(),
         const TrondroFeedScreen(),
         const TrondroHealthScreen(),
         const TrondroWaterScreen(),
@@ -2169,18 +2170,17 @@ class _HomeScreenState extends State<HomeScreen> {
       return [
         const HousingScreen(category: 'vorona'),
         const FeedScreen(category: 'vorona'),
-        TorohayScreen(),
-        const HealthScreen(category: 'vorona'),
+        const TorohayVoronaScreen(),
         const BreedsScreen(category: 'vorona'),
         const EggsScreen(category: 'vorona'),
-        const GavageScreen(),
+        const FamahananaScreen(),
         const FinanceScreen(),
       ];
     }
     return [
       const HousingScreen(category: 'akoho'),
       const FeedScreen(category: 'akoho'),
-      TorohayScreen(),
+      const TorohayAkohoScreen(),
       const HealthScreen(category: 'akoho'),
       const BreedsScreen(category: 'akoho'),
       const EggsScreen(category: 'akoho'),
@@ -2196,7 +2196,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (widget.category == 'fambolena') {
       return ['Voly', 'Tetiandro', 'Tany', 'Bibikely', 'Vola'];
     } else if (widget.category == 'trondro') {
-      return ['Système', 'Sakafo', 'Fahasalamana', 'Rano', 'Vola'];
+      return ['Karazany', 'Teknika', 'Sakafo', 'Fahasalamana', 'Rano', 'Vola'];
     } else if (widget.category == 'tantely') {
       return ['Toho', 'Vokatra', 'Fahasalamana', 'Tetiandro', 'Vola'];
     } else if (widget.category == 'olitra') {
@@ -2206,7 +2206,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (widget.category == 'holatra') {
       return ['Karazana', 'Fambolena', 'Fiotazana', 'Tsena', 'Vola'];
     } else if (widget.category == 'vorona') {
-      return ['Trano', 'Sakafo', 'Torohay', 'Fahasalamana', 'Races', 'Atody', 'Gavage', 'Vola'];
+      return ['Trano', 'Sakafo', 'Torohay', 'Races', 'Atody', 'Famahanana', 'Vola'];
     }
     return ['Trano', 'Sakafo', 'Torohay', 'Fahasalamana', 'Races', 'Atody', 'Vola'];
   }
@@ -2239,7 +2239,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ];
     } else if (widget.category == 'trondro') {
       return [
-        {'icon': '🏊', 'label': 'Système'},
+        {'icon': '🐟', 'label': 'Karazany'},
+        {'icon': '🔧', 'label': 'Teknika'},
         {'icon': '🦐', 'label': 'Sakafo'},
         {'icon': '🩺', 'label': 'Fahasalamana'},
         {'icon': '💧', 'label': 'Rano'},
@@ -2282,10 +2283,9 @@ class _HomeScreenState extends State<HomeScreen> {
         {'icon': '🏠', 'label': 'Trano'},
         {'icon': '🌾', 'label': 'Sakafo'},
         {'icon': '📘', 'label': 'Torohay'},
-        {'icon': '💊', 'label': 'Fahasalamana'},
         {'icon': '🦆', 'label': 'Races'},
         {'icon': '🥚', 'label': 'Atody'},
-        {'icon': '🍽️', 'label': 'Gavage'},
+        {'icon': '🍽️', 'label': 'Famahanana'},
         {'icon': '💰', 'label': 'Vola'},
       ];
     }
@@ -2336,7 +2336,7 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -2452,7 +2452,7 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -2759,7 +2759,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Content Area
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  margin: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.9),
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
@@ -2787,15 +2787,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // Floating Action Button pour Atody - SEULEMENT pour AkohoTech
-      floatingActionButton: (widget.category == 'akoho' && _currentIndex == 4) ? FloatingActionButton.extended(
+      // Floating Action Button pour Atody - AkohoTech (index 5) et VoronaTech (index 4)
+      floatingActionButton: ((widget.category == 'akoho' && _currentIndex == 5) || (widget.category == 'vorona' && _currentIndex == 4)) ? FloatingActionButton.extended(
         onPressed: () {
           // Afficher dialog pour choisir: Collection ou Incubation
           showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (ctx) => Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -2816,7 +2816,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: AppColors.warning.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(16),
@@ -2843,7 +2843,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: AppColors.success.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(16),
@@ -2955,7 +2955,7 @@ class _HousingScreenState extends State<HousingScreen> {
       } else if (_type == 'Sarindokotra') {
         // Mulard (croisement Gana x Dokotra): 3-4/m²
         area = count / 3.5;
-        equip = '• 🦆 Sarindokotra (Mulard): 3-4/m²\n• Dobo rano ilaina\n• Trano malalaka\n• Gavage: 0.5m² isaky ny iray\n• Tsy miteraka (Stérile)';
+        equip = '• 🦆 Sarindokotra (Mulard): 3-4/m²\n• Dobo rano ilaina\n• Trano malalaka\n• Famahanana (gavage): 0.5m² isaky ny iray\n• Tsy miteraka (Stérile)';
       } else if (_type == 'Gisa') {
         // Oie: 2-3/m²
         area = count / 2.5;
@@ -3013,7 +3013,7 @@ class _HousingScreenState extends State<HousingScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -3022,7 +3022,7 @@ class _HousingScreenState extends State<HousingScreen> {
             child: Column(
               children: [
                 DropdownButtonFormField<String>(
-                  value: _type,
+                  initialValue: _type,
                   decoration: const InputDecoration(labelText: 'Karazana Biby'),
                   items: ['Chair', 'Pondeuse', 'Gasy', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo']
                   .where((val) {
@@ -5400,13 +5400,6 @@ class _FeedScreenState extends State<FeedScreen> {
     String stageLabel = '';
     String currentFormula = '';
 
-    String formatTiers(Map<String, Map<String, String>> tiers) {
-      return tiers.entries.map((e) {
-        final ingredients = e.value.entries.map((i) => '• ${i.key}: ${i.value}').join('\n');
-        return '🔹 ${e.key}:\n$ingredients';
-      }).join('\n\n');
-    }
-
     if (type == 'Chair') {
       if (week == 1) { gPerBird = 23; waterMl = 46; }
       else if (week == 2) { gPerBird = 47; waterMl = 94; }
@@ -5418,60 +5411,268 @@ class _FeedScreenState extends State<FeedScreen> {
 
       if (week <= 3) {
         stageLabel = 'Démarrage (0-3 herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '52%', 'Soja': '30%', 'Apombo': '10%', 'Vovo-trondro': '4%', 'CMV': '4%'},
-          'Avo lenta': {'Katsaka': '55%', 'Soja': '30%', 'Blé': '10%', 'Huile': '1%', 'CMV': '4%'},
-          'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'Lysine': '0.5%', 'CMV': '4.5%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 45% (angovo fototra)',
+              'Apombombary 20% + Vovomangahazo 10% ho an\'ny fibre',
+              'Tourteau soja 15% (protéine)',
+              'Vovo-trondro 3% + CMV/Premix 5%',
+              'Sira 0.5% sy tambavy manohitra coccidiose',
+            ],
+          },
+          {
+            'label': 'Antonony (semi-indus.)',
+            'lines': [
+              'Katsaka 48%',
+              'Tourteau soja 25% + Son de Blé 12%',
+              'Farine de poisson 5%',
+              'Huile végétale 5% hanampiana angovo',
+              'CMV Chair 5% + Acide aminé starter',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 47%',
+              'Tourteau soja 30% + Corn gluten 8%',
+              'Farine de poisson 6% (lysine, methionine)',
+              'Huile 4% + CMV 3%',
+              'Acides aminés synthétique 2%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (integration)',
+            'lines': [
+              'Katsaka 45%',
+              'Tourteau soja 32% + Concentré protéique 8%',
+              'Farine de poisson 5% + Huile 5%',
+              'CMV 3% + Pro/Prebiotique 2%',
+            ],
+          },
+        ]);
       } else if (week <= 5) {
         stageLabel = 'Croissance (4-5 herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '60%', 'Soja': '20%', 'Apombo': '15%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '58%', 'Soja': '25%', 'Apombo': '10%', 'Vovo-trondro': '3%', 'CMV': '4%'},
-          'Avo lenta': {'Katsaka': '62%', 'Soja': '25%', 'Blé': '8%', 'Huile': '1%', 'CMV': '4%'},
-          'Tena raitra': {'Katsaka': '65%', 'Soja': '25%', 'Blé': '5%', 'Huile': '1.5%', 'Lysine': '0.5%', 'CMV': '3%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 55%',
+              'Apombombary 18% + Vovomangahazo 10%',
+              'Tourteau soja 12%',
+              'Drêche 3% + CMV 2%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 58%',
+              'Tourteau soja 20% + Son de Blé 12%',
+              'Farine de poisson 4%',
+              'Huile 4% + CMV 2%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 60%',
+              'Tourteau soja 22% + Corn gluten 6%',
+              'Huile 5%',
+              'Farine viande-poisson 3% + CMV 2% + AA 2%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 58%',
+              'Tourteau soja 24% + Concentré AA 5%',
+              'Huile 5% + Farine poisson 4%',
+              'CMV 2% + Probiotique/enzymes 2%',
+            ],
+          },
+        ]);
       } else {
         stageLabel = 'Finition (6+ herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '65%', 'Soja': '15%', 'Apombo': '15%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '62%', 'Soja': '20%', 'Apombo': '12%', 'Vovo-trondro': '2%', 'CMV': '4%'},
-          'Avo lenta': {'Katsaka': '68%', 'Soja': '18%', 'Blé': '8%', 'Huile': '2%', 'CMV': '4%'},
-          'Tena raitra': {'Katsaka': '70%', 'Soja': '18%', 'Blé': '5%', 'Huile': '3%', 'Lysine': '0.5%', 'CMV': '3.5%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 62%',
+              'Vovomangahazo 15% + Apombombary 10%',
+              'Tourteau soja 8%',
+              'Drêche 3% + CMV 2%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 65%',
+              'Tourteau soja 15% + Son de Blé 10%',
+              'Huile 4%',
+              'CMV 2% + Enzyme 1%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 67%',
+              'Tourteau soja 16% + Corn gluten 4%',
+              'Huile 5%',
+              'CMV 2% + AA 2% + Extract 2%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 65%',
+              'Tourteau soja 18% + Huile 6% + By-pass fat 3%',
+              'CMV 2%',
+              'Probiotique & électrolyte 2% (fin de lot)',
+            ],
+          },
+        ]);
       }
     } else if (type == 'Pondeuse') {
-      if (week <= 8) { gPerBird = 40; } else if (week <= 18) { gPerBird = 80; } else { gPerBird = 125; }
+      if (week <= 8) {
+        gPerBird = 40;
+      } else if (week <= 18) {
+        gPerBird = 80;
+      } else {
+        gPerBird = 125;
+      }
       waterMl = 250;
 
       if (week <= 8) {
         stageLabel = 'Démarrage (0-8 herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '25%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '48%', 'Soja': '25%', 'Apombo': '22%', 'CMV': '5%'},
-          'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'CMV': '5%'},
-          'Tena raitra': {'Katsaka': '52%', 'Soja': '28%', 'Blé': '15%', 'Huile': '1%', 'CMV': '4%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 45% + Apombombary 20% + Manioc 10%',
+              'Tourteau soja 18%',
+              'Farine de poisson 3%',
+              'CMV + Vitamina 4%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 48%',
+              'Tourteau soja 23% + Son de Blé 15%',
+              'Farine de poisson 4% + Huile 5%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 47%',
+              'Tourteau soja 26% + Corn gluten 8%',
+              'Farine de poisson 5% + Huile 6%',
+              'CMV 4% + Amino starter 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (hatchery)',
+            'lines': [
+              'Katsaka 45%',
+              'Tourteau soja 28% + Concentré protéique 8%',
+              'Farine de poisson 5% + Huile 6%',
+              'CMV 4% + Probiotique 4%',
+            ],
+          },
+        ]);
       } else if (week <= 18) {
         stageLabel = 'Croissance (9-18 herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '45%', 'Soja': '15%', 'Apombo': '35%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '45%', 'Soja': '20%', 'Apombo': '30%', 'CMV': '5%'},
-          'Avo lenta': {'Katsaka': '48%', 'Soja': '22%', 'Blé': '25%', 'CMV': '5%'},
-          'Tena raitra': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'Huile': '1%', 'CMV': '4%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 55%',
+              'Apombombary 20% + Manioc 10%',
+              'Tourteau soja 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 58%',
+              'Tourteau soja 18% + Son de Blé 15%',
+              'Huile 4% + CMV 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 57%',
+              'Tourteau soja 20% + Corn gluten 8%',
+              'Huile 5% + CMV 5% + Amino 5%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 55%',
+              'Tourteau soja 22% + Concentré protéique 8%',
+              'Huile 6%',
+              'CMV 5% + Pro/Prebiotique 4%',
+            ],
+          },
+        ]);
       } else {
         stageLabel = 'Ponte (19+ herinandro)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '20%', 'Coquille': '8%', 'CMV': '2%'},
-          'Antonony': {'Katsaka': '50%', 'Soja': '22%', 'Apombo': '15%', 'Coquille': '9%', 'CMV': '4%'},
-          'Avo lenta': {'Katsaka': '52%', 'Soja': '25%', 'Blé': '10%', 'Coquille': '9%', 'Huile': '2%', 'CMV': '2%'},
-          'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '5%', 'Coquille': '10%', 'Huile': '2%', 'Methionine': '0.2%', 'CMV': '2.8%'}
-        });
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 50% + Manioc 10%',
+              'Apombombary 15%',
+              'Tourteau soja 12%',
+              'Coquille/akorandriaka 8%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 52%',
+              'Tourteau soja 18% + Son de Blé 12%',
+              'Huile 4%',
+              'Coquille 8% + CMV 4% + Additif 2%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 50%',
+              'Tourteau soja 20% + Corn gluten 6%',
+              'Huile 6%',
+              'Coquille 10% + CMV 4%',
+              'Acides aminés 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (omega+)',
+            'lines': [
+              'Katsaka 48%',
+              'Tourteau soja 22% + Concentré protéique 8%',
+              'Huile 6% (soja/lin)',
+              'Coquille 10% + CMV 4%',
+              'Omega-3/probiotique 2%',
+            ],
+          },
+        ]);
       }
     } else if (type == 'Mpiady') {
-      if (week <= 8) { gPerBird = 35; } else if (week <= 20) { gPerBird = 80; } else { gPerBird = 120; }
+      if (week <= 8) {
+        gPerBird = 35;
+      } else if (week <= 20) {
+        gPerBird = 80;
+      } else {
+        gPerBird = 120;
+      }
       waterMl = 280;
 
       if (week <= 8) {
@@ -5485,7 +5686,13 @@ class _FeedScreenState extends State<FeedScreen> {
         currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Son de Blé: 10%\n• Vovo-trondro (Farine de Poisson): 8%\n• CMV: 5%\n\n💪 Vitamines E & B12 recommandées';
       }
     } else if (type == 'Ornement') {
-      if (week <= 8) { gPerBird = 30; } else if (week <= 18) { gPerBird = 60; } else { gPerBird = 100; }
+      if (week <= 8) {
+        gPerBird = 30;
+      } else if (week <= 18) {
+        gPerBird = 60;
+      } else {
+        gPerBird = 100;
+      }
       waterMl = 200;
 
       if (week <= 8) {
@@ -5499,150 +5706,686 @@ class _FeedScreenState extends State<FeedScreen> {
         currentFormula = '• Katsaka: 52%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 28%\n• CMV: 5%\n\n🪶 Ajouter huile végétale pour plumage brillant';
       }
     } else if (type == 'Nain') {
-      if (week <= 8) { gPerBird = 20; } else if (week <= 18) { gPerBird = 40; } else { gPerBird = 60; }
+      if (week <= 8) {
+        gPerBird = 20;
+      } else if (week <= 18) {
+        gPerBird = 40;
+      } else {
+        gPerBird = 60;
+      }
       waterMl = 120;
 
       stageLabel = week <= 18 ? 'Croissance' : 'Adulte';
       currentFormula = '• Katsaka: 55%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombo-bary (Son de Blé): 25%\n• CMV: 5%';
     } else if (type == 'Gana') {
-      if (week <= 3) { gPerBird = 50; } else if (week <= 7) { gPerBird = 120; } else { gPerBird = 180; }
+      if (week <= 3) {
+        gPerBird = 50;
+      } else if (week <= 7) {
+        gPerBird = 120;
+      } else {
+        gPerBird = 180;
+      }
       waterMl = 400;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 7 ? 'Croissance' : 'Finition');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '50%', 'Soja': '20%', 'Apombo': '25%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '52%', 'Soja': '25%', 'Apombo': '18%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '55%', 'Soja': '28%', 'Blé': '12%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '8%', 'Huile': '1%', 'CMV': '3%'}
-      });
+      if (week <= 3) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka voatoto 40%',
+              'Apombombary 25% + Vovomangahazo 10%',
+              'Tsaramaso/voanjo toto 15%',
+              'Farine poisson 5% + CMV 5%',
+              'Tambavy coccidiose na sakamalaho 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 45%',
+              'Tourteau soja 25%',
+              'Son de Blé 12%',
+              'Farine poisson 8%',
+              'Huile soja 5% + CMV 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 42% + Blé 8%',
+              'Tourteau soja 28%',
+              'Corn gluten 7%',
+              'Huile soja 6%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (intensif)',
+            'lines': [
+              'Katsaka 40%',
+              'Tourteau soja 30% + Concentré protéique 10%',
+              'Farine poisson 8%',
+              'Huile omega 6%',
+              'CMV 3% + Pro/Prebiotiques 3%',
+            ],
+          },
+        ]);
+      } else if (week <= 7) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 50%',
+              'Apombombary 20%',
+              'Mangahazo maina 10%',
+              'Tsaramaso/voanjo 10%',
+              'CMV 5% + Huile 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 55%',
+              'Tourteau soja 18%',
+              'Son de Blé 15%',
+              'Farine poisson 5%',
+              'Huile 4% + CMV 3%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 52% + Blé 10%',
+              'Tourteau soja 20%',
+              'Corn gluten 6%',
+              'Huile soja 6%',
+              'CMV 3% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (semi-indus.)',
+            'lines': [
+              'Katsaka 50% + Orge 10%',
+              'Tourteau soja 22% + Concentré AA 5%',
+              'Huile omega 6%',
+              'Farine poisson 5%',
+              'Additifs enzymes/probiotiques 2%',
+            ],
+          },
+        ]);
+      } else {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 55%',
+              'Mangahazo masaka 15%',
+              'Apombombary 15%',
+              'Tsaramaso 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 60%',
+              'Son de Blé 15%',
+              'Tourteau soja 12%',
+              'Huile 5%',
+              'CMV 3% + électrolytes 3%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 60% + Blé 10%',
+              'Tourteau soja 15%',
+              'Corn gluten 5%',
+              'Huile soja 6%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (export)',
+            'lines': [
+              'Katsaka 55% + Orge 12%',
+              'Tourteau soja 18%',
+              'Huile 7% + By-pass fat 3%',
+              'Farine poisson 5%',
+              'CMV 3% + Pro/Prebiotique 3%',
+            ],
+          },
+        ]);
+      }
     } else if (type == 'Dokotra') {
-      if (week <= 4) { gPerBird = 60; } else if (week <= 10) { gPerBird = 150; } else { gPerBird = 220; }
+      if (week <= 4) {
+        gPerBird = 60;
+      } else if (week <= 10) {
+        gPerBird = 150;
+      } else {
+        gPerBird = 220;
+      }
       waterMl = 450;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Finition');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '52%', 'Soja': '22%', 'Apombo': '21%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '58%', 'Soja': '28%', 'Blé': '10%', 'CMV': '4%'},
-        'Tena raitra': {'Katsaka': '60%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
-      });
+      if (week <= 4) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 38%',
+              'Apombombary 25%',
+              'Tsaramaso/voanjo 15%',
+              'Vovo-mangahazo 12%',
+              'CMV + anana 10%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 45%',
+              'Tourteau soja 25%',
+              'Son de Blé 15%',
+              'Huile 5%',
+              'CMV 5% + Levure 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 42% + Blé 10%',
+              'Tourteau soja 28%',
+              'Corn gluten 6%',
+              'Farine poisson 6%',
+              'CMV 4% + enzymes 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 40% + Orge 12%',
+              'Tourteau soja 30% + Concentré protéique 8%',
+              'Huile omega 6%',
+              'CMV 4% + probiotiques 4%',
+            ],
+          },
+        ]);
+      } else if (week <= 10) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora',
+            'lines': [
+              'Katsaka 45%',
+              'Apombombary 25%',
+              'Mangahazo 15%',
+              'Tsaramaso 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 55%',
+              'Tourteau soja 18%',
+              'Son de Blé 15%',
+              'Huile 5%',
+              'CMV 5% + électrolytes 2%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 55% + Blé 10%',
+              'Tourteau soja 20%',
+              'Corn gluten 5%',
+              'Huile soja 5%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (croissance)',
+            'lines': [
+              'Katsaka 50% + Orge 15%',
+              'Tourteau soja 20% + Concentré AA 5%',
+              'Huile omega 6%',
+              'CMV 4% + Pro/Prebiotiques 4%',
+            ],
+          },
+        ]);
+      } else {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora',
+            'lines': [
+              'Katsaka 55%',
+              'Apombo 20%',
+              'Mangahazo 15%',
+              'Tsaramaso 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 60%',
+              'Tourteau soja 15%',
+              'Son de Blé 10%',
+              'Huile 5%',
+              'CMV 5% + électrolytes 3%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 60% + Orge 10%',
+              'Tourteau soja 18%',
+              'Corn gluten 5%',
+              'Huile soja 5%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (export)',
+            'lines': [
+              'Katsaka 55% + Blé 15%',
+              'Tourteau soja 18% + Concentré protéique 7%',
+              'Huile 6%',
+              'CMV 4% + Pro/Prebiotique 3%',
+            ],
+          },
+        ]);
+      }
     } else if (type == 'Sarindokotra') {
-      if (week <= 4) { gPerBird = 80; } else if (week <= 10) { gPerBird = 200; } else if (week <= 12) { gPerBird = 400; } else { gPerBird = 450; }
+      // Mulard (Famahanana/Foie gras) - Croissance rapide
+      if (week <= 4) {
+        gPerBird = 80;
+      } else if (week <= 10) {
+        gPerBird = 200;
+      } else if (week <= 12) {
+        // Phase famahanana (gavage)
+        gPerBird = 400;
+      } else {
+        gPerBird = 450;
+      }
       waterMl = 500;
 
-      stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Gavage');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '50%', 'Soja': '25%', 'Apombo': '20%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '55%', 'Soja': '25%', 'Apombo': '15%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '58%', 'Soja': '28%', 'Blé': '10%', 'CMV': '4%'},
-        'Tena raitra': {'Katsaka': '60%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
-      });
+      stageLabel = week <= 4 ? 'Démarrage' : (week <= 10 ? 'Croissance' : 'Famahanana');
+      if (week <= 4) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora village',
+            'lines': [
+              'Katsaka 40%',
+              'Apombombary 25%',
+              'Tsaramaso/voanjo 15%',
+              'Vovomangahazo 10%',
+              'CMV + tambavy 10%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 45%',
+              'Tourteau soja 25%',
+              'Son de Blé 15%',
+              'Farine poisson 5%',
+              'Huile 5% + CMV 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 43% + Blé 10%',
+              'Tourteau soja 28%',
+              'Corn gluten 7%',
+              'Huile soja 6%',
+              'CMV 4% + enzymes 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 40% + Orge 10%',
+              'Tourteau soja 30% + Concentré protéique 8%',
+              'Huile omega 6%',
+              'CMV 3% + Pro/Prebiotiques 3%',
+            ],
+          },
+        ]);
+      } else if (week <= 10) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora',
+            'lines': [
+              'Katsaka 50%',
+              'Apombombary 20%',
+              'Mangahazo 15%',
+              'Tsaramaso 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 55%',
+              'Tourteau soja 18%',
+              'Son de Blé 15%',
+              'Huile 5%',
+              'CMV 7%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 55% + Blé 10%',
+              'Tourteau soja 20%',
+              'Corn gluten 5%',
+              'Huile soja 5%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 52% + Orge 15%',
+              'Tourteau soja 20%',
+              'Concentré gras 5%',
+              'Huile omega 6%',
+              'CMV 4% + Pro/Prebiotiques 3%',
+            ],
+          },
+        ]);
+      } else {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora famahanana',
+            'lines': [
+              'Katsaka maina voatoto 80%',
+              'Vovomangahazo masaka 10%',
+              'Sira + tambavy 5%',
+              'CMV 5%',
+              'Gavage in-droa isan\'andro',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka masaka 85%',
+              'Huile voanio 5%',
+              'Voanjo/tsaramaso voatoto 5%',
+              'CMV 3% + Vitamine 2%',
+              'Rano mafana hanalana vovoka',
+            ],
+          },
+          {
+            'label': 'Avo lenta foie',
+            'lines': [
+              'Maïs cuit vapeur 80% + Graisse 8%',
+              'Concentré protéique 5%',
+              'CMV 3%',
+              'Pro/Prebiotiques 2%',
+              'Electrolyte 2% (recovery)',
+            ],
+          },
+          {
+            'label': 'Tena raitra foie gras',
+            'lines': [
+              'Maïs extrudé 75% + Graisse palmipède 15%',
+              'Concentré foie gras 5%',
+              'CMV précision 3%',
+              'Pro/Prebiotiques + enzymes 2%',
+              'Vitamine ADE booster',
+            ],
+          },
+        ]);
+      }
     } else if (type == 'Gisa') {
-      if (week <= 3) { gPerBird = 70; } else if (week <= 8) { gPerBird = 200; } else { gPerBird = 350; }
+      if (week <= 3) {
+        gPerBird = 70;
+      } else if (week <= 8) {
+        gPerBird = 200;
+      } else {
+        gPerBird = 350;
+      }
       waterMl = 600;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 8 ? 'Croissance' : 'Finition');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '45%', 'Soja': '15%', 'Apombo': '30%', 'Ahitra': '10%'},
-        'Antonony': {'Katsaka': '48%', 'Soja': '20%', 'Apombo': '25%', 'Ahitra': '7%'},
-        'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'Ahitra': '5%'},
-        'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '15%', 'Huile': '1%', 'Ahitra': '4%'}
-      });
+      if (week <= 3) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora fibre',
+            'lines': [
+              'Katsaka 35%',
+              'Apombombary 20%',
+              'Tsaramaso/voanjo 15%',
+              'Ravina maitso voatetika 20%',
+              'CMV 10%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 40% + Blé 10%',
+              'Tourteau soja 25%',
+              'Son de Blé 15%',
+              'Huile 5%',
+              'CMV 5% + enzymes 5%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 38% + Blé 12%',
+              'Tourteau soja 28%',
+              'Corn gluten 8%',
+              'Huile soja 6%',
+              'CMV 4% + probiotiques 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra',
+            'lines': [
+              'Katsaka 35% + Orge 15%',
+              'Tourteau soja 30% + Concentré protéique 8%',
+              'Huile omega 6%',
+              'CMV 3% + Immuno booster 3%',
+            ],
+          },
+        ]);
+      } else if (week <= 8) {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora pasture',
+            'lines': [
+              'Ahitra/bozaka 30%',
+              'Katsaka 30%',
+              'Apombombary 20%',
+              'Mangahazo 10%',
+              'CMV 10%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Ahitra 25% + Luzerne 10%',
+              'Katsaka 35%',
+              'Tourteau soja 18%',
+              'Son de Blé 8%',
+              'CMV 4% + Huile 4%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Ahitra 25%',
+              'Katsaka 40% + Blé 10%',
+              'Tourteau soja 18%',
+              'Corn gluten 5%',
+              'Huile 5% + CMV 7%',
+            ],
+          },
+          {
+            'label': 'Tena raitra paturage',
+            'lines': [
+              'Paturage irrigé 35%',
+              'Katsaka 35%',
+              'Concentré palmipède 15%',
+              'Huile omega 5%',
+              'CMV précision 10%',
+            ],
+          },
+        ]);
+      } else {
+        currentFormula = _buildTieredFormula([
+          {
+            'label': 'Mora',
+            'lines': [
+              'Katsaka 50%',
+              'Ahitra maina 20%',
+              'Apombombary 15%',
+              'Mangahazo 10%',
+              'CMV 5%',
+            ],
+          },
+          {
+            'label': 'Antonony',
+            'lines': [
+              'Katsaka 55%',
+              'Son de Blé 15%',
+              'Tourteau soja 12%',
+              'Huile 5%',
+              'CMV 3% + électrolytes 3%',
+            ],
+          },
+          {
+            'label': 'Avo lenta',
+            'lines': [
+              'Katsaka 55% + Blé 10%',
+              'Tourteau soja 15%',
+              'Corn gluten 5%',
+              'Huile 6%',
+              'CMV 4% + Pro/Prebiotiques 4%',
+            ],
+          },
+          {
+            'label': 'Tena raitra (viande maigre)',
+            'lines': [
+              'Katsaka 52% + Orge 12%',
+              'Tourteau soja 16%',
+              'Huile 7% + By-pass fat 3%',
+              'Farine poisson 5%',
+              'CMV 4% + enzymes 3%',
+            ],
+          },
+        ]);
+      }
     } else if (type == 'Vorontsiloza') {
-      if (week <= 4) { gPerBird = 60; } else if (week <= 12) { gPerBird = 180; } else { gPerBird = 350; }
+      if (week <= 4) {
+        gPerBird = 60;
+      } else if (week <= 12) {
+        gPerBird = 180;
+      } else {
+        gPerBird = 350;
+      }
       waterMl = 500;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 12 ? 'Croissance' : 'Finition');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '48%', 'Soja': '28%', 'Apombo': '19%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '50%', 'Soja': '30%', 'Apombo': '15%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '52%', 'Soja': '32%', 'Blé': '11%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
-      });
+      currentFormula = '• 🦃 Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 28%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 7%\n• CMV: 5%\n\n⚠️ Mila protéine be';
     } else if (type == 'VorontsilozaChair') {
-      if (week <= 4) { gPerBird = 80; } else if (week <= 8) { gPerBird = 200; } else if (week <= 14) { gPerBird = 400; } else { gPerBird = 500; }
+      // Dinde à chair - Engraissement intensif
+      if (week <= 4) {
+        gPerBird = 80;
+      } else if (week <= 8) {
+        gPerBird = 200;
+      } else if (week <= 14) {
+        gPerBird = 400;
+      } else {
+        gPerBird = 500;
+      }
       waterMl = 700;
 
       stageLabel = week <= 4 ? 'Démarrage' : (week <= 8 ? 'Croissance' : 'Finition');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '45%', 'Soja': '30%', 'Apombo': '20%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '48%', 'Soja': '32%', 'Apombo': '15%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '50%', 'Soja': '35%', 'Blé': '10%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
-      });
+      currentFormula = '• 🦃 VORONTSILOZA CHAIR:\n\n📍 Démarrage (0-4 sem):\n  Protéine: 28%\n  Katsaka: 45%, Soja: 30%\n\n📍 Croissance (5-8 sem):\n  Protéine: 24%\n  Katsaka: 50%, Soja: 25%\n\n📍 Finition (9-16 sem):\n  Protéine: 18%\n  Katsaka: 60%, Soja: 15%\n\n🎯 Lanja vonjena:\n  • Lahy: 12-18 kg (16-20 sem)\n  • Vavy: 8-10 kg (14-16 sem)';
     } else if (type == 'Akanga') {
-      if (week <= 6) { gPerBird = 35; } else if (week <= 14) { gPerBird = 80; } else { gPerBird = 120; }
+      if (week <= 6) {
+        gPerBird = 35;
+      } else if (week <= 14) {
+        gPerBird = 80;
+      } else {
+        gPerBird = 120;
+      }
       waterMl = 250;
 
       stageLabel = week <= 6 ? 'Démarrage' : (week <= 14 ? 'Croissance' : 'Adulte');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '50%', 'Soja': '22%', 'Apombo': '23%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '52%', 'Soja': '25%', 'Apombo': '18%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '55%', 'Soja': '28%', 'Blé': '12%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '8%', 'Huile': '1%', 'CMV': '3%'}
-      });
+      currentFormula = '• 🐓 Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 22%\n• Apombo-bary (Son de Blé): 18%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%';
     } else if (type == 'Akohonala') {
-      if (week <= 6) { gPerBird = 30; } else if (week <= 16) { gPerBird = 60; } else { gPerBird = 90; }
+      if (week <= 6) {
+        gPerBird = 30;
+      } else if (week <= 16) {
+        gPerBird = 60;
+      } else {
+        gPerBird = 90;
+      }
       waterMl = 200;
 
       stageLabel = week <= 6 ? 'Démarrage' : (week <= 16 ? 'Croissance' : 'Adulte');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '45%', 'Soja': '25%', 'Apombo': '25%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '48%', 'Soja': '28%', 'Apombo': '19%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '50%', 'Soja': '30%', 'Blé': '15%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '52%', 'Soja': '32%', 'Blé': '10%', 'Huile': '2%', 'CMV': '4%'}
-      });
+      currentFormula = '• 🦚 Katsaka: 45%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombo-bary (Son de Blé): 20%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%\n\n🪶 Ilaina vitamines ho an\'ny volom-borona';
     } else if (type == 'Papelika') {
-      if (week <= 3) { gPerBird = 8; } else if (week <= 6) { gPerBird = 18; } else { gPerBird = 25; }
+      if (week <= 3) {
+        gPerBird = 8;
+      } else if (week <= 6) {
+        gPerBird = 18;
+      } else {
+        gPerBird = 25;
+      }
       waterMl = 50;
 
       stageLabel = week <= 3 ? 'Démarrage' : (week <= 6 ? 'Croissance' : 'Ponte/Adulte');
-      currentFormula = formatTiers({
-        'Mora': {'Katsaka': '48%', 'Soja': '30%', 'Apombo': '17%', 'CMV': '5%'},
-        'Antonony': {'Katsaka': '50%', 'Soja': '32%', 'Apombo': '13%', 'CMV': '5%'},
-        'Avo lenta': {'Katsaka': '52%', 'Soja': '35%', 'Blé': '8%', 'CMV': '5%'},
-        'Tena raitra': {'Katsaka': '55%', 'Soja': '35%', 'Blé': '5%', 'Huile': '2%', 'CMV': '3%'}
-      });
+      currentFormula = '• 🐦 Katsaka: 48%\n• Faikan-tsoja (Tourteau Soja): 30%\n• Apombo-bary (Son de Blé): 12%\n• Vovo-trondro (Farine de Poisson): 5%\n• CMV: 5%\n\n🥚 Protéine avo ho an\'ny atody';
     } else if (type == 'Bitro') {
-      if (week <= 4) { gPerBird = 50; } else if (week <= 12) { gPerBird = 120; } else { gPerBird = 150; }
+      if (week <= 4) {
+        gPerBird = 50;
+      } else if (week <= 12) {
+        gPerBird = 120;
+      } else {
+        gPerBird = 150;
+      }
       waterMl = 300;
 
       stageLabel = week <= 4 ? 'Zaza (0-4 herinandro)' : (week <= 12 ? 'Mitombo (5-12 herinandro)' : 'Lehibe');
       currentFormula = '• 🐇 BITRO - Sakafo isan\'andro:\n\n🥬 Hay (Foin): 70% - Ilaina mandrakariva\n🥕 Anana sy Legioma: 20%\n   - Karaoty, Salady, Petsay\n   - Ravina voasary, Anamalaho\n🌾 Granulés Lapin: 10%\n\n⚠️ Aza omena: Saonjo, Ovy, Voatabia, Vary';
     } else if (type == 'BitroVolavo') {
-      if (week <= 4) { gPerBird = 30; } else if (week <= 8) { gPerBird = 60; } else { gPerBird = 80; }
+      if (week <= 4) {
+        gPerBird = 30;
+      } else if (week <= 8) {
+        gPerBird = 60;
+      } else {
+        gPerBird = 80;
+      }
       waterMl = 150;
 
       stageLabel = week <= 4 ? 'Zaza' : (week <= 8 ? 'Mitombo' : 'Lehibe');
       currentFormula = '• 🐹 BITRO VOALAVO - Sakafo isan\'andro:\n\n🥬 Hay (Foin): 60% - Ilaina mandrakariva\n🥬 Anana maitso: 30%\n   - Petsay, Salady, Anamalaho\n   - Karaoty, Voatavo\n🍊 Vitamina C: Voasary, Tongolo mena\n🌾 Granulés: 10%\n\n⚠️ Mila Vitamina C isan\'andro!';
     } else if (type == 'Kisoa') {
-      if (week <= 8) { gPerBird = 500; } else if (week <= 16) { gPerBird = 1500; } else { gPerBird = 2500; }
-      waterMl = gPerBird * 3;
+      if (week <= 8) {
+        gPerBird = 500; // 0.5kg
+      } else if (week <= 16) {
+        gPerBird = 1500; // 1.5kg
+      } else {
+        gPerBird = 2500; // 2.5kg
+      }
+      waterMl = gPerBird * 3; // ~3x feed
 
       if (week <= 8) {
         stageLabel = 'Zaza (Sevrage: 6-8 sem)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '50%', 'Soja': '25%', 'Apombo': '20%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '52%', 'Soja': '28%', 'Apombo': '15%', 'CMV': '5%'},
-          'Avo lenta': {'Katsaka': '55%', 'Soja': '30%', 'Blé': '10%', 'CMV': '5%'},
-          'Tena raitra': {'Katsaka': '58%', 'Soja': '30%', 'Blé': '5%', 'Huile': '2%', 'CMV': '5%'}
-        });
+        currentFormula = '• Katsaka: 50%\n• Faikan-tsoja (Tourteau Soja): 25%\n• Apombombary (Son de Riz): 10%\n• Vovo-trondro (Farine de Poisson): 5%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       } else if (week <= 16) {
         stageLabel = 'Mitombo (Croissance: 9-16 sem)';
-        currentFormula = formatTiers({
-          'Mora': {'Katsaka': '45%', 'Manioc': '15%', 'Soja': '15%', 'Apombo': '20%', 'CMV': '5%'},
-          'Antonony': {'Katsaka': '48%', 'Manioc': '10%', 'Soja': '20%', 'Apombo': '17%', 'CMV': '5%'},
-          'Avo lenta': {'Katsaka': '50%', 'Soja': '25%', 'Blé': '20%', 'CMV': '5%'},
-          'Tena raitra': {'Katsaka': '55%', 'Soja': '25%', 'Blé': '15%', 'Huile': '1%', 'CMV': '4%'}
-        });
+        currentFormula = '• Katsaka: 45%\n• Vovo-mangahazo (Manioc): 15%\n• Faikan-tsoja (Tourteau Soja): 15%\n• Apombombary (Son de Riz): 15%\n• Faika-labiera (Drêche): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       } else {
         stageLabel = 'Lehibe (Finition/Truie)';
-        currentFormula = formatTiers({
-          'Mora': {'Manioc': '30%', 'Katsaka': '20%', 'Apombo': '30%', 'Drêche': '15%', 'CMV': '5%'},
-          'Antonony': {'Manioc': '20%', 'Katsaka': '30%', 'Apombo': '25%', 'Drêche': '20%', 'CMV': '5%'},
-          'Avo lenta': {'Katsaka': '50%', 'Soja': '15%', 'Blé': '20%', 'Drêche': '10%', 'CMV': '5%'},
-          'Tena raitra': {'Katsaka': '60%', 'Soja': '15%', 'Blé': '15%', 'Huile': '2%', 'CMV': '4%'}
-        });
+        currentFormula = '• Vovo-mangahazo (Manioc): 30%\n• Katsaka: 20%\n• Apombombary (Son de Riz): 25%\n• Faika-labiera (Drêche): 15%\n• Faikan-tsoja (Tourteau Soja): 5%\n• CMV Porc: 4%\n• Sira: 0.5%\n• Lao-taolana: 0.5%';
       }
     }
 
@@ -5652,7 +6395,6 @@ class _FeedScreenState extends State<FeedScreen> {
       gPerBird: gPerBird,
       waterMl: waterMl,
     );
-
   }
 
   List<Widget> _buildSegmentInputs() {
@@ -5811,6 +6553,15 @@ class _FeedScreenState extends State<FeedScreen> {
     return '1';
   }
 
+  String _buildTieredFormula(List<Map<String, dynamic>> tiers) {
+    return tiers
+        .map((tier) {
+          final lines = (tier['lines'] as List<String>).map((line) => '   • $line').join('\n');
+          return '🔹 ${tier['label']}:\n$lines';
+        })
+        .join('\n\n');
+  }
+
   Widget _buildCollationItem(String emoji, String title, String description) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -5864,7 +6615,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 child: Column(
                   children: [
                     DropdownButtonFormField(
-                      value: _type,
+                      initialValue: _type,
                       items: ['Chair', 'Pondeuse', 'Ornement', 'Nain', 'Mpiady', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo', 'Kisoa']
                       .where((val) {
                         if (widget.category == 'vorona') {
@@ -5928,7 +6679,7 @@ class _FeedScreenState extends State<FeedScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         elevation: 4,
                         shadowColor: AppColors.primary.withValues(alpha: 0.4),
@@ -6178,7 +6929,7 @@ class _FeedScreenState extends State<FeedScreen> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF1B5E20), Color(0xFF43A047)],
@@ -6261,241 +7012,186 @@ class _FeedScreenState extends State<FeedScreen> {
 }
 
 // --- MODULE 3: TOROHAY (GUIDES SPÉCIFIQUES VORONA) ---
-class TorohayScreen extends StatelessWidget {
-  const TorohayScreen({super.key});
+// --- MODULE 3: TOROHAY (GUIDES) ---
+
+// TorohayAkohoScreen - Pour AkohoTech (Papelika, Vorontsiloza)
+class TorohayAkohoScreen extends StatelessWidget {
+  const TorohayAkohoScreen({super.key});
 
   List<Map<String, dynamic>> _buildGuides() {
     return [
       {
-        'emoji': '🦆',
-        'title': 'Sarindokotra (Mulard)',
-        'subtitle': 'Hybride Dokotra lahy + Gana vavy. Hena matsiro sy Foie Gras.',
-        'badges': ['4-6 kg (14 sem)', 'Sterile (tsy miteraka)', 'Gavage possible'],
+        'emoji': '🍗',
+        'title': 'Poulet de chair 45 andro',
+        'subtitle': 'Programme 6 herinandro hahazoana lanja 1.8-2.2 kg sy FCR 1.7-1.9.',
+        'badges': ['45 andro', '1.8-2.2 kg', 'FCR 1.7-1.9'],
         'steps': [
           {
-            'icon': Icons.info_outline,
-            'title': 'Fiaviana & Tombony',
+            'icon': Icons.house_siding,
+            'title': 'Trano & Hafanana',
             'points': [
-              'Vokatry ny fampivadiana Dokotra lahy (Barbarie) sy Gana vavy (Pékin/Nantais).',
-              'Tsy manatody ary tsy miteraka (Sterile) - ompiana ho hena ihany.',
-              'Mitombo haingana kokoa noho ny gana tsotra, hena matsiro, tsy dia matavy loatra.',
-              'Mahazaka aretina sy lafika tsara kokoa noho ny gana.',
+              'Hakitroka: 12-14 isa/m² (0-3 herinandro), midina ho 8 isa/m² rehefa 5+ herinandro.',
+              'Hafanana: 34°C andro 1, midina 2-3°C isan-kerinandro hatramin\'ny 21°C.',
+              'Ventilation mitsitaitaika + pad cooling raha mihoatra 30°C.',
+              'Lafika 8-10 sm (chip bois/rice hull) ovaina isaky ny herinandro.',
             ],
           },
           {
             'icon': Icons.restaurant_outlined,
-            'title': 'Sakafo',
+            'title': 'Sakafo & FCR',
             'points': [
-              'Démarrage (0-3 sem): Provende Gana Démarrage 20% protéine, 5-6g/andro.',
-              'Croissance (4-8 sem): Katsaka 55%, Apombo 20%, Soja 20%, CMV 5%.',
-              'Finition (9-12 sem): Katsaka betsaka kokoa mba hahazoana lanja (4-6kg).',
-              'Gavage (12+ sem): Katsaka masaka omena in-2 isan\'andro 21 andro = Foie Gras.',
+              'Starter 0-10 andro: 22-23% protéine, 30-35g/akoho/andro, electrolytes ho an\'ny brooder.',
+              'Grower 11-24 andro: 21% protéine, 55-80g/andro, manomboka mampiditra pellets.',
+              'Finisher 25-42 andro: 19% protéine, katsaka 55% + soja 20%, 120-140g/andro.',
+              'Tanjona FCR 1.7-1.9 → mifehy rano madio 24/24 sy famahanana in-5/andro.',
             ],
           },
           {
-            'icon': Icons.home_outlined,
-            'title': 'Trano & Fikarakarana',
+            'icon': Icons.health_and_safety_outlined,
+            'title': 'Fahasalamana & Biosecurity',
             'points': [
-              'Hakitroka: 3-4 isa/m². Lavaka rano (dobo) raha misy.',
-              'Tsy mila rano hilomanosana be, fa rano fisotro madio foana.',
-              'Lafika maina (paille/copeaux) mba tsy harary tongotra.',
-              'Tandremo: Mifampipika raha tery loatra ny toerana.',
+              'Vaksiny: Pesta HB1 (andro 6), Gumboro (andro 12 & 18), Lasota (andro 21).',
+              'Electrolyte + Vitamine C rehefa misy heat stress >32°C.',
+              'Fidiovana lalina + asa footbath permanganate alohan\'ny batch tsirairay.',
+              'Mitahiry mortality <4% amin\'ny triage sy fanesorana biby malemy.',
             ],
           },
           {
             'icon': Icons.timeline_outlined,
-            'title': 'Dingana fanodinana',
+            'title': 'Fitantanana & Fivarotana',
             'points': [
-              'Fiompiana toy ny gana (0-12 sem).',
-              'Lanja vonjena: 4-6 kg amin\'ny 14-16 herinandro.',
-              'Raha Gavage: Manomboka amin\'ny 12 sem, hatramin\'ny 15-16 sem.',
-              'Hena misy tavy tsara, matsiro, tsara ho an\'ny fivarotana.',
+              'Manao fanisana lanja isan-kerinandro (sample 5%) hahafantarana ADG 55-65g.',
+              'Misintona sakafo in-5/andro mandra-pahatonga 3 herinandro, avy eo in-3-4/andro.',
+              'Fasting 6 ora alohan\'ny fandefasana mba hihena ny loto sy hanatsara kalitao hena.',
+              'Kajio vola isaky ny kg amin\'ny alalan\'ny cost/kg sy vidin\'ny tsena mialoha.',
             ],
           },
         ],
         'feed': [
-          {'label': 'Démarrage', 'value': 'Provende 20% protéine, hafanana 32-35°C.'},
-          {'label': 'Croissance', 'value': 'Katsaka 55%, Apombo 20%, Soja 20%.'},
-          {'label': 'Finition', 'value': 'Katsaka betsaka, lanja 4-6kg.'},
+          {'label': '0-10 andro', 'value': 'Starter 22-23% protéine, 30-35g/akoho/andro + Probiotique.'},
+          {'label': '11-24 andro', 'value': 'Grower 21% protéine, 55-80g/andro, rano 0.5L/10 isa.'},
+          {'label': '25-42 andro', 'value': 'Finisher 19% protéine, 120-140g/andro, katsaka 55%.'},
         ],
         'timeline': [
-          {'label': 'Fiaviana', 'value': 'Dokotra lahy × Gana vavy.'},
-          {'label': 'Fiompiana', 'value': '14-16 herinandro.'},
-          {'label': 'Gavage (option)', 'value': '12-15 sem, Foie Gras 500-700g.'},
+          {'label': '0-10 andro', 'value': 'Brooder 34→30°C, jiro 23h, vaksiny HB1.'},
+          {'label': '11-24 andro', 'value': 'Grower + Lasota/Gumboro, ventilation ampitomboina.'},
+          {'label': '25-45 andro', 'value': 'Finisher, fanomanana famoahana, FCR kendrena 1.8.'},
         ],
       },
       {
-        'emoji': '🌊',
-        'title': 'Gana (Canard Pékin)',
-        'subtitle': 'Mpamokatra atody sy hena. Fotsy, vava mavo.',
-        'badges': ['200-250 atody/taona', '3-4 kg (10 sem)', 'Mila rano'],
+        'emoji': '🥚',
+        'title': 'Poule pondeuse 80%',
+        'subtitle': 'Atody 280-320 isan-taona amin\'ny jiro 16-18 ora sy sakafo misy calcium 3.5-4%.',
+        'badges': ['280-320 atody/taona', 'Jiro 16-18h', 'Calcium 3.5-4%'],
         'steps': [
           {
-            'icon': Icons.waves_outlined,
-            'title': 'Singa Manan-danja',
+            'icon': Icons.home_work_outlined,
+            'title': 'Trano & Hazavana',
             'points': [
-              'Gana fotsy, vava mavo, tongotra mavo (Pékin/Nantais).',
-              'Mila rano hilomanosana sy fisotro (dobo na lavaka).',
-              'Manatody 200-250 isa/taona, hena matsiro 3-4kg.',
-              'Mahazaka hatsiaka kokoa noho ny akoho.',
+              'Hakitroka: 6-7 isa/m², perchoir 20 sm/akoho, rivotra misosa manala ammonia.',
+              'Akany: 1 akany/5 vavy, mololo maina ovaina in-2 isan-kerinandro.',
+              'Hazavana: 14 ora (tanora) → 16-18 ora (ponte) amin\'ny jiro 60 lux.',
+              'Aza ampiditra hazavana mahery tampoka; asio 30 min fanampiny isan-kerinandro.',
             ],
           },
           {
             'icon': Icons.restaurant_outlined,
-            'title': 'Sakafo',
+            'title': 'Sakafo & Dingana',
             'points': [
-              'Démarrage (0-3 sem): Provende 20% protéine.',
-              'Croissance (4-10 sem): Katsaka 50%, Apombo 25%, Soja 20%, CMV 5%.',
-              'Ponte: Proteina 16-18%, Calcium 3.5%, omena coquille huître.',
-              'Azo omena anana, ahitra, voatavo, vary aron-tsakafo.',
+              'Starter 0-6 herinandro: 20% protéine, 35g/akoho/andro.',
+              'Grower/Developer 7-16 herinandro: 16% protéine, 70-80g/andro, Calcium 2%.',
+              'Ponte 17+ herinandro: 18% protéine, Calcium 3.5-4%, 110-120g/andro.',
+              'Ampio grit + coquille huître 5-8% mandritra ny plateau.',
             ],
           },
           {
-            'icon': Icons.pool_outlined,
-            'title': 'Trano & Rano',
+            'icon': Icons.health_and_safety_outlined,
+            'title': 'Fahasalamana & Fitiliana',
             'points': [
-              'Hakitroka: 3-4 isa/m².',
-              'Lavaka rano (dobo) ilaina - 30-40 sm lalina, afaka milomano.',
-              'Trano misy rivotra, tsy maizina loatra.',
-              'Atsipy fasika lavaka mba hitsaroan\'ny gana.',
+              'Vaksiny: Pesta, Gumboro, IB, Variole, Salmonella araka ny tetiandro.',
+              'Vermifuge isaky ny 8 herinandro + fifehezana kankana ivelany (poudre).',
+              'Fanombanana lanja 16 herinandro (1.2-1.3kg) alohan\'ny hanombohana jiro.',
+              'Manao culling 5% isan-taona hanavaozana ny vokatra.',
             ],
           },
           {
-            'icon': Icons.egg_outlined,
-            'title': 'Atody & Fiterahana',
+            'icon': Icons.assignment_turned_in_outlined,
+            'title': 'Fitantanana Atody',
             'points': [
-              'Manomboka manatody: 20-24 herinandro.',
-              'Ratio: 1 lahy : 5-6 vavy.',
-              'Incubation: 28 andro.',
-              'Atody lehibe noho ny akoho (70-80g).',
+              'Manangona atody 3-4x/andro, diovina amin\'ny lamba maina.',
+              'Tehirizo amin\'ny 16-18°C, hamandoana 75%, vaventy miakatra.',
+              'Manao traceabilité (daty, tranon\'akoho) alohan\'ny fivarotana.',
+              'Mitazona rano sy sakafo 24/24 hisorohana stress mampidina ponte.',
             ],
           },
         ],
         'feed': [
-          {'label': 'Démarrage', 'value': 'Provende 20% protéine.'},
-          {'label': 'Croissance', 'value': 'Katsaka 50%, Apombo 25%, Soja 20%.'},
-          {'label': 'Ponte', 'value': 'Protéine 16-18%, Calcium 3.5%.'},
+          {'label': '0-6 herinandro', 'value': 'Starter 20% protéine, 35g/andro.'},
+          {'label': '7-16 herinandro', 'value': 'Grower 16% protéine, 70-80g/andro, Calcium 2%.'},
+          {'label': '17+ herinandro', 'value': 'Ponte 18% protéine, Calcium 3.5-4%, 110-120g/andro.'},
         ],
         'timeline': [
-          {'label': 'Incubation', 'value': '28 andro.'},
-          {'label': 'Chair', 'value': '10-12 herinandro, 3-4kg.'},
-          {'label': 'Ponte', 'value': '200-250 atody/taona.'},
+          {'label': '0-16 herinandro', 'value': 'Starter → Grower, fanaraha-maso lanja sy perchoir.'},
+          {'label': '17-21 herinandro', 'value': 'Fanomanana ponte, ampiaraho jiro 30 min/sem.'},
+          {'label': '22+ herinandro', 'value': 'Plateau 80-90% ponte, fitantanana calcium sy filaharana.'},
         ],
       },
       {
-        'emoji': '🦆',
-        'title': 'Dokotra (Canard Barbarie)',
-        'subtitle': 'Mafy orina, hena be, tsy manao tabataba.',
-        'badges': ['4-5 kg (lahy)', '100-120 atody/taona', 'Mahery'],
+        'emoji': '🐓',
+        'title': 'Akanga (Guinea fowl)',
+        'subtitle': 'Vorona fanairana sy hena matanjaka mila toerana malalaka sy sakafo manankarena protéine.',
+        'badges': ['6-8 isa/m²', '120-160 atody', 'Lahy 1 : 5 vavy'],
         'steps': [
           {
-            'icon': Icons.pets_outlined,
-            'title': 'Toetra',
+            'icon': Icons.landscape,
+            'title': 'Toerana & Fefy',
             'points': [
-              'Lojika mena eo amin\'ny tava, volo misy fotsy sy mainty.',
-              'Tsy manao tabataba be toy ny gana.',
-              'Lahy lehibe kokoa noho ny vavy (4-5kg vs 2.5-3kg).',
-              'Mafy orina, mahazaka aretina tsara.',
+              'Hakitroka brooder: 6-8 isa/m², avy eo mila aviary 2m avo misy net 2.5cm.',
+              'Perchoir 1.8-2m avo, lafaoro maina misoroka tongotra maratra.',
+              'Avela hivoaka amin\'ny atoandro fa averina amin\'ny tranony amin\'ny hariva.',
+              'Tapaho elatra iray raha tsy misy aviary mihidy.',
             ],
           },
           {
-            'icon': Icons.restaurant_outlined,
+            'icon': Icons.restaurant_menu,
             'title': 'Sakafo',
             'points': [
-              'Toy ny gana, fa mila angovo bebe kokoa (lahy lehibe).',
-              'Croissance: Katsaka 55%, Apombo 20%, Soja 20%, CMV 5%.',
-              'Azo omena anana, legioma, vary aron-tsakafo.',
-              'Tsy dia mila rano be toy ny gana.',
+              'Starter 0-4 herinandro: 23% protéine, 35g/andro, brooder 35→28°C.',
+              'Grower 5-12 herinandro: 20% protéine, 70-90g/andro, omena anana maitso.',
+              'Adulte: 16% protéine, 60-70% ahitra/ahitra maina + 40% provende.',
+              'Ampio grit sy coquille 3% hanamafisana atody.',
             ],
           },
           {
-            'icon': Icons.home_outlined,
-            'title': 'Trano',
+            'icon': Icons.health_and_safety_outlined,
+            'title': 'Fahasalamana & Fitandremana',
             'points': [
-              'Hakitroka: 2-3 isa/m² (lehibe kokoa).',
-              'Tsy tena mila dobo lehibe, fa rano fisotro foana.',
-              'Perchoir ambony kely - tia miala amin\'ny tany.',
-              'Tandremo ny lahy tsy hifampiady (mifampisokatra).',
+              'Vaksiny mitovy amin\'ny akoho (Pesta, Gumboro) + vermifuge isaky ny 3 volana.',
+              'Aza afangaro amin\'ny akoho marefo rehefa mbola kely (mitondra tabia).',
+              'Rano madio & sira mineraly hanalefahana stress rehefa manao raitra.',
+              'Manao famafazana anti-mite amin\'ny perchoir sy akany maro.',
             ],
           },
           {
-            'icon': Icons.eco_outlined,
-            'title': 'Fiterahana & Atody',
+            'icon': Icons.timeline_outlined,
+            'title': 'Fanodinana & Tsena',
             'points': [
-              'Manatody: 100-120 isa/taona.',
-              'Ratio: 1 lahy : 4-5 vavy.',
-              'Incubation: 35 andro (lava kokoa noho ny gana).',
-              'Tsara hampitombo Sarindokotra (lahy Dokotra + vavy Gana).',
+              'Fampiofanana miverina amin\'ny tranony 4-6 herinandro, sakafo fanintonana amin\'ny hariva.',
+              'Atody 120-160 isa/taona amin\'ny 8-9 volana, hatch rate 60-70% raha couveuse.',
+              'Hena 1.3-1.5kg amin\'ny 16-20 herinandro, vidiny avo kokoa noho ny akoho mahazatra.',
+              'Tafiditra amin\'ny tsena gourmet/restaurant sy fiarovana tanàna (alarme voajanahary).',
             ],
           },
         ],
         'feed': [
-          {'label': 'Démarrage', 'value': 'Provende 20% protéine.'},
-          {'label': 'Croissance', 'value': 'Katsaka 55%, Apombo 20%, Soja 20%.'},
-          {'label': 'Adulte', 'value': 'Katsaka, vary aron-tsakafo, anana.'},
+          {'label': '0-4 herinandro', 'value': 'Starter 23% protéine, 35g/andro, brooder 35→28°C.'},
+          {'label': '5-12 herinandro', 'value': 'Grower 20% protéine, 70-90g/andro + anana.'},
+          {'label': 'Adulte', 'value': 'Provende 16% + ahitra 60-70%, grit 3%.'},
         ],
         'timeline': [
-          {'label': 'Incubation', 'value': '35 andro.'},
-          {'label': 'Chair', 'value': '12-14 herinandro, 4-5kg (lahy).'},
-          {'label': 'Ponte', 'value': '100-120 atody/taona.'},
-        ],
-      },
-      {
-        'emoji': '🦢',
-        'title': 'Gisa (Oie)',
-        'subtitle': 'Lehibe, mafy orina, mihinana ahitra be.',
-        'badges': ['30-50 atody/taona', '5-8 kg', 'Mihinana ahitra'],
-        'steps': [
-          {
-            'icon': Icons.grass_outlined,
-            'title': 'Toetra Manokana',
-            'points': [
-              'Lehibe kokoa noho ny gana/dokotra (5-8kg).',
-              'Mihinana ahitra be dia be - mora fiompiana raha misy tanimboly.',
-              'Mafy orina, mahazaka hatsiaka sy aretina.',
-              'Tendro (duvet) tsara indrindra ho an\'ny ondana.',
-            ],
-          },
-          {
-            'icon': Icons.restaurant_outlined,
-            'title': 'Sakafo',
-            'points': [
-              'Démarrage: Provende 18-20% protéine.',
-              'Adulte: Ahitra 70-80%, Katsaka/vary 20-30%.',
-              'Mila ahitra maitso foana - tanimboly na vohitra.',
-              'Rano madio betsaka (milomano sy misotro).',
-            ],
-          },
-          {
-            'icon': Icons.pool_outlined,
-            'title': 'Trano & Toerana',
-            'points': [
-              'Hakitroka: 1-2 isa/m² (lehibe be).',
-              'Lavaka rano lehibe ilaina (milomano).',
-              'Tanimboly na vohitra maitso (paddock).',
-              'Trano hialofana rivotra sy orana.',
-            ],
-          },
-          {
-            'icon': Icons.egg_outlined,
-            'title': 'Atody & Fiterahana',
-            'points': [
-              'Manatody: 30-50 isa/taona.',
-              'Ratio: 1 lahy : 3-4 vavy.',
-              'Incubation: 28-30 andro.',
-              'Atody lehibe (120-150g), tsara sakafon\'olona.',
-            ],
-          },
-        ],
-        'feed': [
-          {'label': 'Démarrage', 'value': 'Provende 18-20% protéine.'},
-          {'label': 'Adulte', 'value': 'Ahitra 70-80%, Katsaka 20-30%.'},
-          {'label': 'Ponte', 'value': 'Ahitra + Katsaka, Calcium fanampy.'},
-        ],
-        'timeline': [
-          {'label': 'Incubation', 'value': '28-30 andro.'},
-          {'label': 'Chair', 'value': '14-16 herinandro, 5-8kg.'},
-          {'label': 'Ponte', 'value': '30-50 atody/taona.'},
+          {'label': '0-4 herinandro', 'value': 'Brooder mafana, manapaka elatra ankavia amin\'ny herinandro faha-4.'},
+          {'label': '5-16 herinandro', 'value': 'Aviary sy famerenana an-trano isan-alina.'},
+          {'label': '8-9 volana', 'value': 'Ponte 120-160 isa, lahy 1:5 vavy, hena 1.3-1.5kg.'},
         ],
       },
       {
@@ -6575,41 +7271,42 @@ class TorohayScreen extends StatelessWidget {
             'icon': Icons.vaccines_outlined,
             'title': 'Fisorohana aretina',
             'points': [
-              'Vitamina & Electrolyte mandritra ny 5 andro voalohany sy rehefa miala amin\'ny brooder.',
-              'Vaksiny Newcastle rehefa 10 andro sy repika 35 andro raha misy loza.',
-              'Sasao sy diovy isan-kerinandro ny fanomezam-pisakafoana / fisotroana mba hisorohana coccidiose.',
+              'Vaksiny amin\'ny andro faha-1 (Marek na Newcastle raha misy).',
+              'Tandremo ny Blackhead (Histomoniasis) – aza ifangaroana amin\'ny akoho.',
+              'Omena antibiotique prophylactique rehefa tery be na manova sakafo.',
+              'Diovina tsara ny lafika isan-kerinandro, tandremo ny Coccidiosis.',
             ],
           },
           {
-            'icon': Icons.scale_outlined,
-            'title': 'Fitomboana & sakafo',
+            'icon': Icons.restaurant_outlined,
+            'title': 'Sakafo & Fampitomboana',
             'points': [
-              'Démarrage (0-4 herinandro): 28% protéine, 60-80g/isa/andro.',
-              'Croissance (5-8 herinandro): 24% protéine, 180-220g/isa/andro.',
-              'Finition (9-16+ herinandro): 18-20% protéine, katsaka 60%, soya 20%, blé 15%, CMV 5%.',
-              'Ampidiro fibre (ahitra na luzerne) 5-8% hisorohana matavy loatra.',
+              'Démarrage (0-6 herinandro): 28% protéine + vitamines A, D, E. Sakafo vovony 100%.',
+              'Croissance (7-14 herinandro): 20-22% protéine, afangaro granulé sy katsaka.',
+              'Finition (15-20 herinandro): 16-18% protéine, omena katsaka be.',
+              'Lahy lehibe kokoa noho ny vavy (18 kg vs 10 kg), mila sakafo betsaka kokoa.',
             ],
           },
           {
-            'icon': Icons.flag_outlined,
-            'title': 'Tetiandro famokarana',
+            'icon': Icons.timeline_outlined,
+            'title': 'Dingana Fanodinana',
             'points': [
-              'Herinandro 0-2: brooder 34-32°C, jiro 23 ora/andro.',
-              'Herinandro 3-8: manomboka maka toerana malalaka sy mitsabo coccidiose raha ilaina.',
-              'Herinandro 9-12: fisarahana lahy/vavy; atomboka fanomezana sakafo finition misy katsaka betsaka.',
-              'Herinandro 16-20: lanja kendrena 12-15kg (lahy) sy 8-10kg (vavy).',
+              'Andro 1-21: hafanana 36-38°C, miakatra tsara raha mahazo jiro 24 ora.',
+              'Andro 22-60: ampihena ny hafanana tsara-tsara hatramin\'ny 20°C.',
+              'Andro 60-100: tsarovy hitondra masaka (mature) moramora – aza oziana loatra.',
+              'Vonjeo: Amin\'ny herinandro faha-16-20. Lanja 12-15 kg. Ny lahy lehibe kokoa.',
             ],
           },
         ],
         'feed': [
-          {'label': '0-4 herinandro', 'value': 'Starter 28% protéine + coccidiostat, 60-80g/isa/andro.'},
-          {'label': '5-8 herinandro', 'value': 'Grower 24% protéine, omena amin\'ny fatra 2 isa/andro hisorohana fandaniam-panafody.'},
-          {'label': '9-16+ herinandro', 'value': 'Finisher 18% protéine + katsaka voatoto, fibre 5-8% ho an\'ny tsinay.'},
+          {'label': '0-6 herinandro', 'value': 'Starter 28% protéine. Hafanana 36-38°C.'},
+          {'label': '7-14 herinandro', 'value': 'Croissance 20-22% protéine + katsaka.'},
+          {'label': '15-20 herinandro', 'value': 'Finition 16-18% protéine. Katsaka betsaka.'},
         ],
         'timeline': [
-          {'label': 'Fividianana na incubation', 'value': 'Sivana atody 85g+, incubation 28 andro, mila fihodinana atody 5x/andro.'},
-          {'label': 'Brooder', 'value': 'Lampy 250W, tsihy fihazonana hafanana, misaraka avy hatrany ny lahy rohy raha be fifandirana.'},
-          {'label': 'Fanaraha-maso lanja', 'value': 'Mandrefy isan-kerinandro, raha latsaky ny tondro (table) dia mampiakatra protéine/kaloria 10% mandritra ny 3 andro.'},
+          {'label': 'Fiomanana', 'value': 'Incubation 28 andro. Hatching rate ~75%.'},
+          {'label': 'Fizarana', 'value': 'Lahy sy vavy misaraka amin\'ny 8-10 herinandro.'},
+          {'label': 'Fanodinana', 'value': '16-20 herinandro: 12-15 kg (lahy > vavy).'},
         ],
       },
     ];
@@ -6618,22 +7315,33 @@ class TorohayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final guides = _buildGuides();
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHero(),
-          const SizedBox(height: 20),
-          ...guides.map((guide) => Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: _buildGuideCard(guide),
-              )),
-          _buildChecklistCard(),
-          const SizedBox(height: 16),
-          _buildAlertCard(),
-          const SizedBox(height: 16),
-        ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHero(),
+            const SizedBox(height: 20),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.75,
+              ),
+              itemCount: guides.length,
+              itemBuilder: (context, index) => _buildGuideCard(guides[index], context),
+            ),
+            const SizedBox(height: 16),
+            _buildChecklistCard(),
+            const SizedBox(height: 16),
+            _buildAlertCard(),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
@@ -6641,7 +7349,7 @@ class TorohayScreen extends StatelessWidget {
   Widget _buildHero() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(colors: [Color(0xFF2F8F83), Color(0xFF0F5132)]),
         borderRadius: BorderRadius.circular(24),
@@ -6658,10 +7366,10 @@ class TorohayScreen extends StatelessWidget {
         children: const [
           Text('Torohay manokana', style: TextStyle(color: Colors.white70, fontSize: 13, letterSpacing: 0.5)),
           SizedBox(height: 6),
-          Text('Fomba fiompiana Papelika & Vorontsiloza', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+          Text('AkohoTech Tena raitra Guides', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           Text(
-            'Paikady haingana ahazoana atody betsaka sy hena mavesatra, miaraka amin\'ny sakafo, hakitroka ary fisorohana aretina.',
+            'Papelika, poulet de chair, poule pondeuse, vorontsiloza ary akanga miaraka amin\'ny sakafo, hakitroka ary fisorohana aretina maoderina.',
             style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
           ),
         ],
@@ -6669,57 +7377,195 @@ class TorohayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGuideCard(Map<String, dynamic> guide) {
+  Widget _buildGuideCard(Map<String, dynamic> guide, BuildContext ctx) {
     final List<String> badges = List<String>.from(guide['badges'] as List);
     final List<Map<String, dynamic>> steps = List<Map<String, dynamic>>.from(guide['steps'] as List);
     final List<Map<String, String>> feed = List<Map<String, String>>.from(guide['feed'] as List);
     final List<Map<String, String>> timeline = List<Map<String, String>>.from(guide['timeline'] as List);
+    final List<Map<String, String>> health = guide['health'] != null
+      ? List<Map<String, String>>.from(guide['health'] as List)
+      : [];
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.grey.shade200),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 18, offset: const Offset(0, 10)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(guide['emoji'] as String, style: const TextStyle(fontSize: 32)),
-              const SizedBox(width: 12),
-              Expanded(
+    // Associer une couleur de fond selon le type
+    Color getCardColor() {
+      final title = guide['title'] as String;
+      if (title.contains('Poulet')) return const Color(0xFFFF7043);
+      if (title.contains('Poule pondeuse')) return const Color(0xFFFFC107);
+      if (title.contains('Akanga')) return const Color(0xFF4E342E);
+      if (title.contains('Papelika')) return const Color(0xFFE91E63);
+      if (title.contains('Vorontsiloza')) return const Color(0xFF9C27B0);
+      return const Color(0xFF2F8F83);
+    }
+
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: ctx,
+          builder: (dialogContext) => Dialog(
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(guide['title'] as String, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 4),
-                    Text(
-                      guide['subtitle'] as String,
-                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, height: 1.4),
+                    Row(
+                      children: [
+                        Text(guide['emoji'] as String, style: const TextStyle(fontSize: 32)),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(guide['title'] as String, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => Navigator.pop(dialogContext),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 8),
+                    Text(guide['subtitle'] as String, style: const TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: badges.map((badge) => _buildBadge(badge)).toList(),
+                    ),
+                    const SizedBox(height: 18),
+                    ...steps.map((step) => _buildStepTile(step)),
+                    const SizedBox(height: 16),
+                    _buildListSection('Sakafo & Fatra', feed, Icons.restaurant_menu),
+                    if (health.isNotEmpty) ...[
+                      const SizedBox(height: 12),
+                      _buildListSection('Fahasalamana & Tips', health, Icons.health_and_safety),
+                    ],
+                    const SizedBox(height: 12),
+                    _buildListSection('Tetiandro / Workflow', timeline, Icons.schedule),
                   ],
                 ),
               ),
+            ),
+          ),
+        );
+      },
+      child: Container(
+        height: 280,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.15),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              getCardColor(),
+              getCardColor().withValues(alpha: 0.7),
             ],
           ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: badges.map((badge) => _buildBadge(badge)).toList(),
-          ),
-          const SizedBox(height: 18),
-          ...steps.map((step) => _buildStepTile(step)),
-          const SizedBox(height: 16),
-          _buildListSection('Sakafo & Fatra', feed, Icons.restaurant_menu),
-          const SizedBox(height: 12),
-          _buildListSection('Tetiandro / Workflow', timeline, Icons.schedule),
-        ],
+        ),
+        child: Stack(
+          children: [
+            // Motif de fond avec l'emoji
+            Positioned(
+              right: -20,
+              top: -20,
+              child: Opacity(
+                opacity: 0.1,
+                child: Text(
+                  guide['emoji'] as String,
+                  style: const TextStyle(fontSize: 150),
+                ),
+              ),
+            ),
+            // Dégradé pour lisibilité
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.8),
+                  ],
+                  stops: const [0.4, 1.0],
+                ),
+              ),
+            ),
+            // Contenu
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Badge en haut
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.25),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                          ),
+                          child: Text(
+                            badges.isNotEmpty ? badges[0] : '',
+                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Titre et détails en bas
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        guide['emoji'] as String,
+                        style: const TextStyle(fontSize: 36),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        guide['title'] as String,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: const [
+                          Icon(Icons.touch_app, color: Colors.white70, size: 13),
+                          SizedBox(width: 4),
+                          Flexible(
+                            child: Text(
+                              'Tsindrio eto',
+                              style: TextStyle(color: Colors.white70, fontSize: 11),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -6866,7 +7712,706 @@ class TorohayScreen extends StatelessWidget {
           SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Fisorohana aretina: aza mifangaro amin\'ny akoho ny vorontsiloza sy papelika. Manaova karantina 3 herinandro ho an\'ny vorona vaovao ary tandremo ny hafanana (brooder) mba tsy hisy fahafatesana tampoka.',
+              'Fisorohana aretina: aza mifangaro amin\'ny akoho ny vorontsiloza sy papelika. Manaova fanasarahana/atokana 3 herinandro ho an\'ny vorona vaovao ary tandremo ny hafanana (brooder) mba tsy hisy fahafatesana tampoka.',
+              style: TextStyle(fontSize: 13, height: 1.5),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// TorohayVoronaScreen - Pour VoronaTech (Gana, Dokotra, Sarindokotra, Gisa)
+class TorohayVoronaScreen extends StatelessWidget {
+  const TorohayVoronaScreen({super.key});
+
+  List<Map<String, dynamic>> _buildGuides() {
+    return [
+      {
+        'emoji': '🦆',
+        'title': 'Sarindokotra (Mulard)',
+        'subtitle': 'Hybride Dokotra lahy + Gana vavy. Hena matsiro sy Foie Gras.',
+        'badges': ['4-6 kg (14 sem)', 'Sterile (tsy miteraka)', 'Famahanana (gavage) possible'],
+        'steps': [
+          {
+            'icon': Icons.info_outline,
+            'title': 'Fiaviana & Tombony',
+            'points': [
+              'Vokatry ny fampivadiana Dokotra lahy (Barbarie) sy Gana vavy (Pékin/Nantais).',
+              'Tsy manatody ary tsy miteraka (Sterile) - ompiana ho hena ihany.',
+              'Mitombo haingana kokoa noho ny gana tsotra, hena matsiro, tsy dia matavy loatra.',
+              'Mahazaka aretina sy lafika tsara kokoa noho ny gana.',
+            ],
+          },
+          {
+            'icon': Icons.restaurant_outlined,
+            'title': 'Sakafo',
+            'points': [
+              'Démarrage (0-3 sem): Provende Gana Démarrage 20% protéine, 5-6g/andro.',
+              'Croissance (4-8 sem): Katsaka 55%, Apombo 20%, Soja 20%, CMV 5%.',
+              'Finition (9-12 sem): Katsaka betsaka kokoa mba hahazoana lanja (4-6kg).',
+              'Famahanana manokana (12+ sem): Katsaka masaka omena in-2 isan\'andro 21 andro = Foie Gras.',
+            ],
+          },
+          {
+            'icon': Icons.home_outlined,
+            'title': 'Trano & Fikarakarana',
+            'points': [
+              'Hakitroka: 3-4 isa/m². Lavaka rano (dobo) raha misy.',
+              'Tsy mila rano hilomanosana be, fa rano fisotro madio foana.',
+              'Lafika maina (paille/copeaux) mba tsy harary tongotra.',
+              'Tandremo: Mifampipika raha tery loatra ny toerana.',
+            ],
+          },
+          {
+            'icon': Icons.timeline_outlined,
+            'title': 'Dingana fanodinana',
+            'points': [
+              'Fiompiana toy ny gana (0-12 sem).',
+              'Lanja vonjena: 4-6 kg amin\'ny 14-16 herinandro.',
+              'Raha famahanana manokana: Manomboka amin\'ny 12 sem, hatramin\'ny 15-16 sem.',
+              'Hena misy tavy tsara, matsiro, tsara ho an\'ny fivarotana.',
+            ],
+          },
+        ],
+        'feed': [
+          {'label': 'Démarrage', 'value': 'Provende 20% protéine, hafanana 32-35°C.'},
+          {'label': 'Croissance', 'value': 'Katsaka 55%, Apombo 20%, Soja 20%.'},
+          {'label': 'Finition', 'value': 'Katsaka betsaka, lanja 4-6kg.'},
+        ],
+        'health': [
+          {
+            'label': 'Fiaviana',
+            'value': 'Dokotra lahy × Gana vavy (Mulard) ary tsy miteraka ka atokana ho hena na Foie Gras.',
+          },
+          {
+            'label': 'Fahasalamana',
+            'value': 'Mahazaka aretina kokoa noho ny gana tsotra, fa mila rano fisotro madio sy rivotra tsara hivezivezy.',
+          },
+          {
+            'label': 'Fitandremana',
+            'value': 'Ataovy malalaka ny toerana hisorohana piquage sy diky lena, ampio paille maina hiarovana tongotra.',
+          },
+        ],
+        'timeline': [
+          {'label': 'Fiaviana', 'value': 'Dokotra lahy × Gana vavy.'},
+          {'label': 'Fiompiana', 'value': '14-16 herinandro.'},
+          {'label': 'Famahanana (option)', 'value': '12-15 sem, Foie Gras 500-700g.'},
+        ],
+      },
+      {
+        'emoji': '🌊',
+        'title': 'Gana (Canard Pékin)',
+        'subtitle': 'Mpamokatra atody sy hena. Fotsy, vava mavo.',
+        'badges': ['200-250 atody/taona', '3-4 kg (10 sem)', 'Mila rano'],
+        'steps': [
+          {
+            'icon': Icons.waves_outlined,
+            'title': 'Singa Manan-danja',
+            'points': [
+              'Gana fotsy, vava mavo, tongotra mavo (Pékin/Nantais).',
+              'Mila rano hilomanosana sy fisotro (dobo na lavaka).',
+              'Manatody 200-250 isa/taona, hena matsiro 3-4kg.',
+              'Mahazaka hatsiaka kokoa noho ny akoho.',
+            ],
+          },
+          {
+            'icon': Icons.restaurant_outlined,
+            'title': 'Sakafo',
+            'points': [
+              'Démarrage (0-3 sem): Provende 20% protéine.',
+              'Croissance (4-10 sem): Katsaka 50%, Apombo 25%, Soja 20%, CMV 5%.',
+              'Ponte: Proteina 16-18%, Calcium 3.5%, omena coquille huître.',
+              'Azo omena anana, ahitra, voatavo, vary aron-tsakafo.',
+            ],
+          },
+          {
+            'icon': Icons.pool_outlined,
+            'title': 'Trano & Rano',
+            'points': [
+              'Hakitroka: 3-4 isa/m².',
+              'Lavaka rano (dobo) ilaina - 30-40 sm lalina, afaka milomano.',
+              'Trano misy rivotra, tsy maizina loatra.',
+              'Atsipy fasika lavaka mba hitsaroan\'ny gana.',
+            ],
+          },
+          {
+            'icon': Icons.egg_outlined,
+            'title': 'Atody & Fiterahana',
+            'points': [
+              'Manomboka manatody: 20-24 herinandro.',
+              'Ratio: 1 lahy : 5-6 vavy.',
+              'Incubation: 28 andro.',
+              'Atody lehibe noho ny akoho (70-80g).',
+            ],
+          },
+        ],
+        'feed': [
+          {'label': 'Démarrage', 'value': 'Provende 20% protéine.'},
+          {'label': 'Croissance', 'value': 'Katsaka 50%, Apombo 25%, Soja 20%.'},
+          {'label': 'Ponte', 'value': 'Protéine 16-18%, Calcium 3.5%.'},
+        ],
+        'health': [
+          {
+            'label': 'Fiterahana',
+            'value': 'Manomboka manatody amin\'ny 5-6 volana nefa tsy mikotrika tsara, ka tsara ampiasaina Dokotra vavy na couveuse.',
+          },
+          {
+            'label': 'Rano',
+            'value': 'Mila rano lalina hilomanosana hanadiovana volo sy hanampiana ny fandevonan-kanina isaky ny misakafo.',
+          },
+          {
+            'label': 'Fiambenana',
+            'value': 'Aza avela maloto ny dobo sy ny lafika mba hisorohana aretin-tongotra sy taovam-pisefoana.',
+          },
+        ],
+        'timeline': [
+          {'label': 'Incubation', 'value': '28 andro.'},
+          {'label': 'Chair', 'value': '10-12 herinandro, 3-4kg.'},
+          {'label': 'Ponte', 'value': '200-250 atody/taona.'},
+        ],
+      },
+      {
+        'emoji': '🦆',
+        'title': 'Dokotra (Canard Barbarie)',
+        'subtitle': 'Mafy orina, hena be, tsy manao tabataba.',
+        'badges': ['4-5 kg (lahy)', '100-120 atody/taona', 'Mahery'],
+        'steps': [
+          {
+            'icon': Icons.pets_outlined,
+            'title': 'Toetra',
+            'points': [
+              'Lojika mena eo amin\'ny tava, volo misy fotsy sy mainty.',
+              'Tsy manao tabataba be toy ny gana.',
+              'Lahy lehibe kokoa noho ny vavy (4-5kg vs 2.5-3kg).',
+              'Mafy orina, mahazaka aretina tsara.',
+            ],
+          },
+          {
+            'icon': Icons.restaurant_outlined,
+            'title': 'Sakafo',
+            'points': [
+              'Toy ny gana, fa mila angovo bebe kokoa (lahy lehibe).',
+              'Croissance: Katsaka 55%, Apombo 20%, Soja 20%, CMV 5%.',
+              'Azo omena anana, legioma, vary aron-tsakafo.',
+              'Tsy dia mila rano be toy ny gana.',
+            ],
+          },
+          {
+            'icon': Icons.home_outlined,
+            'title': 'Trano',
+            'points': [
+              'Hakitroka: 2-3 isa/m² (lehibe kokoa).',
+              'Tsy tena mila dobo lehibe, fa rano fisotro foana.',
+              'Perchoir ambony kely - tia miala amin\'ny tany.',
+              'Tandremo ny lahy tsy hifampiady (mifampisokatra).',
+            ],
+          },
+          {
+            'icon': Icons.eco_outlined,
+            'title': 'Fiterahana & Atody',
+            'points': [
+              'Manatody: 100-120 isa/taona.',
+              'Ratio: 1 lahy : 4-5 vavy.',
+              'Incubation: 35 andro (lava kokoa noho ny gana).',
+              'Tsara hampitombo Sarindokotra (lahy Dokotra + vavy Gana).',
+            ],
+          },
+        ],
+        'feed': [
+          {'label': 'Démarrage', 'value': 'Provende 20% protéine.'},
+          {'label': 'Croissance', 'value': 'Katsaka 55%, Apombo 20%, Soja 20%.'},
+          {'label': 'Adulte', 'value': 'Katsaka, vary aron-tsakafo, anana.'},
+        ],
+        'health': [
+          {
+            'label': 'Fitondran-tena',
+            'value': 'Mangina ary manamaivana adin-tsaina amin\'ny toeram-piompiana akaiky tanàna.',
+          },
+          {
+            'label': 'Fitandremana',
+            'value': 'Dokotra vavy mahay manidina ka tapaho elatra iray (remiges) raha tazonina amin\'ny toerana misokatra.',
+          },
+          {
+            'label': 'Fampiasana',
+            'value': 'Reny champion amin\'ny fikotrehana atody (akoho, gana, vorontsiloza) raha tsy misy couveuse.',
+          },
+        ],
+        'timeline': [
+          {'label': 'Incubation', 'value': '35 andro.'},
+          {'label': 'Chair', 'value': '12-14 herinandro, 4-5kg (lahy).'},
+          {'label': 'Ponte', 'value': '100-120 atody/taona.'},
+        ],
+      },
+      {
+        'emoji': '🦢',
+        'title': 'Gisa (Oie)',
+        'subtitle': 'Lehibe, mafy orina, mihinana ahitra be.',
+        'badges': ['30-50 atody/taona', '5-8 kg', 'Mihinana ahitra'],
+        'steps': [
+          {
+            'icon': Icons.grass_outlined,
+            'title': 'Toetra Manokana',
+            'points': [
+              'Lehibe kokoa noho ny gana/dokotra (5-8kg).',
+              'Mihinana ahitra be dia be - mora fiompiana raha misy tanimboly.',
+              'Mafy orina, mahazaka hatsiaka sy aretina.',
+              'Tendro (duvet) tsara indrindra ho an\'ny ondana.',
+            ],
+          },
+          {
+            'icon': Icons.restaurant_outlined,
+            'title': 'Sakafo',
+            'points': [
+              'Démarrage: Provende 18-20% protéine.',
+              'Adulte: Ahitra 70-80%, Katsaka/vary 20-30%.',
+              'Mila ahitra maitso foana - tanimboly na vohitra.',
+              'Rano madio betsaka (milomano sy misotro).',
+            ],
+          },
+          {
+            'icon': Icons.pool_outlined,
+            'title': 'Trano & Toerana',
+            'points': [
+              'Hakitroka: 1-2 isa/m² (lehibe be).',
+              'Lavaka rano lehibe ilaina (milomano).',
+              'Tanimboly na vohitra maitso (paddock).',
+              'Trano hialofana rivotra sy orana.',
+            ],
+          },
+          {
+            'icon': Icons.egg_outlined,
+            'title': 'Atody & Fiterahana',
+            'points': [
+              'Manatody: 30-50 isa/taona.',
+              'Ratio: 1 lahy : 3-4 vavy.',
+              'Incubation: 28-30 andro.',
+              'Atody lehibe (120-150g), tsara sakafon\'olona.',
+            ],
+          },
+        ],
+        'feed': [
+          {'label': 'Démarrage', 'value': 'Provende 18-20% protéine.'},
+          {'label': 'Adulte', 'value': 'Ahitra 70-80%, Katsaka 20-30%.'},
+          {'label': 'Ponte', 'value': 'Ahitra + Katsaka, Calcium fanampy.'},
+        ],
+        'health': [
+          {
+            'label': 'Fahasalamana',
+            'value': 'Vorona rustique be fa mila rano madio sy ahitra maitso vaovao isan\'andro.',
+          },
+          {
+            'label': 'Vaksiny',
+            'value': 'Soso-kevitra ny Derzsy/Parvovirose ho an\'ny zana-gisa 7-14 andro raha misy atahorana bakteria.',
+          },
+          {
+            'label': 'Fiambenana',
+            'value': 'Mikiakiaka raha misy olon-tsy fantatra ka azo ampiasaina ho mpiambina voajanahary ny tokantrano.',
+          },
+        ],
+        'timeline': [
+          {'label': 'Incubation', 'value': '28-30 andro.'},
+          {'label': 'Chair', 'value': '14-16 herinandro, 5-8kg.'},
+          {'label': 'Ponte', 'value': '30-50 atody/taona.'},
+        ],
+      },
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final guides = _buildGuides();
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHero(),
+            const SizedBox(height: 20),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.75,
+              ),
+              itemCount: guides.length,
+              itemBuilder: (context, index) => _buildGuideCard(guides[index], context),
+            ),
+            const SizedBox(height: 20),
+            _buildChecklistCard(),
+            const SizedBox(height: 16),
+            _buildAlertCard(),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHero() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Color(0xFF2F8F83), Color(0xFF0F5132)]),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 25,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text('Torohay manokana', style: TextStyle(color: Colors.white70, fontSize: 13, letterSpacing: 0.5)),
+          SizedBox(height: 6),
+          Text('Fomba fiompiana Gana, Dokotra, Sarindokotra & Gisa', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          Text(
+            'Torolalana feno mikasika ny fiompiana vorona rano (canards, oies) sy ny Mulard (Sarindokotra).',
+            style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.4),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGuideCard(Map<String, dynamic> guide, BuildContext ctx) {
+    final List<String> badges = List<String>.from(guide['badges'] as List);
+    final List<Map<String, dynamic>> steps = List<Map<String, dynamic>>.from(guide['steps'] as List);
+    final List<Map<String, String>> feed = List<Map<String, String>>.from(guide['feed'] as List);
+    final List<Map<String, String>> timeline = List<Map<String, String>>.from(guide['timeline'] as List);
+
+    // Associer une couleur de fond selon le type
+    Color getCardColor() {
+      final title = guide['title'] as String;
+      if (title.contains('Sarindokotra')) return const Color(0xFF8B4513);
+      if (title.contains('Gana')) return const Color(0xFF2196F3);
+      if (title.contains('Dokotra')) return const Color(0xFF4CAF50);
+      if (title.contains('Gisa')) return const Color(0xFFFF9800);
+      return const Color(0xFF2F8F83);
+    }
+
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: ctx,
+          builder: (dialogContext) => Dialog(
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 600, maxWidth: 500),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(guide['emoji'] as String, style: const TextStyle(fontSize: 32)),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(guide['title'] as String, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () => Navigator.pop(dialogContext),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(guide['subtitle'] as String, style: const TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: badges.map((badge) => _buildBadge(badge)).toList(),
+                    ),
+                    const SizedBox(height: 18),
+                    ...steps.map((step) => _buildStepTile(step)),
+                    const SizedBox(height: 16),
+                    _buildListSection('Sakafo & Fatra', feed, Icons.restaurant_menu),
+                    const SizedBox(height: 12),
+                    _buildListSection('Tetiandro / Workflow', timeline, Icons.schedule),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      child: Container(
+        height: 280,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.15),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
+            ),
+          ],
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              getCardColor(),
+              getCardColor().withValues(alpha: 0.7),
+            ],
+          ),
+        ),
+        child: Stack(
+          children: [
+            // Motif de fond avec l'emoji
+            Positioned(
+              right: -20,
+              top: -20,
+              child: Opacity(
+                opacity: 0.1,
+                child: Text(
+                  guide['emoji'] as String,
+                  style: const TextStyle(fontSize: 150),
+                ),
+              ),
+            ),
+            // Dégradé pour lisibilité
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withValues(alpha: 0.8),
+                  ],
+                  stops: const [0.4, 1.0],
+                ),
+              ),
+            ),
+            // Contenu
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Badge en haut
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.25),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
+                          ),
+                          child: Text(
+                            badges.isNotEmpty ? badges[0] : '',
+                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Titre et détails en bas
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        guide['emoji'] as String,
+                        style: const TextStyle(fontSize: 36),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        guide['title'] as String,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: const [
+                          Icon(Icons.touch_app, color: Colors.white70, size: 13),
+                          SizedBox(width: 4),
+                          Flexible(
+                            child: Text(
+                              'Tsindrio eto',
+                              style: TextStyle(color: Colors.white70, fontSize: 11),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBadge(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+      ),
+      child: Text(text, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600, fontSize: 12)),
+    );
+  }
+
+  Widget _buildStepTile(Map<String, dynamic> step) {
+    final List<String> points = List<String>.from(step['points'] as List);
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(step['icon'] as IconData, color: AppColors.primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(step['title'] as String, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ...points.map((point) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('• ', style: TextStyle(fontSize: 14, height: 1.4)),
+                    Expanded(child: Text(point, style: const TextStyle(fontSize: 14, height: 1.4))),
+                  ],
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListSection(String title, List<Map<String, String>> items, IconData icon) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: AppColors.accent),
+              const SizedBox(width: 8),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ...items.map((item) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(item['label']!, style: const TextStyle(fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 2),
+                    Text(item['value']!, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+                  ],
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChecklistCard() {
+    final items = [
+      'Manao planing famokarana miaraka amin\'ny fampitomboana Gana sy Dokotra.',
+      'Mitahiry angona momba ny atody, lanja, sy sakafo ho an\'ny taranaka tsirairay.',
+      'Tandremo ny rano - mila lavaka rano madio hatrany ny gana.',
+      'Raha te hamokatra Sarindokotra: Ampiasao ny Dokotra lahy lehibe indrindra hiaraka amin\'ny Gana vavy.',
+    ];
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Checklist an\'ny mpamboly', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.primary)),
+          const SizedBox(height: 10),
+          ...items.map((item) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.check_circle, color: AppColors.primary, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text(item, style: const TextStyle(fontSize: 14, height: 1.4))),
+                  ],
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAlertCard() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.red.shade50,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.red.shade200),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Icon(Icons.warning_amber_rounded, color: AppColors.error),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Fisorohana aretina: Tandremo ny rano - diovao matetika ny dobo mba tsy hisy aretina. Azo omena vaksiny ny Gana sy Dokotra tahaka ny akoho.',
               style: TextStyle(fontSize: 13, height: 1.5),
             ),
           ),
@@ -6894,22 +8439,6 @@ class Disease {
     required this.naturalRemedy,
     required this.actions,
     required this.prophylaxis,
-  });
-}
-
-class GuideItem {
-  final String title;
-  final String subtitle;
-  final String content;
-  final IconData icon;
-  final Color color;
-
-  GuideItem({
-    required this.title,
-    required this.subtitle,
-    required this.content,
-    required this.icon,
-    required this.color,
   });
 }
 
@@ -7035,128 +8564,6 @@ class _HealthScreenState extends State<HealthScreen> with SingleTickerProviderSt
   List<Map<String, String>> _schedule = [];
   late String _type;
 
-  // RACES VORONA (GANA, GISA) - MALADIES COURANTES
-  final List<GuideItem> _voronaGuides = [
-    GuideItem(
-      title: 'Sarindokotra',
-      subtitle: 'Mulard (Dokotra + Gana)',
-      content: '''
-🦆 SARINDOKOTRA (MULARD) - TOROLALANA FENO
-
-🔹 1. Fiaviana:
-Vokatry ny fampivadiana Dokotra lahy (Barbarie) sy Gana vavy (Pékin).
-⚠️ Fanamarihana: Tsy manatody ary tsy miteraka (Sterile). Ompiana manokana ho an'ny hena na Foie Gras.
-
-🔹 2. Tombony:
-• Mitombo haingana be.
-• Hena matsiro, tsy dia matavy loatra raha tsy atao Gavage (Fahanana).
-• Mahazaka aretina kokoa noho ny gana tsotra.
-
-🔹 3. Sakafo (Programme Alimentaire):
-• 0-3 Herinandro (Démarrage): Provende Gana Démarrage (20% Proteina). Rano madio foana.
-• 4-8 Herinandro (Croissance): Afangaro ny Provende sy ny Katsaka/Apombo. Azo omena anana.
-• 9-12 Herinandro (Finition): Katsaka betsaka kokoa mba hahazoana lanja.
-• Raha Gavage (Fahanana): Manomboka amin'ny herinandro faha-12, omena katsaka masaka in-2 isan'andro mandritra ny 21 andro.
-
-🔹 4. Trano sy Fikarakarana:
-• Tsy mila rano hilomanosana be, fa mila rano fisotro madio foana.
-• Lafika maina (Paille na Copeaux) mba tsy harary tongotra.
-• Tandremo: Mifampipika (Piquage) raha tery loatra ny toerana na mafana loatra.
-''',
-      icon: Icons.pets,
-      color: Colors.orange,
-    ),
-    GuideItem(
-      title: 'Gana (Canard Pékin)',
-      subtitle: 'Mpamokatra atody sy hena',
-      content: '''
-🌊 GANA (PÉKIN) - TOROLALANA FENO
-
-🔹 1. Famaritana:
-Gana fotsy, vava mavo, tongotra mavo. Io no karazana gana miely indrindra eran-tany.
-
-🔹 2. Tombony:
-• Fitomboana: Tena haingana (mahazo 2.5kg ao anatin'ny 7-8 herinandro).
-• Atody: Manatody betsaka (150-200 isan-taona).
-• Hena: Hena malefaka, matavy kokoa noho ny Dokotra.
-
-🔹 3. Fanahafana (Reproduction):
-• Manomboka manatody: 5-6 volana.
-• ⚠️ Olana: Tsy dia mahay mikotrika ny Gana Pékin vavy.
-• Vahaolana: Ampiasao ny Dokotra vavy na Couveuse artifisialy hikotrehana ny atodiny.
-
-🔹 4. Sakafo:
-• Tia mihinana zavatra rehetra (Omnivore): ahitra, kankana, sisa-tsakafo, provende.
-• Mila rano betsaka hanampy azy hitelina sakafo.
-
-🔹 5. Trano:
-• Mila rano (dobo kely) raha azo atao, manatsara ny fahasalamany sy ny volony.
-• Trano maina ho an'ny alina hiarovana amin'ny biby mpiremby.
-''',
-      icon: Icons.water,
-      color: Colors.blue,
-    ),
-    GuideItem(
-      title: 'Gisa (Oie)',
-      subtitle: 'Mpiandry tanàna sy hena',
-      content: '''
-🛡️ GISA (OIE) - TOROLALANA FENO
-
-🔹 1. Famaritana:
-Vorona lehibe, matanjaka, ary manan-tsaina. Mpiandry tanàna tsara (mikiakiaka raha misy olon-tsy fantatra).
-
-🔹 2. Tombony:
-• Sakafo: 80% AHITRA (Herbivore). Tena mitsitsy vola amin'ny sakafo.
-• Hena: Hena mena, matsiro.
-• Foie Gras: Ny atin-gisa no tsara indrindra.
-• Plumes: Ny volony dia azo ampiasaina (ondana).
-
-🔹 3. Sakafo:
-• Alefaso miriaria amin'ny toerana misy ahitra maitso.
-• Omena katsaka na provende kely fotsiny amin'ny hariva hamenoana ny filany.
-
-🔹 4. Fanahafana:
-• Manatody 30-50 isan-taona (Saison: Lohataona).
-• Ny Gisa vavy dia reny tena mahay mikotrika sy mitaiza zanaka.
-• Ny Gisa lahy iray dia ampy ho an'ny vavy 3-4.
-
-🔹 5. Fahasalamana:
-• Tena matanjaka (Rustique). Mahalana vao marary raha madio ny tontolo iainany.
-• Mila vaksiny Derzsy (Parvovirose) ny zana-gisa.
-''',
-      icon: Icons.security,
-      color: Colors.grey,
-    ),
-    GuideItem(
-      title: 'Dokotra (Barbarie)',
-      subtitle: 'Canard de Barbarie',
-      content: '''
-🥚 DOKOTRA (BARBARIE) - TOROLALANA FENO
-
-🔹 1. Famaritana:
-Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
-
-🔹 2. Tombony:
-• Hena: Hena mena, kely tavy (Maigre), tena tadiavina amin'ny tsena.
-• Lanja: Lahy lehibe (4-5kg), Vavy kely (2.5-3kg).
-• Mikotrika: Ny Dokotra vavy no tompondaka amin'ny fikotrehana (Championne). Azo ampiasaina hikotrika atodin'akoho, gana, na vorontsiloza.
-
-🔹 3. Sakafo:
-• Mitovy amin'ny Gana, fa mila fotoana ela kokoa vao lehibe (12 herinandro vavy, 14+ herinandro lahy).
-• Tia mihinana ahitra sy bibikely koa.
-
-🔹 4. Trano sy Fikarakarana:
-• Manidina: Mahay manidina tsara ny vavy. Mila tapahina ny elatra (remiges) iray mba tsy handositra.
-• Perchoir: Tia mipetraka amin'ny toerana avo (tsy toy ny gana).
-• Tsy dia mila rano be toy ny Gana Pékin.
-
-🔹 5. Torohevitra:
-• Raha te hamokatra Sarindokotra: Ampiasao ny Dokotra lahy lehibe indrindra hiaraka amin'ny Gana vavy.
-''',
-      icon: Icons.egg,
-      color: Colors.teal,
-    ),
-  ];
 
   final List<Disease> _chickenDiseases = [
     Disease(
@@ -7322,7 +8729,7 @@ Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
       list.add({'day': 'J-14', 'act': 'Vermifuge voalohany'});
       list.add({'day': 'J-21', 'act': 'Vaksiny Pasteurellose'});
       list.add({'day': 'J-60', 'act': 'Vermifuge faharoa'});
-      list.add({'day': 'J-70', 'act': '🍽️ Fanombohana Gavage (Raha foie gras)'});
+      list.add({'day': 'J-70', 'act': '🍽️ Fanombohana Famahanana (gavage raha foie gras)'});
       list.add({'day': 'J-84', 'act': '🥩 Vonjena (12-14 herinandro)'});
     } else if (_type == 'VorontsilozaChair') {
       // Dinde à chair - Calendrier sanitaire
@@ -7378,9 +8785,6 @@ Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
 
   @override
   Widget build(BuildContext context) {
-    if (widget.category == 'vorona') {
-      return _buildDiseaseTab();
-    }
     return Column(
       children: [
         TabBar(
@@ -7409,13 +8813,13 @@ Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: _buildCard(
             title: 'Tetiandro Fanaovam-baksiny',
             child: Column(
               children: [
                 DropdownButtonFormField(
-                  value: _type,
+                  initialValue: _type,
                   items: ['Chair', 'Pondeuse', 'Gana', 'Dokotra', 'Sarindokotra', 'Gisa', 'Vorontsiloza', 'VorontsilozaChair', 'Akanga', 'Akohonala', 'Papelika', 'Bitro', 'BitroVolavo']
                   .where((val) {
                     if (widget.category == 'vorona') {
@@ -7470,55 +8874,6 @@ Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
   }
 
   Widget _buildDiseaseTab() {
-    if (widget.category == 'vorona') {
-      return GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.85,
-        ),
-        itemCount: _voronaGuides.length,
-        itemBuilder: (context, index) {
-          final item = _voronaGuides[index];
-          return Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            child: InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Row(children: [Icon(item.icon, color: item.color), const SizedBox(width: 10), Text(item.title)]),
-                    content: SingleChildScrollView(child: Text(item.content)),
-                    actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))],
-                  ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: item.color.withValues(alpha: 0.2),
-                    child: Icon(item.icon, size: 30, color: item.color),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  const SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(item.subtitle, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      );
-    }
-
     final diseases = _chickenDiseases;
     return ListView.builder(
       padding: const EdgeInsets.all(16),
@@ -7532,7 +8887,7 @@ Miavaka amin'ny lohany mena (caroncules). Mangina (tsy mitabataba toy ny Gana).
             title: Text(d.name, style: const TextStyle(fontWeight: FontWeight.bold)),
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -7780,7 +9135,7 @@ class _FinanceScreenState extends State<FinanceScreen> with SingleTickerProvider
     return Card(
       elevation: 4,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -9285,7 +10640,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -9525,7 +10880,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -9679,7 +11034,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -9968,7 +11323,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
               TextField(controller: nameCtrl, decoration: const InputDecoration(labelText: 'Anarana (ex: Brahma)')),
               TextField(controller: originCtrl, decoration: const InputDecoration(labelText: 'Fiaviana (ex: Inde)')),
               DropdownButtonFormField<String>(
-                value: type,
+                initialValue: type,
                 items: ['Pondeuse', 'Chair', 'Mixte', 'Ornement', 'Mpiady', 'Vorontsiloza', 'Akanga', 'Papelika']
                     .map((t) => DropdownMenuItem(value: t, child: Text(t)))
                     .toList(),
@@ -10250,7 +11605,7 @@ class _BreedsScreenState extends State<BreedsScreen> with SingleTickerProviderSt
         children: [
           // Simulation Card
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.purple.shade400, Colors.deepPurple.shade600],
@@ -10478,7 +11833,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -10526,7 +11881,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                 const SizedBox(height: 12),
                 
                 DropdownButtonFormField<String>(
-                  value: selectedBreedName,
+                  initialValue: selectedBreedName,
                   decoration: const InputDecoration(
                     labelText: 'Race / Karazany',
                     prefixIcon: Icon(Icons.category),
@@ -10602,7 +11957,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -10626,7 +11981,7 @@ class _EggsScreenState extends State<EggsScreen> with SingleTickerProviderStateM
                     
                     // Type de volaille
                     DropdownButtonFormField<String>(
-                      value: selectedType,
+                      initialValue: selectedType,
                       decoration: const InputDecoration(
                         labelText: 'Karazan\'ny vorona',
                         prefixIcon: Icon(Icons.egg_alt),
@@ -11298,18 +12653,18 @@ Widget _buildStatCard({
   );
 }
 
-// ==================== GAVAGE SCREEN ====================
-class GavageScreen extends StatefulWidget {
-  const GavageScreen({super.key});
+// ==================== FAMAHANANA SCREEN ====================
+class FamahananaScreen extends StatefulWidget {
+  const FamahananaScreen({super.key});
 
   @override
-  State<GavageScreen> createState() => _GavageScreenState();
+  State<FamahananaScreen> createState() => _FamahananaScreenState();
 }
 
-class _GavageScreenState extends State<GavageScreen> {
+class _FamahananaScreenState extends State<FamahananaScreen> {
   String _selectedType = 'Sarindokotra (Mulard)';
   
-  final Map<String, Map<String, dynamic>> _gavageData = {
+  final Map<String, Map<String, dynamic>> _famahananaData = {
     'Sarindokotra (Mulard)': {
       'age_start': '11-12 herinandro',
       'duration': '12-15 andro',
@@ -11317,7 +12672,7 @@ class _GavageScreenState extends State<GavageScreen> {
       'frequency': '2 isan\'andro (300-450g isaky ny sakafo)',
       'target_weight': '5-6 kg',
       'liver_weight': '400-600g',
-      'desc': 'Ny Mulard no tsara indrindra amin\'ny Foie Gras. Matanjaka ary mahazaka gavage tsara.',
+      'desc': 'Ny Mulard no tsara indrindra amin\'ny Foie Gras. Matanjaka ary mahazaka famahanana manokana (gavage) tsara.',
     },
     'Gisa (Oie)': {
       'age_start': '14-16 herinandro',
@@ -11326,13 +12681,13 @@ class _GavageScreenState extends State<GavageScreen> {
       'frequency': '3 isan\'andro (250-350g isaky ny sakafo)',
       'target_weight': '8-10 kg',
       'liver_weight': '700-900g',
-      'desc': 'Ny Gisa dia manome Foie Gras lehibe kokoa fa sarotra kokoa ny gavage (tenda lava).',
+      'desc': 'Ny Gisa dia manome Foie Gras lehibe kokoa fa sarotra kokoa ny famahanana (gavage) noho ny tendany lava.',
     },
   };
 
   @override
   Widget build(BuildContext context) {
-    final data = _gavageData[_selectedType]!;
+    final data = _famahananaData[_selectedType]!;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -11342,8 +12697,8 @@ class _GavageScreenState extends State<GavageScreen> {
           _buildCard(
             title: 'Safidio ny Karazana',
             child: DropdownButtonFormField<String>(
-              value: _selectedType,
-              items: _gavageData.keys.map((k) => DropdownMenuItem(value: k, child: Text(k))).toList(),
+              initialValue: _selectedType,
+              items: _famahananaData.keys.map((k) => DropdownMenuItem(value: k, child: Text(k))).toList(),
               onChanged: (v) => setState(() => _selectedType = v!),
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.pets, color: AppColors.primary),
@@ -11354,7 +12709,7 @@ class _GavageScreenState extends State<GavageScreen> {
           const SizedBox(height: 16),
           
           _buildCard(
-            title: 'Torolalana Gavage',
+            title: 'Torolalana Famahanana (Gavage)',
             child: Column(
               children: [
                 _buildInfoRow('📅 Fanombohana', data['age_start']),
@@ -11377,18 +12732,18 @@ class _GavageScreenState extends State<GavageScreen> {
           const SizedBox(height: 16),
 
           _buildCard(
-            title: 'Teknika Fanaovana',
+            title: 'Teknika Famahanana manokana',
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text('1. Fiomanana (Pré-gavage)', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('• Omena sakafo betsaka (ad libitum) 10 andro alohan\'ny gavage.\n• Ampitomboina ny katsaka amin\'ny sakafo.'),
+                Text('1. Fiomanana (Pré-famahanana)', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('• Omena sakafo betsaka (ad libitum) 10 andro alohan\'ny famahanana manokana.\n• Ampitomboina ny katsaka amin\'ny sakafo.'),
                 SizedBox(height: 10),
                 Text('2. Fandrahoana Katsaka', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text('• Andrahoina ny katsaka (voany manontolo) mandra-pahalemy.\n• Afangaro menaka kely (1%) sy sira (0.5%) rehefa maty ny afo.\n• Avela hangatsiaka vao omena.'),
                 SizedBox(height: 10),
-                Text('3. Fomba Fampidirana (Gavage)', style: TextStyle(fontWeight: FontWeight.bold)),
-                Text('• Tazomina moramora ny vorona.\n• Atsofoka ny "Entonnoir" na milina gavage.\n• Atao moramora mba tsy handratra ny tenda.\n• Otraina ny tenda mba hidina ny sakafo.'),
+                Text('3. Fomba Fampidirana (Famahanana/Gavage)', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('• Tazomina moramora ny vorona.\n• Atsofoka ny "Entonnoir" na milina famahanana (gavage).\n• Atao moramora mba tsy handratra ny tenda.\n• Otraina ny tenda mba hidina ny sakafo.'),
                 SizedBox(height: 10),
                 Text('⚠️ Tandremo:', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
                 Text('• Ajanona raha sempotra ny vorona.\n• Omena rano madio foana.\n• Aza atao mafana loatra ny trano.'),
@@ -11544,7 +12899,7 @@ class _BitroHousingScreenState extends State<BitroHousingScreen> {
         ),
       ),
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -11863,7 +13218,7 @@ class _BitroHousingScreenState extends State<BitroHousingScreen> {
             // Result card
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [AppColors.primary, AppColors.primaryDark],
@@ -12298,6 +13653,188 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
           ],
         },
       },
+      'tieredMixes': [
+        {
+          'stage': 'Starter bitro (0-4 herinandro)',
+          'tiers': [
+            {
+              'label': 'Mora village',
+              'lines': [
+                'Bozaka maina sy ravina manioc maina 40%',
+                'Apombombary 20% + Katsaka vaky 15%',
+                'Ravin-tsaonjo masaka 10%',
+                'Fako-legioma voatoto 10%',
+                'CMV + sira 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin luzerne 45%',
+                'Orge 15% + Apombo 15%',
+                'Tourteau soja 15%',
+                'Huile soja 5%',
+                'Vitamines-mineraly 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Foin luzerne 40% + Corn gluten 8%',
+                'Orge extrudé 15%',
+                'Tourteau soja 22%',
+                'Levure + probiotiques 5%',
+                'Huile omega 5%'
+              ],
+            },
+            {
+              'label': 'Tena raitra hatchery',
+              'lines': [
+                'Foin de luzerne micronisé 38% + Timothy 10%',
+                'Tourteau soja bypass 20%',
+                'Concentré protéique lapin 15%',
+                'Huile chanvre 7%',
+                'CMS + Pro/Prebiotique + enzymes 10%'
+              ],
+            },
+          ],
+        },
+        {
+          'stage': 'Croissance (5-12 herinandro)',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Bozaka maina 35% + ravina manioc maina 10%',
+                'Apombombary 25%',
+                'Katsaka na vary potika 15%',
+                'Betsimisaraka menaka (huile voanio) 5%',
+                'CMV 10%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin luzerne 40%',
+                'Orge 20% + Avoine 10%',
+                'Tourteau soja 18%',
+                'Pulpe betterave 7%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Foin luzerne 38%',
+                'Orge floconné 22%',
+                'Tourteau soja 22%',
+                'Maïs extrudé 10%',
+                'Huile soja + acides gras 8%'
+              ],
+            },
+            {
+              'label': 'Tena raitra élevage',
+              'lines': [
+                'Timothy + luzerne 50%',
+                'Concentré croissance (18% PB) 25%',
+                'Corn gluten + pois protéagineux 15%',
+                'Huile lin 5%',
+                'Additifs (enzymes, probiotiques) 5%'
+              ],
+            },
+          ],
+        },
+        {
+          'stage': 'Finition/Entretien (12+ herinandro)',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Bozaka maina 50%',
+                'Ravina manioc maina 15%',
+                'Apombombary 20%',
+                'Katsaka 10%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin luzerne 45% + herbe elephant 10%',
+                'Orge 15%',
+                'Tourteau soja 12%',
+                'Pulpe betterave 10%',
+                'CMV + levure 8%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Timothy 40% + luzerne 15%',
+                'Orge floconné 15%',
+                'Tourteau soja 15%',
+                'Maïs sec 10%',
+                'Huile chanvre + additifs 5%'
+              ],
+            },
+            {
+              'label': 'Tena raitra fibre boost',
+              'lines': [
+                'Timothy 35% + luzerne 20% + sainfoin 10%',
+                'Concentré entretien 15%',
+                'Corn gluten 8%',
+                'Huile omega 5%',
+                'Pro/Prebiotiques 7%'
+              ],
+            },
+          ],
+        },
+        {
+          'stage': 'Reproduction (vavy bevohoka/mampinono)',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Bozaka maina 35%',
+                'Apombombary 25%',
+                'Katsaka 15%',
+                'Sakafon-kisoa masaka (mora) 15%',
+                'CMV + Calcium 10%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin luzerne 40%',
+                'Orge 20%',
+                'Tourteau soja 20%',
+                'Maïs 10%',
+                'Huile soja + CMV 10%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Timothy+luzerne 45%',
+                'Tourteau soja 25%',
+                'Maïs extrudé 15%',
+                'Huile soja 5%',
+                'Levure + probiotiques + calcium 10%'
+              ],
+            },
+            {
+              'label': 'Tena raitra maternité',
+              'lines': [
+                'Luzerne déshydratée 40% + herbs 10%',
+                'Concentré lactation 25%',
+                'Poids proteagineux 10%',
+                'Huile DHA 5%',
+                'Additifs immunité (MOS, FOS, probiotiques) 10%'
+              ],
+            },
+          ],
+        },
+      ],
       'forbidden': ['Ovy MANTA (cru)', 'Saonjo MANTA (cru)', 'Tongolo', 'Avocat', 'Chocolat', 'Mofo mamy'],
       'tips': '💡 ZAVA-DEHIBE: Ny Foin (Bozaka maina) no fototry ny sakafo (70%) hisorohana ny aretin-kibo sy hanalavana ny nify. Ny rano dia tokony ho madio foana (Ad libitum).',
     },
@@ -12367,11 +13904,149 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
           ],
         },
       },
+      'tieredMixes': [
+        {
+          'stage': 'Jeunes < 6 volana',
+          'tiers': [
+            {
+              'label': 'Mora village',
+              'lines': [
+                'Bozaka maina 45%',
+                'Apombombary 20%',
+                'Katsaka na vary 15%',
+                'Legioma maitso (anatsonga) 10%',
+                'Vitamine C rano 10%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin Timothy 50%',
+                'Orge 15% + Avoine 10%',
+                'Tourteau soja 15%',
+                'Legioma voatetika 5%',
+                'CMV + Vit C poudre 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Foin Timothy 45% + luzerne 10%',
+                'Orge floconné 15%',
+                'Tourteau soja 18%',
+                'Maïs extrudé 7%',
+                'Vit C stabilisé + probiotiques 5%'
+              ],
+            },
+            {
+              'label': 'Tena raitra élevage',
+              'lines': [
+                'Timothy sélectionné 50%',
+                'Concentré junior cavy 25%',
+                'Pois protéagineux 10%',
+                'Huile lin 5%',
+                'Additifs Vit C + immunité 10%'
+              ],
+            },
+          ],
+        },
+        {
+          'stage': 'Adulte (maintenance)',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Bozaka maina 60%',
+                'Legioma maitso 20%',
+                'Apombo 10%',
+                'Voanjo kely 5%',
+                'Vitamine C rano 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Foin Timothy 55%',
+                'Granulé Vit C 20%',
+                'Anana (cresson, persil) 15%',
+                'Pulp betterave 5%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Timothy 50% + luzerne 10%',
+                'Granulé équilibré Vit C 20%',
+                'Légumes frais premium 10%',
+                'Huile chanvre 5%',
+                'Vit C liposomale 5%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (show)',
+              'lines': [
+                'Timothy 45% + orchard grass 15%',
+                'Concentré adulte 20%',
+                'Superfood (kale, persil) 10%',
+                'Huile omega 5%',
+                'Vit C + probiotiques 5%'
+              ],
+            },
+          ],
+        },
+        {
+          'stage': 'Gestante/Mampinono',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Bozaka maina 40%',
+                'Legioma (anantsonga) 25%',
+                'Katsaka 15%',
+                'Apombo 10%',
+                'Vit C rano 10%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Timothy 45% + luzerne 10%',
+                'Granulé gestante 20%',
+                'Legioma mamy 10%',
+                'Maïs 5%',
+                'Vit C + Calcium 10%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Timothy 40% + luzerne 15%',
+                'Concentré reproduction 20%',
+                'Tourteau soja 10%',
+                'Huile soja 5%',
+                'Vit C stabilisé + probiotiques 10%'
+              ],
+            },
+            {
+              'label': 'Tena raitra maternité',
+              'lines': [
+                'Herbe premium (timothy, orchard) 50%',
+                'Concentré lactation 20%',
+                'Pois protéagineux 10%',
+                'Huile omega 5%',
+                'Vit C + DHA + MOS/FOS 15%'
+              ],
+            },
+          ],
+        },
+      ],
       'forbidden': ['Saonjo', 'Ovy MANTA', 'Tongolo', 'Iceberg salady', 'Avocat'],
       'tips': '⚠️ ZAVA-DEHIBE: Mila Vitamine C isan\'andro (30-50mg) - tsy afaka mamokatra azy irery!',
       'vitaminCWarning': true,
     },
   };
+
 
   @override
   void dispose() {
@@ -12417,7 +14092,7 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
                 return <Widget>[
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         children: [
                           _buildBitroHeader(),
@@ -12799,7 +14474,11 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
                                         Expanded(
                                           child: Text(
                                             'Ampifanaraho amin’ny karazany sy ny toe-batany',
-                                            style: TextStyle(color: Colors.blue.shade900, fontSize: 12, fontStyle: FontStyle.italic),
+                                            style: TextStyle(
+                                              color: Colors.blue.shade900,
+                                              fontSize: 12,
+                                              fontStyle: FontStyle.italic,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -12875,6 +14554,50 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
                               ],
                             ),
                           ),
+                        if (data['tieredMixes'] != null)
+                          _buildCard(
+                            title: 'Mix Low -> Tena raitra',
+                            icon: Icons.layers,
+                            child: Column(
+                              children: (data['tieredMixes'] as List)
+                                  .map<Widget>((mix) {
+                                final tiers =
+                                    (mix['tiers'] as List).cast<Map<String, dynamic>>();
+                                return Container(
+                                  margin: const EdgeInsets.only(bottom: 12),
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.purple.shade50,
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Colors.purple.shade100,
+                                      width: 1.2,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        mix['stage'] as String,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primaryDark,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        _formatTieredMixText(tiers),
+                                        style: const TextStyle(
+                                          height: 1.5,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
                         if (data['tips'] != null)
                           _buildCard(
                             title: 'Torohevitra',
@@ -12899,11 +14622,23 @@ class _BitroFeedScreenState extends State<BitroFeedScreen> {
     );
   }
 
+  String _formatTieredMixText(List<Map<String, dynamic>> tiers) {
+    return tiers
+        .map((tier) {
+          final lines = (tier['lines'] as List)
+              .cast<String>()
+              .map((line) => '   • $line')
+              .join('\n');
+          return '🔹 ${tier['label']}\n$lines';
+        })
+        .join('\n\n');
+  }
+
   Widget _buildBitroHeader() {
     final data = _feedData[_selectedType]!;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF8E24AA), Color(0xFFBA68C8)],
@@ -13168,7 +14903,7 @@ class GuideDetailScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(colors: [Colors.purple, Colors.deepPurple], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 borderRadius: BorderRadius.circular(18),
@@ -14049,7 +15784,7 @@ class DiseaseDetailScreen extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(colors: [Color(0xFFEF5350), Color(0xFFE57373)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 borderRadius: BorderRadius.circular(18),
@@ -14310,7 +16045,7 @@ class _BitroBreedsScreenState extends State<BitroBreedsScreen> with SingleTicker
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -14514,7 +16249,7 @@ class _BitroBreedsScreenState extends State<BitroBreedsScreen> with SingleTicker
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -14616,7 +16351,7 @@ class _BitroBreedsScreenState extends State<BitroBreedsScreen> with SingleTicker
       backgroundColor: Colors.transparent,
       builder: (ctx) => StatefulBuilder(
         builder: (context, setModalState) => Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -15123,7 +16858,7 @@ class _BitroBreedsScreenState extends State<BitroBreedsScreen> with SingleTicker
         children: [
           // Simulation Card
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [AppColors.gradientStart, AppColors.gradientEnd]),
               borderRadius: BorderRadius.circular(20),
@@ -15152,7 +16887,7 @@ class _BitroBreedsScreenState extends State<BitroBreedsScreen> with SingleTicker
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: AppColors.primary,
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                   child: const Text('Hanomboka Simulation'),
@@ -15266,7 +17001,7 @@ class _BitroGestationScreenState extends State<BitroGestationScreen> {
     }
     
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -15324,7 +17059,7 @@ class _BitroGestationScreenState extends State<BitroGestationScreen> {
           // Gestation info
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [AppColors.primary, AppColors.primaryDark]),
               borderRadius: BorderRadius.circular(16),
@@ -15725,6 +17460,12 @@ class KisoaFeedScreen extends StatefulWidget {
 
 class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
   String _stage = 'Démarrage (10-25kg)';
+  final TextEditingController _pigCountCtrl = TextEditingController(text: '10');
+  final TextEditingController _avgWeightCtrl = TextEditingController(text: '20');
+  final TextEditingController _rateCtrl = TextEditingController(text: '3.0');
+  final TextEditingController _batchKgCtrl = TextEditingController(text: '20');
+  String _selectedTier = 'Mora';
+  int _mealsPerDay = 2;
   
   final Map<String, Map<String, dynamic>> _feedData = {
     'Démarrage (10-25kg)': {
@@ -15734,53 +17475,88 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3200 - 3300 kcal/kg',
       'formulas': [
         {
-          'name': 'Tena raitra',
+          'name': 'Tena raitra (Type Européen)',
           'desc': 'Tena mahery (Super Croissance). Misy ronono.',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '50 kg'},
             {'name': 'Tourteau Soja', 'qty': '25 kg'},
             {'name': 'Farine Poisson', 'qty': '10 kg'},
-            {'name': 'Lactoserum', 'qty': '5 kg'},
-            {'name': 'Menaka', 'qty': '2 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
-            {'name': 'Lysine', 'qty': '200 g'},
+            {'name': 'Lactoserum (Poudre Lait)', 'qty': '5 kg'},
+            {'name': 'Menaka (Huile)', 'qty': '2 kg'},
+            {'name': 'CMV 5% (Starter)', 'qty': '5 kg'},
+            {'name': 'Lysine (Acide Aminé)', 'qty': '200 g'},
             {'name': 'Methionine', 'qty': '100 g'},
           ]
         },
         {
-          'name': 'Avo lenta',
-          'desc': 'Fitomboana haingana',
-          'ingredients': [
-            {'name': 'Katsaka', 'qty': '52 kg'},
-            {'name': 'Tourteau Soja', 'qty': '22 kg'},
-            {'name': 'Apombo', 'qty': '10 kg'},
-            {'name': 'Farine Poisson', 'qty': '8 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
-            {'name': 'Menaka', 'qty': '1 kg'},
-          ]
-        },
-        {
-          'name': 'Antonony',
+          'name': 'Standard (Mid Range)',
           'desc': 'Fifandanjana tsara',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '50 kg'},
-            {'name': 'Apombo', 'qty': '15 kg'},
+            {'name': 'Apombo (Son)', 'qty': '15 kg'},
             {'name': 'Tourteau Soja', 'qty': '20 kg'},
             {'name': 'Farine Poisson', 'qty': '10 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
           ]
         },
         {
-          'name': 'Mora',
+          'name': 'Mora (Mora)',
           'desc': 'Mampiasa mangahazo sy apombo',
           'ingredients': [
-            {'name': 'Mangahazo', 'qty': '30 kg'},
+            {'name': 'Mangahazo (Cossette)', 'qty': '30 kg'},
             {'name': 'Katsaka', 'qty': '20 kg'},
-            {'name': 'Apombo', 'qty': '25 kg'},
+            {'name': 'Apombo (Son)', 'qty': '25 kg'},
             {'name': 'Tourteau Arachide', 'qty': '20 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
           ]
         }
+      ],
+      'tieredMixes': [
+        {
+          'stage': 'Starter 10-25kg',
+          'tiers': [
+            {
+              'label': 'Mora (Village)',
+              'lines': [
+                'Mangahazo maina 35% + Apombo 25%',
+                'Katsaka rovitra 20%',
+                'Voanjo/tsaramaso toto 10%',
+                'Lela-masaka (ranom-bary) 5%',
+                'CMV sy sira 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Katsaka 40% + Apombo 20%',
+                'Tourteau soja 20%',
+                'Farine poisson 10%',
+                'Huile voanio 5%',
+                'CMV Starter 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Katsaka 45% + Orge 10%',
+                'Tourteau soja 25%',
+                'Farine poisson 8% + Huile 5%',
+                'Lactoserum 5%',
+                'CMV + Lysine/Methionine 7%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (euro)',
+              'lines': [
+                'Katsaka 40% + Ble 10% + Orge 10%',
+                'Tourteau soja 22% + Concentré protéique 8%',
+                'Lactoserum 5% + Huile colza 3%',
+                'Aditif enzymes + probiotiques 2%',
+                'CMV précision 5%'
+              ],
+            },
+          ],
+        },
       ],
       'tips': 'Ny Methionine sy Lysine dia "Acides Aminés" tena ilaina amin\'ny fananganana hozatra (Muscle). Tsy ampy ireo ny katsaka sy soja.',
     },
@@ -15791,12 +17567,12 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '3000 - 3100 kcal/kg',
       'formulas': [
         {
-          'name': 'Tena raitra',
+          'name': 'Tena raitra (Intensif)',
           'desc': 'Fitomboana farany ambony (GMQ > 700g)',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '60 kg'},
             {'name': 'Tourteau Soja', 'qty': '22 kg'},
-            {'name': 'Apombo', 'qty': '10 kg'},
+            {'name': 'Apombo (Son)', 'qty': '10 kg'},
             {'name': 'Menaka', 'qty': '1 kg'},
             {'name': 'CMV 5%', 'qty': '5 kg'},
             {'name': 'Lysine', 'qty': '150 g'},
@@ -15804,18 +17580,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Avo lenta',
-          'desc': 'Tsara ho an\'ny hena',
-          'ingredients': [
-            {'name': 'Katsaka', 'qty': '55 kg'},
-            {'name': 'Tourteau Soja', 'qty': '20 kg'},
-            {'name': 'Apombo', 'qty': '15 kg'},
-            {'name': 'Menaka', 'qty': '1 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
-          ]
-        },
-        {
-          'name': 'Antonony',
+          'name': 'Standard (Mid Range)',
           'desc': 'Fifandanjana tsara',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '45 kg'},
@@ -15826,7 +17591,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Mora',
+          'name': 'Mora (Mora)',
           'desc': 'Mora vidy nefa mahomby',
           'ingredients': [
             {'name': 'Mangahazo', 'qty': '40 kg'},
@@ -15836,7 +17601,54 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Ny fenitra Eoropeana dia mitaky angovo (Energie Nette) ambony. Ny katsaka no tsara indrindra amin\'ny izany.',
+      'tieredMixes': [
+        {
+          'stage': 'Croissance 25-60kg',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Mangahazo maina 40%',
+                'Apombo 25%',
+                'Katsaka 15%',
+                'Voanjo/tsaramaso toto 15%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Katsaka 45%',
+                'Mangahazo 15% + Apombo 20%',
+                'Tourteau soja 15%',
+                'Huile soja 3%',
+                'CMV + Lysine 2%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Katsaka 55% + Ble/orge 10%',
+                'Tourteau soja 20%',
+                'Apombo 8% + Pulpe 5%',
+                'Huile colza 2%',
+                'CMV + additifs 5%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (GMQ 800g+)',
+              'lines': [
+                'Katsaka 50% + ble 15%',
+                'Tourteau soja 23%',
+                'Concentré AA (lysine/methionine) 2%',
+                'Huile 4%',
+                'CMV précision 6%'
+              ],
+            },
+          ],
+        },
+      ],
+      'tips': 'Ny fenitra Eoropeana dia mitaky angovo (Energie Nette) ambony. Ny katsaka no tsara indrindra amin\'izany.',
     },
     'Finition (60-100kg)': {
       'age': '18 - 24 Herinandro',
@@ -15845,28 +17657,18 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
       'energy': '2900 - 3000 kcal/kg',
       'formulas': [
         {
-          'name': 'Tena raitra',
-          'desc': 'Hena be, tavy kely (Qualité Export).',
+          'name': 'Tena raitra (Viande Maigre)',
+          'desc': 'Hena be, tavy kely (Qualité Export). Ahitsy ny Lysine.',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '65 kg'},
             {'name': 'Tourteau Soja', 'qty': '15 kg'},
-            {'name': 'Apombo', 'qty': '15 kg'},
+            {'name': 'Apombo (Son)', 'qty': '15 kg'},
             {'name': 'CMV 5% Finition', 'qty': '5 kg'},
             {'name': 'Lysine', 'qty': '100 g'},
           ]
         },
         {
-          'name': 'Avo lenta',
-          'desc': 'Hena tsara',
-          'ingredients': [
-            {'name': 'Katsaka', 'qty': '60 kg'},
-            {'name': 'Tourteau Soja', 'qty': '15 kg'},
-            {'name': 'Apombo', 'qty': '20 kg'},
-            {'name': 'CMV 5%', 'qty': '5 kg'},
-          ]
-        },
-        {
-          'name': 'Antonony',
+          'name': 'Standard (Mid Range)',
           'desc': 'Fifandanjana tsara. Sombin\'ny hena sy tavy.',
           'ingredients': [
             {'name': 'Katsaka', 'qty': '40 kg'},
@@ -15877,7 +17679,7 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         },
         {
-          'name': 'Mora',
+          'name': 'Mora (Mora)',
           'desc': 'Ho an\'ny farany. Hena be tavy kokoa.',
           'ingredients': [
             {'name': 'Mangahazo maina', 'qty': '50 kg'},
@@ -15887,7 +17689,53 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
-      'tips': 'Any Eoropa: Ferana ny sakafo (Rationing) amin\'ny farany mba tsy ho matavy loatra. Ny Premium dia mitaky proteina ambany (14%) fa Lysine ambony (0.7-0.8%) = hena tsy misy tavy.',
+      'tieredMixes': [
+        {
+          'stage': 'Finition 60-100kg',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Mangahazo maina 50%',
+                'Apombo 25%',
+                'Katsaka 15%',
+                'Voanjo/tsaramaso 5%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Katsaka 45% + Mangahazo 20%',
+                'Apombo 15%',
+                'Tourteau soja 12%',
+                'Huile 3%',
+                'CMV finition 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Katsaka 55% + ble 15%',
+                'Tourteau soja 15%',
+                'Apombo 10%',
+                'Huile colza 3%',
+                'CMV precision + lysine 7%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (viande maigre)',
+              'lines': [
+                'Katsaka 50% + ble 15% + orge 10%',
+                'Tourteau soja 15% + corn gluten 5%',
+                'Huile 3%',
+                'CMV finition + acides aminés 7%'
+              ],
+            },
+          ],
+        },
+      ],
+      'tips': 'Any Eoropa: Ferana ny sakafo (Rationing) amin\'ny farany mba tsy ho matavy loatra. Ny Tena raitra dia mitaky proteina ambany (14%) fa Lysine ambony (0.7-0.8%) = hena tsy misy tavy.',
     },
     'Renin-kisoa (Gestante)': {
       'age': 'Vohoka (114 andro)',
@@ -15906,6 +17754,53 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
             {'name': 'Sira', 'qty': '0.5 kg'},
           ]
         }
+      ],
+      'tieredMixes': [
+        {
+          'stage': 'Gestante 0-114 andro',
+          'tiers': [
+            {
+              'label': 'Mora fibre',
+              'lines': [
+                'Apombo 45%',
+                'Mangahazo 20%',
+                'Katsaka 15%',
+                'Legioma maitso 10%',
+                'CMV + sira 10%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Apombo 40%',
+                'Katsaka 30%',
+                'Tourteau soja 15%',
+                'Fibre (pulpe betterave) 10%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Katsaka 38% + Ble 10%',
+                'Apombo 25%',
+                'Tourteau soja 15%',
+                'Huile colza 5%',
+                'CMV gestation + acides aminés 7%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (litière fibre)',
+              'lines': [
+                'Katsaka 35% + orge 15%',
+                'Apombo 25% + pulpe sechee 10%',
+                'Tourteau soja 10%',
+                'Huile 3%',
+                'CMV + vitamines repro 7%'
+              ],
+            },
+          ],
+        },
       ],
       'tips': 'Aza omena be loatra sao sarotra miteraka (matavy loatra). Omena anana sy legioma maitso be dia be.',
     },
@@ -15927,10 +17822,288 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
           ]
         }
       ],
+      'tieredMixes': [
+        {
+          'stage': 'Lactation (milk boost)',
+          'tiers': [
+            {
+              'label': 'Mora',
+              'lines': [
+                'Mangahazo maina 40%',
+                'Apombo 20%',
+                'Katsaka 20%',
+                'Voanjo/tsaramaso 15%',
+                'CMV 5%'
+              ],
+            },
+            {
+              'label': 'Antonony',
+              'lines': [
+                'Katsaka 50%',
+                'Apombo 15%',
+                'Tourteau soja 20%',
+                'Huile 5%',
+                'CMV + vitaminy 10%'
+              ],
+            },
+            {
+              'label': 'Avo lenta',
+              'lines': [
+                'Katsaka 55% + orge 10%',
+                'Tourteau soja 20%',
+                'Apombo 8%',
+                'Huile soja 4%',
+                'CMV lactation + lysine 3%'
+              ],
+            },
+            {
+              'label': 'Tena raitra (lait max)',
+              'lines': [
+                'Katsaka 50% + ble 15%',
+                'Tourteau soja 22% + concentré lactation 5%',
+                'Huile 4%',
+                'CMV + enzymes + probiotiques 4%'
+              ],
+            },
+          ],
+        },
+      ],
       'tips': 'Mila rano be dia be hamokarana ronono (20-30 Litatra/andro). Omeo sakafo betsaka araka izay laniny.',
     },
   };
   
+  final Map<String, List<Map<String, dynamic>>> _tierRecipes = {
+    'Démarrage (10-25kg)': [
+      {
+        'label': 'Mora',
+        'ingredients': [
+          {'name': 'Mangahazo maina', 'pct': 35},
+          {'name': 'Apombo', 'pct': 25},
+          {'name': 'Katsaka', 'pct': 20},
+          {'name': 'Voanjo/Tsaramaso toto', 'pct': 10},
+          {'name': 'Lela-masaka (ranom-bary)', 'pct': 5},
+          {'name': 'CMV + sira', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Antonony',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 40},
+          {'name': 'Apombo', 'pct': 20},
+          {'name': 'Tourteau soja', 'pct': 20},
+          {'name': 'Farine poisson', 'pct': 10},
+          {'name': 'Huile', 'pct': 5},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Avo lenta',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 45},
+          {'name': 'Orge', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 25},
+          {'name': 'Farine poisson', 'pct': 8},
+          {'name': 'Huile', 'pct': 5},
+          {'name': 'CMV + Lys/Meth', 'pct': 7},
+        ],
+      },
+      {
+        'label': 'Tena raitra',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 40},
+          {'name': 'Ble', 'pct': 10},
+          {'name': 'Orge', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 22},
+          {'name': 'Concentré protéique', 'pct': 6},
+          {'name': 'Lactoserum', 'pct': 5},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV précision', 'pct': 4},
+        ],
+      },
+    ],
+    'Croissance (25-60kg)': [
+      {
+        'label': 'Mora',
+        'ingredients': [
+          {'name': 'Mangahazo', 'pct': 40},
+          {'name': 'Apombo', 'pct': 25},
+          {'name': 'Katsaka', 'pct': 15},
+          {'name': 'Voanjo/Tsaramaso', 'pct': 15},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Antonony',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 45},
+          {'name': 'Mangahazo', 'pct': 15},
+          {'name': 'Apombo', 'pct': 20},
+          {'name': 'Tourteau soja', 'pct': 15},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV + Lysine', 'pct': 2},
+        ],
+      },
+      {
+        'label': 'Avo lenta',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 55},
+          {'name': 'Ble/Orge', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 18},
+          {'name': 'Apombo', 'pct': 5},
+          {'name': 'Pulpe', 'pct': 5},
+          {'name': 'Huile', 'pct': 2},
+          {'name': 'CMV + additifs', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Tena raitra',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 50},
+          {'name': 'Ble', 'pct': 15},
+          {'name': 'Tourteau soja', 'pct': 23},
+          {'name': 'Concentré AA', 'pct': 2},
+          {'name': 'Huile', 'pct': 4},
+          {'name': 'CMV précision', 'pct': 6},
+        ],
+      },
+    ],
+    'Finition (60-100kg)': [
+      {
+        'label': 'Mora',
+        'ingredients': [
+          {'name': 'Mangahazo maina', 'pct': 50},
+          {'name': 'Apombo', 'pct': 25},
+          {'name': 'Katsaka', 'pct': 15},
+          {'name': 'Voanjo/Tsaramaso', 'pct': 5},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Antonony',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 45},
+          {'name': 'Mangahazo', 'pct': 20},
+          {'name': 'Apombo', 'pct': 15},
+          {'name': 'Tourteau soja', 'pct': 12},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Avo lenta',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 55},
+          {'name': 'Ble', 'pct': 15},
+          {'name': 'Tourteau soja', 'pct': 15},
+          {'name': 'Apombo', 'pct': 8},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV', 'pct': 4},
+        ],
+      },
+      {
+        'label': 'Tena raitra',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 50},
+          {'name': 'Ble', 'pct': 15},
+          {'name': 'Orge', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 15},
+          {'name': 'Corn gluten', 'pct': 5},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV/AA', 'pct': 2},
+        ],
+      },
+    ],
+    'Renin-kisoa (Gestante)': [
+      {
+        'label': 'Mora fibre',
+        'ingredients': [
+          {'name': 'Apombo', 'pct': 45},
+          {'name': 'Mangahazo', 'pct': 20},
+          {'name': 'Katsaka', 'pct': 15},
+          {'name': 'Legioma maitso', 'pct': 10},
+          {'name': 'CMV + sira', 'pct': 10},
+        ],
+      },
+      {
+        'label': 'Antonony',
+        'ingredients': [
+          {'name': 'Apombo', 'pct': 40},
+          {'name': 'Katsaka', 'pct': 30},
+          {'name': 'Tourteau soja', 'pct': 15},
+          {'name': 'Fibre (pulpe)', 'pct': 10},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Avo lenta',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 38},
+          {'name': 'Ble', 'pct': 10},
+          {'name': 'Apombo', 'pct': 25},
+          {'name': 'Tourteau soja', 'pct': 15},
+          {'name': 'Huile', 'pct': 5},
+          {'name': 'CMV gestation', 'pct': 7},
+        ],
+      },
+      {
+        'label': 'Tena raitra',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 35},
+          {'name': 'Orge', 'pct': 15},
+          {'name': 'Apombo', 'pct': 25},
+          {'name': 'Pulpe sechee', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 10},
+          {'name': 'Huile', 'pct': 3},
+          {'name': 'CMV/vitamines repro', 'pct': 2},
+        ],
+      },
+    ],
+    'Renin-kisoa (Allaitante)': [
+      {
+        'label': 'Mora',
+        'ingredients': [
+          {'name': 'Mangahazo maina', 'pct': 40},
+          {'name': 'Apombo', 'pct': 20},
+          {'name': 'Katsaka', 'pct': 20},
+          {'name': 'Voanjo/Tsaramaso', 'pct': 15},
+          {'name': 'CMV', 'pct': 5},
+        ],
+      },
+      {
+        'label': 'Antonony',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 50},
+          {'name': 'Apombo', 'pct': 15},
+          {'name': 'Tourteau soja', 'pct': 20},
+          {'name': 'Huile', 'pct': 5},
+          {'name': 'CMV + vitaminy', 'pct': 10},
+        ],
+      },
+      {
+        'label': 'Avo lenta',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 55},
+          {'name': 'Orge', 'pct': 10},
+          {'name': 'Tourteau soja', 'pct': 20},
+          {'name': 'Apombo', 'pct': 8},
+          {'name': 'Huile soja', 'pct': 4},
+          {'name': 'CMV lactation', 'pct': 3},
+        ],
+      },
+      {
+        'label': 'Tena raitra',
+        'ingredients': [
+          {'name': 'Katsaka', 'pct': 50},
+          {'name': 'Ble', 'pct': 15},
+          {'name': 'Tourteau soja', 'pct': 22},
+          {'name': 'Concentré lactation', 'pct': 5},
+          {'name': 'Huile', 'pct': 4},
+          {'name': 'CMV/enzymes/probiotiques', 'pct': 4},
+        ],
+      },
+    ],
+  };
+
   final List<Map<String, dynamic>> _engraissementPlan = [
     {
       'emoji': '⚡',
@@ -15988,18 +18161,268 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
     },
   ];
 
+  (double min, double max) _rateBounds() {
+    if (_stage.contains('Démarrage')) return (4.0, 6.0);
+    if (_stage.contains('Croissance')) return (3.0, 4.0);
+    if (_stage.contains('Finition')) return (2.0, 3.0);
+    if (_stage.contains('Allaitante')) return (4.0, 6.0);
+    if (_stage.contains('Gestante')) return (2.0, 2.5);
+    return (2.0, 3.5);
+  }
+
+  void _suggestPigRate() {
+    final pigs = int.tryParse(_pigCountCtrl.text.trim());
+    final avg = double.tryParse(_avgWeightCtrl.text.replaceAll(',', '.').trim());
+    if (pigs == null || pigs <= 0 || avg == null || avg <= 0) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Fenoy isan\'ny kisoa sy lanja salan\'isa.')),
+      );
+      return;
+    }
+    final bounds = _rateBounds();
+    double base = (bounds.$1 + bounds.$2) / 2;
+    if (avg > 80) base -= 0.3;
+    if (avg < 25) base += 0.3;
+    base = base.clamp(bounds.$1, bounds.$2);
+    setState(() {
+      _rateCtrl.text = base.toStringAsFixed(1);
+    });
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Soso-kevitra fatra: ${base.toStringAsFixed(1)}%/andro (${_stage.toLowerCase()})')),
+    );
+  }
+
+  List<Map<String, dynamic>> _currentTierIngredients() {
+    final list = _tierRecipes[_stage];
+    if (list == null) return [];
+    final tier = list.firstWhere(
+      (t) => t['label'] == _selectedTier,
+      orElse: () => list.first,
+    );
+    return (tier['ingredients'] as List).cast<Map<String, dynamic>>();
+  }
+
+  Map<String, double> _computePigFeed() {
+    final pigs = int.tryParse(_pigCountCtrl.text.trim());
+    final avg = double.tryParse(_avgWeightCtrl.text.replaceAll(',', '.').trim());
+    final rate = double.tryParse(_rateCtrl.text.replaceAll(',', '.').trim());
+    if (pigs == null || pigs <= 0 || avg == null || avg <= 0 || rate == null || rate <= 0) {
+      return {'total': 0, 'perPig': 0, 'perMeal': 0};
+    }
+    final biomass = pigs * avg; // kg total
+    final total = biomass * rate / 100;
+    final perPig = total / pigs;
+    final perMeal = total / (_mealsPerDay > 0 ? _mealsPerDay : 1);
+    return {'total': total, 'perPig': perPig, 'perMeal': perMeal};
+  }
+
+  List<Map<String, dynamic>> _scaledRecipe(double batchKg) {
+    final ingredients = _currentTierIngredients();
+    if (batchKg <= 0 || ingredients.isEmpty) return [];
+    return ingredients
+        .map((ing) => {
+              'name': ing['name'],
+              'kg': (ing['pct'] as num) * batchKg / 100,
+              'pct': ing['pct'],
+            })
+        .toList();
+  }
+
+  @override
+  void dispose() {
+    _pigCountCtrl.dispose();
+    _avgWeightCtrl.dispose();
+    _rateCtrl.dispose();
+    _batchKgCtrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = _feedData[_stage]!;
+    final feed = _computePigFeed();
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           _buildCard(
+            title: 'Kajy sakafo Kisoa',
+            icon: Icons.calculate,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DropdownButtonFormField<String>(
+                  key: ValueKey('calc-$_stage'),
+                  initialValue: _stage,
+                  isExpanded: true,
+                  decoration: const InputDecoration(labelText: 'Stade / sokajy'),
+                  items: _feedData.keys
+                      .map((s) => DropdownMenuItem(value: s, child: Text(s, style: const TextStyle(fontWeight: FontWeight.bold))))
+                      .toList(),
+                  onChanged: (v) => setState(() => _stage = v!),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _pigCountCtrl,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Isan\'ny kisoa',
+                    prefixIcon: Icon(Icons.numbers),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _avgWeightCtrl,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Lanja salan\'isa isaky ny kisoa (kg)',
+                    prefixIcon: Icon(Icons.monitor_weight_outlined),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _rateCtrl,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Fatra %/andro',
+                          prefixIcon: Icon(Icons.percent),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    TextButton.icon(
+                      onPressed: _suggestPigRate,
+                      icon: const Icon(Icons.auto_fix_high, size: 18),
+                      label: const Text('Soso-kevitra'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Text('Isan\'ny sakafo/andro'),
+                    Expanded(
+                      child: Slider(
+                        value: _mealsPerDay.toDouble(),
+                        min: 2,
+                        max: 4,
+                        divisions: 2,
+                        label: '$_mealsPerDay',
+                        onChanged: (v) => setState(() => _mealsPerDay = v.round()),
+                      ),
+                    ),
+                    Text('${_mealsPerDay}x'),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.green.shade50,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.green.shade100),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Vokatra', style: TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 6),
+                      Text('Total: ${feed['total']!.toStringAsFixed(2)} kg/andro'),
+                      Text('Isaky ny kisoa: ${feed['perPig']!.toStringAsFixed(2)} kg/andro'),
+                      Text('Isaky ny sakafon\'andro: ${feed['perMeal']!.toStringAsFixed(2)} kg'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text('Recette (batch manokana)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink.shade700)),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField<String>(
+                        key: ValueKey('tier-$_stage'),
+                        initialValue: _selectedTier,
+                        decoration: const InputDecoration(labelText: 'Safidio: Mora → Tena raitra'),
+                        items: (_tierRecipes[_stage] ?? [])
+                            .map((t) => DropdownMenuItem(value: t['label'] as String, child: Text(t['label'] as String)))
+                            .toList(),
+                        onChanged: (v) => setState(() => _selectedTier = v!),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    SizedBox(
+                      width: 120,
+                      child: TextField(
+                        controller: _batchKgCtrl,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(labelText: 'Batch (kg)'),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Builder(builder: (context) {
+                  final batch = double.tryParse(_batchKgCtrl.text.replaceAll(',', '.').trim()) ?? 0;
+                  final recipe = _scaledRecipe(batch);
+                  if (recipe.isEmpty) {
+                    return const Text('Fenoy batch (kg) sy mifidiana tier hanamboatra liste.');
+                  }
+                  return Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade50,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Fangaro ho an\'ny ${batch.toStringAsFixed(1)} kg',
+                            style: const TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 6),
+                        ...recipe.map((ing) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(child: Text('${ing['name']} (${(ing['pct'] as num).toStringAsFixed(1)}%)')),
+                                  Text('${(ing['kg'] as double).toStringAsFixed(2)} kg',
+                                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+          _buildCard(
             title: 'Torolalana Sakafo (Pro)',
             icon: Icons.restaurant_menu,
             child: Column(
               children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.pink.shade50,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.pink.shade200),
+                    ),
+                    child: const Text('Safidy faharoa', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
@@ -16023,48 +18446,71 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
                 _buildInfoRow('🍽️ Fatra isan\'andro', data['ration']),
                 _buildInfoRow('💪 Proteina ilaina', data['protein']),
                 _buildInfoRow('⚡ Angovo (Energie)', data['energy']),
-                const Divider(),
-                const Text('🧪 FORMULES (Fangaro 100kg)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink, fontSize: 16)),
-                const SizedBox(height: 12),
-                
-                ...(data['formulas'] as List).map((formula) => Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey.shade200),
-                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 8, offset: const Offset(0, 4))],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.science, color: Colors.pink, size: 20),
-                          const SizedBox(width: 8),
-                          Expanded(child: Text(formula['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15))),
-                        ],
-                      ),
-                      if (formula['desc'] != null)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 28, bottom: 8),
-                          child: Text(formula['desc'], style: TextStyle(fontSize: 12, color: Colors.grey[600], fontStyle: FontStyle.italic)),
-                        ),
-                      const Divider(),
-                      ...(formula['ingredients'] as List).map((ing) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                if (data['tieredMixes'] != null) ...[
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(bottom: 12),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.pink.shade50,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.pink.shade100),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Text('• ${ing['name']}', style: const TextStyle(fontSize: 14)),
-                            Text(ing['qty'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.pink)),
+                            const Icon(Icons.layers, color: Colors.pink),
+                            const SizedBox(width: 8),
+                            const Expanded(
+                              child: Text(
+                                'Mix Low -> Tena raitra',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.pink,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      )),
-                    ],
+                        const SizedBox(height: 12),
+                        ...((data['tieredMixes'] as List)
+                          .map((mix) {
+                          final tiers = (mix['tiers'] as List)
+                              .cast<Map<String, dynamic>>();
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.pink.shade100),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  mix['stage'] as String,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primaryDark,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  _formatTieredMixText(tiers),
+                                  style: const TextStyle(height: 1.5, fontSize: 13),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList()),
+                      ],
+                    ),
                   ),
-                )),
+                ],
 
                 const SizedBox(height: 8),
                 Container(
@@ -16172,6 +18618,18 @@ class _KisoaFeedScreenState extends State<KisoaFeedScreen> {
         ],
       ),
     );
+  }
+
+  String _formatTieredMixText(List<Map<String, dynamic>> tiers) {
+    return tiers
+        .map((tier) {
+          final lines = (tier['lines'] as List)
+              .cast<String>()
+              .map((line) => '   • $line')
+              .join('\n');
+          return '🔹 ${tier['label']}\n$lines';
+        })
+        .join('\n\n');
   }
 
   Widget _buildAltFood(String name, String desc) {
@@ -16544,7 +19002,7 @@ class _KisoaHealthScreenState extends State<KisoaHealthScreen> with SingleTicker
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: _buildCard(
             title: 'Tetiandro Fitsaboana Kisoa',
             icon: Icons.calendar_month,
@@ -21138,13 +23596,13 @@ DINGANA 5: FIJINJANA
         Text(
           _searchQuery.isEmpty
               ? 'Tsindrio raha hijery ny voly sy ny torolalana A-Z.'
-              : 'Vokatra ho an\'ny "${_searchQuery}"',
+              : 'Vokatra ho an\'ny "$_searchQuery"',
           style: const TextStyle(fontSize: 11, color: Color(0xFF388E3C)),
         ),
         const SizedBox(height: 12),
         if (entries.isEmpty)
           Container(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
@@ -21317,7 +23775,7 @@ DINGANA 5: FIJINJANA
         child: Image.asset(
           path,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => Center(
+          errorBuilder: (context, error, stackTrace) => Center(
             child: Text(
               cropName.isNotEmpty ? cropName.substring(0, 1).toUpperCase() : '🌱',
               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
@@ -21375,7 +23833,13 @@ class _CultureDetailScreenState extends State<CultureDetailScreen> {
               decoration: BoxDecoration(
                 gradient: const LinearGradient(colors: [Color(0xFFFFFFFF), Color(0xFFECFDF5)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 borderRadius: BorderRadius.circular(18),
-                boxShadow: [BoxShadow(color: const Color(0xFF16A34A).withValues(alpha: 0.15), blurRadius: 16, offset: const Offset(0, 10))],
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF16A34A).withValues(alpha: 0.15),
+                    blurRadius: 16,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
                 border: Border.all(color: const Color(0xFF16A34A).withValues(alpha: 0.2)),
               ),
               child: Column(
@@ -21389,7 +23853,7 @@ class _CultureDetailScreenState extends State<CultureDetailScreen> {
                       child: Image.asset(
                         c.imagePath,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => Container(
+                        errorBuilder: (context, error, stackTrace) => Container(
                           color: const Color(0xFFDCFCE7),
                           alignment: Alignment.center,
                           child: Text(c.name.isNotEmpty ? c.name.substring(0, 1).toUpperCase() : '🌱', style: const TextStyle(fontSize: 32, color: Color(0xFF16A34A))),
@@ -21588,7 +24052,7 @@ class _CultureDetailScreenState extends State<CultureDetailScreen> {
   // 🌱 NOUVELLE SECTION: Informations sur les semences
   Widget _seedCard(String? seedInfo, String? soilInfo, String? nurseryInfo) {
     // Parse seed info lines with colors
-    Widget _buildSeedLine(String line) {
+    Widget buildSeedLine(String line) {
       Color iconColor = Colors.greenAccent;
       IconData iconData = Icons.eco_rounded;
       
@@ -21714,7 +24178,7 @@ class _CultureDetailScreenState extends State<CultureDetailScreen> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  ...seedInfo!.split('\n').where((l) => l.trim().isNotEmpty).map((line) => _buildSeedLine(line.trim())),
+                  ...seedInfo!.split('\n').where((l) => l.trim().isNotEmpty).map((line) => buildSeedLine(line.trim())),
                 ],
               ),
             ),
@@ -25307,240 +27771,127 @@ class _PricingDialogState extends State<PricingDialog> {
 
 // ==================== TRONDROTECH - PISCICULTURE ====================
 
-// ========== Trondro Systems Screen ==========
+// ========== Trondro Karazany Screen ==========
 class TrondroSystemsScreen extends StatelessWidget {
   const TrondroSystemsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final systems = [
-      {
-        'name': 'Hors Sol (Basin plastika/Beton/Bâche)',
-        'emoji': '🏊',
-        'type': 'intensive',
-        'description': 'Fiompiana anaty basin plastika, beton na bâche. Teknika maoderina mety amin\'ny toerana kely.',
-        'capacity': '50-100 trondro/m³ (sans aération) / 100-500 (avec aération)',
-        'species': ['Tilapia', 'Carpe', 'Clarias (Trondro gasy)'],
-        'investment': 'Antonony - Ambony',
-        'difficulty': 'Antonony',
-        'advantages': [
-          'Tsy mila toerana lehibe (tokotany kely dia ampy)',
-          'Azo atao na aiza na aiza (an-tanana)',
-          'Mora jerena sy arahi-maso ny trondro',
-          'Fahadiovan\'ny rano azo fehezina tanteraka',
-          'Tsy misy mpangalatra na biby mpihinana',
-          'Vokatra haingana (4-6 volana)',
-        ],
-        'disadvantages': [
-          'Mila pompe aérateur (raha te hampitombo isa)',
-          'Mila famatsiana rano madio matetika',
-          'Vidiny basin lafo (investissement départ)',
-          'Mila fanaraha-maso isan\'andro',
-        ],
-        'conditions': [
-          'Rano: Madio, tsy misy chlore (avelao hiala 24h raha rano Jirama)',
-          'pH: 6.5 - 8.5 (Tsara indrindra 7.0-7.5)',
-          'Oxygène: > 5mg/L (Mila aérateur raha > 50 trondro/m³)',
-          'Température: 25°C - 30°C (Tilapia)',
-          'Ammoniac: < 0.02 mg/L (Tena poizina!)',
-          'Nitrite: < 0.1 mg/L',
-        ],
-        'actions': [
-          'Isan\'andro: Omeo sakafo in-3 na in-4 (maraina, atoandro, hariva)',
-          'Isan\'andro: Jereo raha mihinana tsara ny trondro',
-          'Isan\'andro: Esory ny sakafo tsy lany (mba tsy ho lo)',
-          'Isan-kerinandro: Soloy ny 20-30% n\'ny rano (siphonage fond)',
-          'Isan-kerinandro: Diovy ny filtre (raha misy)',
-          'Isam-bolana: Lanjao ny trondro vitsivitsy (échantillon) hanitsiana ny sakafo',
-        ],
-        'setup': [
-          '1. Omano ny toerana: Fisaka, mafy, akaiky rano',
-          '2. Apetraho ny basin (Plastika, Beton na Bâche)',
-          '3. Asio tatatra fivoahan-drano (Vidange) any ambany',
-          '4. Fenoy rano ary avelao 2-3 andro (hiala ny fofona/chlore)',
-          '5. Asio "Cycle Azote" (zezika kely) mandritra ny 1-2 herinandro',
-          '6. Arotsaka ny zana-trondro (maraina na hariva, aza atao tampoka)',
-        ],
-        'materials': [
-          {'name': 'Basin plastika 1000L (IBC)', 'price': '150,000-250,000 Ar'},
-          {'name': 'Bâche (raha manao dobo bâche)', 'price': '10,000-15,000 Ar/m²'},
-          {'name': 'Pompe aérateur (Bulle)', 'price': '45,000-80,000 Ar'},
-          {'name': 'Pompe à eau (Fidiran-drano)', 'price': '150,000-300,000 Ar'},
-          {'name': 'Kit Test Rano (pH, Ammo)', 'price': '80,000-150,000 Ar'},
-          {'name': 'Harato', 'price': '15,000-25,000 Ar'},
-        ],
-      },
-      {
-        'name': 'Dobo (Lavadrano vita)',
-        'emoji': '🕳️',
-        'type': 'semi-intensive',
-        'description': 'Fiompiana anaty dobo lavadrano vita tany. Fomba mahazatra eto Madagasikara.',
-        'capacity': '2-5 trondro/m²',
-        'species': ['Tilapia', 'Carpe', 'Heterotis'],
-        'investment': 'Ambany - Antonony',
-        'difficulty': 'Mora',
-        'advantages': [
-          'Vidiny fiandohana ambany',
-          'Tsy mila fitaovana be',
-          'Sakafo voajanahary misy ao',
-          'Mora fikarakarana',
-        ],
-        'disadvantages': [
-          'Mila tany malalaka',
-          'Sarotra fehezina ny rano',
-          'Misy mpangalatra (vorona, bibilava)',
-        ],
-        'materials': [
-          {'name': 'Fanadiovana dobo', 'price': '50,000-150,000 Ar'},
-          {'name': 'Harato fiarovana', 'price': '30,000-80,000 Ar'},
-          {'name': 'Zezika organika (fiandohana)', 'price': '20,000-40,000 Ar'},
-          {'name': 'Harato fijinjana', 'price': '25,000-50,000 Ar'},
-        ],
-      },
-      {
-        'name': 'Farihy kely (Petit lac)',
-        'emoji': '🏞️',
-        'type': 'semi-intensive',
-        'description': 'Fiompiana anaty farihy kely efa misy. Mila harato fiarovana.',
-        'capacity': '1-3 trondro/m²',
-        'species': ['Tilapia', 'Carpe', 'Heterotis', 'Black bass'],
-        'investment': 'Ambany',
-        'difficulty': 'Mora',
-        'advantages': [
-          'Tsy mila vola be',
-          'Sakafo voajanahary betsaka',
-          'Fari-piainana voajanahary',
-          'Azo ampiana voly vary',
-        ],
-        'disadvantages': [
-          'Sarotra fehezina',
-          'Misy mpangalatra',
-          'Tsy azo ajanona ny rano',
-        ],
-        'materials': [
-          {'name': 'Harato fiarovana lehibe', 'price': '80,000-200,000 Ar'},
-          {'name': 'Bao marika', 'price': '5,000-10,000 Ar'},
-          {'name': 'Harato fijinjana', 'price': '30,000-60,000 Ar'},
-        ],
-      },
-      {
-        'name': 'Farihy lehibe miaraka amin\'ny harato',
-        'emoji': '🌊',
-        'type': 'extensive',
-        'description': 'Fiompiana anaty farihy lehibe miaraka amin\'ny harato (cage/enclos).',
-        'capacity': '20-50 trondro/m³ (anaty cage)',
-        'species': ['Tilapia', 'Carpe'],
-        'investment': 'Antonony - Ambony',
-        'difficulty': 'Antonony',
-        'advantages': [
-          'Kapasita be',
-          'Rano madio foana',
-          'Azo atao lehibe ny orinasa',
-        ],
-        'disadvantages': [
-          'Mila harato matanjaka',
-          'Mety ho fangalaran\'olona',
-          'Mila fiambenana',
-        ],
-        'materials': [
-          {'name': 'Cage harato 3x3x2m', 'price': '150,000-300,000 Ar'},
-          {'name': 'Bao flotaison', 'price': '50,000-100,000 Ar'},
-          {'name': 'Tady matanjaka', 'price': '20,000-40,000 Ar'},
-          {'name': 'Harato fijinjana', 'price': '30,000-60,000 Ar'},
-        ],
-      },
-      {
-        'name': 'Rano velona (Rivière) miaraka amin\'ny harato',
-        'emoji': '🏞️',
-        'type': 'extensive',
-        'description': 'Fiompiana anaty renirano miaraka amin\'ny harato na enclos.',
-        'capacity': '10-30 trondro/m³',
-        'species': ['Tilapia', 'Carpe', 'Heterotis'],
-        'investment': 'Antonony',
-        'difficulty': 'Sarotra',
-        'advantages': [
-          'Rano madio foana (mikoriana)',
-          'Oxygène betsaka',
-          'Sakafo voajanahary betsaka',
-        ],
-        'disadvantages': [
-          'Mety ho simba ny harato (riaka)',
-          'Sarotra jerena',
-          'Mila fahazoan-dalana',
-        ],
-        'materials': [
-          {'name': 'Enclos harato matanjaka', 'price': '200,000-400,000 Ar'},
-          {'name': 'Pieu bois/vy', 'price': '50,000-100,000 Ar'},
-          {'name': 'Tady sy fitaovana famatotra', 'price': '30,000-50,000 Ar'},
-        ],
-      },
-    ];
-
     final fishSpecies = [
       {
-        'name': 'Tilapia (Tilapia nilotica)',
+        'name': 'Tilapia Nilotica',
         'emoji': '🐟',
         'localName': 'Tilapia, Fiha',
-        'growthTime': '6-8 volana',
-        'harvestWeight': '300-500g',
+        'growthTime': '5-7 volana',
+        'harvestWeight': '400-600g',
         'temperature': '25-30°C',
-        'priceKg': '12,000-18,000 Ar/kg',
-        'advantages': ['Mora tezaina', 'Mahatanty aretina', 'Mitombo haingana'],
-        'feed': 'Sakafo vita an-trano, kankana, apombombary (son de riz), katsaka',
+        'priceKg': '18,000-25,000 Ar/kg',
+        'color': const Color(0xFF00BCD4),
+        'advantages': ['Mora tezaina', 'Mahatanty aretina', 'Mitombo haingana', 'Lafo vidiny amin\'izao'],
+        'feed': 'Provende 28-32% protéine, kankana, apombombary, katsaka',
+        'densityPerM3': '50-100 (tsy misy aérateur) / 150-300 (misy aérateur)',
+        'fcr': '1.5-1.8 (1.5kg sakafo = 1kg trondro)',
         'alevins': [
-          {'size': '1-2 cm (0.5-2g)', 'price': '200-300 Ar/iray'},
-          {'size': '3-5 cm (5-10g)', 'price': '400-500 Ar/iray'},
-          {'size': '6-8 cm (15-30g)', 'price': '600-800 Ar/iray'},
-          {'size': 'Géniteur (250-500g)', 'price': '8,000-15,000 Ar/iray'},
+          {'size': 'Fingerling 2-3cm (1-3g)', 'price': '300-400 Ar/iray'},
+          {'size': 'Fingerling 5-7cm (8-15g)', 'price': '500-700 Ar/iray'},
+          {'size': 'Juvenile 8-12cm (30-60g)', 'price': '800-1,200 Ar/iray'},
+          {'size': 'Géniteur Lahy (300-500g)', 'price': '15,000-25,000 Ar/iray'},
+          {'size': 'Géniteur Vavy (250-400g)', 'price': '12,000-20,000 Ar/iray'},
         ],
       },
       {
-        'name': 'Carpe commune',
+        'name': 'Tilapia Rouge (Red Tilapia)',
         'emoji': '🐠',
+        'localName': 'Tilapia mena',
+        'growthTime': '6-8 volana',
+        'harvestWeight': '400-700g',
+        'temperature': '26-32°C',
+        'priceKg': '22,000-30,000 Ar/kg',
+        'color': const Color(0xFFFF5722),
+        'advantages': ['Vidiny lafo kokoa', 'Tsara bika', 'Tiana any ivelany'],
+        'feed': 'Provende 30-35% protéine, sakafo kalitao ambony',
+        'densityPerM3': '40-80 (tsy misy aérateur) / 100-200 (misy aérateur)',
+        'fcr': '1.6-2.0',
+        'alevins': [
+          {'size': 'Fingerling 3-5cm (3-8g)', 'price': '600-800 Ar/iray'},
+          {'size': 'Fingerling 6-10cm (15-40g)', 'price': '1,000-1,500 Ar/iray'},
+          {'size': 'Géniteur (400-600g)', 'price': '25,000-40,000 Ar/iray'},
+        ],
+      },
+      {
+        'name': 'Carpe Commune',
+        'emoji': '🐡',
         'localName': 'Karpa, Besisika',
         'growthTime': '8-12 volana',
-        'harvestWeight': '500-1500g',
+        'harvestWeight': '800-2000g',
         'temperature': '20-28°C',
-        'priceKg': '15,000-22,000 Ar/kg',
-        'advantages': ['Lanja mavesatra', 'Tsy sarotra sakafo', 'Vidiny lafo'],
-        'feed': 'Kankana, apombombary (son de riz), ravina, zava-maniry',
+        'priceKg': '20,000-28,000 Ar/kg',
+        'color': const Color(0xFF795548),
+        'advantages': ['Lanja mavesatra', 'Tsy sarotra sakafo', 'Mahazaka hatsiaka'],
+        'feed': 'Kankana, apombombary, ravina, mofo maina',
+        'densityPerM3': '20-40',
+        'fcr': '2.0-2.5',
         'alevins': [
-          {'size': '2-3 cm (1-3g)', 'price': '250-350 Ar/iray'},
-          {'size': '4-6 cm (8-15g)', 'price': '450-550 Ar/iray'},
-          {'size': '7-10 cm (25-50g)', 'price': '650-800 Ar/iray'},
-          {'size': 'Géniteur (1-2kg)', 'price': '20,000-35,000 Ar/iray'},
+          {'size': 'Fingerling 3-5cm (2-5g)', 'price': '350-500 Ar/iray'},
+          {'size': 'Fingerling 6-10cm (15-40g)', 'price': '600-900 Ar/iray'},
+          {'size': 'Géniteur (1-2kg)', 'price': '25,000-45,000 Ar/iray'},
         ],
       },
       {
-        'name': 'Carpe chinoise (Amour blanc)',
-        'emoji': '🐟',
+        'name': 'Carpe Chinoise (Amour blanc)',
+        'emoji': '🐋',
         'localName': 'Karpa fotsy',
         'growthTime': '10-14 volana',
-        'harvestWeight': '1-3 kg',
+        'harvestWeight': '1.5-4 kg',
         'temperature': '22-28°C',
-        'priceKg': '18,000-25,000 Ar/kg',
-        'advantages': ['Lanja mavesatra be', 'Mihinana ahitra/ravina'],
-        'feed': 'Ahitra, ravina, zava-maniry anaty rano',
+        'priceKg': '22,000-32,000 Ar/kg',
+        'color': const Color(0xFF4CAF50),
+        'advantages': ['Lanja mavesatra be', 'Mihinana ahitra/ravina', 'Manadio dobo'],
+        'feed': 'Ahitra, ravina, zava-maniry anaty rano (Herbivore)',
+        'densityPerM3': '15-30',
+        'fcr': '2.5-3.5 (ahitra)',
         'alevins': [
-          {'size': '3-5 cm (3-8g)', 'price': '350-450 Ar/iray'},
-          {'size': '6-10 cm (15-40g)', 'price': '550-700 Ar/iray'},
-          {'size': 'Géniteur (2-4kg)', 'price': '40,000-60,000 Ar/iray'},
+          {'size': 'Fingerling 5-8cm (5-15g)', 'price': '500-700 Ar/iray'},
+          {'size': 'Juvenile 10-15cm (50-100g)', 'price': '900-1,400 Ar/iray'},
+          {'size': 'Géniteur (2-4kg)', 'price': '50,000-80,000 Ar/iray'},
+        ],
+      },
+      {
+        'name': 'Clarias (Trondro gasy)',
+        'emoji': '🐍',
+        'localName': 'Clarias, Fibata',
+        'growthTime': '6-10 volana',
+        'harvestWeight': '500-1500g',
+        'temperature': '24-32°C',
+        'priceKg': '15,000-22,000 Ar/kg',
+        'color': const Color(0xFF607D8B),
+        'advantages': ['Mahazaka rano maloto', 'Tsy mila oxygène be', 'Mahazaka hanoanana'],
+        'feed': 'Hena, trondro kely, kankana, provende',
+        'densityPerM3': '80-150 (tsy mila aérateur)',
+        'fcr': '1.2-1.6',
+        'alevins': [
+          {'size': 'Fingerling 3-5cm (2-6g)', 'price': '400-600 Ar/iray'},
+          {'size': 'Fingerling 8-12cm (30-80g)', 'price': '800-1,200 Ar/iray'},
+          {'size': 'Géniteur (800g-1.5kg)', 'price': '20,000-35,000 Ar/iray'},
         ],
       },
       {
         'name': 'Heterotis',
-        'emoji': '🐡',
+        'emoji': '🐳',
         'localName': 'Marakely',
         'growthTime': '12-18 volana',
-        'harvestWeight': '1-5 kg',
+        'harvestWeight': '2-6 kg',
         'temperature': '24-30°C',
-        'priceKg': '15,000-20,000 Ar/kg',
-        'advantages': ['Lanja mavesatra be', 'Mahazaka toerana ratsy'],
-        'feed': 'Zava-maniry, plancton, kankana',
+        'priceKg': '18,000-25,000 Ar/kg',
+        'color': const Color(0xFF9C27B0),
+        'advantages': ['Lanja mavesatra be', 'Mahazaka toerana ratsy', 'Vidiny lafo'],
+        'feed': 'Plancton, zava-maniry, kankana, bibikely',
+        'densityPerM3': '10-25',
+        'fcr': '2.0-3.0',
         'alevins': [
-          {'size': '5-8 cm (10-20g)', 'price': '500-700 Ar/iray'},
-          {'size': '10-15 cm (40-80g)', 'price': '800-1,200 Ar/iray'},
-          {'size': 'Géniteur (3-5kg)', 'price': '50,000-80,000 Ar/iray'},
+          {'size': 'Fingerling 8-12cm (20-50g)', 'price': '800-1,200 Ar/iray'},
+          {'size': 'Juvenile 15-20cm (100-200g)', 'price': '1,500-2,500 Ar/iray'},
+          {'size': 'Géniteur (3-5kg)', 'price': '60,000-100,000 Ar/iray'},
         ],
       },
     ];
@@ -25565,9 +27916,9 @@ class TrondroSystemsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('SYSTÈME FIOMPIANA TRONDRO',
+                      const Text('KARAZANA TRONDRO',
                           style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                      Text('Tilapia, Carpe - Hors sol, Dobo, Farihy, Rano velona',
+                      Text('Tilapia, Carpe, Clarias, Heterotis - Vidiny sy toetoetra',
                           style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 12)),
                     ],
                   ),
@@ -25578,449 +27929,855 @@ class TrondroSystemsScreen extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // Fish Species Section
+          // Fish Species Section - GRID FORMAT 2 COLUMNS
+          const Row(
+            children: [
+              Text('🐠', style: TextStyle(fontSize: 24)),
+              SizedBox(width: 8),
+              Text('KARAZANA TRONDRO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text('Vidiny amin\'ny tsena: Décembre 2025', style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
+          const SizedBox(height: 12),
+          
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final crossAxisCount = constraints.maxWidth > 600 ? 3 : 2;
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.75,
+                ),
+                itemCount: fishSpecies.length,
+                itemBuilder: (context, index) {
+                  final fish = fishSpecies[index];
+                  final color = fish['color'] as Color? ?? Colors.cyan;
+                  return GestureDetector(
+                    onTap: () => _showFishDetails(context, fish),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [color.withValues(alpha: 0.9), color.withValues(alpha: 0.6)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(color: color.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 4)),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Emoji and Name
+                            Text(fish['emoji'] as String, style: const TextStyle(fontSize: 32)),
+                            const SizedBox(height: 6),
+                            Text(
+                              fish['name'] as String,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13, height: 1.2),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              fish['localName'] as String,
+                              style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 10),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const Spacer(),
+                            // Price Badge
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.95),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                fish['priceKg'] as String,
+                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: color),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            // Quick Info
+                            Wrap(
+                              spacing: 4,
+                              runSpacing: 4,
+                              children: [
+                                _buildMiniChip('⏱️ ${fish['growthTime']}'),
+                                _buildMiniChip('⚖️ ${fish['harvestWeight']}'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMiniChip(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(text, style: const TextStyle(fontSize: 9, color: Colors.white)),
+    );
+  }
+
+  void _showFishDetails(BuildContext context, Map<String, dynamic> fish) {
+    final color = fish['color'] as Color? ?? Colors.cyan;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.85,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Column(
+          children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [color, color.withValues(alpha: 0.7)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(fish['emoji'] as String, style: const TextStyle(fontSize: 48)),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(fish['name'] as String, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                            Text(fish['localName'] as String, style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 14)),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  // Price highlight
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('💰 VIDINY: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(fish['priceKg'] as String, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: color)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Content
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  // Quick Stats
+                  Row(
+                    children: [
+                      Expanded(child: _buildStatCard('⏱️ Fotoana', fish['growthTime'] as String, Colors.blue)),
+                      const SizedBox(width: 8),
+                      Expanded(child: _buildStatCard('⚖️ Lanja', fish['harvestWeight'] as String, Colors.green)),
+                      const SizedBox(width: 8),
+                      Expanded(child: _buildStatCard('🌡️ Hafanana', fish['temperature'] as String, Colors.orange)),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  // Density and FCR
+                  if (fish['densityPerM3'] != null || fish['fcr'] != null)
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.purple.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.purple.shade200),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('📊 DONNÉES TECHNIQUES', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple.shade800)),
+                          const SizedBox(height: 8),
+                          if (fish['densityPerM3'] != null)
+                            Text('🐟 Densité: ${fish['densityPerM3']} trondro/m³', style: const TextStyle(fontSize: 13)),
+                          if (fish['fcr'] != null)
+                            Text('📈 FCR: ${fish['fcr']}', style: const TextStyle(fontSize: 13)),
+                        ],
+                      ),
+                    ),
+
+                  // Feed
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.green.shade200),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('🍽️ SAKAFO', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green.shade800)),
+                        const SizedBox(height: 8),
+                        Text(fish['feed'] as String, style: const TextStyle(fontSize: 13)),
+                      ],
+                    ),
+                  ),
+
+                  // Advantages
+                  if (fish['advantages'] != null)
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.teal.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.teal.shade200),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('✅ TOMBONTSOA', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.teal.shade800)),
+                          const SizedBox(height: 8),
+                          ...(fish['advantages'] as List).map((adv) => Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('• ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Expanded(child: Text(adv as String, style: const TextStyle(fontSize: 13))),
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                    ),
+
+                  // Alevins prices
+                  if (fish['alevins'] != null)
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade50,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.blue.shade200),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('🐣 VIDIN\'NY ZANA-TRONDRO (Alevins)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue.shade800)),
+                          const SizedBox(height: 12),
+                          ...(fish['alevins'] as List).map((alevin) => Container(
+                            margin: const EdgeInsets.only(bottom: 8),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.blue.shade100),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(child: Text(alevin['size'] as String, style: const TextStyle(fontSize: 12))),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.shade100,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(alevin['price'] as String, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green.shade800)),
+                                ),
+                              ],
+                            ),
+                          )),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        children: [
+          Text(label, style: TextStyle(fontSize: 11, color: color)),
+          const SizedBox(height: 4),
+          Text(value, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: color), textAlign: TextAlign.center),
+        ],
+      ),
+    );
+  }
+}
+
+// ========== Trondro Teknika Screen ==========
+class TrondroTeknikaScreen extends StatelessWidget {
+  const TrondroTeknikaScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Vocational-style modules and checklists for beginners
+    final quickSteps = [
+      {
+        'title': 'Dingana 1: Fikarakarana haingana',
+        'icon': '⚙️',
+        'items': [
+          'Fenoy rano madio 70-80% ny tanky/dobo, ampio aérateur raha misy',
+          'Avelao hitsahatra 12-24h raha rano Jirama (hiala chlore)',
+          'Ataovy fefy/harato hiarovana amin’ ny biby sy mpangalatra',
+        ],
+      },
+      {
+        'title': 'Dingana 2: Alevinage andro iray',
+        'icon': '🐣',
+        'items': [
+          'Ataovy acclimatation 20-30 min (kitapo ao anaty rano, manampy rano tsikelikely)',
+          'Atsipazo moramora ny zana-trondro, jereo ny fiparitahana',
+          'Densité soso-kevitra: 50-80/m³ (tilapia tsy misy aérateur) na 100-200/m³ (misy aérateur)',
+        ],
+      },
+      {
+        'title': 'Dingana 3: Sakafo andro voalohany',
+        'icon': '🍽️',
+        'items': [
+          'Sakafo madinika (starter) 6-8% lanja vinavinaina, zaraina in-3/4',
+          'Esory ny sakafo tsy lany 15-20 min aorian’ny famahanana',
+          'Tandremo ny fihetsika: raha tsy mihinana, ajanony ny fatra',
+        ],
+      },
+      {
+        'title': 'Dingana 4: Fanaraha-maso 48h',
+        'icon': '🩺',
+        'items': [
+          'Jereo: fihodinana eny ambony, fihinanana, loko, ratra',
+          'Mandrefy pH sy DO (dissolved oxygen): tanjona pH 6.5-8.0, DO > 5 mg/L',
+          'Famantarana DO ambany (<4 mg/L): trondro miakatra misintona rivotra na tsy mihinana',
+          'Asa haingana raha DO midina: ampio aérateur/oxygénateur, ahena sakafo, ovay rano 20-30% tsy misy chlore',
+          'Nitrite tanjona: <0.1 mg/L (tsara kokoa <0.05 mg/L); famantarana: gills mena-volontsôkôlà, miantso rivotra',
+          'Chlore: 0 mg/L no azo ekena, avelao hitsahatra ny rano Jirama 12-24h na mampiasà dechlorinateur',
+          'Raha nitrite na chlore avo: ovay rano tsikelikely 30-50% ary sorohy ny sakafo be dia be',
+          'Raha misy maty be dia ajanony ny sakafo, diniho koa ammonia/nitrite raha azo atao',
+        ],
+      },
+      {
+        'title': 'Dingana 5: KPI fototra',
+        'icon': '📊',
+        'items': [
+          'Survie > 90% aorian’ny 48h',
+          'FCR = sakafo (kg) ÷ fitomboan’ny lanja (kg); ohatra: 1.5 kg sakafo / 1 kg fitomboana = FCR 1.5',
+          'FCR tanjona: Tilapia 1.5-1.8, Clarias 1.2-1.6 (ambany kokoa = mahomby kokoa)',
+          'Kalitaon-drano: pH 6.5-8.0, DO > 5 mg/L, Ammonia < 0.02 mg/L',
+        ],
+      },
+    ];
+
+    final teknikaList = [
+      {
+        'title': 'DOBO TANY (Étang en terre)',
+        'emoji': '🏞️',
+        'color': Colors.brown,
+        'description': 'Fomba mahazatra indrindra any ambanivohitra',
+        'details': [
+          {'label': 'Habaka', 'value': '100-5000 m²'},
+          {'label': 'Lalina', 'value': '1-1.5 m'},
+          {'label': 'Densité', 'value': '2-5 trondro/m²'},
+          {'label': 'Fotoana fiompiana', 'value': '6-8 volana'},
+        ],
+        'advantages': [
+          'Tsy lafo loatra ny fanorenana',
+          'Sakafo voajanahary betsaka (plancton)',
+          'Mora kojakojaina',
+          'Azo atao eny ambanivohitra rehetra',
+        ],
+        'requirements': [
+          'Tany tsy mandalo rano (argileux)',
+          'Loharano rano azo antoka',
+          'Fefy manodidina (contre prédateurs)',
+          'Système drainage',
+        ],
+        'investment': '500,000-2,000,000 Ar',
+      },
+      {
+        'title': 'BASSIN BÉTON',
+        'emoji': '🏗️',
+        'color': Colors.blueGrey,
+        'description': 'Rafitra mafy orina ho an\'ny fiompiana goavana',
+        'details': [
+          {'label': 'Habaka', 'value': '20-200 m²'},
+          {'label': 'Lalina', 'value': '1-2 m'},
+          {'label': 'Densité', 'value': '10-20 trondro/m³'},
+          {'label': 'Fotoana fiompiana', 'value': '4-6 volana'},
+        ],
+        'advantages': [
+          'Maharitra ela (20+ taona)',
+          'Mora fanadiovana',
+          'Contrôle tsara ny rano',
+          'Densité avo kokoa',
+        ],
+        'requirements': [
+          'Système aération (pompe)',
+          'Filtration rano',
+          'Fanaraha-maso matetika',
+          'Sakafo artifisyely',
+        ],
+        'investment': '2,000,000-10,000,000 Ar',
+      },
+      {
+        'title': 'HORS-SOL (Réservoir/Tank)',
+        'emoji': '🛢️',
+        'color': Colors.indigo,
+        'description': 'Fiompiana anaty réservoir plastika na fibre',
+        'details': [
+          {'label': 'Habaka', 'value': '1-50 m³'},
+          {'label': 'Densité', 'value': '20-50 trondro/m³'},
+          {'label': 'Fotoana fiompiana', 'value': '3-5 volana'},
+          {'label': 'Trondro', 'value': 'Tilapia, Clarias'},
+        ],
+        'advantages': [
+          'Tsy mila tany lehibe',
+          'Azo atao an-tanàna',
+          'Croissance haingana',
+          'Contrôle feno ny tontolo',
+        ],
+        'requirements': [
+          'Aérateur electrique',
+          'Système filtration',
+          'Pompe rano',
+          'Jiro (électricité) azo antoka',
+        ],
+        'investment': '1,500,000-8,000,000 Ar',
+      },
+      {
+        'title': 'CAGE FLOTTANTE (Farihy)',
+        'emoji': '🌊',
+        'color': Colors.cyan,
+        'description': 'Fiompiana anaty cage ao anaty farihy na renirano',
+        'details': [
+          {'label': 'Habaka cage', 'value': '4-100 m³'},
+          {'label': 'Densité', 'value': '30-100 trondro/m³'},
+          {'label': 'Fotoana fiompiana', 'value': '4-8 volana'},
+          {'label': 'Trondro', 'value': 'Tilapia, Carpe'},
+        ],
+        'advantages': [
+          'Tsy mila kojakoja rano',
+          'Rano madio foana',
+          'Production avo be',
+          'Mora monitoring',
+        ],
+        'requirements': [
+          'Farihy na renirano lalina',
+          'Filet matanjaka',
+          'Ancrage tsara',
+          'Fahazoan-dalana (permis)',
+        ],
+        'investment': '800,000-5,000,000 Ar',
+      },
+      {
+        'title': 'RAS (Recirculating Aquaculture)',
+        'emoji': '♻️',
+        'color': Colors.teal,
+        'description': 'Système moderne mamerina ny rano',
+        'details': [
+          {'label': 'Rano ampiasaina', 'value': '5-10% isan\'andro'},
+          {'label': 'Densité', 'value': '50-100 trondro/m³'},
+          {'label': 'Fotoana fiompiana', 'value': '3-4 volana'},
+          {'label': 'Efficience', 'value': '95% rano recycled'},
+        ],
+        'advantages': [
+          'Tsy mandany rano be',
+          'Contrôle feno',
+          'Production isan-taona',
+          'Biosécurité avo',
+        ],
+        'requirements': [
+          'Biofiltre',
+          'Système mécanique filtration',
+          'UV sterilizer',
+          'Expertise technique',
+        ],
+        'investment': '10,000,000-50,000,000 Ar',
+      },
+      {
+        'title': 'AQUAPONIE',
+        'emoji': '🥬',
+        'color': Colors.green,
+        'description': 'Trondro + Legioma = Système intégré',
+        'details': [
+          {'label': 'Ratio', 'value': '1m³ trondro = 3m² legioma'},
+          {'label': 'Densité', 'value': '20-30 trondro/m³'},
+          {'label': 'Vokatra', 'value': 'Trondro + Legioma'},
+          {'label': 'Zezika', 'value': 'Tsy ilaina (poissons fournissent)'},
+        ],
+        'advantages': [
+          'Double vokatra (trondro + legioma)',
+          'Tsy mila zezika ho an\'ny legioma',
+          'Économie rano 90%',
+          'Bio sy voajanahary',
+        ],
+        'requirements': [
+          'Pompe rano',
+          'Growbed (lit de culture)',
+          'Media (graviers, billes)',
+          'Système siphon',
+        ],
+        'investment': '2,000,000-15,000,000 Ar',
+      },
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colors.cyan.shade50, Colors.white],
+        ),
+      ),
+      child: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          // Header
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 5)],
+              gradient: LinearGradient(
+                colors: [Colors.cyan.shade700, Colors.blue.shade600],
+              ),
+              borderRadius: BorderRadius.circular(16),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                const Row(
-                  children: [
-                    Text('🐠', style: TextStyle(fontSize: 24)),
-                    SizedBox(width: 8),
-                    Text('KARAZANA TRONDRO', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  ],
-                ),
-                const Divider(),
-                ...fishSpecies.map((fish) => Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.cyan.shade50,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.cyan.shade100),
-                  ),
+                const Text('🔧', style: TextStyle(fontSize: 40)),
+                const SizedBox(width: 12),
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text(fish['emoji'] as String, style: const TextStyle(fontSize: 28)),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(fish['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                                Text('🏷️ ${fish['localName']}', style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade100,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(fish['priceKg'] as String, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green.shade800)),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 4,
-                        children: [
-                          _buildFishChip('⏱️ ${fish['growthTime']}'),
-                          _buildFishChip('⚖️ ${fish['harvestWeight']}'),
-                          _buildFishChip('🌡️ ${fish['temperature']}'),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      Text('🍽️ Sakafo: ${fish['feed']}', style: TextStyle(fontSize: 11, color: Colors.grey.shade700)),
-                      
-                      // Alevins prices section
-                      if (fish['alevins'] != null) ...[
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.shade50,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.blue.shade200),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Text('🐣 ', style: TextStyle(fontSize: 14)),
-                                  Text('VIDIN\'NY ZANA-TRONDRO:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.blue.shade800)),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                              ...(fish['alevins'] as List).map((alevin) => Padding(
-                                padding: const EdgeInsets.only(bottom: 3),
-                                child: Row(
-                                  children: [
-                                    const Text('  • ', style: TextStyle(fontSize: 10)),
-                                    Expanded(child: Text(alevin['size'] as String, style: const TextStyle(fontSize: 10))),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                      decoration: BoxDecoration(
-                                        color: Colors.green.shade100,
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: Text(alevin['price'] as String, style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold, color: Colors.green.shade700)),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ],
-                          ),
-                        ),
-                      ],
+                      const Text('TEKNIKA FIOMPIANA', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                      Text('Fomba sy rafitra samihafa', style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
                     ],
                   ),
-                )),
+                ),
               ],
             ),
           ),
+          const SizedBox(height: 16),
 
-          const SizedBox(height: 20),
+          // Vocational training single card -> opens full sheet
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) => Container(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [Colors.cyan.shade700, Colors.blue.shade600]),
+                          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                        ),
+                        child: Row(
+                          children: [
+                            const Text('🎓', style: TextStyle(fontSize: 30)),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('PARCOURS EXPRESS (1 JOUR)',
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                                  Text('Dingana tsotra: fanomanana → alevinage → sakafo → fanaraha-maso',
+                                      style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.close, color: Colors.white),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: ListView(
+                            children: [
+                              ...quickSteps.map((card) => Container(
+                                    margin: const EdgeInsets.only(bottom: 12),
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6, offset: const Offset(0, 2))],
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(card['icon'] as String, style: const TextStyle(fontSize: 20)),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Text(card['title'] as String,
+                                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.cyan.shade800)),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10),
+                                        ...(card['items'] as List).map((it) => Container(
+                                              margin: const EdgeInsets.only(bottom: 6),
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                              decoration: BoxDecoration(
+                                                color: Colors.cyan.shade50,
+                                                borderRadius: BorderRadius.circular(10),
+                                                border: Border.all(color: Colors.cyan.shade100),
+                                              ),
+                                              child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('• ', style: TextStyle(fontSize: 12, color: Colors.cyan.shade700, fontWeight: FontWeight.bold)),
+                                                  Expanded(child: Text(it as String, style: const TextStyle(fontSize: 12, height: 1.35))),
+                                                ],
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, 2))],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.cyan.shade50,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Text('🎓', style: TextStyle(fontSize: 26)),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('PARCOURS EXPRESS (1 JOUR)',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                        Text('Kit de démarrage en 1 journée: fanomanana → alevinage → sakafo → fanaraha-maso',
+                            style: TextStyle(fontSize: 12, color: Colors.grey.shade700)),
+                      ],
+                    ),
+                  ),
+                  const Icon(Icons.keyboard_arrow_right, color: Colors.cyan, size: 24),
+                ],
+              ),
+            ),
+          ),
 
-          // Systems Section
-          const Text('SYSTÈME FIOMPIANA', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
 
-          ...systems.map((system) => Container(
-            margin: const EdgeInsets.only(bottom: 16),
+          // Systems list
+          ...teknikaList.map((teknika) => Container(
+            margin: const EdgeInsets.only(bottom: 12),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 5)],
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, 2)),
+              ],
             ),
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
-                leading: Text(system['emoji'] as String, style: const TextStyle(fontSize: 32)),
-                title: Text(system['name'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(system['description'] as String, style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
-                    const SizedBox(height: 4),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 4,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Colors.cyan.shade100,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text('📊 ${system['capacity']}', style: TextStyle(fontSize: 10, color: Colors.cyan.shade800)),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Colors.orange.shade100,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text('💰 ${system['investment']}', style: TextStyle(fontSize: 10, color: Colors.orange.shade800)),
-                        ),
-                      ],
-                    ),
-                  ],
+                tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                leading: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: (teknika['color'] as Color).withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(child: Text(teknika['emoji'] as String, style: const TextStyle(fontSize: 28))),
                 ),
+                title: Text(teknika['title'] as String, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: teknika['color'] as Color)),
+                subtitle: Text(teknika['description'] as String, style: const TextStyle(fontSize: 11)),
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
+                  // Quick stats
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: (teknika['color'] as Color).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: (teknika['details'] as List).map((d) => Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: (teknika['color'] as Color).withValues(alpha: 0.3)),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(d['label'] as String, style: TextStyle(fontSize: 9, color: Colors.grey.shade600)),
+                            Text(d['value'] as String, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: teknika['color'] as Color)),
+                          ],
+                        ),
+                      )).toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Advantages
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.green.shade200),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Trondro azo atao
-                        Row(
-                          children: [
-                            const Text('🐟 Trondro: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                            Text((system['species'] as List).join(', '), style: TextStyle(fontSize: 12, color: Colors.grey.shade700)),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-
-                        // Avantages
-                        const Text('✅ Tombontsoa:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.green)),
-                        ...(system['advantages'] as List).map((adv) => Padding(
-                          padding: const EdgeInsets.only(left: 16, top: 2),
-                          child: Text('• $adv', style: TextStyle(fontSize: 11, color: Colors.grey.shade700)),
-                        )),
-
+                        Text('✅ TOMBONTSOA', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.green.shade800)),
                         const SizedBox(height: 8),
-
-                        // Inconvénients
-                        const Text('⚠️ Fatiantoka:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.orange)),
-                        ...(system['disadvantages'] as List).map((dis) => Padding(
-                          padding: const EdgeInsets.only(left: 16, top: 2),
-                          child: Text('• $dis', style: TextStyle(fontSize: 11, color: Colors.grey.shade700)),
-                        )),
-
-                        // Conditions (New)
-                        if (system.containsKey('conditions')) ...[
-                          const SizedBox(height: 16),
-                          Card(
-                            elevation: 0,
-                            color: Colors.blue.shade50,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(color: Colors.blue.shade100),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (context) => Container(
-                                    height: MediaQuery.of(context).size.height * 0.7,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue.shade50,
-                                            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.thermostat, color: Colors.blue.shade700),
-                                              const SizedBox(width: 12),
-                                              Text('Fepetra ilaina (Conditions)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue.shade900)),
-                                              const Spacer(),
-                                              IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: ListView(
-                                            padding: const EdgeInsets.all(20),
-                                            children: (system['conditions'] as List).map((cond) => Padding(
-                                              padding: const EdgeInsets.only(bottom: 12),
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('• ', style: TextStyle(color: Colors.blue.shade700, fontWeight: FontWeight.bold, fontSize: 16)),
-                                                  Expanded(child: Text(cond, style: const TextStyle(fontSize: 15, height: 1.5))),
-                                                ],
-                                              ),
-                                            )).toList(),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.thermostat, color: Colors.blue.shade700),
-                                    const SizedBox(width: 12),
-                                    Text('Fepetra ilaina (Conditions)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.blue.shade900)),
-                                    const Spacer(),
-                                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.blue.shade300),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-
-                        // Setup (New)
-                        if (system.containsKey('setup')) ...[
-                          const SizedBox(height: 12),
-                          Card(
-                            elevation: 0,
-                            color: Colors.purple.shade50,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(color: Colors.purple.shade100),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (context) => Container(
-                                    height: MediaQuery.of(context).size.height * 0.7,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            color: Colors.purple.shade50,
-                                            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.build, color: Colors.purple.shade700),
-                                              const SizedBox(width: 12),
-                                              Text('Fanombohana (Mise en place)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.purple.shade900)),
-                                              const Spacer(),
-                                              IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: ListView(
-                                            padding: const EdgeInsets.all(20),
-                                            children: (system['setup'] as List).map((step) => Padding(
-                                              padding: const EdgeInsets.only(bottom: 12),
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('• ', style: TextStyle(color: Colors.purple.shade700, fontWeight: FontWeight.bold, fontSize: 16)),
-                                                  Expanded(child: Text(step, style: const TextStyle(fontSize: 15, height: 1.5))),
-                                                ],
-                                              ),
-                                            )).toList(),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.build, color: Colors.purple.shade700),
-                                    const SizedBox(width: 12),
-                                    Text('Fanombohana (Mise en place)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.purple.shade900)),
-                                    const Spacer(),
-                                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.purple.shade300),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-
-                        // Actions (New)
-                        if (system.containsKey('actions')) ...[
-                          const SizedBox(height: 12),
-                          Card(
-                            elevation: 0,
-                            color: Colors.brown.shade50,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: BorderSide(color: Colors.brown.shade100),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (context) => Container(
-                                    height: MediaQuery.of(context).size.height * 0.7,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            color: Colors.brown.shade50,
-                                            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.calendar_today, color: Colors.brown.shade700),
-                                              const SizedBox(width: 12),
-                                              Text('Asa atao (Actions)', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.brown.shade900)),
-                                              const Spacer(),
-                                              IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: ListView(
-                                            padding: const EdgeInsets.all(20),
-                                            children: (system['actions'] as List).map((action) => Padding(
-                                              padding: const EdgeInsets.only(bottom: 12),
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('• ', style: TextStyle(color: Colors.brown.shade700, fontWeight: FontWeight.bold, fontSize: 16)),
-                                                  Expanded(child: Text(action, style: const TextStyle(fontSize: 15, height: 1.5))),
-                                                ],
-                                              ),
-                                            )).toList(),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                              borderRadius: BorderRadius.circular(12),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.calendar_today, color: Colors.brown.shade700),
-                                    const SizedBox(width: 12),
-                                    Text('Asa atao (Actions)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.brown.shade900)),
-                                    const Spacer(),
-                                    Icon(Icons.arrow_forward_ios, size: 16, color: Colors.brown.shade300),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-
-                        const SizedBox(height: 12),
-
-                        // Matériaux
-                        const Text('🛒 Fitaovana ilaina:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                        const SizedBox(height: 8),
-                        ...(system['materials'] as List).map((mat) => Container(
-                          margin: const EdgeInsets.only(bottom: 4),
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
+                        ...(teknika['advantages'] as List).map((a) => Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(mat['name'] as String, style: const TextStyle(fontSize: 11)),
-                              Text(mat['price'] as String, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.green.shade700)),
+                              Text('• ', style: TextStyle(color: Colors.green.shade700)),
+                              Expanded(child: Text(a as String, style: const TextStyle(fontSize: 12))),
                             ],
                           ),
                         )),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Requirements
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade50,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.orange.shade200),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('⚙️ ZAVATRA ILAINA', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.orange.shade800)),
+                        const SizedBox(height: 8),
+                        ...(teknika['requirements'] as List).map((r) => Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('• ', style: TextStyle(color: Colors.orange.shade700)),
+                              Expanded(child: Text(r as String, style: const TextStyle(fontSize: 12))),
+                            ],
+                          ),
+                        )),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Investment
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.blue.shade100, Colors.cyan.shade100],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        const Text('💰', style: TextStyle(fontSize: 24)),
+                        const SizedBox(width: 12),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('FAMPIASAM-BOLA', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
+                            Text(teknika['investment'] as String, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blue.shade800)),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -26032,27 +28789,207 @@ class TrondroSystemsScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildFishChip(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.cyan.shade200),
-      ),
-      child: Text(text, style: TextStyle(fontSize: 10, color: Colors.cyan.shade800)),
-    );
-  }
 }
 
 // ========== Trondro Feed Screen ==========
-class TrondroFeedScreen extends StatelessWidget {
+class TrondroFeedScreen extends StatefulWidget {
   const TrondroFeedScreen({super.key});
 
   @override
+  State<TrondroFeedScreen> createState() => _TrondroFeedScreenState();
+}
+
+class _TrondroFeedScreenState extends State<TrondroFeedScreen> {
+  final TextEditingController _biomassCtrl = TextEditingController(text: '100');
+  final TextEditingController _rateCtrl = TextEditingController(text: '3');
+  final TextEditingController _fishCountCtrl = TextEditingController();
+  final TextEditingController _sampleCountCtrl = TextEditingController(text: '20');
+  final TextEditingController _sampleWeightCtrl = TextEditingController();
+  int _mealsPerDay = 3;
+  String _selectedFormula = 'Mora';
+  String _selectedStage = 'Croissance';
+  String _selectedSpecies = 'Tilapia';
+
+  static const List<Map<String, Object>> _localCostTiers = [
+    {
+      'name': 'Mora',
+      'protein': '24-26%',
+      'note': 'Akora mora vidy, ho an\'ny tilapia/Carpe',
+      'mix': [
+        {'name': 'Apombombary (son de riz)', 'pct': '40%'},
+        {'name': 'Katsaka voatoto', 'pct': '25%'},
+        {'name': 'Mangahazo voatoto', 'pct': '10%'},
+        {'name': 'Ravina moringa na anatsonga maina', 'pct': '10%'},
+        {'name': 'Tourteau soja', 'pct': '10%'},
+        {'name': 'Premix + sira', 'pct': '5%'},
+      ],
+    },
+    {
+      'name': 'Antonony',
+      'protein': '28-30%',
+      'note': 'Misy protéine ampy, mety amin\'ny fitomboana',
+      'mix': [
+        {'name': 'Apombombary', 'pct': '30%'},
+        {'name': 'Katsaka', 'pct': '20%'},
+        {'name': 'Tourteau soja', 'pct': '25%'},
+        {'name': 'Lafarinina trondro', 'pct': '10%'},
+        {'name': 'Olitra BSF maina', 'pct': '10%'},
+        {'name': 'Premix + sira', 'pct': '5%'},
+      ],
+    },
+    {
+      'name': 'Tsara',
+      'protein': '32-34%',
+      'note': 'Ho an\'ny zana-trondro na fitomboana haingana',
+      'mix': [
+        {'name': 'Katsaka', 'pct': '20%'},
+        {'name': 'Tourteau soja', 'pct': '30%'},
+        {'name': 'Lafarinina trondro', 'pct': '15%'},
+        {'name': 'Olitra BSF maina', 'pct': '15%'},
+        {'name': 'Apombombary', 'pct': '15%'},
+        {'name': 'Premix + sira', 'pct': '5%'},
+      ],
+    },
+    {
+      'name': 'Avo lenta',
+      'protein': '35-38%',
+      'note': 'Protein avo, RAS na cage densité avo',
+      'mix': [
+        {'name': 'Tourteau soja', 'pct': '30%'},
+        {'name': 'Lafarinina trondro', 'pct': '20%'},
+        {'name': 'Olitra BSF maina', 'pct': '20%'},
+        {'name': 'Katsaka', 'pct': '15%'},
+        {'name': 'Apombombary', 'pct': '10%'},
+        {'name': 'Premix + sira + calcium', 'pct': '5%'},
+      ],
+    },
+  ];
+
+  @override
+  void dispose() {
+    _biomassCtrl.dispose();
+    _rateCtrl.dispose();
+    _fishCountCtrl.dispose();
+    _sampleCountCtrl.dispose();
+    _sampleWeightCtrl.dispose();
+    super.dispose();
+  }
+
+  Widget _infoChip(String label, String value) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.teal.shade100,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: TextStyle(fontSize: 11, color: Colors.teal.shade900)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+        ],
+      ),
+    );
+  }
+
+  Widget _badge(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.teal.shade200),
+      ),
+      child: Text(text, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+    );
+  }
+
+  void _suggestRate() {
+    final biomass = double.tryParse(_biomassCtrl.text.replaceAll(',', '.').trim());
+    final totalFish = int.tryParse(_fishCountCtrl.text.trim());
+
+    if (biomass == null || biomass <= 0 || totalFish == null || totalFish <= 0) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Fenoy biomasse sy isan\'ny trondro aloha.')),
+      );
+      return;
+    }
+
+    final avgWeightG = (biomass * 1000) / totalFish;
+    double recommended;
+    String label;
+
+    if (avgWeightG < 50) {
+      recommended = 5.5;
+      label = 'Zana-trondro (<50g)';
+    } else if (avgWeightG < 150) {
+      recommended = 4.0;
+      label = 'Kely (50-150g)';
+    } else if (avgWeightG < 500) {
+      recommended = 2.8;
+      label = 'Salantsalany (150-500g)';
+    } else {
+      recommended = 2.2;
+      label = 'Lehibe (>500g)';
+    }
+
+    double minStage;
+    double maxStage;
+    switch (_selectedStage) {
+      case 'Démarrage':
+        minStage = 4.0;
+        maxStage = 8.0;
+        break;
+      case 'Croissance':
+        minStage = 2.5;
+        maxStage = 5.0;
+        break;
+      case 'Finition':
+        minStage = 1.5;
+        maxStage = 3.0;
+        break;
+      case 'Entretien':
+      default:
+        minStage = 1.0;
+        maxStage = 2.5;
+        break;
+    }
+
+    recommended = recommended.clamp(minStage, maxStage);
+
+    setState(() {
+      _rateCtrl.text = recommended.toStringAsFixed(1);
+    });
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Fatra soso-kevitra: ${recommended.toStringAsFixed(1)}%/andro ($label, ${_selectedStage.toLowerCase()} - $_selectedSpecies)',
+        ),
+      ),
+    );
+  }
+
+  void _estimateBiomass() {
+    final totalFish = int.tryParse(_fishCountCtrl.text.trim());
+    final sampleFish = int.tryParse(_sampleCountCtrl.text.trim());
+    final sampleWeight = double.tryParse(_sampleWeightCtrl.text.replaceAll(',', '.').trim());
+
+    if (totalFish == null || totalFish <= 0) return;
+    if (sampleFish == null || sampleFish <= 0) return;
+    if (sampleWeight == null || sampleWeight <= 0) return;
+
+    final avgPerFish = sampleWeight / sampleFish; // kg par poisson
+    final biomass = avgPerFish * totalFish;
+    setState(() {
+      _biomassCtrl.text = biomass.toStringAsFixed(1);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // Formules de provende par stade
     final provendeFormulas = [
       {
         'stage': 'DÉMARRAGE (0-1 volana)',
@@ -26175,6 +29112,340 @@ class TrondroFeedScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          // FEED CALCULATOR (Trondro)
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 6)],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Text('🧮', style: TextStyle(fontSize: 26)),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text('Feed Calculator - sakafo isan\'andro',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.teal.shade50,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.teal.shade100),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Tsy fantatra ny lanja? Kajy biomasse', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                      const SizedBox(height: 8),
+                      LayoutBuilder(builder: (context, constraints) {
+                        final isNarrow = constraints.maxWidth < 380;
+                        final fishField = TextField(
+                          controller: _fishCountCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            labelText: 'Isan\'ny trondro rehetra',
+                            prefixIcon: Icon(Icons.numbers),
+                          ),
+                        );
+                        final sampleCountField = TextField(
+                          controller: _sampleCountCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            labelText: 'Isan\'ny santionany',
+                            prefixIcon: Icon(Icons.scale),
+                          ),
+                        );
+                        final sampleWeightField = TextField(
+                          controller: _sampleWeightCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            labelText: 'Lanja santionany (kg)',
+                            prefixIcon: Icon(Icons.monitor_weight_outlined),
+                          ),
+                        );
+
+                        return Column(
+                          children: [
+                            if (isNarrow) ...[
+                              fishField,
+                              const SizedBox(height: 8),
+                              sampleCountField,
+                              const SizedBox(height: 8),
+                              sampleWeightField,
+                            ] else Row(
+                              children: [
+                                Expanded(child: fishField),
+                                const SizedBox(width: 8),
+                                Expanded(child: sampleCountField),
+                                const SizedBox(width: 8),
+                                Expanded(child: sampleWeightField),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton.icon(
+                                onPressed: _estimateBiomass,
+                                icon: const Icon(Icons.calculate),
+                                label: const Text('Kajy biomasse ary fenoy'),
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.teal),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isNarrow = constraints.maxWidth < 380;
+                    return Column(
+                      children: [
+                        isNarrow
+                            ? Column(
+                                children: [
+                                  TextField(
+                                    controller: _biomassCtrl,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Biomasse trondro (kg)',
+                                      prefixIcon: Icon(Icons.monitor_weight),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  TextField(
+                                    controller: _rateCtrl,
+                                    keyboardType: TextInputType.number,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Fatra %/andro',
+                                      prefixIcon: Icon(Icons.percent),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _biomassCtrl,
+                                      keyboardType: TextInputType.number,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Biomasse trondro (kg)',
+                                        prefixIcon: Icon(Icons.monitor_weight),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _rateCtrl,
+                                      keyboardType: TextInputType.number,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Fatra %/andro',
+                                        prefixIcon: Icon(Icons.percent),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                        const SizedBox(height: 8),
+                        LayoutBuilder(builder: (context, inner) {
+                          final tight = inner.maxWidth < 520;
+                          final stageField = DropdownButtonFormField<String>(
+                            initialValue: _selectedStage,
+                            decoration: const InputDecoration(
+                              labelText: 'Stade',
+                              prefixIcon: Icon(Icons.timeline),
+                            ),
+                            items: const [
+                              'Démarrage',
+                              'Croissance',
+                              'Finition',
+                              'Entretien',
+                            ]
+                                .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                                .toList(),
+                            onChanged: (v) => setState(() => _selectedStage = v!),
+                          );
+
+                          final speciesField = DropdownButtonFormField<String>(
+                            initialValue: _selectedSpecies,
+                            decoration: const InputDecoration(
+                              labelText: 'Karazana (race)',
+                              prefixIcon: Icon(Icons.pets),
+                            ),
+                            items: const [
+                              'Tilapia',
+                              'Carpe',
+                              'Clarias',
+                              'Heterotis',
+                            ]
+                                .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                                .toList(),
+                            onChanged: (v) => setState(() => _selectedSpecies = v!),
+                          );
+
+                          if (tight) {
+                            return Column(
+                              children: [
+                                stageField,
+                                const SizedBox(height: 8),
+                                speciesField,
+                              ],
+                            );
+                          }
+
+                          return Row(
+                            children: [
+                              Expanded(child: stageField),
+                              const SizedBox(width: 12),
+                              Expanded(child: speciesField),
+                            ],
+                          );
+                        }),
+                        const SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton.icon(
+                            onPressed: _suggestRate,
+                            icon: const Icon(Icons.auto_fix_high, size: 18),
+                            label: const Text('Soso-kevitra fatra'),
+                            style: TextButton.styleFrom(foregroundColor: Colors.teal.shade700),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        isNarrow
+                            ? Column(
+                                children: [
+                                  DropdownButtonFormField<String>(
+                                    initialValue: _selectedFormula,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Karazana recette',
+                                      prefixIcon: Icon(Icons.category),
+                                    ),
+                                    items: _localCostTiers
+                                        .map((f) => DropdownMenuItem(value: f['name'] as String, child: Text(f['name'] as String)))
+                                        .toList(),
+                                    onChanged: (v) => setState(() => _selectedFormula = v!),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Slider(
+                                          value: _mealsPerDay.toDouble(),
+                                          min: 2,
+                                          max: 5,
+                                          divisions: 3,
+                                          label: '$_mealsPerDay sakafo',
+                                          onChanged: (v) => setState(() => _mealsPerDay = v.round()),
+                                        ),
+                                      ),
+                                      Text('$_mealsPerDay/x', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                children: [
+                                  Expanded(
+                                    child: DropdownButtonFormField<String>(
+                                      initialValue: _selectedFormula,
+                                      decoration: const InputDecoration(
+                                        labelText: 'Karazana recette',
+                                        prefixIcon: Icon(Icons.category),
+                                      ),
+                                      items: _localCostTiers
+                                          .map((f) => DropdownMenuItem(value: f['name'] as String, child: Text(f['name'] as String)))
+                                          .toList(),
+                                      onChanged: (v) => setState(() => _selectedFormula = v!),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Slider(
+                                            value: _mealsPerDay.toDouble(),
+                                            min: 2,
+                                            max: 5,
+                                            divisions: 3,
+                                            label: '$_mealsPerDay sakafo',
+                                            onChanged: (v) => setState(() => _mealsPerDay = v.round()),
+                                          ),
+                                        ),
+                                        Text('$_mealsPerDay/x', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(height: 10),
+                Builder(builder: (context) {
+                  final biomass = double.tryParse(_biomassCtrl.text.replaceAll(',', '.')) ?? 0;
+                  final rate = double.tryParse(_rateCtrl.text.replaceAll(',', '.')) ?? 0;
+                  final daily = biomass * rate / 100;
+                  final perMeal = _mealsPerDay > 0 ? daily / _mealsPerDay : 0;
+                  final chosen = _localCostTiers.firstWhere((f) => f['name'] == _selectedFormula);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          _infoChip('📦 Sakafo androany', daily == 0 ? '0 kg' : '${daily.toStringAsFixed(2)} kg'),
+                          const SizedBox(width: 8),
+                          _infoChip('🍽️ Isaky ny sakafo', perMeal == 0 ? '0 kg' : '${perMeal.toStringAsFixed(2)} kg'),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.teal.shade50,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.teal.shade100),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${chosen['name']} • Protein ${chosen['protein']}',
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                            Text(chosen['note'] as String, style: TextStyle(fontSize: 11, color: Colors.grey.shade700)),
+                            const SizedBox(height: 8),
+                            Wrap(
+                              spacing: 6,
+                              runSpacing: 6,
+                              children: (chosen['mix'] as List).map((m) => _badge('${m['pct']} ${m['name']}')).toList(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ],
             ),
           ),
@@ -27771,29 +31042,29 @@ class TantelyCalendarScreen extends StatelessWidget {
         'emoji': '☀️',
         'season': 'Fahavaratra (Lohataona)',
         'activities': [
-          'Fotoana fijinjana tantely',
+          'Fotoana fiotazana tantely',
           'Jereo raha misy mpanjaka vaovao',
           'Ampio hausse raha feno',
         ],
-        'flowers': 'Litchi, Mango, Voninkazo maro',
+        'flowers': 'Litchi, Manga, Voninkazo maro',
       },
       {
         'month': 'Febroary',
         'emoji': '🌸',
         'season': 'Fahavaratra',
         'activities': [
-          'Fijinjana faharoa',
+          'Fiotazana faharoa',
           'Jereo ny varroa',
           'Aza manokatra be loatra',
         ],
-        'flowers': 'Mango, Voninkazo hazo',
+        'flowers': 'Manga, Voninkazo hazo',
       },
       {
         'month': 'Martsa',
         'emoji': '🌿',
         'season': 'Fararano',
         'activities': [
-          'Fijinjana farany alohan\'ny ririnina',
+          'Fiotazana farany alohan\'ny ririnina',
           'Jereo ny habetsahan\'ny tantely',
           'Aza alaina daholo ny tantely',
         ],
@@ -27885,18 +31156,18 @@ class TantelyCalendarScreen extends StatelessWidget {
           'Ampio hausse faharoa',
           'Jereo matetika',
         ],
-        'flowers': 'Litchi feno, Mango, voninkazo maro',
+        'flowers': 'Litchi feno, Manga, voninkazo maro',
       },
       {
         'month': 'Desambra',
         'emoji': '☀️',
         'season': 'Fahavaratra',
         'activities': [
-          'Fotoana fijinjana voalohany',
+          'Fotoana fiotazana voalohany',
           'Tantely be indrindra',
           'Aza alaina daholo - avelao ho sakafo ririnina',
         ],
-        'flowers': 'Mango, Litchi, voninkazo maro',
+        'flowers': 'Manga, Litchi, voninkazo maro',
       },
     ];
 
@@ -27924,6 +31195,35 @@ class TantelyCalendarScreen extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                       Text('Asa tokony atao isam-bolana',
                           style: TextStyle(color: Colors.white.withValues(alpha: 0.9), fontSize: 12)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.blue.shade100),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('ℹ️', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Inona no atao hoe "Hausse" ?',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                      SizedBox(height: 4),
+                      Text('Hausse = vata fanampiny apetraka eo ambony ny toho-tantely rehefa feno. Atao hanitarana toerana hitahirizan\'ny tantely tantely, mba tsy ho tery ny colonie ary hahafahana mijinja bebe kokoa.',
+                          style: TextStyle(fontSize: 11)),
                     ],
                   ),
                 ),
@@ -32380,7 +35680,7 @@ class _ProfitabilityAnalyzerDialogState extends State<ProfitabilityAnalyzerDialo
 
                       if (_recommendations.isEmpty)
                         Container(
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(16),
                           child: const Text(
                             '😔 Tsy ampy ny vola ho an\'ny asa voalaza. Ampitomboy kely ny budget.',
                             textAlign: TextAlign.center,
@@ -34121,7 +37421,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
         constraints: const BoxConstraints(maxWidth: 400),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
